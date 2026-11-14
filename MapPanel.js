@@ -20,28 +20,40 @@ html,body,#map{margin:0;padding:0;height:100%;background:#e8e2d6}
 <body><div id="map"></div>
 <script>${LEAFLET_JS}</script>
 <script>
+  function send(o) { if (window.ReactNativeWebView) window.ReactNativeWebView.postMessage(JSON.stringify(o)); }
   var map = L.map('map', { zoomControl: false });
-  var tileErrors = 0, usingOsm = false;
-  var carto = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-    subdomains: 'abcd', maxZoom: 20, attribution: '© OpenStreetMap © CARTO'
-  }).addTo(map);
-  // Si CARTO falla, cambia a los mapas de OpenStreetMap
-  carto.on('tileerror', function () {
-    tileErrors++;
-    if (tileErrors > 4 && !usingOsm) {
-      usingOsm = true;
-      map.removeLayer(carto);
-      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19, attribution: '© OpenStreetMap'
-      }).addTo(map);
-    }
-  });
+  // Proveedores de mapas gratuitos, sin clave. Si uno falla, se pasa al siguiente.
+  var PROVIDERS = [
+    { name: 'Esri', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+      opt: { maxZoom: 19, attribution: '© Esri, HERE, Garmin, © OpenStreetMap' } },
+    { name: 'OSM', url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+      opt: { maxZoom: 19, attribution: '© OpenStreetMap' } },
+    { name: 'CARTO', url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+      opt: { subdomains: 'abcd', maxZoom: 20, attribution: '© OpenStreetMap © CARTO' } },
+    { name: 'Satélite', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      opt: { maxZoom: 19, attribution: '© Esri, Maxar, Earthstar Geographics' } }
+  ];
+  var current = -1, tiles = null, errors = 0, autoSwitches = 0;
+  function useProvider(i) {
+    current = i % PROVIDERS.length;
+    errors = 0;
+    if (tiles) map.removeLayer(tiles);
+    var pr = PROVIDERS[current];
+    tiles = L.tileLayer(pr.url, pr.opt).addTo(map);
+    tiles.on('tileerror', function () {
+      errors++;
+      // falla automática al siguiente (solo una vuelta, por si no hay internet)
+      if (errors === 6 && autoSwitches < PROVIDERS.length - 1) { autoSwitches++; useProvider(current + 1); }
+    });
+    send({ type: 'provider', name: pr.name });
+  }
+  window.nextProvider = function () { useProvider(current + 1); };
+  useProvider(0);
   map.setView([35.0116, 135.7681], 14);
 
   var layer = L.layerGroup().addTo(map);
   var me = null, meAcc = null, data = null, fitted = false;
 
-  function send(o) { if (window.ReactNativeWebView) window.ReactNativeWebView.postMessage(JSON.stringify(o)); }
 
   function fit() {
     if (!data || !data.points.length) return;
@@ -86,6 +98,7 @@ html,body,#map{margin:0;padding:0;height:100%;background:#e8e2d6}
 export default function MapPanel({ points, route, me, focus, onTapPoint, height = 280 }) {
   const ref = useRef(null);
   const [ready, setReady] = useState(false);
+  const [provider, setProvider] = useState('');
   const html = useMemo(buildHtml, []);
 
   const run = (code) => ref.current && ref.current.injectJavaScript(`${code};true;`);
@@ -123,6 +136,7 @@ export default function MapPanel({ points, route, me, focus, onTapPoint, height 
           try {
             const msg = JSON.parse(e.nativeEvent.data);
             if (msg.type === 'ready') setReady(true);
+            if (msg.type === 'provider') setProvider(msg.name);
             if (msg.type === 'tap' && onTapPoint) onTapPoint(msg.id);
           } catch (_) {}
         }}
@@ -133,6 +147,9 @@ export default function MapPanel({ points, route, me, focus, onTapPoint, height 
         </TouchableOpacity>
         <TouchableOpacity style={st.btn} onPress={() => run('window.fitAll()')}>
           <Text style={st.btnText}>⤢ Todo</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={st.btn} onPress={() => run('window.nextProvider()')}>
+          <Text style={st.btnText}>🗺 {provider || 'Mapa'}</Text>
         </TouchableOpacity>
       </View>
     </View>
