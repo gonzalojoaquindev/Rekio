@@ -161,6 +161,7 @@ const POINTS = [
   {
     id: 'yasakato',
     photo: ["en:Hōkan-ji", "ja:法観寺"],
+    short: 'La pagoda de cinco pisos, símbolo del este de Kioto.',
     name: 'Pagoda de Yasaka',
     jp: '八坂の塔（法観寺）',
     lat: 34.99855,
@@ -203,10 +204,125 @@ const POINTS = [
       'En noviembre no hay flores, pero los arces del parque y de las colinas de Higashiyama se ponen rojos: es la otra gran temporada de Kioto, el momiji.',
   },
 
+  // ── Kiyomizu-dera y sus calles ──
+  {
+    id: 'kiyo_niomon',
+    photo: ["ja:清水寺", "en:Kiyomizu-dera"],
+    name: 'Puerta Niōmon de Kiyomizu-dera',
+    jp: '清水寺・仁王門',
+    lat: 34.99547,
+    lng: 135.78323,
+    radius: 40,
+    type: 'historia',
+    short: 'La gran puerta roja, custodiada por dos guardianes feroces.',
+    story:
+      'Estás frente a la Niōmon, la gran puerta roja de Kiyomizu-dera. La gente de Kioto la llama también Akamon, la puerta roja. Ardió durante la guerra de Ōnin, en 1469, se reconstruyó hacia el año 1500 y fue restaurada por completo en 2003, por eso su bermellón brilla así. ' +
+      'Mira a los lados: dos guardianes musculosos, los Niō, protegen la entrada. Uno tiene la boca abierta y el otro cerrada. Representan el primer y el último sonido, el comienzo y el fin de todas las cosas. ' +
+      'Y ahora, el origen del templo. Según la leyenda, en el año 778 un monje de Nara llamado Enchin soñó que debía buscar una fuente de agua pura en estas colinas. La encontró en la cascada que hoy se llama Otowa. Dos años después, un guerrero llamado Sakanoue no Tamuramaro subió a cazar ciervos, conoció al monje, se arrepintió de matar y le ayudó a levantar un templo. Kiyomizu significa eso: agua pura.',
+  },
+  {
+    id: 'kiyo_pagoda',
+    photo: ["search:ja:清水寺 三重塔"],
+    name: 'Pagoda de tres pisos',
+    jp: '清水寺・三重塔',
+    lat: 34.9954,
+    lng: 135.784,
+    radius: 30,
+    type: 'historia',
+    short: 'La pagoda bermellón que se ve desde todo el este de Kioto.',
+    story:
+      'Esta pagoda de tres pisos, pintada de bermellón brillante, es la silueta de Kiyomizu que se ve desde buena parte de la ciudad. Es una de las pagodas de tres pisos más altas de Japón. La que ves fue reconstruida en 1632. ' +
+      'Una pagoda no es un edificio para entrar: es un relicario. Guarda en su centro reliquias o escrituras sagradas, y sus pisos representan los niveles del universo budista. ' +
+      'Fíjate en las esquinas de los techos: en las puntas hay pequeños demonios y dragones que vigilan las cuatro direcciones. Y en la cima, el remate de metal con anillos apunta al cielo como una antena entre este mundo y el otro. ' +
+      'Desde aquí, si miras hacia atrás, tienes una de las mejores vistas de los tejados de Kioto.',
+  },
+  {
+    id: 'kiyo_hondo',
+    photo: ["search:ja:清水の舞台", "en:Kiyomizu-dera"],
+    name: 'El escenario de Kiyomizu',
+    jp: '清水寺・本堂（清水の舞台）',
+    lat: 34.99496,
+    lng: 135.78505,
+    radius: 35,
+    type: 'historia',
+    short: 'La terraza de madera a 13 metros de altura, sin un solo clavo.',
+    story:
+      'Estás en el famoso escenario de Kiyomizu, la gran terraza del salón principal. El edificio que te rodea se reconstruyó en 1633 por orden del shōgun Tokugawa Iemitsu, después de que el templo se quemara varias veces. ' +
+      'Asómate con cuidado: estás a unos trece metros sobre la ladera, más o menos un edificio de cuatro pisos. Toda la estructura descansa sobre un bosque de enormes pilares de madera ensamblados sin usar clavos. ' +
+      'En japonés existe un dicho: saltar desde el escenario de Kiyomizu. Significa tomar una decisión muy arriesgada, lanzarse sin red. Y no es solo un dicho. En la época Edo se creía que si saltabas y sobrevivías, tu deseo se cumpliría. Los registros cuentan 234 saltos, y la gran mayoría sobrevivió, gracias a los árboles y a la pendiente. El gobierno Meiji lo prohibió en 1872. ' +
+      'Dentro del salón se venera a Kannon, la diosa de la compasión, con once cabezas y mil brazos. Es una imagen secreta: solo se muestra al público una vez cada treinta y tres años. ' +
+      'Detrás del salón está el santuario Jishu, el del amor, con sus dos piedras para caminar con los ojos cerrados. Ahora mismo está cerrado por obras de restauración.',
+  },
+  {
+    id: 'kiyo_okunoin',
+    photo: ["search:ja:清水寺 奥の院"],
+    name: 'Mirador del Okunoin',
+    jp: '清水寺・奥の院',
+    lat: 34.99455,
+    lng: 135.7858,
+    radius: 30,
+    type: 'historia',
+    short: 'La mejor vista del escenario, con Kioto de fondo.',
+    story:
+      'Date vuelta. Desde aquí tienes la foto más famosa de Kiyomizu: el gran escenario de madera suspendido sobre el bosque, con Kioto extendiéndose detrás. ' +
+      'Este pequeño salón es el Okunoin, el santuario interior. Fue reconstruido al mismo tiempo que el salón principal, en 1633, y también tiene su propio escenario de madera. Está construido justo encima de la cascada Otowa, el lugar donde, según la leyenda, todo comenzó. ' +
+      'Ahora, a mediados de noviembre, los arces de esta ladera empiezan a ponerse rojos. Los japoneses tienen una palabra para salir a contemplarlos: momijigari, literalmente, cazar hojas rojas. ' +
+      'Tómate un momento. Este es un buen lugar para la foto.',
+  },
+  {
+    id: 'kiyo_otowa',
+    photo: ["search:ja:音羽の滝 清水寺"],
+    name: 'Cascada Otowa',
+    jp: '音羽の滝',
+    lat: 34.9944,
+    lng: 135.78525,
+    radius: 30,
+    type: 'historia',
+    short: 'Tres chorros de agua sagrada: elige solo uno.',
+    story:
+      'Llegaste a la cascada Otowa, el corazón de Kiyomizu. De aquí viene el nombre del templo: kiyoi mizu, agua pura. Según la leyenda, este es el lugar donde el monje Enchin encontró la fuente que vio en su sueño, y donde el guerrero Tamuramaro calmó su sed. ' +
+      'El agua cae en tres chorros. La tradición popular dice que cada uno da una bendición distinta: larga vida, éxito en los estudios y suerte en el amor. ' +
+      'Pero ojo con la regla: se toma de uno solo. Beber de los tres se considera codicia, y dicen que trae mala suerte. ' +
+      'Toma uno de los cucharones de mango largo, recoge un poco de agua y bebe. Los cucharones se esterilizan con luz ultravioleta en esas cajas. Y mientras haces la fila, mira hacia arriba: estás justo debajo de los pilares del gran escenario.',
+  },
+  {
+    id: 'sannenzaka',
+    photo: ["ja:産寧坂", "search:ja:三年坂 京都"],
+    name: 'Sannenzaka',
+    jp: '三年坂（産寧坂）',
+    lat: 34.9976,
+    lng: 135.7812,
+    radius: 40,
+    type: 'historia',
+    short: 'La calle de piedra donde no te puedes caer.',
+    story:
+      'Estás en Sannenzaka, la cuesta de los tres años, con sus escalones de piedra y sus casas de madera. Camina con cuidado, y no lo digo solo por los escalones. ' +
+      'Dice la leyenda que quien se cae en esta cuesta morirá en tres años. Por eso, en las tiendas de la zona vas a ver calabazas secas, las hyōtan: se dice que protegen contra esa mala suerte. ' +
+      'El nombre tiene otra explicación más amable. También se escribe Sannei-zaka, la cuesta del parto tranquilo, porque por aquí subían las mujeres embarazadas a rezar a la Kannon de Kiyomizu por un buen parto. ' +
+      'Hoy está llena de tiendas de cerámica, dulces y té. Si tienes hambre, es buen momento para probar un yatsuhashi, el dulce típico de Kioto, de masa de arroz con canela.',
+  },
+  {
+    id: 'ninenzaka',
+    photo: ["ja:二寧坂", "search:ja:二年坂 京都"],
+    name: 'Ninenzaka',
+    jp: '二年坂（二寧坂）',
+    lat: 34.9986,
+    lng: 135.7807,
+    radius: 40,
+    type: 'historia',
+    short: 'La hermana menor de Sannenzaka, con un Starbucks de tatami.',
+    story:
+      'Esta es Ninenzaka, la cuesta de los dos años, la hermana menor de Sannenzaka. Y sí, tiene su propia versión de la leyenda: aquí, si te caes, te quedarían dos años. ' +
+      'Estas calles conservan el aspecto de un barrio de comerciantes de los siglos pasados, y están protegidas para que las casas mantengan su estilo tradicional. Fíjate en las rejas de madera de las fachadas, las celosías: dejan ver hacia afuera sin que los de afuera vean hacia adentro. ' +
+      'Una curiosidad moderna: en esta calle hay un Starbucks dentro de una casa tradicional de más de cien años, sin letrero luminoso, donde puedes tomar tu café sentado en tatami. ' +
+      'Sigue bajando: al final te espera la pagoda de Yasaka, la última parada.',
+  },
+
   // ── Palacio Imperial de Kioto (Kyoto Gyoen) ──
   {
     id: 'sakaimachi',
     photo: ["en:Kyoto_Gyoen", "ja:京都御苑"],
+    short: 'El antiguo barrio de nobles convertido en parque.',
     name: 'Parque Kyoto Gyoen',
     jp: '京都御苑・堺町御門',
     lat: 35.0172,
@@ -221,6 +337,7 @@ const POINTS = [
   {
     id: 'hamaguri',
     photo: ["ja:蛤御門", "en:Kinmon_incident"],
+    short: 'La puerta con agujeros de bala de la batalla de 1864.',
     name: 'Puerta Hamaguri',
     jp: '蛤御門',
     lat: 35.0227,
@@ -237,6 +354,7 @@ const POINTS = [
   {
     id: 'kenreimon',
     photo: ["ja:建礼門", "en:Kyoto_Imperial_Palace"],
+    short: 'La puerta reservada solo para el emperador.',
     name: 'Puerta Kenreimon',
     jp: '建礼門',
     lat: 35.0226,
@@ -251,6 +369,7 @@ const POINTS = [
   {
     id: 'seishomon',
     photo: ["ja:京都御所", "en:Kyoto_Imperial_Palace"],
+    short: 'La entrada gratuita al Palacio Imperial.',
     name: 'Entrada al Palacio (Seishomon)',
     jp: '京都御所・清所門',
     lat: 35.0262,
@@ -265,6 +384,7 @@ const POINTS = [
   {
     id: 'shishinden',
     photo: ["ja:紫宸殿", "en:Kyoto_Imperial_Palace"],
+    short: 'El salón donde se coronaban los emperadores.',
     name: 'Salón Shishinden',
     jp: '紫宸殿',
     lat: 35.0245,
@@ -320,6 +440,58 @@ const TOURS = [
     ],
     outro:
       'Aquí termina el recorrido del Palacio Imperial. Desde estos muros se gobernó, al menos en nombre, Japón durante siglos, y aquí se vivieron los últimos días del Japón de los samuráis. Gracias por caminar conmigo. Si te queda energía, el resto del palacio y sus jardines siguen por la ruta señalizada.',
+  },
+  {
+    id: 'kiyomizu',
+    name: 'Kiyomizu-dera y Higashiyama',
+    jp: '清水寺・産寧坂',
+    summary: '8 paradas · unos 2 km a pie, cuesta abajo al final · 2 horas aprox.',
+    intro:
+      'Bienvenido a Kiyomizu-dera, el templo del agua pura, uno de los lugares más queridos de Japón y Patrimonio de la Humanidad. Vamos a recorrer el templo desde su gran puerta roja y luego bajar por las calles de piedra hasta la pagoda de Yasaka. Te voy guiando.',
+    stops: [
+      {
+        id: 'kiyo_niomon',
+        guide:
+          'Primera parada: la gran puerta roja de Kiyomizu-dera, al final de la cuesta Kiyomizu-zaka, la calle de tiendas que sube al templo. Si no estás ahí, toca Cómo llegar.',
+      },
+      {
+        id: 'kiyo_pagoda',
+        guide:
+          'Sube las escaleras de la puerta y sigue hacia la derecha. A pocos pasos verás la pagoda bermellón de tres pisos.',
+      },
+      {
+        id: 'kiyo_hondo',
+        guide:
+          'Sigue el camino principal hacia el este. Pasarás la boletería: la entrada al salón principal es pagada. Continúa hasta salir a la gran terraza de madera.',
+      },
+      {
+        id: 'kiyo_okunoin',
+        guide:
+          'Sal del salón principal y sigue el camino que bordea la ladera hacia el sureste. A unos cien metros está el Okunoin. Cuando llegues, date vuelta para ver el escenario.',
+      },
+      {
+        id: 'kiyo_otowa',
+        guide:
+          'Baja por las escaleras de piedra que salen cerca del Okunoin. Al pie del escenario verás una fila de gente frente a tres chorros de agua: es la cascada Otowa.',
+      },
+      {
+        id: 'sannenzaka',
+        guide:
+          'Ahora sal del templo de vuelta por la puerta roja y baja por la calle de tiendas. A unos doscientos metros, a mano derecha, verás unas escaleras de piedra que bajan: ese es Sannenzaka. Cuidado con los escalones.',
+      },
+      {
+        id: 'ninenzaka',
+        guide:
+          'Baja por Sannenzaka hasta el final de la cuesta y sigue por la calle de piedra hacia la izquierda. En unos cien metros entras a Ninenzaka.',
+      },
+      {
+        id: 'yasakato',
+        guide:
+          'Al final de Ninenzaka sigue las calles de piedra hacia el sur, unos doscientos metros. La pagoda de cinco pisos te va a aparecer de frente, entre las casas.',
+      },
+    ],
+    outro:
+      'Aquí termina el recorrido de Kiyomizu. Recorriste un templo fundado hace más de mil doscientos años, bebiste del agua que le dio su nombre y bajaste por calles donde, dicen, no conviene tropezar. Si te quedan energías, desde aquí puedes seguir hacia Gion caminando hacia el norte.',
   },
 ];
 
@@ -688,8 +860,47 @@ export default function App() {
     return list;
   }, [here]);
 
+  // ── Ruta a pie por calles reales para el recorrido activo ──
+  const [walkRoutes, setWalkRoutes] = useState({}); // tourId → [[lat,lng],...]
+  const [openTourId, setOpenTourId] = useState(null); // tarjeta con paradas desplegadas
+  useEffect(() => {
+    const id = tour ? tour.id : openTourId;
+    if (!id || walkRoutes[id]) return;
+    const def = TOURS.find((x) => x.id === id);
+    const coords = def.stops
+      .map((st) => POINTS.find((p) => p.id === st.id))
+      .map((p) => `${p.lng},${p.lat}`)
+      .join(';');
+    fetch(
+      `https://routing.openstreetmap.de/routed-foot/route/v1/driving/${coords}?overview=full&geometries=geojson`,
+      { headers: { 'User-Agent': 'Rekio/1.0 (https://github.com/gonzalojoaquindev/Rekio)' } }
+    )
+      .then((r) => r.json())
+      .then((d) => {
+        const line = d.routes && d.routes[0] && d.routes[0].geometry.coordinates;
+        if (line && line.length > 1) {
+          setWalkRoutes((w) => ({ ...w, [id]: line.map(([lng, lat]) => [lat, lng]) }));
+        }
+      })
+      .catch(() => {}); // sin ruta: se dibuja en línea recta
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tour && tour.id, openTourId]);
+
   // ── Datos del mapa ──
   const mapData = useMemo(() => {
+    if (!tour && openTourId) {
+      // vista previa del recorrido desplegado
+      const def = TOURS.find((x) => x.id === openTourId);
+      const stops = def.stops.map((st) => POINTS.find((p) => p.id === st.id));
+      return {
+        points: stops.map((p, i) => ({
+          id: p.id, name: p.name, lat: p.lat, lng: p.lng, label: String(i + 1), state: 'todo',
+        })),
+        route: walkRoutes[def.id] || stops.map((p) => [p.lat, p.lng]),
+        focus: null,
+        fitKey: def.id,
+      };
+    }
     if (tour) {
       const def = TOURS.find((x) => x.id === tour.id);
       const stops = def.stops.map((st) => POINTS.find((p) => p.id === st.id));
@@ -703,7 +914,7 @@ export default function App() {
           state:
             tour.phase === 'done' || i < tour.idx ? 'done' : i === tour.idx ? 'now' : 'todo',
         })),
-        route: stops.map((p) => [p.lat, p.lng]),
+        route: walkRoutes[tour.id] || stops.map((p) => [p.lat, p.lng]),
         focus: tour.phase === 'done' ? null : stops[tour.idx],
       };
     }
@@ -719,7 +930,7 @@ export default function App() {
       route: [],
       focus: null,
     };
-  }, [tour, heard]);
+  }, [tour, heard, walkRoutes, openTourId]);
 
   const nearest = here ? rows.find((r) => !heard.has(r.p.id)) : null;
   const speakingPoint = POINTS.find((p) => p.id === speakingId);
@@ -749,6 +960,7 @@ export default function App() {
           points={mapData.points}
           route={mapData.route}
           focus={mapData.focus}
+          fitKey={mapData.fitKey || (tour ? tour.id : 'all')}
           me={here}
           onTapPoint={(id) => !tour && setExpandedId(id)}
         />
@@ -761,6 +973,26 @@ export default function App() {
               <Text style={s.playingTitle}>{def.name}</Text>
               <Text style={s.itemJp}>{def.jp}</Text>
               <Text style={s.small}>{def.summary}</Text>
+              <TouchableOpacity onPress={() => setOpenTourId(openTourId === def.id ? null : def.id)}>
+                <Text style={s.toggle}>
+                  {openTourId === def.id ? '▾' : '▸'} Lo que no te puedes perder ({def.stops.length})
+                </Text>
+              </TouchableOpacity>
+              {openTourId === def.id &&
+                def.stops.map((st, i) => {
+                  const sp = POINTS.find((x) => x.id === st.id);
+                  return (
+                    <View key={st.id} style={s.hl}>
+                      <PointPhoto point={sp} thumb />
+                      <View style={{ flex: 1, marginLeft: 12 }}>
+                        <Text style={s.hlName}>
+                          {i + 1}. {sp.name}
+                        </Text>
+                        {!!sp.short && <Text style={s.hlShort}>{sp.short}</Text>}
+                      </View>
+                    </View>
+                  );
+                })}
               <View style={s.actions}>
                 <TouchableOpacity style={s.btn} onPress={() => startTour(def, false)}>
                   <Text style={s.btnText}>▶ Iniciar recorrido</Text>
@@ -1043,6 +1275,10 @@ const s = StyleSheet.create({
   btnGhostText: { color: C.paper, fontSize: 14 },
   story: { color: C.paper, fontSize: 15, lineHeight: 23, opacity: 0.9 },
   tourCard: { borderColor: C.gold },
+  toggle: { color: C.gold, fontSize: 14, fontWeight: '600', marginTop: 10, marginBottom: 4 },
+  hl: { flexDirection: 'row', alignItems: 'center', marginTop: 10 },
+  hlName: { color: C.paper, fontSize: 15, fontWeight: '700' },
+  hlShort: { color: C.paper, opacity: 0.8, fontSize: 13, lineHeight: 19, marginTop: 2 },
   tourActive: { borderColor: C.vermilion, borderWidth: 2 },
   tourTitle: { color: C.paper, fontSize: 22, fontWeight: '700', marginTop: 4 },
   tourStatus: { color: C.gold, fontSize: 17, fontWeight: '600', marginTop: 6 },

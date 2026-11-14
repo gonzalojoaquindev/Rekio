@@ -6,19 +6,25 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Linking, ActivityIndicator, StyleSheet } from 'react-native';
 
 const cache = {}; // id → { src, fallback, page } | null
-const HEADERS = { 'Api-User-Agent': 'Rekio/1.0 (audioguia)' };
+// Wikimedia exige identificar la app: sin esto puede bloquear las peticiones
+const UA = 'Rekio/1.0 (https://github.com/gonzalojoaquindev/Rekio)';
+const HEADERS = { 'User-Agent': UA, 'Api-User-Agent': UA };
+let lastError = '';
 
 async function fromSummary(lang, title) {
   const r = await fetch(
     `https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`,
     { headers: HEADERS }
   );
-  if (!r.ok) return null;
+  if (!r.ok) {
+    lastError = `HTTP ${r.status}`;
+    return null;
+  }
   const d = await r.json();
   if (!d.thumbnail || !d.thumbnail.source) return null;
   const small = d.thumbnail.source;
   return {
-    src: small.replace(/\/\d+px-/, '/800px-'), // versión más grande si existe
+    src: small.replace(/\/\d+px-/, '/960px-'), // versión más grande si existe
     fallback: small,
     page: d.content_urls && d.content_urls.mobile ? d.content_urls.mobile.page : null,
   };
@@ -28,9 +34,12 @@ async function fromSearch(lang, query) {
   const url =
     `https://${lang}.wikipedia.org/w/api.php?action=query&format=json&origin=*` +
     `&generator=search&gsrlimit=1&gsrsearch=${encodeURIComponent(query)}` +
-    `&prop=pageimages|info&inprop=url&piprop=thumbnail&pithumbsize=800`;
+    `&prop=pageimages|info&inprop=url&piprop=thumbnail&pithumbsize=960`;
   const r = await fetch(url, { headers: HEADERS });
-  if (!r.ok) return null;
+  if (!r.ok) {
+    lastError = `HTTP ${r.status}`;
+    return null;
+  }
   const d = await r.json();
   const pages = d.query && d.query.pages ? Object.values(d.query.pages) : [];
   const p = pages.find((x) => x.thumbnail && x.thumbnail.source);
@@ -56,17 +65,18 @@ async function findPhoto(point) {
         cache[point.id] = res;
         return res;
       }
-    } catch (_) {
-      // sin internet o error: probamos la siguiente opción
+    } catch (e) {
+      lastError = String((e && e.message) || e); // sin internet u otro error
     }
   }
   return null; // no se guarda en caché: se reintenta cuando vuelva internet
 }
 
-export default function PointPhoto({ point, height = 190 }) {
+export default function PointPhoto({ point, height = 190, thumb = false }) {
   const [photo, setPhoto] = useState(cache[point.id] || null);
   const [loading, setLoading] = useState(!cache[point.id]);
   const [useFallback, setUseFallback] = useState(false);
+  const [err, setErr] = useState('');
 
   useEffect(() => {
     let alive = true;
@@ -80,12 +90,35 @@ export default function PointPhoto({ point, height = 190 }) {
     findPhoto(point).then((res) => {
       if (!alive) return;
       setPhoto(res);
+      setErr(res ? '' : lastError);
       setLoading(false);
     });
     return () => {
       alive = false;
     };
   }, [point.id]);
+
+  const uri = photo ? (useFallback ? photo.fallback : photo.src) : null;
+  const imgSource = uri ? { uri, headers: { 'User-Agent': UA } } : null;
+
+  if (thumb) {
+    return (
+      <View style={st.thumb}>
+        {imgSource ? (
+          <Image
+            source={imgSource}
+            style={st.thumbImg}
+            resizeMode="cover"
+            onError={() => !useFallback && setUseFallback(true)}
+          />
+        ) : loading ? (
+          <ActivityIndicator color="#C9A45C" />
+        ) : (
+          <Text style={st.thumbNone}>🏯</Text>
+        )}
+      </View>
+    );
+  }
 
   if (loading) {
     return (
@@ -94,12 +127,14 @@ export default function PointPhoto({ point, height = 190 }) {
       </View>
     );
   }
-  if (!photo) return null;
+  if (!photo) {
+    return err ? <Text style={st.credit}>Foto no disponible ({err})</Text> : null;
+  }
 
   return (
     <View style={st.wrap}>
       <Image
-        source={{ uri: useFallback ? photo.fallback : photo.src }}
+        source={imgSource}
         style={[st.box, { height }]}
         resizeMode="cover"
         onError={() => !useFallback && setUseFallback(true)}
@@ -116,4 +151,15 @@ const st = StyleSheet.create({
   box: { width: '100%', borderRadius: 10, backgroundColor: '#2A241E' },
   center: { alignItems: 'center', justifyContent: 'center', marginTop: 10 },
   credit: { color: '#A99C88', fontSize: 11, marginTop: 4 },
+  thumb: {
+    width: 76,
+    height: 76,
+    borderRadius: 10,
+    backgroundColor: '#2A241E',
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  thumbImg: { width: '100%', height: '100%' },
+  thumbNone: { fontSize: 26 },
 });

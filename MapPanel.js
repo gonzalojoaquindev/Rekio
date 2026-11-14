@@ -95,7 +95,7 @@ html,body,#map{margin:0;padding:0;height:100%;background:#e8e2d6}
 </script>
 </body></html>`;
 
-export default function MapPanel({ points, route, me, focus, onTapPoint, height = 280 }) {
+export default function MapPanel({ points, route, me, focus, fitKey, onTapPoint, height = 280 }) {
   const ref = useRef(null);
   const [ready, setReady] = useState(false);
   const [provider, setProvider] = useState('');
@@ -108,6 +108,12 @@ export default function MapPanel({ points, route, me, focus, onTapPoint, height 
     if (ready) run(`window.setData(${JSON.stringify({ points, route: route || [] })})`);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ready, JSON.stringify(points), JSON.stringify(route)]);
+
+  // Reencuadrar cuando cambia lo que se muestra (otro recorrido, etc.)
+  useEffect(() => {
+    if (ready) run('window.fitAll()');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, fitKey]);
 
   // Mi ubicación
   useEffect(() => {
