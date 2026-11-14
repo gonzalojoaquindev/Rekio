@@ -72,7 +72,7 @@ async function findPhoto(point) {
   return null; // no se guarda en caché: se reintenta cuando vuelva internet
 }
 
-export default function PointPhoto({ point, height = 190, thumb = false }) {
+export default function PointPhoto({ point, height = 190, thumb = false, size = 76, radius = 12, credit = true }) {
   const [photo, setPhoto] = useState(cache[point.id] || null);
   const [loading, setLoading] = useState(!cache[point.id]);
   const [useFallback, setUseFallback] = useState(false);
@@ -103,7 +103,7 @@ export default function PointPhoto({ point, height = 190, thumb = false }) {
 
   if (thumb) {
     return (
-      <View style={st.thumb}>
+      <View style={[st.thumb, { width: size, height: size, borderRadius: radius }]}>
         {imgSource ? (
           <Image
             source={imgSource}
@@ -112,9 +112,9 @@ export default function PointPhoto({ point, height = 190, thumb = false }) {
             onError={() => !useFallback && setUseFallback(true)}
           />
         ) : loading ? (
-          <ActivityIndicator color="#C9A45C" />
+          <ActivityIndicator color="#FF5A3C" />
         ) : (
-          <Text style={st.thumbNone}>🏯</Text>
+          <Text style={st.thumbNone}>📍</Text>
         )}
       </View>
     );
@@ -122,12 +122,13 @@ export default function PointPhoto({ point, height = 190, thumb = false }) {
 
   if (loading) {
     return (
-      <View style={[st.box, st.center, { height }]}>
-        <ActivityIndicator color="#C9A45C" />
+      <View style={[st.box, st.center, { height, borderRadius: radius }]}>
+        <ActivityIndicator color="#FF5A3C" />
       </View>
     );
   }
   if (!photo) {
+    if (!credit) return <View style={[st.box, st.center, { height, borderRadius: radius }]}><Text style={st.thumbNone}>📍</Text></View>;
     return err ? <Text style={st.credit}>Foto no disponible ({err})</Text> : null;
   }
 
@@ -135,27 +136,26 @@ export default function PointPhoto({ point, height = 190, thumb = false }) {
     <View style={st.wrap}>
       <Image
         source={imgSource}
-        style={[st.box, { height }]}
+        style={[st.box, { height, borderRadius: radius }]}
         resizeMode="cover"
         onError={() => !useFallback && setUseFallback(true)}
       />
+      {credit && (
       <TouchableOpacity disabled={!photo.page} onPress={() => photo.page && Linking.openURL(photo.page)}>
         <Text style={st.credit}>Foto: Wikipedia{photo.page ? ' · ver artículo y créditos' : ''}</Text>
       </TouchableOpacity>
+      )}
     </View>
   );
 }
 
 const st = StyleSheet.create({
-  wrap: { marginTop: 10, marginBottom: 4 },
-  box: { width: '100%', borderRadius: 10, backgroundColor: '#2A241E' },
-  center: { alignItems: 'center', justifyContent: 'center', marginTop: 10 },
-  credit: { color: '#A99C88', fontSize: 11, marginTop: 4 },
+  wrap: {},
+  box: { width: '100%', backgroundColor: '#EEEEEE' },
+  center: { alignItems: 'center', justifyContent: 'center' },
+  credit: { color: '#717171', fontSize: 11, marginTop: 4 },
   thumb: {
-    width: 76,
-    height: 76,
-    borderRadius: 10,
-    backgroundColor: '#2A241E',
+    backgroundColor: '#EEEEEE',
     overflow: 'hidden',
     alignItems: 'center',
     justifyContent: 'center',

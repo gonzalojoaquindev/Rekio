@@ -4,19 +4,30 @@
     "slug": "rekio",
     "version": "1.0.0",
     "orientation": "portrait",
-    "backgroundColor": "#16130F",
+    "backgroundColor": "#FFFFFF",
     "android": {
       "package": "com.gonzalojoaquindev.rekio",
       "adaptiveIcon": {
-        "backgroundColor": "#16130F"
+        "backgroundColor": "#FF5A3C"
       },
-      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "CAMERA"
+      ]
     },
     "plugins": [
       [
         "expo-location",
         {
           "locationWhenInUsePermission": "Rekio usa tu ubicación para contarte la historia de cada lugar cuando llegas."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Rekio usa tus fotos para guardar recuerdos de tus recorridos.",
+          "cameraPermission": "Rekio usa la cámara para que guardes fotos de tus recorridos."
         }
       ]
     ]
