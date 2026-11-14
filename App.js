@@ -188,6 +188,75 @@ const POINTS = [
       'Una curiosidad: el árbol que ves no es el original. El primero murió a mediados del siglo veinte, ya muy viejo, y el actual creció de una semilla del anterior. Es, literalmente, su hijo. ' +
       'En noviembre no hay flores, pero los arces del parque y de las colinas de Higashiyama se ponen rojos: es la otra gran temporada de Kioto, el momiji.',
   },
+
+  // ── Palacio Imperial de Kioto (Kyoto Gyoen) ──
+  {
+    id: 'sakaimachi',
+    name: 'Parque Kyoto Gyoen',
+    jp: '京都御苑・堺町御門',
+    lat: 35.0172,
+    lng: 135.7623,
+    radius: 60,
+    type: 'historia',
+    story:
+      'Estás entrando al Kyoto Gyoen, el gran parque que rodea el Palacio Imperial. Mira el ancho camino de gravilla blanca, los pinos y el silencio. Cuesta imaginarlo, pero hace ciento cincuenta años esto no era un parque: era un barrio apretado, con cerca de doscientas mansiones de nobles de la corte, los kuge, todas alrededor del palacio del emperador. ' +
+      'En 1869 el emperador Meiji se trasladó a Tokio, y la corte entera lo siguió. Las mansiones quedaron vacías y empezaron a caerse a pedazos. Se cuenta que cuando el emperador volvió de visita en 1877 y vio el abandono, se entristeció y ordenó preservar el palacio y su entorno. Las casas de los nobles se demolieron y el terreno se transformó en este parque. ' +
+      'Las puertas que ves en el contorno, como esta, eran las entradas a aquel antiguo barrio de nobles. Hoy, por esta misma puerta salen los desfiles de dos de los grandes festivales de Kioto, el Aoi Matsuri en mayo y el Jidai Matsuri en octubre.',
+  },
+  {
+    id: 'hamaguri',
+    name: 'Puerta Hamaguri',
+    jp: '蛤御門',
+    lat: 35.0227,
+    lng: 135.7596,
+    radius: 50,
+    type: 'recreacion',
+    story:
+      'Esta es la puerta Hamaguri, la puerta de la almeja. Su nombre viene de una historia curiosa: era una puerta que casi nunca se abría, hasta que en el gran incendio de 1788 por fin la abrieron, como una almeja que se abre con el fuego. Lo que sigue es una recreación basada en los hechos. ' +
+      'Agosto de 1864. ¿Recuerdas el Ikedaya, el ataque del Shinsengumi a los rebeldes de Chōshū? Pocas semanas después, Chōshū responde. Miles de sus soldados marchan sobre Kioto para recuperar su influencia ante el emperador. ' +
+      'Al amanecer, aquí mismo, estallan los disparos. Defienden el palacio los samuráis de Aizu y, llegando como refuerzo, los de Satsuma, al mando de un hombre corpulento llamado Saigō Takamori. El mismo que, según la tradición, se reunía en secreto en la casa de té Ichiriki de Gion. ' +
+      'Chōshū es derrotado. Pero la guerra se escapa de los muros: el fuego se extiende por la ciudad y arde durante días, destruyendo decenas de miles de casas. ' +
+      'Acércate a las vigas de la puerta y busca las marcas: se dice que son agujeros de bala de esa mañana. Y un giro final: apenas dos años después, Satsuma y Chōshū, enemigos aquí, firmaron una alianza secreta. Juntos derribaron al shogunato en 1868.',
+  },
+  {
+    id: 'kenreimon',
+    name: 'Puerta Kenreimon',
+    jp: '建礼門',
+    lat: 35.0226,
+    lng: 135.7622,
+    radius: 45,
+    type: 'historia',
+    story:
+      'Frente a ti está la puerta Kenreimon, la puerta principal del sur del Palacio Imperial. Fíjate en su techo de corteza de ciprés, sin una sola teja, y en su sencillez casi severa: así es la elegancia de la corte, sin dorados ni excesos. ' +
+      'Esta puerta tradicionalmente estaba reservada al emperador. Ni los nobles más poderosos pasaban por aquí; ellos usaban otras puertas laterales, según su rango. Hasta hoy permanece cerrada casi todo el año y solo se abre en ocasiones muy especiales. ' +
+      'Detrás de estos muros está el corazón del palacio, el gran salón de ceremonias. Los visitantes entran por la puerta Seishomon, en el lado oeste, siguiendo el muro hacia la izquierda.',
+  },
+  {
+    id: 'seishomon',
+    name: 'Entrada al Palacio (Seishomon)',
+    jp: '京都御所・清所門',
+    lat: 35.0262,
+    lng: 135.7607,
+    radius: 45,
+    type: 'historia',
+    story:
+      'Esta es la puerta Seishomon, la entrada de los visitantes al Palacio Imperial de Kioto. Hace siglos era una puerta de servicio, por donde entraban los cocineros y las provisiones de la cocina imperial. Hoy entras gratis, pasando un control de seguridad. ' +
+      'Un dato que sorprende a muchos: este no es el palacio original de Kioto. El primer gran palacio, de cuando se fundó la ciudad en el año 794, estaba más al oeste y desapareció hace muchos siglos entre incendios y abandono. Los emperadores pasaron entonces a vivir en residencias temporales, y una de ellas, en este lugar, terminó convirtiéndose en el palacio definitivo desde el siglo catorce. ' +
+      'Los edificios que vas a ver se quemaron y reconstruyeron varias veces. Los actuales son de 1855, construidos imitando con cuidado el estilo de la época Heian. Trece años después, el emperador se iría a Tokio para siempre.',
+  },
+  {
+    id: 'shishinden',
+    name: 'Salón Shishinden',
+    jp: '紫宸殿',
+    lat: 35.0245,
+    lng: 135.7622,
+    radius: 40,
+    type: 'historia',
+    story:
+      'Este es el Shishinden, el salón de las ceremonias de Estado, el edificio más importante del palacio. Mira el gran patio cubierto de arena blanca: aquí se alineaban los nobles en las grandes ocasiones, cada uno en su puesto según su rango. ' +
+      'Delante de la escalera hay dos árboles. Si miras el salón de frente, a tu derecha está un cerezo y a tu izquierda un naranjo tachibana. Representan a las guardias imperiales de la izquierda y de la derecha, vistas desde el trono, y esa disposición se ha mantenido durante siglos. ' +
+      'En este salón se coronaron los emperadores Taishō, en 1915, y Shōwa, en 1928. Adentro se guarda el Takamikura, el trono imperial. Para las entronizaciones más recientes, celebradas en Tokio, este trono fue desmontado y llevado hasta allá, como un hilo que une al Japón moderno con esta antigua capital.',
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────
@@ -218,6 +287,18 @@ function bearingDeg(a, b) {
 const DIRS = ['norte', 'noreste', 'este', 'sureste', 'sur', 'suroeste', 'oeste', 'noroeste'];
 const dirName = (deg) => DIRS[Math.round(deg / 45) % 8];
 
+const RATE = 0.88; // velocidad de lectura (1 = normal)
+
+const voiceLabel = (v) => {
+  if (!v) return 'predeterminada';
+  const kind = /network/i.test(v.identifier || '')
+    ? 'natural, usa internet'
+    : v.quality === 'Enhanced'
+    ? 'alta calidad'
+    : 'estándar';
+  return `${v.language} · ${kind}`;
+};
+
 const fmtDist = (m) => (m < 1000 ? `${Math.round(m)} m` : `${(m / 1000).toFixed(1)} km`);
 
 // ─────────────────────────────────────────────────────────────
@@ -234,6 +315,7 @@ export default function App() {
   const [heard, setHeard] = useState(new Set());
   const [expandedId, setExpandedId] = useState(null);
   const [voice, setVoice] = useState(null);
+  const [voices, setVoices] = useState([]);
 
   // refs para que los callbacks de voz vean siempre el estado actual
   const speakingRef = useRef(null);
@@ -242,18 +324,47 @@ export default function App() {
 
   const here = sim || gps;
 
-  // ── Voz en español ──
+  // ── Voz en español: ordena las voces de mejor a peor calidad ──
   useEffect(() => {
-    Speech.getAvailableVoicesAsync()
-      .then((voices) => {
-        const es = voices.filter((v) => v.language && v.language.toLowerCase().startsWith('es'));
-        const pick =
-          es.find((v) => /es[-_](us|mx|419|cl)/i.test(v.language)) || es[0] || null;
-        setVoice(pick);
-      })
-      .catch(() => {});
-    return () => Speech.stop();
+    const score = (v) => {
+      let s = 0;
+      if (v.quality === 'Enhanced') s += 4; // voces de alta calidad
+      if (/network/i.test(v.identifier || '')) s += 3; // voces neuronales de Google (usan internet)
+      if (/es[-_](us|mx|419|cl)/i.test(v.language)) s += 2; // español latino primero
+      return s;
+    };
+    const load = () =>
+      Speech.getAvailableVoicesAsync()
+        .then((all) => {
+          const es = all
+            .filter((v) => v.language && v.language.toLowerCase().startsWith('es'))
+            .sort((a, b) => score(b) - score(a));
+          if (es.length) {
+            setVoices(es);
+            setVoice((cur) => cur || es[0]);
+          }
+        })
+        .catch(() => {});
+    load();
+    const retry = setTimeout(load, 2000); // en Android las voces a veces cargan tarde
+    return () => {
+      clearTimeout(retry);
+      Speech.stop();
+    };
   }, []);
+
+  const nextVoice = () => {
+    if (!voices.length) return;
+    const i = voices.findIndex((v) => voice && v.identifier === voice.identifier);
+    const v = voices[(i + 1) % voices.length];
+    setVoice(v);
+    Speech.stop();
+    Speech.speak('Hola, esta es la voz que te va a acompañar por Kioto.', {
+      language: v.language,
+      voice: v.identifier,
+      rate: RATE,
+    });
+  };
 
   // ── GPS ──
   useEffect(() => {
@@ -315,7 +426,7 @@ export default function App() {
       Speech.speak(intro + tag + p.story, {
         language: voice ? voice.language : 'es-US',
         voice: voice ? voice.identifier : undefined,
-        rate: 0.95,
+        rate: RATE,
         pitch: 1.0,
         onDone: () => finish(true),
         onStopped: () => finish(false),
@@ -394,9 +505,9 @@ export default function App() {
       <StatusBar barStyle="light-content" backgroundColor={C.ink} />
       <ScrollView contentContainerStyle={s.scroll}>
         {/* Encabezado */}
-        <Text style={s.kanji}>祇園</Text>
-        <Text style={s.title}>Rekio · Gion</Text>
-        <Text style={s.subtitle}>Kioto — camina y escucha</Text>
+        <Text style={s.kanji}>京都</Text>
+        <Text style={s.title}>Rekio</Text>
+        <Text style={s.subtitle}>Kioto — camina y escucha su historia</Text>
 
         {/* Estado de ubicación */}
         <View style={s.card}>
@@ -430,8 +541,15 @@ export default function App() {
           </View>
           <Text style={s.small}>
             Escuchados: {heard.size}/{POINTS.length}
-            {voice ? `  ·  Voz: ${voice.language}` : '  ·  Voz: predeterminada'}
           </Text>
+          <View style={s.row}>
+            <Text style={[s.small, { flex: 1, marginTop: 0 }]}>Voz: {voiceLabel(voice)}</Text>
+            {voices.length > 1 && (
+              <TouchableOpacity style={[s.btn, s.btnGhost, { marginTop: 0 }]} onPress={nextVoice}>
+                <Text style={s.btnGhostText}>Cambiar voz ({voices.length})</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
 
         {/* Reproduciendo */}

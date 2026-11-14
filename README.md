@@ -2,7 +2,9 @@
 
 Audioguía turística que te cuenta la historia de cada lugar mientras caminas. Usa el GPS para saber dónde estás y narra relatos inmersivos con la voz del teléfono, sin internet.
 
-Primer recorrido: **Gion, Kioto** (12 puntos, desde el Ikedaya hasta el parque Maruyama).
+Recorridos en **Kioto** (17 puntos):
+- **Gion**: del Ikedaya al parque Maruyama (12 puntos)
+- **Palacio Imperial**: Kyoto Gyoen, puerta Hamaguri, Kenreimon, Seishomon y Shishinden (5 puntos)
 
 ## Funciones
 - Narración automática al entrar al radio de cada punto
@@ -10,6 +12,7 @@ Primer recorrido: **Gion, Kioto** (12 puntos, desde el Ikedaya hasta el parque M
 - Relatos históricos y recreaciones marcadas como tales
 - Modo simulación para probar sin estar en el lugar
 - Navegación a pie con Google Maps
+- Selector de voz: elige la voz en español de mejor calidad del teléfono
 
 ## Stack
 React Native · Expo SDK 58 · expo-location · expo-speech
