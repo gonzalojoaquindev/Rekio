@@ -16,6 +16,7 @@ import {
 import * as Location from 'expo-location';
 import * as Speech from 'expo-speech';
 import { useKeepAwake } from 'expo-keep-awake';
+import MapPanel from './MapPanel';
 
 // ─────────────────────────────────────────────────────────────
 // 1. CONTENIDO: puntos del recorrido
@@ -669,6 +670,39 @@ export default function App() {
     return list;
   }, [here]);
 
+  // ── Datos del mapa ──
+  const mapData = useMemo(() => {
+    if (tour) {
+      const def = TOURS.find((x) => x.id === tour.id);
+      const stops = def.stops.map((st) => POINTS.find((p) => p.id === st.id));
+      return {
+        points: stops.map((p, i) => ({
+          id: p.id,
+          name: p.name,
+          lat: p.lat,
+          lng: p.lng,
+          label: String(i + 1),
+          state:
+            tour.phase === 'done' || i < tour.idx ? 'done' : i === tour.idx ? 'now' : 'todo',
+        })),
+        route: stops.map((p) => [p.lat, p.lng]),
+        focus: tour.phase === 'done' ? null : stops[tour.idx],
+      };
+    }
+    return {
+      points: POINTS.map((p, i) => ({
+        id: p.id,
+        name: p.name,
+        lat: p.lat,
+        lng: p.lng,
+        label: heard.has(p.id) ? '✓' : String(i + 1),
+        state: heard.has(p.id) ? 'done' : 'todo',
+      })),
+      route: [],
+      focus: null,
+    };
+  }, [tour, heard]);
+
   const nearest = here ? rows.find((r) => !heard.has(r.p.id)) : null;
   const speakingPoint = POINTS.find((p) => p.id === speakingId);
 
@@ -691,6 +725,15 @@ export default function App() {
         <Text style={s.title}>Rekio</Text>
         <Text style={s.subtitle}>Kioto — camina y escucha su historia</Text>
 
+
+        {/* Mapa */}
+        <MapPanel
+          points={mapData.points}
+          route={mapData.route}
+          focus={mapData.focus}
+          me={here}
+          onTapPoint={(id) => !tour && setExpandedId(id)}
+        />
 
         {/* Recorridos guiados */}
         {!tour &&
