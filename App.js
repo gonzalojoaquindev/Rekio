@@ -17,6 +17,7 @@ import * as Location from 'expo-location';
 import * as Speech from 'expo-speech';
 import { useKeepAwake } from 'expo-keep-awake';
 import MapPanel from './MapPanel';
+import PointPhoto from './PointPhoto';
 
 // ─────────────────────────────────────────────────────────────
 // 1. CONTENIDO: puntos del recorrido
@@ -27,6 +28,7 @@ import MapPanel from './MapPanel';
 const POINTS = [
   {
     id: 'ikedaya',
+    photo: ["en:Ikedaya_incident", "ja:池田屋事件"],
     name: 'El incidente del Ikedaya',
     jp: '池田屋事件跡',
     lat: 35.00885,
@@ -41,6 +43,7 @@ const POINTS = [
   },
   {
     id: 'okuni',
+    photo: ["ja:出雲阿国", "en:Izumo_no_Okuni"],
     name: 'Estatua de Izumo no Okuni',
     jp: '出雲阿国像',
     lat: 35.00395,
@@ -56,6 +59,7 @@ const POINTS = [
   },
   {
     id: 'minamiza',
+    photo: ["en:Minami-za", "ja:南座"],
     name: 'Teatro Minamiza',
     jp: '南座',
     lat: 35.00385,
@@ -69,6 +73,7 @@ const POINTS = [
   },
   {
     id: 'tatsumi',
+    photo: ["ja:巽橋", "search:ja:祇園白川 巽橋"],
     name: 'Puente Tatsumi y canal Shirakawa',
     jp: '巽橋・白川',
     lat: 35.00506,
@@ -82,6 +87,7 @@ const POINTS = [
   },
   {
     id: 'kanikakuni',
+    photo: ["search:ja:祇園白川"],
     name: 'Monumento Kanikakuni',
     jp: 'かにかくに碑',
     lat: 35.00525,
@@ -95,6 +101,7 @@ const POINTS = [
   },
   {
     id: 'ichiriki',
+    photo: ["ja:一力亭", "en:Ichiriki_Chaya"],
     name: 'Hanamikoji e Ichiriki Chaya',
     jp: '花見小路・一力亭',
     lat: 35.00367,
@@ -110,6 +117,7 @@ const POINTS = [
   },
   {
     id: 'kaburenjo',
+    photo: ["ja:祇園甲部歌舞練場", "en:Miyako_Odori"],
     name: 'Gion Kōbu Kaburenjō',
     jp: '祇園甲部歌舞練場',
     lat: 35.00135,
@@ -123,6 +131,7 @@ const POINTS = [
   },
   {
     id: 'kenninji',
+    photo: ["en:Kennin-ji", "ja:建仁寺"],
     name: 'Templo Kennin-ji',
     jp: '建仁寺',
     lat: 35.0008,
@@ -137,6 +146,7 @@ const POINTS = [
   },
   {
     id: 'yasui',
+    photo: ["ja:安井金比羅宮"],
     name: 'Santuario Yasui Konpiragū',
     jp: '安井金比羅宮',
     lat: 35.00025,
@@ -150,6 +160,7 @@ const POINTS = [
   },
   {
     id: 'yasakato',
+    photo: ["en:Hōkan-ji", "ja:法観寺"],
     name: 'Pagoda de Yasaka',
     jp: '八坂の塔（法観寺）',
     lat: 34.99855,
@@ -163,6 +174,7 @@ const POINTS = [
   },
   {
     id: 'yasaka',
+    photo: ["en:Yasaka_Shrine", "ja:八坂神社"],
     name: 'Santuario Yasaka',
     jp: '八坂神社',
     lat: 35.0037,
@@ -177,6 +189,7 @@ const POINTS = [
   },
   {
     id: 'maruyama',
+    photo: ["en:Maruyama_Park", "ja:円山公園"],
     name: 'Parque Maruyama',
     jp: '円山公園',
     lat: 35.0037,
@@ -193,6 +206,7 @@ const POINTS = [
   // ── Palacio Imperial de Kioto (Kyoto Gyoen) ──
   {
     id: 'sakaimachi',
+    photo: ["en:Kyoto_Gyoen", "ja:京都御苑"],
     name: 'Parque Kyoto Gyoen',
     jp: '京都御苑・堺町御門',
     lat: 35.0172,
@@ -206,6 +220,7 @@ const POINTS = [
   },
   {
     id: 'hamaguri',
+    photo: ["ja:蛤御門", "en:Kinmon_incident"],
     name: 'Puerta Hamaguri',
     jp: '蛤御門',
     lat: 35.0227,
@@ -221,6 +236,7 @@ const POINTS = [
   },
   {
     id: 'kenreimon',
+    photo: ["ja:建礼門", "en:Kyoto_Imperial_Palace"],
     name: 'Puerta Kenreimon',
     jp: '建礼門',
     lat: 35.0226,
@@ -234,6 +250,7 @@ const POINTS = [
   },
   {
     id: 'seishomon',
+    photo: ["ja:京都御所", "en:Kyoto_Imperial_Palace"],
     name: 'Entrada al Palacio (Seishomon)',
     jp: '京都御所・清所門',
     lat: 35.0262,
@@ -247,6 +264,7 @@ const POINTS = [
   },
   {
     id: 'shishinden',
+    photo: ["ja:紫宸殿", "en:Kyoto_Imperial_Palace"],
     name: 'Salón Shishinden',
     jp: '紫宸殿',
     lat: 35.0245,
@@ -794,6 +812,7 @@ export default function App() {
                 )}
                 <Text style={s.tourTitle}>{tour.phase === 'done' ? '¡Listo!' : p.name}</Text>
                 <Text style={s.tourStatus}>{status}</Text>
+                {tour.phase !== 'done' && <PointPhoto point={p} />}
                 {tour.phase !== 'done' && (
                   <Text style={s.guideText}>{def.stops[tour.idx].guide}</Text>
                 )}
@@ -911,6 +930,7 @@ export default function App() {
 
               {open && (
                 <View style={s.itemBody}>
+                  <PointPhoto point={p} />
                   <View style={s.actions}>
                     <TouchableOpacity
                       style={s.btn}
