@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Rekio",
+    "slug": "rekio",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "backgroundColor": "#16130F",
+    "android": {
+      "package": "com.gonzalojoaquindev.rekio",
+      "adaptiveIcon": {
+        "backgroundColor": "#16130F"
+      },
+      "permissions": ["ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Rekio usa tu ubicación para contarte la historia de cada lugar cuando llegas."
+        }
+      ]
+    ]
+  }
+}
