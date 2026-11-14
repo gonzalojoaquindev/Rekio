@@ -7,6 +7,7 @@ Recorridos en **Kioto** (17 puntos):
 - **Palacio Imperial**: Kyoto Gyoen, puerta Hamaguri, Kenreimon, Seishomon y Shishinden (5 puntos)
 
 ## Funciones
+- **Recorrido guiado** del Palacio Imperial: indicaciones habladas entre paradas, progreso, "Cómo llegar" y modo simulación
 - Narración automática al entrar al radio de cada punto
 - Distancia y dirección al próximo punto
 - Relatos históricos y recreaciones marcadas como tales

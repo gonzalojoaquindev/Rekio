@@ -259,6 +259,51 @@ const POINTS = [
   },
 ];
 
+
+// ─────────────────────────────────────────────────────────────
+// 1b. RECORRIDOS GUIADOS
+//     guide: indicación para llegar a esa parada desde la anterior
+// ─────────────────────────────────────────────────────────────
+const TOURS = [
+  {
+    id: 'palacio',
+    name: 'Palacio Imperial de Kioto',
+    jp: '京都御所',
+    summary: '5 paradas · unos 2 km a pie · 1 hora y media aprox.',
+    intro:
+      'Bienvenido al recorrido del Palacio Imperial de Kioto. Durante más de quinientos años, los emperadores de Japón vivieron detrás de estos muros. Te voy a ir guiando parada por parada. Cuando llegues a cada punto, te contaré su historia.',
+    stops: [
+      {
+        id: 'sakaimachi',
+        guide:
+          'Primera parada: la puerta Sakaimachi, la entrada sur del parque Kyoto Gyoen, sobre la calle Marutamachi. Si no estás ahí, toca el botón Cómo llegar y Google Maps te lleva.',
+      },
+      {
+        id: 'kenreimon',
+        guide:
+          'Ahora camina derecho hacia el norte por el gran camino de gravilla, unos seiscientos metros. Al fondo verás un muro largo color crema, con cinco líneas blancas horizontales: esas líneas indican el rango más alto, el de la casa imperial. La puerta del centro de ese muro es Kenreimon. Ahí te espero.',
+      },
+      {
+        id: 'hamaguri',
+        guide:
+          'Ahora gira a la izquierda, hacia el oeste. Camina unos doscientos cincuenta metros, dejando atrás la esquina del muro, hasta la puerta del parque que da a la avenida Karasuma. Es una puerta grande de madera oscura, con refuerzos de hierro.',
+      },
+      {
+        id: 'seishomon',
+        guide:
+          'Vuelve hacia el muro del palacio y camina hacia el norte, siguiéndolo por su lado oeste, unos cuatrocientos metros. Busca la fila de visitantes y el control de seguridad: esa es la puerta Seishomon, la entrada al palacio.',
+      },
+      {
+        id: 'shishinden',
+        guide:
+          'Entra, pasa el control y sigue la ruta señalizada. Pasarás por el pórtico de carruajes y las salas de espera de los nobles. Avanza hasta ver un gran patio de arena blanca con un salón enorme al fondo y dos árboles frente a su escalera. Ese es el Shishinden.',
+      },
+    ],
+    outro:
+      'Aquí termina el recorrido del Palacio Imperial. Desde estos muros se gobernó, al menos en nombre, Japón durante siglos, y aquí se vivieron los últimos días del Japón de los samuráis. Gracias por caminar conmigo. Si te queda energía, el resto del palacio y sus jardines siguen por la ruta señalizada.',
+  },
+];
+
 // ─────────────────────────────────────────────────────────────
 // 2. UTILIDADES GEO
 // ─────────────────────────────────────────────────────────────
@@ -316,6 +361,7 @@ export default function App() {
   const [expandedId, setExpandedId] = useState(null);
   const [voice, setVoice] = useState(null);
   const [voices, setVoices] = useState([]);
+  const [tour, setTour] = useState(null);
 
   // refs para que los callbacks de voz vean siempre el estado actual
   const speakingRef = useRef(null);
@@ -405,7 +451,7 @@ export default function App() {
   }, []);
 
   const speakPoint = useCallback(
-    (p, arrived = false) => {
+    (p, arrived = false, onComplete = null) => {
       Speech.stop();
       speakingRef.current = p.id;
       setSpeakingId(p.id);
@@ -419,7 +465,8 @@ export default function App() {
         setSpeakingId(null);
         if (completed) {
           markHeard(p.id);
-          playNext();
+          if (onComplete) onComplete();
+          else playNext();
         }
       };
 
@@ -435,6 +482,31 @@ export default function App() {
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [voice, markHeard]
+  );
+
+  // Habla un texto de guía (indicaciones del recorrido)
+  const say = useCallback(
+    (text, onDone = null) => {
+      Speech.stop();
+      const tok = `__guide${Date.now()}`;
+      speakingRef.current = tok;
+      setSpeakingId(null);
+      const finish = (completed) => {
+        if (speakingRef.current !== tok) return;
+        speakingRef.current = null;
+        if (completed && onDone) onDone();
+      };
+      Speech.speak(text, {
+        language: voice ? voice.language : 'es-US',
+        voice: voice ? voice.identifier : undefined,
+        rate: RATE,
+        pitch: 1.0,
+        onDone: () => finish(true),
+        onStopped: () => finish(false),
+        onError: () => finish(false),
+      });
+    },
+    [voice]
   );
 
   const playNext = useCallback(() => {
@@ -459,7 +531,7 @@ export default function App() {
 
   // ── Disparo automático por cercanía ──
   useEffect(() => {
-    if (!auto || !here) return;
+    if (!auto || !here || tour) return; // en recorrido guiado manda el recorrido
     const inside = POINTS.map((p) => ({ p, d: distanceM(here, p) }))
       .filter(
         ({ p, d }) =>
@@ -473,7 +545,117 @@ export default function App() {
     if (!inside.length) return;
     queueRef.current.push(...inside);
     if (!speakingRef.current) playNext();
-  }, [here, auto, playNext]);
+  }, [here, auto, tour, playNext]);
+
+  // ─────────────────────────────────────────────
+  // RECORRIDO GUIADO
+  // tour = { id, idx, phase, simulate }
+  //   phase: 'guiding' (dando indicaciones) → 'going' (caminando)
+  //          → 'story' (relato) → siguiente parada … → 'done'
+  // ─────────────────────────────────────────────
+  const tourRef = useRef(null);
+  const simTimer = useRef(null);
+  const latest = useRef({});
+  latest.current = { say, speakPoint };
+
+  const setTourState = (t) => {
+    tourRef.current = t;
+    setTour(t);
+  };
+
+  const tourDef = (t) => TOURS.find((x) => x.id === t.id);
+  const stopPoint = (t, idx) => POINTS.find((p) => p.id === tourDef(t).stops[idx].id);
+
+  const teleport = (idx) => {
+    const t = tourRef.current;
+    if (!t || !t.simulate) return;
+    const p = stopPoint(t, idx);
+    setSim({ lat: p.lat, lng: p.lng, label: p.name });
+  };
+
+  const giveDirections = (t, idx, prefix = '') => {
+    setTourState({ ...t, idx, phase: 'guiding' });
+    const guide = tourDef(t).stops[idx].guide;
+    latest.current.say(prefix + guide, () => {
+      const cur = tourRef.current;
+      if (!cur || cur.idx !== idx) return;
+      setTourState({ ...cur, phase: 'going' });
+      if (cur.simulate) {
+        clearTimeout(simTimer.current);
+        simTimer.current = setTimeout(() => teleport(idx), 1500);
+      }
+    });
+  };
+
+  const tellStory = (t) => {
+    const p = stopPoint(t, t.idx);
+    setTourState({ ...t, phase: 'story' });
+    latest.current.speakPoint(p, true, () => advance());
+  };
+
+  const advance = () => {
+    const t = tourRef.current;
+    if (!t) return;
+    const def = tourDef(t);
+    const next = t.idx + 1;
+    if (next < def.stops.length) {
+      giveDirections(t, next);
+    } else {
+      setTourState({ ...t, phase: 'done' });
+      latest.current.say(def.outro);
+    }
+  };
+
+  const startTour = (def, simulate) => {
+    stop();
+    clearTimeout(simTimer.current);
+    setExpandedId(null);
+    if (!simulate) setSim(null);
+    const t = { id: def.id, idx: 0, phase: 'guiding', simulate };
+    tourRef.current = t;
+    giveDirections(t, 0, def.intro + ' ');
+  };
+
+  const endTour = () => {
+    clearTimeout(simTimer.current);
+    const t = tourRef.current;
+    setTourState(null);
+    stop();
+    if (t && t.simulate) setSim(null);
+  };
+
+  const skipStep = () => {
+    const t = tourRef.current;
+    if (!t) return;
+    clearTimeout(simTimer.current);
+    if (t.phase === 'guiding' || t.phase === 'going') {
+      if (t.simulate) teleport(t.idx);
+      tellStory(t);
+    } else if (t.phase === 'story') {
+      Speech.stop();
+      advance();
+    }
+  };
+
+  const repeatStep = () => {
+    const t = tourRef.current;
+    if (!t) return;
+    clearTimeout(simTimer.current);
+    if (t.phase === 'story') tellStory(t);
+    else if (t.phase === 'done') latest.current.say(tourDef(t).outro);
+    else giveDirections(t, t.idx);
+  };
+
+  // Llegada a la parada actual
+  useEffect(() => {
+    const t = tourRef.current;
+    if (!t || t.phase !== 'going' || !here) return;
+    const p = stopPoint(t, t.idx);
+    if (distanceM(here, p) <= p.radius) tellStory(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [here, tour]);
+
+  useEffect(() => () => clearTimeout(simTimer.current), []);
 
   // ── Lista ordenada por distancia ──
   const rows = useMemo(() => {
@@ -508,6 +690,93 @@ export default function App() {
         <Text style={s.kanji}>京都</Text>
         <Text style={s.title}>Rekio</Text>
         <Text style={s.subtitle}>Kioto — camina y escucha su historia</Text>
+
+
+        {/* Recorridos guiados */}
+        {!tour &&
+          TOURS.map((def) => (
+            <View key={def.id} style={[s.card, s.tourCard]}>
+              <Text style={s.cardLabel}>RECORRIDO GUIADO</Text>
+              <Text style={s.playingTitle}>{def.name}</Text>
+              <Text style={s.itemJp}>{def.jp}</Text>
+              <Text style={s.small}>{def.summary}</Text>
+              <View style={s.actions}>
+                <TouchableOpacity style={s.btn} onPress={() => startTour(def, false)}>
+                  <Text style={s.btnText}>▶ Iniciar recorrido</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[s.btn, s.btnGhost]} onPress={() => startTour(def, true)}>
+                  <Text style={s.btnGhostText}>Simular recorrido</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ))}
+
+        {tour &&
+          (() => {
+            const def = TOURS.find((x) => x.id === tour.id);
+            const p = POINTS.find((x) => x.id === def.stops[tour.idx].id);
+            const d = here ? distanceM(here, p) : null;
+            const status =
+              tour.phase === 'guiding'
+                ? 'Escucha las indicaciones…'
+                : tour.phase === 'going'
+                ? d != null
+                  ? `Camina ${fmtDist(d)} hacia el ${dirName(bearingDeg(here, p))}`
+                  : 'Buscando tu ubicación…'
+                : tour.phase === 'story'
+                ? 'Escuchando la historia'
+                : 'Recorrido terminado';
+            return (
+              <View style={[s.card, s.tourActive]}>
+                <Text style={s.cardLabel}>
+                  {tour.simulate ? 'SIMULACIÓN · ' : ''}
+                  {def.name.toUpperCase()}
+                </Text>
+                <View style={s.dots}>
+                  {def.stops.map((st, i) => (
+                    <View
+                      key={st.id}
+                      style={[
+                        s.dot,
+                        i < tour.idx || tour.phase === 'done' ? s.dotDone : null,
+                        i === tour.idx && tour.phase !== 'done' ? s.dotNow : null,
+                      ]}
+                    />
+                  ))}
+                </View>
+                {tour.phase !== 'done' && (
+                  <Text style={s.small}>
+                    Parada {tour.idx + 1} de {def.stops.length}
+                  </Text>
+                )}
+                <Text style={s.tourTitle}>{tour.phase === 'done' ? '¡Listo!' : p.name}</Text>
+                <Text style={s.tourStatus}>{status}</Text>
+                {tour.phase !== 'done' && (
+                  <Text style={s.guideText}>{def.stops[tour.idx].guide}</Text>
+                )}
+                <View style={s.actions}>
+                  {tour.phase !== 'done' && tour.phase !== 'story' && (
+                    <TouchableOpacity style={s.btn} onPress={() => openMaps(p)}>
+                      <Text style={s.btnText}>Cómo llegar</Text>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity style={[s.btn, s.btnGhost]} onPress={repeatStep}>
+                    <Text style={s.btnGhostText}>↺ Repetir</Text>
+                  </TouchableOpacity>
+                  {tour.phase !== 'done' && (
+                    <TouchableOpacity style={[s.btn, s.btnGhost]} onPress={skipStep}>
+                      <Text style={s.btnGhostText}>
+                        {tour.phase === 'story' ? 'Siguiente ›' : 'Ya llegué ›'}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
+                  <TouchableOpacity style={[s.btn, s.btnGhost]} onPress={endTour}>
+                    <Text style={s.btnGhostText}>Terminar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          })()}
 
         {/* Estado de ubicación */}
         <View style={s.card}>
@@ -553,7 +822,7 @@ export default function App() {
         </View>
 
         {/* Reproduciendo */}
-        {speakingPoint && (
+        {speakingPoint && !tour && (
           <View style={[s.card, s.playing]}>
             <Text style={s.cardLabel}>▶ ESCUCHANDO</Text>
             <Text style={s.playingTitle}>{speakingPoint.name}</Text>
@@ -564,7 +833,7 @@ export default function App() {
         )}
 
         {/* Próximo punto */}
-        {nearest && !speakingPoint && (
+        {nearest && !speakingPoint && !tour && (
           <View style={s.card}>
             <Text style={s.cardLabel}>PRÓXIMO PUNTO</Text>
             <Text style={s.playingTitle}>{nearest.p.name}</Text>
@@ -710,5 +979,14 @@ const s = StyleSheet.create({
   btnGhost: { backgroundColor: 'transparent', borderWidth: 1, borderColor: C.line },
   btnGhostText: { color: C.paper, fontSize: 14 },
   story: { color: C.paper, fontSize: 15, lineHeight: 23, opacity: 0.9 },
+  tourCard: { borderColor: C.gold },
+  tourActive: { borderColor: C.vermilion, borderWidth: 2 },
+  tourTitle: { color: C.paper, fontSize: 22, fontWeight: '700', marginTop: 4 },
+  tourStatus: { color: C.gold, fontSize: 17, fontWeight: '600', marginTop: 6 },
+  guideText: { color: C.paper, fontSize: 14, lineHeight: 21, opacity: 0.8, marginTop: 8 },
+  dots: { flexDirection: 'row', gap: 6, marginTop: 4 },
+  dot: { width: 22, height: 6, borderRadius: 3, backgroundColor: C.line },
+  dotDone: { backgroundColor: C.gold },
+  dotNow: { backgroundColor: C.vermilion },
   footer: { color: C.muted, fontSize: 12, marginTop: 18, lineHeight: 18 },
 });
