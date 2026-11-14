@@ -398,4 +398,163 @@ export const PLACES = [
       'Delante de la escalera hay dos árboles. Si miras el salón de frente, a tu derecha está un cerezo y a tu izquierda un naranjo tachibana. Representan a las guardias imperiales de la izquierda y de la derecha, vistas desde el trono, y esa disposición se ha mantenido durante siglos. ' +
       'En este salón se coronaron los emperadores Taishō, en 1915, y Shōwa, en 1928. Adentro se guarda el Takamikura, el trono imperial. Para las entronizaciones más recientes, celebradas en Tokio, este trono fue desmontado y llevado hasta allá, como un hilo que une al Japón moderno con esta antigua capital.',
   },
+
+  // ── Arashiyama y Kinkaku-ji ──
+  {
+    "id": "togetsukyo",
+    "city": "kyoto",
+    "photo": [
+      "ja:渡月橋",
+      "en:Togetsukyō"
+    ],
+    "name": "Puente Togetsukyō",
+    "jp": "渡月橋",
+    "lat": 35.0129,
+    "lng": 135.6777,
+    "radius": 60,
+    "type": "historia",
+    "short": "El puente por donde cruza la luna, símbolo de Arashiyama.",
+    "story": "Estás en el puente Togetsukyō, el símbolo de Arashiyama. Su nombre significa el puente por donde cruza la luna. Cuenta la tradición que en el siglo trece el emperador Kameyama paseaba en bote una noche de luna llena, y le pareció que la luna atravesaba el puente de un lado a otro. De ahí el nombre. Mira a tu alrededor: el río, las montañas cubiertas de bosque. Desde la época Heian, los nobles de la capital venían hasta aquí a pasear en bote, recitar poemas y contemplar la luna. En otoño, como ahora, las laderas se tiñen de rojo y amarillo. El puente que pisas es de 1934. Por dentro tiene una estructura moderna, pero sus barandas de madera mantienen el aspecto antiguo, y por eso aparece tanto en películas de época. Un detalle curioso: aquí el río cambia de nombre. Río arriba se le conoce como Hozu y, río abajo, como Katsura."
+  },
+  {
+    "id": "tenryuji",
+    "city": "kyoto",
+    "photo": [
+      "en:Tenryū-ji",
+      "ja:天龍寺"
+    ],
+    "name": "Templo Tenryū-ji",
+    "jp": "天龍寺",
+    "lat": 35.01596,
+    "lng": 135.67377,
+    "radius": 70,
+    "type": "historia",
+    "short": "El templo del dragón celestial y un jardín de 700 años.",
+    "story": "Estás en Tenryū-ji, el templo del dragón celestial, el más importante de Arashiyama y Patrimonio de la Humanidad. Su historia nace de una culpa. En 1339 murió el emperador Go-Daigo, enemigo del hombre más poderoso de Japón, el shōgun Ashikaga Takauji, que primero había luchado a su lado y luego se volvió contra él. Tras la muerte del emperador, el shōgun, aconsejado por el monje zen Musō Soseki, levantó este templo para honrar su memoria y calmar su espíritu. Lo hizo justo aquí, donde Go-Daigo había crecido, en el antiguo palacio de su abuelo, el emperador Kameyama, el mismo que bautizó el puente. ¿Y el dragón? Se cuenta que el hermano del shōgun soñó con un dragón dorado que se elevaba desde el río. Para pagar la construcción enviaron incluso un barco comercial a China, al que llamaron el barco de Tenryū-ji. No te pierdas el jardín Sōgenchi, diseñado por Musō Soseki hace unos setecientos años y que aún conserva su forma original. Fíjate cómo las montañas de detrás parecen parte del jardín: es la técnica del paisaje prestado. Y si entras al salón del Dharma, mira el techo: un dragón entre nubes pintado en 1997 por el artista Kayama Matazō."
+  },
+  {
+    "id": "nonomiya",
+    "city": "kyoto",
+    "photo": [
+      "ja:野宮神社",
+      "en:Nonomiya_Shrine"
+    ],
+    "name": "Santuario Nonomiya",
+    "jp": "野宮神社",
+    "lat": 35.01778,
+    "lng": 135.67417,
+    "radius": 35,
+    "type": "historia",
+    "short": "El santuario del torii negro, donde se purificaban las princesas.",
+    "story": "Este pequeño santuario rodeado de bambú es Nonomiya. Fíjate en su torii: no es rojo, sino oscuro, hecho con troncos sin descortezar. Es un kuroki torii, una de las formas más antiguas de torii en Japón. En la época Heian, aquí vivían durante un año o más las princesas imperiales elegidas para servir en el gran santuario de Ise. Se purificaban en este lugar antes del viaje. Este santuario aparece en La historia de Genji, la gran novela del siglo once, en una despedida melancólica entre el protagonista y una dama que se preparaba para partir. Hoy la gente viene a pedir por el amor y los buenos encuentros. Busca una piedra lisa llamada okame-ishi: dicen que trae suerte acariciarla mientras pides un deseo."
+  },
+  {
+    "id": "chikurin",
+    "city": "kyoto",
+    "photo": [
+      "search:ja:竹林の小径 嵯峨野",
+      "en:Arashiyama"
+    ],
+    "name": "Bosque de bambú de Sagano",
+    "jp": "竹林の小径",
+    "lat": 35.0172,
+    "lng": 135.671,
+    "radius": 60,
+    "type": "historia",
+    "short": "El camino entre bambúes gigantes que suena como el mar.",
+    "story": "Bienvenido al bosque de bambú de Sagano. Cierra los ojos un momento y escucha. Ese crujido de los tallos, ese susurro de las hojas allá arriba. En 1996, el Ministerio del Medio Ambiente de Japón eligió este sonido como uno de los cien paisajes sonoros del país, una lista creada para proteger los sonidos que la gente quiere conservar, en una época de cada vez más ruido. El bambú que te rodea es moso, una especie gigante que puede superar los veinte metros de altura. Y crece a una velocidad asombrosa: un brote joven puede alargarse cerca de un metro en un solo día. Fíjate en las cercas bajas a los lados del camino: están hechas de ramas secas atadas a mano. Una petición de respeto: hubo visitantes que grabaron sus nombres en los tallos, y esas heridas se vuelven negras y no se borran. Míralo, escúchalo, pero no lo toques. Y si algún día quieres el bosque casi para ti solo, ven muy temprano en la mañana."
+  },
+  {
+    "id": "okochi",
+    "city": "kyoto",
+    "photo": [
+      "ja:大河内山荘",
+      "en:Ōkōchi_Sansō"
+    ],
+    "name": "Villa Ōkōchi Sansō",
+    "jp": "大河内山荘",
+    "lat": 35.01727,
+    "lng": 135.66935,
+    "radius": 45,
+    "type": "historia",
+    "short": "El jardín de una estrella del cine de samuráis, con té matcha.",
+    "story": "Al final del bosque de bambú está la entrada a Ōkōchi Sansō, la villa de un actor de cine. Ōkōchi Denjirō fue una de las grandes estrellas de las películas de samuráis de antes de la Segunda Guerra Mundial. Se dice que, a los treinta y cuatro años, quiso crear una belleza que durara más que sus películas. Durante unos treinta años invirtió aquí gran parte de lo que ganaba, diseñando él mismo un jardín de dos hectáreas en la ladera del monte Ogura. Murió en 1962, y después la villa se abrió al público. La entrada es pagada, pero incluye un té matcha con un dulce tradicional. Desde lo alto hay una vista amplia de Kioto, y en otoño, como ahora, es uno de los rincones más bonitos de Arashiyama."
+  },
+  {
+    "id": "kinkaku_view",
+    "city": "kyoto",
+    "photo": [
+      "en:Kinkaku-ji",
+      "ja:鹿苑寺"
+    ],
+    "name": "Pabellón Dorado",
+    "jp": "金閣寺（鹿苑寺）",
+    "lat": 35.0388,
+    "lng": 135.7293,
+    "radius": 40,
+    "type": "historia",
+    "short": "El pabellón cubierto de oro reflejado en el estanque espejo.",
+    "story": "Ahí está: el Pabellón Dorado, reflejado en el estanque Kyōkochi, el estanque espejo. Este lugar fue primero la villa de un noble, Saionji Kintsune. En 1397, el shōgun Ashikaga Yoshimitsu, que había dejado el cargo pero seguía siendo el hombre más poderoso de Japón, la adquirió y construyó aquí su residencia de retiro. Desde aquí recibía a embajadores y organizaba encuentros de arte, teatro y poesía. Cuando murió, según su voluntad, la villa se convirtió en templo zen. Su nombre oficial es Rokuon-ji. Fíjate en los tres pisos: cada uno tiene un estilo distinto. El primero, de madera natural, recuerda los palacios de la nobleza. El segundo sigue el estilo de las casas de los samuráis, y el tercero, el de un templo zen. Los dos pisos superiores están cubiertos de pan de oro. En la cima, un fénix dorado mira hacia el sur. Un consejo: el recorrido dentro del templo es en un solo sentido, así que saca tus fotos aquí antes de seguir."
+  },
+  {
+    "id": "kinkaku_pine",
+    "city": "kyoto",
+    "photo": [
+      "search:ja:陸舟の松 金閣寺"
+    ],
+    "name": "El incendio y el pino barco",
+    "jp": "陸舟の松",
+    "lat": 35.0395,
+    "lng": 135.7299,
+    "radius": 25,
+    "type": "historia",
+    "short": "Un incendio en 1950 y un bonsái de 600 años con forma de barco.",
+    "story": "Ahora que estás más cerca, un secreto: este pabellón no es el original. En julio de 1950, un joven monje novicio le prendió fuego. El edificio, que había sobrevivido más de quinientos años, ardió por completo, junto con una antigua estatua de Yoshimitsu. El caso conmocionó a Japón e inspiró una novela famosa de Yukio Mishima, El pabellón de oro, publicada en 1956. El pabellón se reconstruyó en 1955 copiando el original. En 1987 se volvió a cubrir con una lámina de oro nueva, varias veces más gruesa que la anterior. Por eso brilla tanto. Algo sí se salvó: el fénix original del techo, que en ese momento estaba guardado para su restauración. Y ahora mira este pino con forma de barco: el Rikushū no matsu, el pino barco en tierra. Según la tradición, fue un bonsái del propio Yoshimitsu que luego se plantó en la tierra y se fue moldeando como una embarcación. Tiene más de seiscientos años, y su proa apunta al oeste, hacia la Tierra Pura del budismo."
+  },
+  {
+    "id": "anmintaku",
+    "city": "kyoto",
+    "photo": [
+      "search:ja:安民沢 鹿苑寺"
+    ],
+    "name": "Estanque Anmintaku",
+    "jp": "安民沢",
+    "lat": 35.04,
+    "lng": 135.7293,
+    "radius": 25,
+    "type": "historia",
+    "short": "El estanque que nunca se seca y el manantial del té del shōgun.",
+    "story": "Detrás del pabellón, el camino sube entre árboles y musgo. Cerca de aquí está el Gingasen, un manantial de donde, según la tradición, Yoshimitsu sacaba agua para preparar su té. Un poco más arriba está el estanque Anmintaku. Dicen que nunca se ha secado, ni siquiera en las peores sequías. En su pequeña isla hay una pagoda de piedra dedicada a la deidad protectora de la familia Saionji, los antiguos dueños de este lugar; según la tradición, una serpiente blanca. Verás también estatuillas de piedra rodeadas de monedas: la gente las lanza y, si acierta, dicen que trae buena suerte. Y desde la parte alta tienes una vista del pabellón por detrás, que casi nadie fotografía."
+  },
+  {
+    "id": "sekkatei",
+    "city": "kyoto",
+    "photo": [
+      "search:ja:夕佳亭 金閣寺"
+    ],
+    "name": "Casa de té Sekkatei",
+    "jp": "夕佳亭・不動堂",
+    "lat": 35.0401,
+    "lng": 135.7302,
+    "radius": 25,
+    "type": "historia",
+    "short": "Una casita de té de paja para ver el oro al atardecer.",
+    "story": "Esta casita de té con techo de paja es el Sekkatei. Se construyó en la época Edo, y su nombre alude a la belleza del atardecer: desde aquí, el pabellón se veía especialmente hermoso con la última luz de la tarde. No se puede entrar, pero puedes asomarte a su interior pequeño y sencillo, de apenas unos tatamis. Es lo opuesto al oro del pabellón, y esa es la estética del té: la belleza de lo humilde. Antes de la salida verás el Fudō-dō, un pequeño salón que guarda imágenes de Fudō Myōō, el protector de rostro feroz que, con su espada, corta los malos pensamientos. Y junto a la salida hay un puesto donde puedes tomar matcha con un dulce, si quieres descansar antes de seguir."
+  },
+  {
+    "id": "ryoanji",
+    "city": "kyoto",
+    "photo": [
+      "en:Ryōan-ji",
+      "ja:龍安寺"
+    ],
+    "name": "Jardín de piedras de Ryōan-ji",
+    "jp": "龍安寺",
+    "lat": 35.03444,
+    "lng": 135.71833,
+    "radius": 60,
+    "type": "historia",
+    "short": "Quince piedras en grava blanca: nunca las verás todas a la vez.",
+    "story": "Has llegado a Ryōan-ji, el templo del dragón en paz. Lo fundó en 1450 Hosokawa Katsumoto, un poderoso señor de la guerra, en lo que antes había sido una finca de nobles. Pocos años después estalló la guerra de Ōnin, en la que Katsumoto encabezaba uno de los bandos, y el templo ardió. Su hijo lo reconstruyó en 1488. Lo que vienes a ver es su jardín seco: un rectángulo de grava blanca rastrillada con quince piedras, sin un solo árbol. Siéntate en la terraza y cuéntalas. Desde cualquier lugar donde te sientes, siempre habrá una piedra escondida: nunca verás las quince a la vez. Hay quien dice que solo alguien iluminado podría verlas todas. Nadie sabe con certeza quién diseñó el jardín ni qué representa. Hay quien ve islas en el mar, o una tigresa cruzando un río con sus cachorros. Esa incertidumbre es parte de su gracia. Antes de irte, busca detrás del edificio la fuente de piedra, la tsukubai. Alrededor del agujero central hay cuatro caracteres que, leídos junto con el cuadrado del centro, forman una frase zen: yo solo sé estar satisfecho. Y date un paseo por el estanque Kyōyōchi, también llamado el estanque de los patos mandarines."
+  },
 ];

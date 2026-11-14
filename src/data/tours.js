@@ -185,5 +185,91 @@ export const TOURS = [
       }
     ],
     "outro": "Aquí termina el recorrido de Kiyomizu. Recorriste un templo fundado hace más de mil doscientos años, bebiste del agua que le dio su nombre y bajaste por calles donde, dicen, no conviene tropezar. Si te quedan energías, desde aquí puedes seguir hacia Gion caminando hacia el norte."
+  },
+  {
+    "id": "arashiyama",
+    "city": "kyoto",
+    "category": "Naturaleza",
+    "badge": "Popular",
+    "description": "El puente donde cruza la luna, el templo del dragón celestial y el famoso bosque de bambú que suena como el mar.",
+    "cover": "chikurin",
+    "stamp": {
+      "shape": "hex",
+      "color": "#2E7D4F",
+      "icon": "bamboo"
+    },
+    "name": "Arashiyama: el bosque de bambú",
+    "intro": "Bienvenido a Arashiyama, el rincón de las montañas y el río al oeste de Kioto, donde los nobles venían a contemplar la luna hace más de mil años. Vamos a cruzar el puente, visitar el templo del dragón y caminar por el bosque de bambú. Te voy guiando.",
+    "outro": "Aquí termina el recorrido por Arashiyama. Cruzaste el puente de la luna, conociste la historia de un shōgun arrepentido y escuchaste uno de los sonidos protegidos de Japón. Gracias por caminar conmigo.",
+    "stops": [
+      {
+        "id": "togetsukyo",
+        "optional": false,
+        "guide": "Primera parada: el puente Togetsukyō, sobre el río. Si llegaste en tren a Arashiyama, está a pocos minutos a pie. Si no estás ahí, toca Cómo llegar."
+      },
+      {
+        "id": "tenryuji",
+        "optional": false,
+        "guide": "Desde el puente, camina hacia el norte por la calle principal de Arashiyama, unos trescientos metros. La entrada de Tenryū-ji está sobre esa misma calle. El jardín y los salones son pagados."
+      },
+      {
+        "id": "nonomiya",
+        "optional": true,
+        "guide": "Ahora ve hacia el bosque de bambú. Puedes salir por la puerta norte de Tenryū-ji, que da al sendero, o volver a la calle principal y entrar por el camino de bambú. El santuario del torii oscuro está a la orilla del sendero."
+      },
+      {
+        "id": "chikurin",
+        "optional": false,
+        "guide": "Sigue el sendero de bambú hacia el oeste. Vas a entrar al tramo más alto y denso del bosque."
+      },
+      {
+        "id": "okochi",
+        "optional": true,
+        "guide": "Sigue el sendero de bambú hasta el final, donde el camino sube hacia el monte Ogura. Allí está la entrada a la villa Ōkōchi Sansō."
+      }
+    ]
+  },
+  {
+    "id": "kinkaku",
+    "city": "kyoto",
+    "category": "Templos",
+    "badge": "Imperdible",
+    "description": "El pabellón cubierto de oro del shōgun Yoshimitsu, su incendio y renacimiento, y el misterioso jardín de quince piedras de Ryōan-ji.",
+    "cover": "kinkaku_view",
+    "stamp": {
+      "shape": "circle",
+      "color": "#C9962C",
+      "icon": "pavilion"
+    },
+    "name": "El Pabellón Dorado y Ryōan-ji",
+    "intro": "Bienvenido al Pabellón Dorado, el sueño de oro de un shōgun, y uno de los lugares más famosos de Japón. Recorreremos su jardín y luego caminaremos hasta el jardín de piedras más enigmático del país. Te voy guiando.",
+    "outro": "Aquí termina el recorrido. Viste el oro de un shōgun, conociste su incendio y su renacimiento, y te sentaste frente a quince piedras que nunca se dejan ver todas juntas. Gracias por caminar conmigo.",
+    "stops": [
+      {
+        "id": "kinkaku_view",
+        "optional": false,
+        "guide": "Primera parada: el Pabellón Dorado. Entra al templo, pasa la boletería y sigue el camino: en pocos pasos se abre el estanque con el pabellón al frente."
+      },
+      {
+        "id": "kinkaku_pine",
+        "optional": false,
+        "guide": "Sigue el sendero a lo largo del estanque, acercándote al pabellón. Junto al edificio del templo verás un pino enorme con forma de barco."
+      },
+      {
+        "id": "anmintaku",
+        "optional": true,
+        "guide": "Continúa por el camino que sube por detrás del pabellón, entre musgo y árboles. Busca un pequeño estanque con una islita en el centro."
+      },
+      {
+        "id": "sekkatei",
+        "optional": true,
+        "guide": "Sigue subiendo por el sendero. Arriba encontrarás una casita de té con techo de paja."
+      },
+      {
+        "id": "ryoanji",
+        "optional": false,
+        "guide": "Sal del templo y toma la calle Kinukake no michi hacia el suroeste, unos veinte minutos a pie. Su nombre significa el camino cubierto de seda: se cuenta que un emperador quiso ver nieve en pleno verano sobre el monte Kinugasa y mandó cubrirlo con seda blanca. Al final de la calle llegarás a Ryōan-ji. La entrada es pagada."
+      }
+    ]
   }
 ];

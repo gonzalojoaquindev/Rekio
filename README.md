@@ -2,9 +2,11 @@
 
 Audioguía turística que te cuenta la historia de cada lugar mientras caminas. Usa el GPS para saber dónde estás y narra relatos inmersivos con la voz del teléfono, sin internet.
 
-Recorridos en **Kioto** (24 lugares, 3 recorridos guiados):
+Recorridos en **Kioto** (34 lugares, 5 recorridos guiados):
 - **Gion**: del Ikedaya al parque Maruyama (12 paradas, recorrido guiado)
 - **Palacio Imperial**: Kyoto Gyoen, puerta Hamaguri, Kenreimon, Seishomon y Shishinden (5 puntos, recorrido guiado)
+- **Arashiyama**: puente Togetsukyō, Tenryū-ji, santuario Nonomiya, bosque de bambú y villa Ōkōchi Sansō (5 paradas)
+- **Pabellón Dorado y Ryōan-ji**: Kinkaku-ji, el pino barco, Anmintaku, Sekkatei y el jardín de piedras (5 paradas)
 - **Kiyomizu-dera y Higashiyama**: Niōmon, pagoda, escenario, Okunoin, cascada Otowa, Sannenzaka, Ninenzaka y pagoda de Yasaka (8 paradas, recorrido guiado)
 
 ## Funciones
