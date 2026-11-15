@@ -50,13 +50,17 @@ jobs:
             adb shell monkey -p com.gonzalojoaquindev.rekio -c android.intent.category.LAUNCHER 1
             sleep 30
             adb exec-out screencap -p > /tmp/screen.png
+            adb shell 'S=$(wm size | grep -o "[0-9]*x[0-9]*" | tail -1); W=${S%x*}; H=${S#*x}; input tap $((W*30/100)) $((H*975/1000))'
+            sleep 20
+            adb exec-out screencap -p > /tmp/screen-mapa.png
             adb logcat -d > /tmp/logcat-full.txt
             adb shell pidof com.gonzalojoaquindev.rekio > /tmp/pid.txt || echo "NO CORRE (se cerró)" > /tmp/pid.txt
 
       - name: Guardar resultados en la rama logs
         run: |
           mkdir -p /tmp/out
-          cp /tmp/screen.png /tmp/out/ || true
+          cp /tmp/screen.png /tmp/screen-mapa.png /tmp/out/ || true
+          grep -iE "Google Android Maps|Authorization failure|API key|maps|gms" /tmp/logcat-full.txt | tail -n 200 > /tmp/out/logcat-mapas.txt || true
           cp /tmp/pid.txt /tmp/out/
           grep -E "AndroidRuntime|FATAL|ReactNative|ReactNativeJS|Error|Exception|rekio" /tmp/logcat-full.txt | tail -n 400 > /tmp/out/logcat-errores.txt || true
           tail -n 1500 /tmp/logcat-full.txt > /tmp/out/logcat-final.txt
