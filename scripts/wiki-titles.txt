@@ -1,4 +1,4 @@
-en:Kōfuku-ji|ja:興福寺五重塔|en:Sarusawa Pond|en:Nara Park|en:Tōdai-ji|ja:東大寺南大門|ja:東大寺金堂|ja:東大寺二月堂|en:Kasuga-taisha|ja:春日大社|en:Nara National Museum|ja:浮見堂|
-en:Kaminarimon|ja:仲見世|ja:宝蔵門|en:Sensō-ji|ja:浅草寺五重塔|en:Asakusa Shrine|ja:伝法院|ja:伝法院通り|en:Azuma Bridge|en:Tokyo Skytree|
-en:Meiji Shrine|ja:明治神宮|ja:清正井|ja:竹下通り|en:Takeshita Street|ja:明治神宮御苑|
-en:Tokyo Station|ja:東京駅丸の内駅舎|en:Nijūbashi|ja:二重橋|ja:楠木正成像|en:Kōkyo Gaien|ja:大手門|ja:皇居東御苑|ja:百人番所|ja:江戸城天守|en:Tokyo Imperial Palace East Gardens|ja:富士見櫓|ja:桔梗門|ja:和田倉噴水公園|ja:同心番所
+cs:Kofukuji pagoda Sarusawa pond|cs:Nara Park deer Todaiji|cs:Todaiji Nandaimon gate|cs:Todaiji Nandaimon Kongo Rikishi Unkei|cs:Kasuga Taisha lanterns corridor|cs:Nigatsudo Todaiji view|
+cs:Kaminarimon lantern Asakusa|cs:Nakamise-dori Asakusa|cs:Hozomon Sensoji|cs:Sensoji five-storied pagoda|cs:Sensoji main hall Hondo|cs:Azuma bridge Skytree Sumida|
+cs:Meiji Jingu torii Harajuku entrance|cs:Meiji Jingu sake barrels|cs:Meiji Jingu wine barrels|cs:Kiyomasa well Meiji|cs:Takeshita street Harajuku|
+cs:Tokyo Station Marunouchi building|cs:Kusunoki Masashige statue Kokyo|cs:Nijubashi Fushimi yagura|cs:Otemon Edo castle|cs:Hyakunin-bansho|cs:Edo castle Tenshudai
