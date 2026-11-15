@@ -3,8 +3,12 @@
 //   stops[].optional: parada opcional (se muestra con otro ícono y se puede saltar)
 //   stamp: estampilla que se gana al completar el recorrido
 
+import { TOURS_TOKYO_NARA } from './tours_tokyo_nara';
+
 export const CITIES = [
   { id: 'kyoto', name: 'Kioto', country: 'Japón', cc: 'JP', lat: 35.0116, lng: 135.7681 },
+  { id: 'tokyo', name: 'Tokio', country: 'Japón', cc: 'JP', lat: 35.6812, lng: 139.7671 },
+  { id: 'nara', name: 'Nara', country: 'Japón', cc: 'JP', lat: 34.6851, lng: 135.8329 },
 ];
 
 export const TOURS = [
@@ -273,3 +277,5 @@ export const TOURS = [
     ]
   }
 ];
+
+TOURS.push(...TOURS_TOKYO_NARA);

@@ -75,7 +75,7 @@ export default function ExploreScreen({ openTour, openPlace }) {
         </>
       )}
 
-      {CITIES.map((city) => {
+      {(here ? [...CITIES].sort((a, b) => distanceM(here, a) - distanceM(here, b)) : CITIES).map((city) => {
         const ct = tours.filter((t) => t.city === city.id);
         const cp = places.filter((p) => p.city === city.id);
         if (!ct.length && !cp.length) return null;

@@ -1,0 +1,91 @@
+// Recorridos de Tokio y Nara. Mismo formato que TOURS en tours.js.
+export const TOURS_TOKYO_NARA = [
+  {
+    id: 'asakusa',
+    city: 'tokyo',
+    category: 'Templos',
+    badge: 'Popular',
+    description: 'La Puerta del Trueno, la calle de los dulces y el templo nacido de una estatua pescada en el río.',
+    cover: 'tk_kaminarimon',
+    stamp: { shape: 'pill', color: '#C62828', icon: 'lantern' },
+    name: 'Asakusa: el templo más antiguo de Tokio',
+    intro:
+      'Bienvenido a Asakusa, el barrio donde nació Tokio cuando todavía era una aldea de pescadores. Vamos a cruzar la Puerta del Trueno, recorrer la calle de los dulces y llegar al templo de Sensō-ji, para terminar a orillas del río Sumida. Te voy guiando.',
+    outro:
+      'Aquí termina el recorrido por Asakusa. Seguiste el camino de los peregrinos desde la Puerta del Trueno hasta el río donde empezó todo, hace casi catorce siglos. Gracias por caminar conmigo.',
+    stops: [
+      { id: 'tk_kaminarimon', optional: false, guide: 'Primera parada: la Puerta Kaminarimon, con su gran farol rojo. Está a un par de minutos de la salida 1 de la estación de metro Asakusa. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'tk_nakamise', optional: false, guide: 'Cruza la puerta y sigue derecho hacia el norte. Ya estás en la calle de tiendas que lleva al templo.' },
+      { id: 'tk_hozomon', optional: false, guide: 'Sigue hasta el final de la calle de tiendas. La gran puerta de dos pisos que tienes enfrente es Hōzōmon.' },
+      { id: 'tk_gojunoto', optional: true, guide: 'Cruza Hōzōmon y mira a la izquierda: la pagoda de cinco pisos está a pocos pasos.' },
+      { id: 'tk_sensoji', optional: false, guide: 'Vuelve al centro de la explanada. El gran salón al fondo, con el incensario humeando enfrente, es el salón principal de Sensō-ji.' },
+      { id: 'tk_asakusajinja', optional: true, guide: 'Rodea el salón principal por la derecha. Detrás, a la derecha, está el santuario de Asakusa, más pequeño y tranquilo.' },
+      { id: 'tk_azumabashi', optional: true, guide: 'Para terminar, camina hacia el sureste, unos seiscientos metros, hasta el río Sumida y el puente rojo. Desde ahí se ve la Skytree.' },
+    ],
+  },
+  {
+    id: 'meiji',
+    city: 'tokyo',
+    category: 'Templos',
+    badge: 'Nuevo',
+    description: 'Un bosque plantado a mano, barriles de sake y vino, el santuario del emperador Meiji y el caos kawaii de Harajuku.',
+    cover: 'tk_meiji_honden',
+    stamp: { shape: 'hex', color: '#5B6B2F', icon: 'gate' },
+    name: 'Meiji Jingu y Harajuku: del bosque sagrado al kawaii',
+    intro:
+      'Bienvenido a Harajuku. Vamos a entrar a un bosque sagrado en el centro de Tokio, conocer al emperador que llevó a Japón a la era moderna y terminar en la calle más colorida de la ciudad. Te voy guiando.',
+    outro:
+      'Aquí termina el recorrido. Pasaste del silencio del bosque de Meiji al ruido de la calle Takeshita, los dos extremos de Tokio separados por un puente. Gracias por caminar conmigo.',
+    stops: [
+      { id: 'tk_meiji_torii', optional: false, guide: 'Primera parada: la entrada de Meiji Jingu, junto a la estación de Harajuku. Cruza el puente frente a la estación y verás el primer torii de madera. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'tk_sakadaru', optional: false, guide: 'Sigue el sendero de grava por el bosque, unos cuatrocientos metros. Donde el camino gira a la derecha, verás los barriles a ambos lados.' },
+      { id: 'tk_meiji_honden', optional: false, guide: 'Pasa bajo el gran torii y sigue derecho. Después de la fuente para lavarte las manos, cruza la puerta hasta el patio del santuario.' },
+      { id: 'tk_kiyomasa', optional: true, guide: 'Vuelve hacia el gran torii. Justo antes, a la izquierda, está la entrada al Jardín interior. Es pagado y cierra a las cuatro de la tarde en invierno. El pozo está al fondo del jardín.' },
+      { id: 'tk_takeshita', optional: false, guide: 'Regresa por el sendero hasta la estación de Harajuku. Camina a la izquierda por la calle frente a la estación y, a unos cien metros, verás la entrada de la calle Takeshita al otro lado.' },
+    ],
+  },
+  {
+    id: 'edo',
+    city: 'tokyo',
+    category: 'Palacios',
+    badge: 'Nuevo',
+    description: 'De la estación de ladrillo de 1914 a los muros del castillo más grande del mundo, donde hoy vive el emperador.',
+    cover: 'tk_nijubashi',
+    stamp: { shape: 'square', color: '#2F4A6B', icon: 'palace' },
+    name: 'Del castillo de Edo al Palacio Imperial',
+    intro:
+      'Bienvenido al centro de Tokio. Vamos a caminar desde la estación de Tokio hasta los restos del castillo de Edo, la fortaleza de los shōgun, donde hoy vive el emperador. Un aviso: los Jardines del Este, donde están las últimas paradas, cierran los lunes y los viernes. Te voy guiando.',
+    outro:
+      'Aquí termina el recorrido. Caminaste desde la puerta de la capital moderna hasta la base de la torre que nunca se reconstruyó, por el castillo que se rindió sin un disparo. Gracias por caminar conmigo.',
+    stops: [
+      { id: 'tk_tokyoeki', optional: false, guide: 'Primera parada: la fachada de ladrillo de la estación de Tokio, del lado Marunouchi. Sal por la salida central de Marunouchi y date la vuelta. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'tk_kusunoki', optional: true, guide: 'Camina hacia el oeste por la avenida ancha que sale de la estación, unos ochocientos metros. Cruza al parque del palacio y gira a la izquierda: verás la estatua de un samurái a caballo entre los pinos.' },
+      { id: 'tk_nijubashi', optional: false, guide: 'Camina hacia el oeste por la gran explanada de grava, entre los pinos, hasta el foso. El puente de piedra con dos arcos es Nijūbashi.' },
+      { id: 'tk_otemon', optional: false, guide: 'Ahora camina hacia el norte, siguiendo el foso, aproximadamente un kilómetro. La gran puerta blanca con techo de tejas es Ōtemon, la entrada a los Jardines del Este.' },
+      { id: 'tk_hyakunin', optional: true, guide: 'Entra a los jardines y sube por el camino de la derecha. El edificio largo y bajo, junto a los muros de piedra, es la guardia de los cien.' },
+      { id: 'tk_tenshudai', optional: false, guide: 'Sigue subiendo hasta el gran prado del Honmaru y crúzalo hacia el norte. Al fondo verás una enorme plataforma de piedra: es la base de la antigua torre.' },
+    ],
+  },
+  {
+    id: 'nara',
+    city: 'nara',
+    category: 'Templos',
+    badge: 'Nuevo',
+    description: 'El templo de los Fujiwara, los ciervos sagrados, el Gran Buda de 15 metros y un bosque de faroles de piedra.',
+    cover: 'nara_daibutsuden',
+    stamp: { shape: 'circle', color: '#8B5E3C', icon: 'deer' },
+    name: 'Nara: ciervos y el Gran Buda',
+    intro:
+      'Bienvenido a Nara, la primera capital permanente de Japón, hace más de mil trescientos años. Vamos a caminar desde el templo de los Fujiwara hasta el Gran Buda y terminar en un santuario rodeado de faroles, siempre en compañía de los ciervos. Te voy guiando.',
+    outro:
+      'Aquí termina el recorrido por Nara. Conociste a los ciervos mensajeros, al Buda que nació para salvar a un país de una epidemia y el bosque que nadie toca desde el año 841. Gracias por caminar conmigo.',
+    stops: [
+      { id: 'nara_kofukuji', optional: false, guide: 'Primera parada: el templo Kōfuku-ji, a unos cinco minutos a pie de la estación Kintetsu Nara, subiendo hacia el este. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'nara_shika', optional: false, guide: 'Sal de Kōfuku-ji hacia el este, cruza la calle y entra al parque. Camina unos quinientos metros, pasando junto al Museo Nacional de Nara. Aquí los ciervos ya te estarán esperando.' },
+      { id: 'nara_nandaimon', optional: false, guide: 'Gira hacia el norte por el camino ancho de tiendas. Al final verás una enorme puerta de madera oscura: es la Gran Puerta Sur de Tōdai-ji.' },
+      { id: 'nara_daibutsuden', optional: false, guide: 'Cruza la puerta y sigue derecho hacia el norte. Al fondo verás el gigantesco Salón del Gran Buda. La entrada se paga en la taquilla antes de entrar, solo en efectivo.' },
+      { id: 'nara_nigatsudo', optional: true, guide: 'Al salir, camina hacia el este y sube la colina, unos quinientos metros. Las escaleras de piedra te llevan al balcón de Nigatsu-dō.' },
+      { id: 'nara_kasuga', optional: false, guide: 'Baja de la colina hacia el sur por el camino del bosque, aproximadamente un kilómetro y medio. Vas a ver cada vez más faroles de piedra cubiertos de musgo, hasta llegar al santuario rojo.' },
+    ],
+  },
+];

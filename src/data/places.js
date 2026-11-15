@@ -3,6 +3,9 @@
 // radius: metros alrededor del punto donde se activa el relato
 // photo: artículos de Wikipedia donde buscar la foto ('ja:Título', 'en:Título' o 'search:ja:texto')
 
+import { TOKYO } from './places_tokyo';
+import { NARA } from './places_nara';
+
 export const PLACES = [
   {
     id: 'ikedaya',
@@ -552,6 +555,9 @@ export const PLACES = [
 // ── Entradas ──
 // Precio adulto en yenes, verificado en noviembre de 2026. cash: llevar efectivo.
 // Los precios cambian: se muestran como referencia.
+// Lugares de otras ciudades (cada ciudad en su propio archivo)
+PLACES.push(...TOKYO, ...NARA);
+
 export const FEES = {
   kiyo_hondo: { yen: 500, cash: true, note: 'Salón principal y escenario de Kiyomizu-dera.' },
   tenryuji: {
@@ -563,6 +569,9 @@ export const FEES = {
   kinkaku_view: { yen: 500, cash: true, note: 'La entrada es un amuleto de papel: guárdala.' },
   ryoanji: { yen: 600, cash: true },
   kenninji: { yen: 800, cash: true },
+  nara_daibutsuden: { yen: 800, cash: true, note: 'Salón del Gran Buda. Con el museo de Tōdai-ji: ¥1200.' },
+  nara_kasuga: { yen: 700, cash: true, note: 'Solo el corredor interior junto al santuario principal. El resto es gratis.' },
+  tk_kiyomasa: { yen: 500, cash: true, note: 'Jardín interior (Gyoen). En invierno abre de 9:00 a 16:00.' },
 };
 PLACES.forEach((p) => {
   if (FEES[p.id]) p.fee = FEES[p.id];
