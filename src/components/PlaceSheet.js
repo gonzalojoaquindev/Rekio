@@ -7,7 +7,7 @@ import Icon from './Icon';
 import { Btn, Badge, pickPhoto } from './ui';
 import { C, R } from '../theme';
 import { placeById, distanceM, fmtDist } from '../geo';
-import { useTour, tourById } from '../tour';
+import { useTour, tourById, stopAt } from '../tour';
 import { useStore } from '../store';
 
 export default function PlaceSheet({ placeId, onClose }) {
@@ -19,8 +19,9 @@ export default function PlaceSheet({ placeId, onClose }) {
 
   const playing = t.speaking === `place:${p.id}`;
   const tourDef = t.tour ? tourById(t.tour.id) : null;
-  const stopIdx = tourDef ? tourDef.stops.findIndex((s) => s.id === p.id) : -1;
-  const stop = stopIdx >= 0 ? tourDef.stops[stopIdx] : null;
+  const order = tourDef ? t.tour.order || tourDef.stops.map((_, i) => i) : [];
+  const stopIdx = tourDef ? order.findIndex((si) => tourDef.stops[si].id === p.id) : -1;
+  const stop = stopIdx >= 0 ? stopAt(t.tour, stopIdx) : null;
   const dist = t.here ? distanceM(t.here, p) : null;
   const heard = store.heard.includes(p.id);
   const myPhotos = store.photos.filter((ph) => ph.placeId === p.id);
@@ -51,6 +52,15 @@ export default function PlaceSheet({ placeId, onClose }) {
             {dist != null ? `  ·  a ${fmtDist(dist)}` : ''}
           </Text>
           {!!p.short && <Text style={st.short}>{p.short}</Text>}
+          {p.fee && (
+            <View style={st.fee}>
+              <Text style={st.feeTitle}>
+                🎫 Entrada: ¥{p.fee.yen.toLocaleString('es-CL')} por persona{p.fee.cash ? ' · lleva efectivo' : ''}
+              </Text>
+              {!!p.fee.note && <Text style={st.feeNote}>{p.fee.note}</Text>}
+              <Text style={st.feeNote}>Precio de referencia (nov. 2026), puede cambiar.</Text>
+            </View>
+          )}
 
           <View style={st.actions}>
             <Btn
@@ -117,6 +127,9 @@ const st = StyleSheet.create({
   local: { fontSize: 14, color: C.muted, marginTop: 4 },
   short: { fontSize: 15, color: C.text, marginTop: 10, lineHeight: 21 },
   actions: { flexDirection: 'row', gap: 8, marginTop: 14 },
+  fee: { marginTop: 14, padding: 14, borderRadius: R.md, backgroundColor: '#FFF7E6' },
+  feeTitle: { fontSize: 15, fontWeight: '700', color: C.text },
+  feeNote: { fontSize: 13, color: C.muted, marginTop: 4, lineHeight: 18 },
   storyTitle: { fontSize: 18, fontWeight: '800', color: C.text, marginTop: 24 },
   story: { fontSize: 16, lineHeight: 25, color: '#333', marginTop: 8 },
   close: {

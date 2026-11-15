@@ -3,6 +3,9 @@ name: Probar APK en emulador
 # Instala el último APK publicado en un Android virtual, lo abre y guarda
 # el registro (logcat) y una captura de pantalla en la rama "logs".
 on:
+  workflow_run:
+    workflows: ["Compilar APK"]
+    types: [completed]
   push:
     branches: [debug]
   workflow_dispatch:
@@ -12,6 +15,7 @@ permissions:
 
 jobs:
   test:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:

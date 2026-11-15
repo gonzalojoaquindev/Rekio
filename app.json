@@ -29,6 +29,14 @@
           "photosPermission": "Rekio usa tus fotos para guardar recuerdos de tus recorridos.",
           "cameraPermission": "Rekio usa la cámara para que guardes fotos de tus recorridos."
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "extraProguardRules": "# WorkManager/Room (usados por Google Play services): el optimizador R8 borraba su base de datos interna y la app se cerraba al abrir\n-keep class * extends androidx.room.RoomDatabase { <init>(); }\n-keep class androidx.work.impl.WorkDatabase_Impl { *; }\n-keep class androidx.work.impl.** { *; }\n# Google Maps\n-keep class com.google.android.gms.maps.** { *; }\n-keep class com.rnmaps.** { *; }"
+          }
+        }
       ]
     ]
   }

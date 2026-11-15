@@ -548,3 +548,22 @@ export const PLACES = [
     "story": "Has llegado a Ryōan-ji, el templo del dragón en paz. Lo fundó en 1450 Hosokawa Katsumoto, un poderoso señor de la guerra, en lo que antes había sido una finca de nobles. Pocos años después estalló la guerra de Ōnin, en la que Katsumoto encabezaba uno de los bandos, y el templo ardió. Su hijo lo reconstruyó en 1488. Lo que vienes a ver es su jardín seco: un rectángulo de grava blanca rastrillada con quince piedras, sin un solo árbol. Siéntate en la terraza y cuéntalas. Desde cualquier lugar donde te sientes, siempre habrá una piedra escondida: nunca verás las quince a la vez. Hay quien dice que solo alguien iluminado podría verlas todas. Nadie sabe con certeza quién diseñó el jardín ni qué representa. Hay quien ve islas en el mar, o una tigresa cruzando un río con sus cachorros. Esa incertidumbre es parte de su gracia. Antes de irte, busca detrás del edificio la fuente de piedra, la tsukubai. Alrededor del agujero central hay cuatro caracteres que, leídos junto con el cuadrado del centro, forman una frase zen: yo solo sé estar satisfecho. Y date un paseo por el estanque Kyōyōchi, también llamado el estanque de los patos mandarines."
   },
 ];
+
+// ── Entradas ──
+// Precio adulto en yenes, verificado en noviembre de 2026. cash: llevar efectivo.
+// Los precios cambian: se muestran como referencia.
+export const FEES = {
+  kiyo_hondo: { yen: 500, cash: true, note: 'Salón principal y escenario de Kiyomizu-dera.' },
+  tenryuji: {
+    yen: 500,
+    cash: true,
+    note: 'Solo jardín. Salones +¥300. Dragón del techo +¥500 (fines de semana, feriados y temporadas especiales).',
+  },
+  okochi: { yen: 1000, cash: true, note: 'Incluye té matcha con un dulce.' },
+  kinkaku_view: { yen: 500, cash: true, note: 'La entrada es un amuleto de papel: guárdala.' },
+  ryoanji: { yen: 600, cash: true },
+  kenninji: { yen: 800, cash: true },
+};
+PLACES.forEach((p) => {
+  if (FEES[p.id]) p.fee = FEES[p.id];
+});

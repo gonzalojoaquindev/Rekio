@@ -10,7 +10,7 @@ import { C, R, shadow } from '../theme';
 import { TOURS } from '../data/tours';
 import { placeById, fmtDist, cityById, distanceM } from '../geo';
 import { fetchTourRoute } from '../nav';
-import { tourById, useTour } from '../tour';
+import { tourById, useTour, stopAt } from '../tour';
 import { useStore } from '../store';
 
 const routeCache = {};
@@ -23,35 +23,42 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
   const tour = t.tour;
   const def = tour ? tourById(tour.id) : null;
 
+  const orderKey = tour && tour.order ? tour.order.join(',') : '';
+  const routeKey = def ? `${def.id}:${orderKey}` : '';
   useEffect(() => {
     if (!def) return;
-    if (routeCache[def.id]) return setRoute(routeCache[def.id]);
+    if (routeCache[routeKey]) return setRoute(routeCache[routeKey]);
     setRoute(null);
-    fetchTourRoute(def.stops.map((s) => placeById(s.id)))
+    const ordered = (tour.order || def.stops.map((_, i) => i)).map((i) => placeById(def.stops[i].id));
+    fetchTourRoute(ordered)
       .then((line) => {
         if (line) {
-          routeCache[def.id] = line;
+          routeCache[routeKey] = line;
           setRoute(line);
         }
       })
       .catch(() => {});
-  }, [def && def.id]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [routeKey]);
 
   const points = useMemo(() => {
     if (!def) return [];
-    return def.stops.map((s, i) => {
-      const p = placeById(s.id);
+    const order = tour.order || def.stops.map((_, i) => i);
+    return order.map((si, pos) => {
+      const st = def.stops[si];
+      const p = placeById(st.id);
       return {
         id: p.id,
         name: p.name,
         lat: p.lat,
         lng: p.lng,
-        label: String(i + 1),
-        kind: s.optional ? 'optional' : 'must',
-        state: tour.phase === 'done' || i < tour.idx ? 'done' : i === tour.idx ? 'now' : 'todo',
+        label: String(pos + 1),
+        kind: st.optional ? 'optional' : 'must',
+        state: tour.phase === 'done' || pos < tour.idx ? 'done' : pos === tour.idx ? 'now' : 'todo',
       };
     });
-  }, [def, tour && tour.idx, tour && tour.phase]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [def, orderKey, tour && tour.idx, tour && tour.phase]);
 
   // ── Sin recorrido activo ──
   if (!tour) {
@@ -79,7 +86,7 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
     );
   }
 
-  const stop = def.stops[tour.idx];
+  const stop = stopAt(tour, tour.idx);
   const p = placeById(stop.id);
   const city = cityById(def.city);
   const done = tour.phase === 'done';
@@ -167,7 +174,10 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
                 <Text style={st.stopName} numberOfLines={1}>
                   {p.name}
                 </Text>
-                <Text style={st.status}>{status}</Text>
+                <Text style={st.status}>
+                  {status}
+                  {p.fee ? `  ·  🎫 ¥${p.fee.yen.toLocaleString('es-CL')}${p.fee.cash ? ' efectivo' : ''}` : ''}
+                </Text>
               </View>
               <Text style={st.more}>Ficha ›</Text>
             </TouchableOpacity>

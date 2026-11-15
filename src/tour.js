@@ -3,13 +3,46 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import * as Location from 'expo-location';
 import { PLACES } from './data/places';
 import { TOURS } from './data/tours';
-import { distanceM, distToPolylineM, fmtDist, placeById, tourStats } from './geo';
+import { distanceM, distToPolylineM, fmtDist, placeById, tourStats, bearingDeg, dirName } from './geo';
 import { say, stopSpeaking, onSpeakingChange, speakingKey, placeNarration, loadVoices } from './speech';
 import { fetchWalkingRoute } from './nav';
 import { useStore } from './store';
 
 const Ctx = createContext(null);
 export const tourById = (id) => TOURS.find((t) => t.id === id);
+
+// Orden de las paradas: original, al revés o empezando por la más cercana
+export function buildOrder(def, mode, from) {
+  const n = def.stops.length;
+  const idx = [...Array(n).keys()];
+  if (mode === 'reverse') return idx.reverse();
+  if (mode !== 'nearest' || !from) return idx;
+  // vecino más cercano: siempre camina a la parada pendiente más próxima
+  const left = new Set(idx);
+  const order = [];
+  let cur = from;
+  while (left.size) {
+    let best = null;
+    let bestD = Infinity;
+    left.forEach((i) => {
+      const d = distanceM(cur, placeById(def.stops[i].id));
+      if (d < bestD) {
+        bestD = d;
+        best = i;
+      }
+    });
+    order.push(best);
+    left.delete(best);
+    cur = placeById(def.stops[best].id);
+  }
+  return order;
+}
+
+// Parada en la posición pos del recorrido activo
+export const stopAt = (t, pos) => tourById(t.id).stops[t.order ? t.order[pos] : pos];
+const isOriginal = (t) => !t.order || t.order.every((v, i) => v === i);
+
+const words = (m) => (m < 1000 ? `${Math.round(m / 10) * 10} metros` : `${(m / 1000).toFixed(1).replace('.', ',')} kilómetros`);
 
 export function TourProvider({ children }) {
   const store = useStore();
@@ -73,7 +106,7 @@ export function TourProvider({ children }) {
   };
 
   const def = (t) => tourById(t.id);
-  const stopPlace = (t, idx) => placeById(def(t).stops[idx].id);
+  const stopPlace = (t, idx) => placeById(stopAt(t, idx).id);
 
   // ── Narrar un lugar cualquiera (desde una ficha o el mapa) ──
   const playPlace = useCallback((id) => {
@@ -130,7 +163,15 @@ export function TourProvider({ children }) {
     setLegState(null);
     setNavMsg(null);
     requestLeg(idx);
-    const guide = def(t).stops[idx].guide;
+    const st = stopAt(t, idx);
+    let guide = st.guide;
+    if (!isOriginal(t)) {
+      // con otro orden, las indicaciones originales ("desde el puente…") no sirven
+      const p = placeById(st.id);
+      const from = hereRef.current;
+      const where = from ? ` Está a unos ${words(distanceM(from, p))} hacia el ${dirName(bearingDeg(from, p))}.` : '';
+      guide = `${idx === 0 ? 'Empezamos por' : 'Siguiente parada'}: ${p.name}.${where}${st.optional ? ' Es una parada opcional.' : ''} Sigue la ruta azul del mapa y las indicaciones de voz.`;
+    }
     say(prefix + guide, {
       key: 'guide',
       onDone: () => {
@@ -173,12 +214,13 @@ export function TourProvider({ children }) {
     }
   };
 
-  const startTour = (id, simulate = false) => {
+  const startTour = (id, simulate = false, mode = 'original') => {
     stopSimWalk();
     stopSpeaking();
     if (!simulate) setSim(null);
     const d = tourById(id);
-    tourRef.current = { id, idx: 0, phase: 'guiding', simulate };
+    const order = buildOrder(d, mode, simulate ? null : hereRef.current);
+    tourRef.current = { id, idx: 0, phase: 'guiding', simulate, order };
     giveDirections(0, d.intro + ' ');
   };
 

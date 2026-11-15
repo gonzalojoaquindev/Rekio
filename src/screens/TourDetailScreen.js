@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PointPhoto from '../components/PointPhoto';
 import MapPanel from '../components/MapPanel';
@@ -7,9 +7,9 @@ import Stamp from '../components/Stamp';
 import Icon from '../components/Icon';
 import { Btn, SectionTitle, pickPhoto } from '../components/ui';
 import { C, R, shadow } from '../theme';
-import { placeById, tourStats, cityById } from '../geo';
+import { placeById, tourStats, cityById, distanceM, fmtDist } from '../geo';
 import { fetchTourRoute } from '../nav';
-import { tourById, useTour } from '../tour';
+import { tourById, useTour, buildOrder } from '../tour';
 import { useStore, earnedStamps } from '../store';
 
 const routeCache = {};
@@ -51,10 +51,34 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
     state: store.heard.includes(x.p.id) ? 'done' : 'todo',
   }));
 
-  const start = (simulate) => {
-    t.startTour(tour.id, simulate);
+  const go = (simulate, mode) => {
+    t.startTour(tour.id, simulate, mode);
     onStart();
   };
+
+  // Si estás lejos de la primera parada, pregunta por dónde empezar
+  const start = (simulate) => {
+    if (simulate || !t.here) return go(simulate, 'original');
+    const first = stops[0].p;
+    const d0 = distanceM(t.here, first);
+    const near = buildOrder(tour, 'nearest', t.here);
+    const nearP = placeById(tour.stops[near[0]].id);
+    if (d0 < 400 || near[0] === 0) return go(false, 'original');
+    Alert.alert(
+      '¿Por dónde empiezas?',
+      `Estás a ${fmtDist(d0)} de la primera parada (${first.name}). Puedo ordenar el recorrido para que camines menos.`,
+      [
+        { text: 'Al revés', onPress: () => go(false, 'reverse') },
+        { text: 'Orden original', onPress: () => go(false, 'original') },
+        { text: `Desde aquí (${nearP.name})`, onPress: () => go(false, 'nearest') },
+      ],
+      { cancelable: true }
+    );
+  };
+
+  const feeMust = must.reduce((a, x) => a + ((x.p.fee && x.p.fee.yen) || 0), 0);
+  const feeOpt = optional.reduce((a, x) => a + ((x.p.fee && x.p.fee.yen) || 0), 0);
+  const yen = (n) => `¥${n.toLocaleString('es-CL')}`;
 
   const StopRow = ({ x }) => (
     <TouchableOpacity style={st.stopRow} onPress={() => openPlace(x.p.id)} activeOpacity={0.8}>
@@ -64,6 +88,12 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
           {x.i + 1}. {x.p.name}
         </Text>
         {!!x.p.short && <Text style={st.stopShort}>{x.p.short}</Text>}
+        {!!x.p.fee && (
+          <Text style={st.stopFee}>
+            🎫 {yen(x.p.fee.yen)}
+            {x.p.fee.cash ? ' · efectivo' : ''}
+          </Text>
+        )}
       </View>
       {store.heard.includes(x.p.id) && <Icon name="check" size={18} color={C.ok} stroke={2.6} />}
     </TouchableOpacity>
@@ -90,6 +120,20 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
             <Stat icon="walk" value={`${s.km.toFixed(1).replace('.', ',')} km`} label="a pie" />
             <Stat icon="pin" value={String(s.stops)} label="paradas" />
             <Stat icon="star" value={String(s.must)} label="imperdibles" />
+          </View>
+
+          <View style={[st.cash, feeMust + feeOpt === 0 && { backgroundColor: '#E8F6EF' }]}>
+            <Text style={st.cashTitle}>
+              {feeMust + feeOpt === 0
+                ? '🆓 Sin entradas pagadas'
+                : `💴 Lleva efectivo: unos ${yen(feeMust + feeOpt)} por persona`}
+            </Text>
+            {feeMust + feeOpt > 0 && (
+              <Text style={st.cashText}>
+                {yen(feeMust)} en paradas imperdibles{feeOpt ? ` + ${yen(feeOpt)} en opcionales` : ''}. Muchos templos
+                solo aceptan efectivo. Precios de referencia (nov. 2026).
+              </Text>
+            )}
           </View>
 
           <Text style={st.desc}>{tour.description}</Text>
@@ -185,6 +229,9 @@ const st = StyleSheet.create({
   statValue: { fontSize: 15, fontWeight: '800', color: C.text },
   statLabel: { fontSize: 12, color: C.muted },
   desc: { fontSize: 16, lineHeight: 24, color: '#333', marginTop: 18 },
+  cash: { marginTop: 18, padding: 14, borderRadius: R.md, backgroundColor: '#FFF7E6' },
+  cashTitle: { fontSize: 15, fontWeight: '800', color: C.text },
+  cashText: { fontSize: 13, color: C.muted, marginTop: 4, lineHeight: 18 },
   stampBox: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -198,6 +245,7 @@ const st = StyleSheet.create({
   stopRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 10 },
   stopName: { fontSize: 16, fontWeight: '700', color: C.text },
   stopShort: { fontSize: 14, color: C.muted, marginTop: 3, lineHeight: 19 },
+  stopFee: { fontSize: 13, color: '#B7791F', fontWeight: '700', marginTop: 3 },
   photos: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 },
   photo: { width: 100, height: 100, borderRadius: 12 },
   addPhoto: {
