@@ -5,7 +5,24 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, Linking, ActivityIndicator, StyleSheet } from 'react-native';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const cache = {}; // id → { src, fallback, page } | null
+// Las fotos encontradas se guardan en el teléfono para no buscarlas en Wikipedia cada vez que abres la app
+const CACHE_KEY = 'rekio:photos:v1';
+let saveTimer = null;
+const ready = AsyncStorage.getItem(CACHE_KEY)
+  .then((raw) => {
+    if (raw) Object.assign(cache, JSON.parse(raw));
+  })
+  .catch(() => {});
+function remember(id, res) {
+  cache[id] = res;
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => AsyncStorage.setItem(CACHE_KEY, JSON.stringify(cache)).catch(() => {}), 1500);
+}
+// Miniatura: pedir la imagen chica en vez de la de 960 px
+const small = (uri) => (uri ? uri.replace(/width=\d+/, 'width=320').replace(/\/(\d{3,4})px-/, '/320px-') : uri);
 // Wikimedia exige identificar la app: sin esto puede bloquear las peticiones
 const UA = 'Rekio/1.0 (https://github.com/gonzalojoaquindev/Rekio)';
 const HEADERS = { 'User-Agent': UA, 'Api-User-Agent': UA };
@@ -56,6 +73,7 @@ function fromCommonsFile(name) {
 }
 
 async function findPhoto(point) {
+  await ready;
   if (point.id in cache) return cache[point.id];
   // Foto elegida a mano: no necesita buscar nada
   const fixed = (point.photo || []).find((t) => t.startsWith('file:'));
@@ -78,7 +96,7 @@ async function findPhoto(point) {
         res = await fromSummary(lang, title.join(':'));
       }
       if (res) {
-        cache[point.id] = res;
+        remember(point.id, res);
         return res;
       }
     } catch (e) {
@@ -114,7 +132,8 @@ export default function PointPhoto({ point, height = 190, thumb = false, size = 
     };
   }, [point.id]);
 
-  const uri = photo ? (useFallback ? photo.fallback : photo.src) : null;
+  const full = photo ? (useFallback ? photo.fallback : photo.src) : null;
+  const uri = thumb ? small(full) : full;
   const imgSource = uri ? { uri, headers: { 'User-Agent': UA } } : null;
 
   if (thumb) {
@@ -125,6 +144,7 @@ export default function PointPhoto({ point, height = 190, thumb = false, size = 
             source={imgSource}
             style={st.thumbImg}
             resizeMode="cover"
+            resizeMethod="resize"
             onError={() => !useFallback && setUseFallback(true)}
           />
         ) : loading ? (
@@ -154,6 +174,7 @@ export default function PointPhoto({ point, height = 190, thumb = false, size = 
         source={imgSource}
         style={[st.box, { height, borderRadius: radius }]}
         resizeMode="cover"
+        resizeMethod="resize"
         onError={() => !useFallback && setUseFallback(true)}
       />
       {credit && (

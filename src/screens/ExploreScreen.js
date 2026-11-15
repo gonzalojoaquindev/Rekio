@@ -18,7 +18,11 @@ const norm = (s) =>
 
 export default function ExploreScreen({ openTour, openPlace }) {
   const insets = useSafeAreaInsets();
-  const { here } = useTour();
+  const { here: rawHere } = useTour();
+  // Posición redondeada a ~100 m: la lista no se recalcula con cada pequeño movimiento
+  const hk = rawHere ? `${rawHere.lat.toFixed(3)},${rawHere.lng.toFixed(3)}` : '';
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const here = useMemo(() => rawHere, [hk]);
   const store = useStore();
   const [q, setQ] = useState('');
   const [cat, setCat] = useState('Todo');

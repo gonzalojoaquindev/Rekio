@@ -33,7 +33,14 @@ export const placeById = (id) => PLACES.find((p) => p.id === id);
 export const cityById = (id) => CITIES.find((c) => c.id === id);
 
 // Distancia aproximada a pie del recorrido (línea recta × 1,3) y duración estimada
+const statsCache = new WeakMap();
 export function tourStats(tour) {
+  if (statsCache.has(tour)) return statsCache.get(tour);
+  const res = computeTourStats(tour);
+  statsCache.set(tour, res);
+  return res;
+}
+function computeTourStats(tour) {
   const pts = tour.stops.map((s) => placeById(s.id));
   let m = 0;
   for (let i = 1; i < pts.length; i++) m += distanceM(pts[i - 1], pts[i]);

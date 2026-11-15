@@ -116,7 +116,7 @@ export function Badge({ label, color = C.text, bg = '#fff' }) {
 }
 
 // ── Tarjeta de recorrido (estilo Airbnb) ──
-export function TourCard({ tour, onPress, width = 280, done, myStars, now }) {
+export const TourCard = React.memo(function TourCard({ tour, onPress, width = 280, done, myStars, now }) {
   const s = tourStats(tour);
   const status = tourStatus(tour, now || new Date());
   const city = cityById(tour.city);
@@ -145,7 +145,9 @@ export function TourCard({ tour, onPress, width = 280, done, myStars, now }) {
       </View>
     </TouchableOpacity>
   );
-}
+},
+// La función onPress cambia en cada render del padre; no hace falta redibujar por eso
+(a, b) => a.tour === b.tour && a.done === b.done && a.myStars === b.myStars && a.now === b.now && a.width === b.width);
 
 // ── Hora actual que se refresca cada minuto (para los estados abierto/cerrado) ──
 export function useNow(ms = 60000) {

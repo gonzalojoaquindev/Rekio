@@ -87,6 +87,9 @@ export function TourProvider({ children }) {
   }, []);
 
   // ── GPS ──
+  // Durante un recorrido real: posición precisa cada 2 s. El resto del tiempo: cada 15 s o 30 m,
+  // para no redibujar toda la app ni gastar batería sin necesidad.
+  const navigating = !!tour && !tour.simulate;
   useEffect(() => {
     let sub = null;
     let cancelled = false;
@@ -96,9 +99,11 @@ export function TourProvider({ children }) {
         setGpsError('Sin permiso de ubicación');
         return;
       }
-      const s = await Location.watchPositionAsync(
-        { accuracy: Location.Accuracy.BestForNavigation, timeInterval: 2000, distanceInterval: 2 },
-        (loc) => setGps({ lat: loc.coords.latitude, lng: loc.coords.longitude, acc: loc.coords.accuracy })
+      const opts = navigating
+        ? { accuracy: Location.Accuracy.BestForNavigation, timeInterval: 2000, distanceInterval: 3 }
+        : { accuracy: Location.Accuracy.Balanced, timeInterval: 15000, distanceInterval: 30 };
+      const s = await Location.watchPositionAsync(opts, (loc) =>
+        setGps({ lat: loc.coords.latitude, lng: loc.coords.longitude, acc: loc.coords.accuracy })
       );
       if (cancelled) s.remove();
       else sub = s;
@@ -106,10 +111,15 @@ export function TourProvider({ children }) {
     return () => {
       cancelled = true;
       if (sub) sub.remove();
+    };
+  }, [navigating]);
+  useEffect(
+    () => () => {
       clearTimeout(simTimer.current);
       stopSpeaking();
-    };
-  }, []);
+    },
+    []
+  );
 
   const setTourState = (t) => {
     tourRef.current = t;
