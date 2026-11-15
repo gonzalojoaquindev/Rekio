@@ -14,7 +14,7 @@ Recorridos en **Kioto** (34 lugares, 5 recorridos guiados):
 - **Estampillas** por cada recorrido completado y **perfil** con estadísticas, fotos y ajustes
 - **Indicaciones por voz giro a giro** entre paradas (OSRM sobre OpenStreetMap)
 - Paradas **imperdibles** y **opcionales**, ficha de cada lugar para volver a escucharla, parada anterior y siguiente
-- **Mapa** con tu ubicación, las paradas numeradas y la ruta (OpenStreetMap/CARTO, sin clave de API)
+- **Mapa de Google** nativo (con OpenStreetMap como respaldo): tu ubicación, paradas y ruta
 - **Recorrido guiado** del Palacio Imperial: indicaciones habladas entre paradas, progreso, "Cómo llegar" y modo simulación
 - Narración automática al entrar al radio de cada punto
 - Distancia y dirección al próximo punto
@@ -24,7 +24,9 @@ Recorridos en **Kioto** (34 lugares, 5 recorridos guiados):
 - Selector de voz: elige la voz en español de mejor calidad del teléfono
 
 ## Stack
-React Native · Expo SDK 58 · expo-location · expo-speech · Leaflet en WebView
+React Native · Expo SDK 58 · react-native-maps (Google Maps) · Leaflet · expo-location · expo-speech
+
+La clave de Google Maps se inyecta al compilar desde el secreto `GOOGLE_MAPS_API_KEY` de GitHub Actions; nunca se guarda en el código.
 
 ## Descargar
 El APK se compila automáticamente con GitHub Actions en cada push a `main`. Descárgalo desde **Releases**.

@@ -11,7 +11,7 @@ const INITIAL = {
   heard: [], // ids de lugares escuchados
   completed: [], // { tourId, date, simulated, km }
   photos: [], // { id, uri, tourId, placeId, date }
-  settings: { auto: true, turnByTurn: true, voiceId: null },
+  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google' },
 };
 
 const Ctx = createContext(null);

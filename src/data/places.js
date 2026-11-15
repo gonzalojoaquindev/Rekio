@@ -55,7 +55,7 @@ export const PLACES = [
   {
     id: 'tatsumi',
     city: 'kyoto',
-    photo: ["ja:巽橋", "search:ja:祇園白川 巽橋"],
+    photo: ["file:Next to the Gion Tatsumi Bridge (44600422074).jpg"],
     name: 'Puente Tatsumi y canal Shirakawa',
     jp: '巽橋・白川',
     lat: 35.00506,
@@ -198,7 +198,7 @@ export const PLACES = [
   {
     id: 'kiyo_niomon',
     city: 'kyoto',
-    photo: ["ja:清水寺", "en:Kiyomizu-dera"],
+    photo: ["file:Nio-mon, Kiyomizu-dera Temple, Kyoto, West view 20190416 1.jpg"],
     name: 'Puerta Niōmon de Kiyomizu-dera',
     jp: '清水寺・仁王門',
     lat: 34.99547,
@@ -214,7 +214,7 @@ export const PLACES = [
   {
     id: 'kiyo_pagoda',
     city: 'kyoto',
-    photo: ["search:ja:清水寺 三重塔"],
+    photo: ["file:Kiyomizu-dera - Pagode Sanjuno-to et hall Kyo-do.jpg"],
     name: 'Pagoda de tres pisos',
     jp: '清水寺・三重塔',
     lat: 34.9954,
@@ -231,7 +231,7 @@ export const PLACES = [
   {
     id: 'kiyo_hondo',
     city: 'kyoto',
-    photo: ["search:ja:清水の舞台", "en:Kiyomizu-dera"],
+    photo: ["file:Kiyomizu-dera.jpg"],
     name: 'El escenario de Kiyomizu',
     jp: '清水寺・本堂（清水の舞台）',
     lat: 34.99496,
@@ -249,7 +249,7 @@ export const PLACES = [
   {
     id: 'kiyo_okunoin',
     city: 'kyoto',
-    photo: ["search:ja:清水寺 奥の院"],
+    photo: ["file:Kiyomizu-dera, Kyoto, November 2016 -01.jpg"],
     name: 'Mirador del Okunoin',
     jp: '清水寺・奥の院',
     lat: 34.99455,
@@ -266,7 +266,7 @@ export const PLACES = [
   {
     id: 'kiyo_otowa',
     city: 'kyoto',
-    photo: ["search:ja:音羽の滝 清水寺"],
+    photo: ["file:Otowa waterfall, Kiyomizu-dera.jpg"],
     name: 'Cascada Otowa',
     jp: '音羽の滝',
     lat: 34.9944,
@@ -353,7 +353,7 @@ export const PLACES = [
   {
     id: 'kenreimon',
     city: 'kyoto',
-    photo: ["ja:建礼門", "en:Kyoto_Imperial_Palace"],
+    photo: ["file:Kyoto-gosho Kenreimon (open).JPG"],
     short: 'La puerta reservada solo para el emperador.',
     name: 'Puerta Kenreimon',
     jp: '建礼門',
@@ -451,10 +451,7 @@ export const PLACES = [
   {
     "id": "chikurin",
     "city": "kyoto",
-    "photo": [
-      "search:ja:竹林の小径 嵯峨野",
-      "en:Arashiyama"
-    ],
+    "photo": ["file:2021 Sagano Bamboo forest in Arashiyama, Kyoto, Japan.jpg"],
     "name": "Bosque de bambú de Sagano",
     "jp": "竹林の小径",
     "lat": 35.0172,
@@ -483,10 +480,7 @@ export const PLACES = [
   {
     "id": "kinkaku_view",
     "city": "kyoto",
-    "photo": [
-      "en:Kinkaku-ji",
-      "ja:鹿苑寺"
-    ],
+    "photo": ["file:Kinkaku-ji (Golden Pavillon).jpg"],
     "name": "Pabellón Dorado",
     "jp": "金閣寺（鹿苑寺）",
     "lat": 35.0388,
@@ -499,9 +493,7 @@ export const PLACES = [
   {
     "id": "kinkaku_pine",
     "city": "kyoto",
-    "photo": [
-      "search:ja:陸舟の松 金閣寺"
-    ],
+    "photo": ["file:Rikushu-no-matsu pine tree in Rokuonji Temple.JPG"],
     "name": "El incendio y el pino barco",
     "jp": "陸舟の松",
     "lat": 35.0395,
@@ -514,9 +506,8 @@ export const PLACES = [
   {
     "id": "anmintaku",
     "city": "kyoto",
-    "photo": [
-      "search:ja:安民沢 鹿苑寺"
-    ],
+    "photo": [],
+    "noAutoPhoto": true,
     "name": "Estanque Anmintaku",
     "jp": "安民沢",
     "lat": 35.04,
@@ -529,9 +520,8 @@ export const PLACES = [
   {
     "id": "sekkatei",
     "city": "kyoto",
-    "photo": [
-      "search:ja:夕佳亭 金閣寺"
-    ],
+    "photo": [],
+    "noAutoPhoto": true,
     "name": "Casa de té Sekkatei",
     "jp": "夕佳亭・不動堂",
     "lat": 35.0401,

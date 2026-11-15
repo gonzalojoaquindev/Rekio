@@ -27,7 +27,11 @@ jobs:
         run: npm install
 
       - name: Generar proyecto Android
-        run: npx expo prebuild --platform android --no-install
+        env:
+          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+        run: |
+          if [ -n "$GOOGLE_MAPS_API_KEY" ]; then echo "Clave de Google Maps: configurada"; else echo "Clave de Google Maps: NO configurada (se usará el mapa abierto)"; fi
+          npx expo prebuild --platform android --no-install
 
       - name: Compilar APK
         working-directory: android

@@ -46,11 +46,27 @@ async function fromSearch(lang, query) {
   return p ? { src: p.thumbnail.source, fallback: p.thumbnail.source, page: p.fullurl } : null;
 }
 
+function fromCommonsFile(name) {
+  const enc = encodeURIComponent(name.replace(/ /g, '_'));
+  return {
+    src: `https://commons.wikimedia.org/wiki/Special:FilePath/${enc}?width=960`,
+    fallback: `https://commons.wikimedia.org/wiki/Special:FilePath/${enc}?width=640`,
+    page: `https://commons.wikimedia.org/wiki/File:${enc}`,
+  };
+}
+
 async function findPhoto(point) {
   if (point.id in cache) return cache[point.id];
+  // Foto elegida a mano: no necesita buscar nada
+  const fixed = (point.photo || []).find((t) => t.startsWith('file:'));
+  if (fixed) {
+    cache[point.id] = fromCommonsFile(fixed.slice(5));
+    return cache[point.id];
+  }
+  if (point.noAutoPhoto && !(point.photo || []).length) return null;
   const tries = [...(point.photo || [])];
   const jp = (point.jp || '').split(/[・（(]/)[0].trim();
-  if (jp) tries.push(`search:ja:${jp}`);
+  if (jp && !point.noAutoPhoto) tries.push(`search:ja:${jp}`);
   for (const t of tries) {
     try {
       let res = null;
@@ -142,7 +158,7 @@ export default function PointPhoto({ point, height = 190, thumb = false, size = 
       />
       {credit && (
       <TouchableOpacity disabled={!photo.page} onPress={() => photo.page && Linking.openURL(photo.page)}>
-        <Text style={st.credit}>Foto: Wikipedia{photo.page ? ' · ver artículo y créditos' : ''}</Text>
+        <Text style={st.credit}>Foto: Wikimedia{photo.page ? ' · ver créditos' : ''}</Text>
       </TouchableOpacity>
       )}
     </View>

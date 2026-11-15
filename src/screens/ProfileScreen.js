@@ -22,6 +22,7 @@ import { PLACES } from '../data/places';
 import { cityById } from '../geo';
 import { useStore, earnedStamps } from '../store';
 import { getVoice, getVoices, setVoice, voiceLabel, say } from '../speech';
+import { hasGoogleMaps } from '../components/MapPanel';
 
 export default function ProfileScreen({ goPassport, openTour }) {
   const insets = useSafeAreaInsets();
@@ -138,6 +139,14 @@ export default function ProfileScreen({ goPassport, openTour }) {
         value={store.settings.turnByTurn}
         onChange={(v) => store.updateSettings({ turnByTurn: v })}
       />
+      {hasGoogleMaps && (
+        <Setting
+          title="Mapa de Google"
+          sub="Desactívalo para usar el mapa abierto (OpenStreetMap)"
+          value={store.settings.mapProvider !== 'osm'}
+          onChange={(v) => store.updateSettings({ mapProvider: v ? 'google' : 'osm' })}
+        />
+      )}
       <TouchableOpacity style={st.setting} onPress={nextVoice}>
         <View style={{ flex: 1 }}>
           <Text style={st.setTitle}>Voz de la guía</Text>
