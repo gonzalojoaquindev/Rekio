@@ -7,6 +7,16 @@ const out = [];
 for (const t of items) {
   const [lang, ...rest] = t.split(':'); const q = rest.join(':');
   try {
+    if (lang === 'ca') {
+      // Audio en Commons con licencia y duración
+      const u = `https://commons.wikimedia.org/w/api.php?action=query&format=json&generator=search&gsrnamespace=6&gsrlimit=12&gsrsearch=${encodeURIComponent(q + ' filetype:audio')}&prop=imageinfo&iiprop=extmetadata|size|url&iiextmetadatafilter=LicenseShortName|Artist`;
+      const j = await (await fetch(u, { headers: UA })).json();
+      for (const pg of Object.values(j.query?.pages || {})) {
+        const ii = pg.imageinfo?.[0] || {}; const m = ii.extmetadata || {};
+        out.push(`${t}\t${pg.title.replace('File:', '')}\t${m.LicenseShortName?.value || '?'}\t${Math.round(ii.duration || 0)}s\t${(m.Artist?.value || '').replace(/<[^>]+>/g, '').slice(0, 60)}`);
+      }
+      continue;
+    }
     if (lang === 'cs') {
       const u = `https://commons.wikimedia.org/w/api.php?action=query&format=json&list=search&srnamespace=6&srlimit=6&srsearch=${encodeURIComponent(q)}`;
       const j = await (await fetch(u, { headers: UA })).json();

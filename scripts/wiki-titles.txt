@@ -1,4 +1,1 @@
-cs:Kofukuji pagoda Sarusawa pond|cs:Nara Park deer Todaiji|cs:Todaiji Nandaimon gate|cs:Todaiji Nandaimon Kongo Rikishi Unkei|cs:Kasuga Taisha lanterns corridor|cs:Nigatsudo Todaiji view|
-cs:Kaminarimon lantern Asakusa|cs:Nakamise-dori Asakusa|cs:Hozomon Sensoji|cs:Sensoji five-storied pagoda|cs:Sensoji main hall Hondo|cs:Azuma bridge Skytree Sumida|
-cs:Meiji Jingu torii Harajuku entrance|cs:Meiji Jingu sake barrels|cs:Meiji Jingu wine barrels|cs:Kiyomasa well Meiji|cs:Takeshita street Harajuku|
-cs:Tokyo Station Marunouchi building|cs:Kusunoki Masashige statue Kokyo|cs:Nijubashi Fushimi yagura|cs:Otemon Edo castle|cs:Hyakunin-bansho|cs:Edo castle Tenshudai
+ca:koto|ca:shakuhachi|ca:shamisen|ca:gagaku|ca:Japanese traditional music|ca:Rokudan|ca:taiko drum|ca:Japanese music|ca:sakura sakura koto
