@@ -13,7 +13,8 @@ jobs:
         with:
           node-version: 22
       - run: node scripts/wiki-check.mjs "$(cat scripts/wiki-titles.txt)" > /tmp/wiki.txt; cat /tmp/wiki.txt
+      - run: sh scripts/dl-audio.sh
       - run: |
           git config user.name rekio-bot; git config user.email actions@users.noreply.github.com
-          git checkout --orphan datos-tmp; git rm -rf . >/dev/null; cp /tmp/wiki.txt .
+          git checkout --orphan datos-tmp; git rm -rf . >/dev/null; cp /tmp/wiki.txt .; mkdir -p audio; cp /tmp/out/* audio/ 2>/dev/null || true
           git add -A; git commit -m "Resultado Wikipedia"; git push -f origin HEAD:datos
