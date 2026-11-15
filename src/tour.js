@@ -4,9 +4,10 @@ import * as Location from 'expo-location';
 import { PLACES } from './data/places';
 import { TOURS } from './data/tours';
 import { distanceM, distToPolylineM, fmtDist, placeById, tourStats, bearingDeg, dirName } from './geo';
-import { say, stopSpeaking, onSpeakingChange, speakingKey, placeNarration, loadVoices } from './speech';
+import { say, stopSpeaking, onSpeakingChange, speakingKey, isSpeaking, placeNarration, loadVoices } from './speech';
 import { fetchWalkingRoute } from './nav';
 import { useStore } from './store';
+import { playMusic, stopMusic, duckMusic } from './music';
 
 const Ctx = createContext(null);
 export const tourById = (id) => TOURS.find((t) => t.id === id);
@@ -70,6 +71,20 @@ export function TourProvider({ children }) {
     if (store.loaded) loadVoices(store.settings.voiceId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store.loaded]);
+
+  // Música de fondo: suena durante el recorrido y baja cuando habla la guía
+  const musicOn = !!tour && store.settings.music !== false;
+  useEffect(() => {
+    if (musicOn) playMusic(tour.id, isSpeaking());
+    else stopMusic();
+  }, [musicOn, tour && tour.id]);
+  useEffect(() => {
+    const off = onSpeakingChange((k) => duckMusic(!!k));
+    return () => {
+      off();
+      stopMusic();
+    };
+  }, []);
 
   // ── GPS ──
   useEffect(() => {

@@ -23,6 +23,7 @@ import { cityById } from '../geo';
 import { useStore, earnedStamps } from '../store';
 import { getVoice, getVoices, setVoice, voiceLabel, say } from '../speech';
 import { hasGoogleMaps } from '../components/MapPanel';
+import { CREDITS } from '../music';
 
 export default function ProfileScreen({ goPassport, openTour }) {
   const insets = useSafeAreaInsets();
@@ -139,6 +140,12 @@ export default function ProfileScreen({ goPassport, openTour }) {
         value={store.settings.turnByTurn}
         onChange={(v) => store.updateSettings({ turnByTurn: v })}
       />
+      <Setting
+        title="Música de fondo"
+        sub="Música japonesa suave durante los recorridos; baja cuando habla la guía"
+        value={store.settings.music !== false}
+        onChange={(v) => store.updateSettings({ music: v })}
+      />
       {hasGoogleMaps && (
         <Setting
           title="Mapa de Google"
@@ -154,6 +161,13 @@ export default function ProfileScreen({ goPassport, openTour }) {
         </View>
         <Text style={st.link}>Cambiar</Text>
       </TouchableOpacity>
+
+      <SectionTitle>Créditos de la música</SectionTitle>
+      {CREDITS.map((c) => (
+        <Text key={c.title} style={st.credit}>
+          <Text style={{ fontWeight: '700', color: C.text }}>{c.title}</Text> · {c.who} · {c.license} · {c.where}
+        </Text>
+      ))}
 
       <Text style={st.version}>Rekio · versión de prueba · datos guardados en este teléfono</Text>
 
@@ -221,6 +235,7 @@ function EditProfile({ visible, onClose }) {
 }
 
 const st = StyleSheet.create({
+  credit: { fontSize: 13, color: C.muted, lineHeight: 19, marginBottom: 8 },
   card: {
     flexDirection: 'row',
     backgroundColor: '#fff',

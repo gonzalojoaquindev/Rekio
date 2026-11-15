@@ -12,7 +12,7 @@ const INITIAL = {
   completed: [], // { tourId, date, simulated, km }
   photos: [], // { id, uri, tourId, placeId, date }
   reviews: {}, // { [tourId]: { stars: 0-5, text, date } } — por ahora solo en este teléfono
-  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google' },
+  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true },
 };
 
 const Ctx = createContext(null);
