@@ -1,0 +1,68 @@
+name: Probar APK en emulador
+
+# Instala el último APK publicado en un Android virtual, lo abre y guarda
+# el registro (logcat) y una captura de pantalla en la rama "logs".
+on:
+  push:
+    branches: [debug]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Descargar el último APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=$(gh release view --json tagName -q .tagName)
+          echo "TAG=$TAG" >> $GITHUB_ENV
+          gh release download "$TAG" -p rekio.apk -D /tmp
+
+      - name: Habilitar KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Abrir la app en el emulador
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: |
+            adb install -r /tmp/rekio.apk
+            adb shell pm grant com.gonzalojoaquindev.rekio android.permission.ACCESS_FINE_LOCATION || true
+            adb logcat -c
+            adb shell monkey -p com.gonzalojoaquindev.rekio -c android.intent.category.LAUNCHER 1
+            sleep 30
+            adb exec-out screencap -p > /tmp/screen.png
+            adb logcat -d > /tmp/logcat-full.txt
+            adb shell pidof com.gonzalojoaquindev.rekio > /tmp/pid.txt || echo "NO CORRE (se cerró)" > /tmp/pid.txt
+
+      - name: Guardar resultados en la rama logs
+        run: |
+          mkdir -p /tmp/out
+          cp /tmp/screen.png /tmp/out/ || true
+          cp /tmp/pid.txt /tmp/out/
+          grep -E "AndroidRuntime|FATAL|ReactNative|ReactNativeJS|Error|Exception|rekio" /tmp/logcat-full.txt | tail -n 400 > /tmp/out/logcat-errores.txt || true
+          tail -n 1500 /tmp/logcat-full.txt > /tmp/out/logcat-final.txt
+          echo "APK probado: $TAG" > /tmp/out/info.txt
+          date -u >> /tmp/out/info.txt
+          git config user.name "rekio-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout --orphan logs-tmp
+          git rm -rf . > /dev/null
+          cp /tmp/out/* .
+          git add -A
+          git commit -m "Resultado de prueba en emulador ($TAG)"
+          git push -f origin HEAD:logs
