@@ -11,6 +11,10 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # La clave debe estar disponible en TODOS los pasos: Gradle vuelve a leer app.config.js
+    # al compilar y, sin ella, la app cree que no hay Google Maps.
+    env:
+      GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
     steps:
       - uses: actions/checkout@v4
 
@@ -27,8 +31,6 @@ jobs:
         run: npm install
 
       - name: Generar proyecto Android
-        env:
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
         run: |
           if [ -n "$GOOGLE_MAPS_API_KEY" ]; then echo "Clave de Google Maps: configurada"; else echo "Clave de Google Maps: NO configurada (se usará el mapa abierto)"; fi
           npx expo prebuild --platform android --no-install

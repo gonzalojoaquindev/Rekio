@@ -1,4 +1,4 @@
-// Mapa: Leaflet dentro de un WebView, con mapas gratuitos (CARTO, Esri, OpenStreetMap).
+// Mapa: Leaflet dentro de un WebView, con mapas gratuitos (Esri, OpenStreetMap); CARTO ahora exige clave.
 // No necesita clave de API. Las teselas del mapa sí necesitan internet.
 //
 // points: [{ id, name, lat, lng, label, kind: 'must'|'optional'|'place', state: 'todo'|'now'|'done' }]
@@ -35,8 +35,6 @@ html,body,#map{margin:0;padding:0;height:100%;background:#F2EFE9}
   map.attributionControl.setPrefix('');
 
   var PROVIDERS = [
-    { name: 'Claro', url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
-      opt: { subdomains: 'abcd', maxZoom: 20, attribution: '© OpenStreetMap © CARTO' } },
     { name: 'Calles', url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
       opt: { maxZoom: 19, attribution: '© Esri, © OpenStreetMap' } },
     { name: 'OSM', url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
