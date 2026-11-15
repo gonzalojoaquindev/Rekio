@@ -1,5 +1,5 @@
 // Piezas de interfaz reutilizables
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
@@ -8,6 +8,7 @@ import Icon from './Icon';
 import PointPhoto from './PointPhoto';
 import { C, R, shadow } from '../theme';
 import { placeById, tourStats, cityById, fmtDist } from '../geo';
+import { tourStatus } from '../hours';
 
 // ── Barra inferior ──
 export const TABS = [
@@ -115,8 +116,9 @@ export function Badge({ label, color = C.text, bg = '#fff' }) {
 }
 
 // ── Tarjeta de recorrido (estilo Airbnb) ──
-export function TourCard({ tour, onPress, width = 280, done, myStars }) {
+export function TourCard({ tour, onPress, width = 280, done, myStars, now }) {
   const s = tourStats(tour);
+  const status = tourStatus(tour, now || new Date());
   const city = cityById(tour.city);
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.85} style={{ width }}>
@@ -137,10 +139,39 @@ export function TourCard({ tour, onPress, width = 280, done, myStars }) {
         {s.stops} paradas · {s.km.toFixed(1).replace('.', ',')} km · {s.durationLabel}
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+        {status && <View style={{ marginTop: 6 }}><StatusChip chip={status.chip} small /></View>}
         <WhenChips when={tour.when} small />
         {!!myStars && <Text style={[st.cardMeta, { marginTop: 6, color: C.text }]}>★ {myStars} · tu nota</Text>}
       </View>
     </TouchableOpacity>
+  );
+}
+
+// ── Hora actual que se refresca cada minuto (para los estados abierto/cerrado) ──
+export function useNow(ms = 60000) {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = setInterval(() => setNow(new Date()), ms);
+    return () => clearInterval(id);
+  }, [ms]);
+  return now;
+}
+
+const TONES = {
+  ok: { bg: '#E8F6EF', fg: '#1B7A4B', dot: '🟢' },
+  warn: { bg: '#FFF4E0', fg: '#9A5B00', dot: '🟠' },
+  bad: { bg: '#FDECEC', fg: '#B3261E', dot: '🔴' },
+  info: { bg: '#EEF3FB', fg: '#2F5597', dot: '🕘' },
+};
+export function StatusChip({ chip, small }) {
+  if (!chip) return null;
+  const t = TONES[chip.tone] || TONES.info;
+  return (
+    <View style={[st.when, small && st.whenSmall, { backgroundColor: t.bg }]}>
+      <Text style={[st.whenText, small && { fontSize: 12 }, { color: t.fg }]}>
+        {t.dot} {chip.text}
+      </Text>
+    </View>
   );
 }
 

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { View, Text, ScrollView, TextInput, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from '../components/Icon';
-import { ScreenTitle, SectionTitle, Chip, TourCard, PlaceCard, HScroll } from '../components/ui';
+import { ScreenTitle, SectionTitle, Chip, TourCard, PlaceCard, HScroll, useNow } from '../components/ui';
 import { C, R, shadow } from '../theme';
 import { TOURS, CITIES } from '../data/tours';
 import { PLACES } from '../data/places';
@@ -23,6 +23,7 @@ export default function ExploreScreen({ openTour, openPlace }) {
   const [q, setQ] = useState('');
   const [cat, setCat] = useState('Todo');
   const done = earnedStamps(store.completed);
+  const now = useNow();
 
   const categories = useMemo(() => ['Todo', ...Array.from(new Set(TOURS.map((t) => t.category)))], []);
 
@@ -86,7 +87,7 @@ export default function ExploreScreen({ openTour, openPlace }) {
                 <SectionTitle sub={`${city.country} · audioguías a pie con GPS`}>Recorridos en {city.name}</SectionTitle>
                 <HScroll>
                   {ct.map((t) => (
-                    <TourCard key={t.id} tour={t} done={!!done[t.id]} myStars={(store.reviews || {})[t.id]?.stars} onPress={() => openTour(t.id)} />
+                    <TourCard key={t.id} tour={t} done={!!done[t.id]} myStars={(store.reviews || {})[t.id]?.stars} now={now} onPress={() => openTour(t.id)} />
                   ))}
                 </HScroll>
               </>

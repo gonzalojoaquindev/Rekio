@@ -5,7 +5,8 @@ import PointPhoto from '../components/PointPhoto';
 import MapPanel from '../components/MapPanel';
 import Stamp from '../components/Stamp';
 import Icon from '../components/Icon';
-import { Btn, SectionTitle, pickPhoto, WhenChips, Stars } from '../components/ui';
+import { Btn, SectionTitle, pickPhoto, WhenChips, Stars, StatusChip, useNow } from '../components/ui';
+import { tourStatus } from '../hours';
 import { C, R, shadow } from '../theme';
 import { placeById, tourStats, cityById, distanceM, fmtDist } from '../geo';
 import { fetchTourRoute } from '../nav';
@@ -27,6 +28,8 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
   const earned = earnedStamps(store.completed)[tour.id];
   const photos = store.photos.filter((ph) => ph.tourId === tour.id);
   const [route, setRoute] = useState(routeCache[tour.id] || null);
+  const now = useNow();
+  const status = tourStatus(tour, now, { from: t.here });
 
   useEffect(() => {
     if (routeCache[tour.id]) return;
@@ -56,8 +59,25 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
     onStart();
   };
 
-  // Si estás lejos de la primera parada, pregunta por dónde empezar
+  // Antes de comenzar: avisa si algo está cerrado hoy o si no alcanzarías a llegar
   const start = (simulate) => {
+    const st0 = simulate ? null : tourStatus(tour, new Date(), { from: t.here });
+    if (!st0 || !st0.issues.length) return chooseOrder(simulate);
+    Alert.alert(
+      st0.blocking ? 'No te recomiendo ir ahora' : 'Un aviso antes de empezar',
+      `${st0.message}\n\nHorarios de referencia: pueden cambiar por ceremonias o eventos.`,
+      st0.blocking
+        ? [
+            { text: 'Ver otros recorridos', onPress: onBack, style: 'cancel' },
+            { text: 'Ir igual', onPress: () => chooseOrder(false) },
+          ]
+        : [{ text: 'Comenzar', onPress: () => chooseOrder(false) }],
+      { cancelable: true }
+    );
+  };
+
+  // Si estás lejos de la primera parada, pregunta por dónde empezar
+  const chooseOrder = (simulate) => {
     if (simulate || !t.here) return go(simulate, 'original');
     const first = stops[0].p;
     const d0 = distanceM(t.here, first);
@@ -135,6 +155,16 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
               </Text>
             )}
           </View>
+
+          {!!status && (
+            <View style={st.statusBox}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <Text style={st.whenTitle}>Hoy</Text>
+                <StatusChip chip={status.chip} />
+              </View>
+              {!!status.message && <Text style={st.cashText}>{status.message}</Text>}
+            </View>
+          )}
 
           {!!tour.when && (
             <View style={st.whenBox}>
@@ -284,6 +314,7 @@ const st = StyleSheet.create({
   statValue: { fontSize: 15, fontWeight: '800', color: C.text },
   statLabel: { fontSize: 12, color: C.muted },
   desc: { fontSize: 16, lineHeight: 24, color: '#333', marginTop: 18 },
+  statusBox: { marginTop: 14, padding: 14, borderRadius: R.md, borderWidth: 1, borderColor: C.line, gap: 8 },
   whenBox: { marginTop: 14, padding: 14, borderRadius: R.md, backgroundColor: '#F7F6FF', gap: 8 },
   whenTitle: { fontSize: 15, fontWeight: '800', color: C.text },
   review: { padding: 16, borderRadius: R.md, borderWidth: 1, borderColor: C.line, backgroundColor: '#fff' },

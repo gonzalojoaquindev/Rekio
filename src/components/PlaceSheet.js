@@ -9,6 +9,7 @@ import { C, R } from '../theme';
 import { placeById, distanceM, fmtDist } from '../geo';
 import { useTour, tourById, stopAt } from '../tour';
 import { useStore } from '../store';
+import { placeHoursText } from '../hours';
 
 export default function PlaceSheet({ placeId, onClose }) {
   const insets = useSafeAreaInsets();
@@ -52,6 +53,17 @@ export default function PlaceSheet({ placeId, onClose }) {
             {dist != null ? `  ·  a ${fmtDist(dist)}` : ''}
           </Text>
           {!!p.short && <Text style={st.short}>{p.short}</Text>}
+          {(() => {
+            const h = placeHoursText(p.id);
+            if (!h) return null;
+            const bg = { ok: '#E8F6EF', warn: '#FFF4E0', bad: '#FDECEC', info: '#EEF3FB' }[h.tone];
+            return (
+              <View style={[st.fee, { backgroundColor: bg }]}>
+                <Text style={st.feeTitle}>🕘 {h.text}</Text>
+                <Text style={st.feeNote}>Horario de referencia (hora de Japón).</Text>
+              </View>
+            );
+          })()}
           {p.fee && (
             <View style={st.fee}>
               <Text style={st.feeTitle}>
