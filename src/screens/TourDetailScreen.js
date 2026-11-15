@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, Alert } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, Alert, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import PointPhoto from '../components/PointPhoto';
 import MapPanel from '../components/MapPanel';
 import Stamp from '../components/Stamp';
 import Icon from '../components/Icon';
-import { Btn, SectionTitle, pickPhoto } from '../components/ui';
+import { Btn, SectionTitle, pickPhoto, WhenChips, Stars } from '../components/ui';
 import { C, R, shadow } from '../theme';
 import { placeById, tourStats, cityById, distanceM, fmtDist } from '../geo';
 import { fetchTourRoute } from '../nav';
@@ -136,6 +136,14 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
             )}
           </View>
 
+          {!!tour.when && (
+            <View style={st.whenBox}>
+              <Text style={st.whenTitle}>Mejor momento para ir</Text>
+              <WhenChips when={tour.when} />
+              <Text style={st.cashText}>{tour.when.note}</Text>
+            </View>
+          )}
+
           <Text style={st.desc}>{tour.description}</Text>
 
           <View style={st.stampBox}>
@@ -167,6 +175,9 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
             </>
           )}
 
+          <SectionTitle sub="Por ahora se guarda solo en tu teléfono">Tu opinión</SectionTitle>
+          <ReviewBox tourId={tour.id} />
+
           <SectionTitle sub="Se guardan en tu teléfono">Tus fotos de este recorrido</SectionTitle>
           <View style={st.photos}>
             {photos.map((ph) => (
@@ -190,6 +201,50 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
         <Btn title="Simular" kind="ghost" onPress={() => start(true)} style={{ flex: 1 }} />
         <Btn title="Comenzar recorrido" icon="headphones" onPress={() => start(false)} style={{ flex: 2 }} />
       </View>
+    </View>
+  );
+}
+
+// Calificación con estrellas y un tip para otros viajeros
+function ReviewBox({ tourId }) {
+  const store = useStore();
+  const saved = (store.reviews || {})[tourId] || { stars: 0, text: '' };
+  const [text, setText] = useState(saved.text || '');
+  const [editing, setEditing] = useState(!saved.text);
+  const LABELS = ['Toca para calificar', 'No me gustó', 'Regular', 'Bueno', 'Muy bueno', '¡Imperdible!'];
+  return (
+    <View style={st.review}>
+      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+        <Stars value={saved.stars} size={30} onChange={(n) => store.setReview(tourId, { stars: n })} />
+        <Text style={st.reviewLabel}>{LABELS[saved.stars]}</Text>
+      </View>
+      {editing ? (
+        <>
+          <TextInput
+            style={st.reviewInput}
+            value={text}
+            onChangeText={setText}
+            placeholder="Tu opinión o un tip, por ejemplo: «Ve lo más temprano posible, después se llena»"
+            placeholderTextColor={C.muted}
+            multiline
+            maxLength={500}
+          />
+          <Btn
+            title="Guardar"
+            small
+            onPress={() => {
+              store.setReview(tourId, { text: text.trim() });
+              setEditing(!text.trim());
+            }}
+            style={{ alignSelf: 'flex-start', marginTop: 10 }}
+          />
+        </>
+      ) : (
+        <TouchableOpacity onPress={() => setEditing(true)} activeOpacity={0.7}>
+          <Text style={st.reviewText}>💡 {saved.text}</Text>
+          <Text style={st.reviewEdit}>Editar</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }
@@ -229,6 +284,13 @@ const st = StyleSheet.create({
   statValue: { fontSize: 15, fontWeight: '800', color: C.text },
   statLabel: { fontSize: 12, color: C.muted },
   desc: { fontSize: 16, lineHeight: 24, color: '#333', marginTop: 18 },
+  whenBox: { marginTop: 14, padding: 14, borderRadius: R.md, backgroundColor: '#F7F6FF', gap: 8 },
+  whenTitle: { fontSize: 15, fontWeight: '800', color: C.text },
+  review: { padding: 16, borderRadius: R.md, borderWidth: 1, borderColor: C.line, backgroundColor: '#fff' },
+  reviewLabel: { fontSize: 15, fontWeight: '700', color: C.text },
+  reviewInput: { marginTop: 12, minHeight: 80, borderWidth: 1, borderColor: '#DDDDDD', borderRadius: 12, padding: 12, fontSize: 15, color: C.text, textAlignVertical: 'top' },
+  reviewText: { marginTop: 12, fontSize: 15, lineHeight: 21, color: C.text },
+  reviewEdit: { marginTop: 6, fontSize: 14, fontWeight: '700', color: C.brand, textDecorationLine: 'underline' },
   cash: { marginTop: 18, padding: 14, borderRadius: R.md, backgroundColor: '#FFF7E6' },
   cashTitle: { fontSize: 15, fontWeight: '800', color: C.text },
   cashText: { fontSize: 13, color: C.muted, marginTop: 4, lineHeight: 18 },

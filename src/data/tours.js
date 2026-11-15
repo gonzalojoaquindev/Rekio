@@ -279,3 +279,17 @@ export const TOURS = [
 ];
 
 TOURS.push(...TOURS_TOKYO_NARA);
+
+// Mejor momento para hacer cada recorrido: temprano | manana | tarde | noche
+export const BEST_TIME = {
+  gion: { slots: ['noche'], note: 'Al anochecer se encienden los faroles y salen las geiko y maiko rumbo a sus citas: así era la vida nocturna que conocieron los samuráis.' },
+  palacio: { slots: ['manana'], note: 'Los jardines abren a las 9:00 y cierran temprano en invierno. Por la mañana hay luz suave y poca gente.' },
+  kiyomizu: { slots: ['temprano'], note: 'El templo abre a las 6:00. Antes de las 8:00 tienes el escenario casi para ti; a media mañana se llena.' },
+  arashiyama: { slots: ['temprano'], note: 'Ve lo más temprano posible: después de las 9:00 el bosque de bambú se llena de gente.' },
+  kinkaku: { slots: ['manana'], note: 'Abre a las 9:00. Llega a esa hora para ver el pabellón con el sol de frente y antes de los grupos.' },
+  asakusa: { slots: ['temprano', 'noche'], note: 'Temprano evitas las multitudes. De noche las tiendas cierran, pero el templo se ilumina y queda casi vacío.' },
+  meiji: { slots: ['temprano'], note: 'El santuario abre al amanecer. Temprano el bosque está en silencio; la calle Takeshita se anima desde las 11:00.' },
+  edo: { slots: ['manana'], note: 'Los Jardines del Este abren a las 9:00 y cierran a las 16:00 en invierno. Cerrados los lunes y viernes.' },
+  nara: { slots: ['manana'], note: 'El Gran Buda abre a las 8:00 en invierno. Por la mañana los ciervos están más tranquilos y hay menos grupos.' },
+};
+TOURS.forEach((t) => { if (BEST_TIME[t.id]) t.when = BEST_TIME[t.id]; });

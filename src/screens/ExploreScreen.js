@@ -86,7 +86,7 @@ export default function ExploreScreen({ openTour, openPlace }) {
                 <SectionTitle sub={`${city.country} · audioguías a pie con GPS`}>Recorridos en {city.name}</SectionTitle>
                 <HScroll>
                   {ct.map((t) => (
-                    <TourCard key={t.id} tour={t} done={!!done[t.id]} onPress={() => openTour(t.id)} />
+                    <TourCard key={t.id} tour={t} done={!!done[t.id]} myStars={(store.reviews || {})[t.id]?.stars} onPress={() => openTour(t.id)} />
                   ))}
                 </HScroll>
               </>

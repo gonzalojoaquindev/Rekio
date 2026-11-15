@@ -115,7 +115,7 @@ export function Badge({ label, color = C.text, bg = '#fff' }) {
 }
 
 // ── Tarjeta de recorrido (estilo Airbnb) ──
-export function TourCard({ tour, onPress, width = 280, done }) {
+export function TourCard({ tour, onPress, width = 280, done, myStars }) {
   const s = tourStats(tour);
   const city = cityById(tour.city);
   return (
@@ -136,7 +136,54 @@ export function TourCard({ tour, onPress, width = 280, done }) {
       <Text style={st.cardMeta}>
         {s.stops} paradas · {s.km.toFixed(1).replace('.', ',')} km · {s.durationLabel}
       </Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+        <WhenChips when={tour.when} small />
+        {!!myStars && <Text style={[st.cardMeta, { marginTop: 6, color: C.text }]}>★ {myStars} · tu nota</Text>}
+      </View>
     </TouchableOpacity>
+  );
+}
+
+// ── Mejor momento para ir ──
+export const TIME_SLOTS = {
+  temprano: { icon: '🌅', label: 'Muy temprano' },
+  manana: { icon: '☀️', label: 'Mañana' },
+  tarde: { icon: '🌇', label: 'Tarde' },
+  noche: { icon: '🌙', label: 'Noche' },
+};
+export function WhenChips({ when, small }) {
+  if (!when) return null;
+  return (
+    <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: small ? 6 : 0 }}>
+      {when.slots.map((k) => (
+        <View key={k} style={[st.when, small && st.whenSmall]}>
+          <Text style={[st.whenText, small && { fontSize: 12 }]}>
+            {TIME_SLOTS[k].icon} {small ? 'Mejor: ' : ''}
+            {TIME_SLOTS[k].label}
+          </Text>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+// ── Estrellas (0 a 5). Con onChange se pueden tocar ──
+export function Stars({ value = 0, size = 18, onChange }) {
+  return (
+    <View style={{ flexDirection: 'row', gap: size * 0.25 }}>
+      {[1, 2, 3, 4, 5].map((n) => {
+        const star = (
+          <Text style={{ fontSize: size, lineHeight: size * 1.25, color: n <= value ? '#F5A623' : '#D5D5D5' }}>★</Text>
+        );
+        return onChange ? (
+          <TouchableOpacity key={n} hitSlop={6} onPress={() => onChange(n === value ? 0 : n)} accessibilityLabel={`${n} estrellas`}>
+            {star}
+          </TouchableOpacity>
+        ) : (
+          <View key={n}>{star}</View>
+        );
+      })}
+    </View>
   );
 }
 
@@ -254,5 +301,8 @@ const st = StyleSheet.create({
   cardBadges: { position: 'absolute', top: 12, left: 12, gap: 6, alignItems: 'flex-start' },
   cardTitle: { fontSize: 16, fontWeight: '700', color: C.text, marginTop: 10 },
   cardMeta: { fontSize: 14, color: C.muted, marginTop: 2 },
+  when: { backgroundColor: '#F2F0FF', borderRadius: 999, paddingHorizontal: 12, paddingVertical: 6 },
+  whenSmall: { paddingHorizontal: 9, paddingVertical: 3 },
+  whenText: { fontSize: 14, fontWeight: '700', color: '#4B3FA8' },
   placeName: { fontSize: 14, fontWeight: '600', color: C.text, marginTop: 8 },
 });

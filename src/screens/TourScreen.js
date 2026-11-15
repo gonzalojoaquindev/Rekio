@@ -5,7 +5,7 @@ import MapPanel from '../components/MapPanel';
 import PointPhoto from '../components/PointPhoto';
 import Stamp from '../components/Stamp';
 import Icon from '../components/Icon';
-import { Btn, RoundBtn, ScreenTitle, TourCard, pickPhoto } from '../components/ui';
+import { Btn, RoundBtn, ScreenTitle, TourCard, pickPhoto, Stars } from '../components/ui';
 import { C, R, shadow } from '../theme';
 import { TOURS } from '../data/tours';
 import { placeById, fmtDist, cityById, distanceM } from '../geo';
@@ -159,7 +159,13 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
           <View style={{ alignItems: 'center', paddingVertical: 6 }}>
             <Stamp stamp={def.stamp} title={city.name} cc={city.cc} size={110} />
             <Text style={st.doneTitle}>¡Ganaste una estampilla!</Text>
-            <Text style={st.doneText}>Ya está en tu pasaporte.</Text>
+            <Text style={st.doneText}>Ya está en tu pasaporte. ¿Qué te pareció?</Text>
+            <View style={{ marginTop: 10 }}>
+              <Stars value={((store.reviews || {})[def.id] || {}).stars || 0} size={30} onChange={(n) => store.setReview(def.id, { stars: n })} />
+            </View>
+            <TouchableOpacity onPress={() => openTour(def.id)}>
+              <Text style={st.tipLink}>Escribir un tip para otros viajeros</Text>
+            </TouchableOpacity>
             <View style={{ flexDirection: 'row', gap: 10, marginTop: 14 }}>
               <Btn title="Ver pasaporte" onPress={goPassport} small />
               <Btn title="Cerrar recorrido" kind="ghost" onPress={t.endTour} small />
@@ -272,4 +278,5 @@ const st = StyleSheet.create({
   controls: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: 18, marginBottom: 10 },
   doneTitle: { fontSize: 20, fontWeight: '800', color: C.text, marginTop: 14 },
   doneText: { fontSize: 14, color: C.muted, marginTop: 4 },
+  tipLink: { marginTop: 8, fontSize: 14, fontWeight: '700', color: C.brand, textDecorationLine: 'underline' },
 });
