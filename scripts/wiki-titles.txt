@@ -1,1 +1,1 @@
-ca:koto|ca:shakuhachi|ca:shamisen|ca:gagaku|ca:Japanese traditional music|ca:Rokudan|ca:taiko drum|ca:Japanese music|ca:sakura sakura koto
+en:Hachikō|ja:忠犬ハチ公像|en:Shibuya Crossing|en:Myth of Tomorrow|ja:明日の神話|ja:のんべい横丁|ja:宮下公園|en:Shibuya Scramble Square|cs:Hachiko statue Shibuya|cs:Shibuya crossing night|cs:Nonbei Yokocho Shibuya|cs:Myth of Tomorrow Okamoto Shibuya|cs:Miyashita Park rooftop|cs:Shibuya Sky observation deck
