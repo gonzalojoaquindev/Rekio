@@ -8,7 +8,7 @@ import Icon from '../components/Icon';
 import { Btn, SectionTitle, pickPhoto, WhenChips, Stars, StatusChip, useNow } from '../components/ui';
 import { tourStatus } from '../hours';
 import { C, R, shadow } from '../theme';
-import { placeById, tourStats, cityById, distanceM, fmtDist } from '../geo';
+import { placeById, tourStats, cityById, distanceM, fmtDist, unitOf } from '../geo';
 import { fetchTourRoute } from '../nav';
 import { tourById, useTour, buildOrder } from '../tour';
 import { useStore, earnedStamps } from '../store';
@@ -61,6 +61,26 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
 
   // Antes de comenzar: avisa si algo está cerrado hoy o si no alcanzarías a llegar
   const start = (simulate) => {
+    // ¿Quedó a medias? Ofrecer continuar donde quedaste
+    const prog = !simulate && (store.progress || {})[tour.id];
+    if (prog && prog.pos > 0) {
+      const u = unitOf(tour);
+      const nextStop = placeById(tour.stops[prog.order ? prog.order[prog.pos] : prog.pos].id);
+      Alert.alert(
+        '¿Continuar donde quedaste?',
+        `Te quedaste en ${u.one.toLowerCase()} ${prog.pos + 1} de ${tour.stops.length}: ${nextStop.name}.`,
+        [
+          { text: 'Desde el inicio', onPress: () => { store.setProgress(tour.id, null); checkAndStart(false); } },
+          { text: 'Continuar', onPress: () => { t.startTour(tour.id, false, 'original', { resume: prog }); onStart(); } },
+        ],
+        { cancelable: true }
+      );
+      return;
+    }
+    checkAndStart(simulate);
+  };
+
+  const checkAndStart = (simulate) => {
     const st0 = simulate ? null : tourStatus(tour, new Date(), { from: t.here });
     if (!st0 || !st0.issues.length) return chooseOrder(simulate);
     Alert.alert(
@@ -141,7 +161,7 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
           <View style={st.stats}>
             <Stat icon="clock" value={s.durationLabel} label="duración" />
             <Stat icon="walk" value={`${s.km.toFixed(1).replace('.', ',')} km`} label="a pie" />
-            <Stat icon="pin" value={String(s.stops)} label="paradas" />
+            <Stat icon="pin" value={String(s.stops)} label={unitOf(tour).many} />
             <Stat icon="star" value={String(s.must)} label="imperdibles" />
           </View>
 

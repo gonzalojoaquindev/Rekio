@@ -12,6 +12,7 @@ const INITIAL = {
   completed: [], // { tourId, date, simulated, km }
   photos: [], // { id, uri, tourId, placeId, date }
   reviews: {}, // { [tourId]: { stars: 0-5, text, date } } — por ahora solo en este teléfono
+  progress: {}, // { [tourId]: { pos, order, date } } — dónde quedó un recorrido sin terminar
   settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true },
 };
 
@@ -97,14 +98,24 @@ export function StoreProvider({ children }) {
       }),
     []
   );
+  const setProgress = useCallback(
+    (tourId, val) =>
+      setState((s) => {
+        const progress = { ...(s.progress || {}) };
+        if (val) progress[tourId] = { ...val, date: new Date().toISOString() };
+        else delete progress[tourId];
+        return { ...s, progress };
+      }),
+    []
+  );
   const updateSettings = useCallback(
     (patch) => setState((s) => ({ ...s, settings: { ...s.settings, ...patch } })),
     []
   );
 
   const value = useMemo(
-    () => ({ ...state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview }),
-    [state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview]
+    () => ({ ...state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress }),
+    [state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress]
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

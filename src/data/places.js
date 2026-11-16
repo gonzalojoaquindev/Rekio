@@ -6,6 +6,7 @@
 import { TOKYO } from './places_tokyo';
 import { NARA } from './places_nara';
 import { TOKYO2 } from './places_tokyo2';
+import { LASERENA } from './places_laserena';
 
 export const PLACES = [
   {
@@ -557,7 +558,7 @@ export const PLACES = [
 // Precio adulto en yenes, verificado en noviembre de 2026. cash: llevar efectivo.
 // Los precios cambian: se muestran como referencia.
 // Lugares de otras ciudades (cada ciudad en su propio archivo)
-PLACES.push(...TOKYO, ...TOKYO2, ...NARA);
+PLACES.push(...TOKYO, ...TOKYO2, ...NARA, ...LASERENA);
 
 export const FEES = {
   kiyo_hondo: { yen: 500, cash: true, note: 'Salón principal y escenario de Kiyomizu-dera.' },

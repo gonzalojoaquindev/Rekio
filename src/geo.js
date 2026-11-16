@@ -83,3 +83,6 @@ export function distToPolylineM(p, line) {
   }
   return best;
 }
+
+// Nombre de las paradas: en las historias continuas se llaman capítulos
+export const unitOf = (tour) => (tour && tour.unit === 'capitulo' ? { one: 'Capítulo', many: 'capítulos' } : { one: 'Parada', many: 'paradas' });

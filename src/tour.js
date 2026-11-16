@@ -72,6 +72,13 @@ export function TourProvider({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store.loaded]);
 
+  // Guardar dónde vas (solo recorridos reales) para poder continuar otro día
+  useEffect(() => {
+    if (!tour || tour.simulate) return;
+    if (tour.phase === 'done') storeRef.current.setProgress(tour.id, null);
+    else if (tour.idx > 0 || tour.phase === 'story') storeRef.current.setProgress(tour.id, { pos: tour.idx, order: tour.order || null });
+  }, [tour && tour.id, tour && tour.idx, tour && tour.phase]);
+
   // Música de fondo: suena durante el recorrido y baja cuando habla la guía
   const musicOn = !!tour && store.settings.music !== false;
   useEffect(() => {
@@ -244,6 +251,12 @@ export function TourProvider({ children }) {
     stopSpeaking();
     if (!simulate) setSim(null);
     const d = tourById(id);
+    // Continuar donde quedaste: mismo orden y desde la parada/capítulo guardado
+    if (opts.resume) {
+      tourRef.current = { id, idx: opts.resume.pos, phase: 'guiding', simulate, order: opts.resume.order || null, dayId: opts.dayId || null };
+      giveDirections(opts.resume.pos, `Continuamos donde quedaste. `);
+      return;
+    }
     const order = buildOrder(d, mode, simulate ? null : hereRef.current);
     tourRef.current = { id, idx: 0, phase: 'guiding', simulate, order, dayId: opts.dayId || null };
     giveDirections(0, d.intro + ' ');

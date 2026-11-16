@@ -106,7 +106,34 @@ async function findPhoto(point) {
   return null; // no se guarda en caché: se reintenta cuando vuelva internet
 }
 
-export default function PointPhoto({ point, height = 190, thumb = false, size = 76, radius = 12, credit = true }) {
+// Si el lugar tiene una ilustración propia (recreación histórica), se muestra esa en vez de buscar en Wikipedia
+export default function PointPhoto(props) {
+  return props.point.art ? <ArtPhoto {...props} /> : <WebPhoto {...props} />;
+}
+
+function ArtPhoto({ point, height = 190, thumb = false, size = 76, radius = 12, credit = true }) {
+  if (thumb) {
+    return (
+      <View style={[st.thumb, { width: size, height: size, borderRadius: radius }]}>
+        <Image source={point.art} style={st.thumbImg} resizeMode="cover" resizeMethod="resize" />
+      </View>
+    );
+  }
+  return (
+    <View style={st.wrap}>
+      <Image source={point.art} style={[st.box, { height, borderRadius: radius }]} resizeMode="cover" resizeMethod="resize" />
+      {credit ? (
+        <Text style={st.credit}>Recreación artística generada con IA · algunos detalles no son de la época</Text>
+      ) : (
+        <View style={st.artBadge}>
+          <Text style={st.artBadgeText}>Recreación con IA</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+function WebPhoto({ point, height = 190, thumb = false, size = 76, radius = 12, credit = true }) {
   const [photo, setPhoto] = useState(cache[point.id] || null);
   const [loading, setLoading] = useState(!cache[point.id]);
   const [useFallback, setUseFallback] = useState(false);
@@ -188,6 +215,8 @@ export default function PointPhoto({ point, height = 190, thumb = false, size = 
 
 const st = StyleSheet.create({
   wrap: {},
+  artBadge: { position: 'absolute', left: 12, bottom: 12, backgroundColor: 'rgba(0,0,0,0.55)', borderRadius: 999, paddingHorizontal: 10, paddingVertical: 4 },
+  artBadgeText: { color: '#fff', fontSize: 11, fontWeight: '700' },
   box: { width: '100%', backgroundColor: '#EEEEEE' },
   center: { alignItems: 'center', justifyContent: 'center' },
   credit: { color: '#717171', fontSize: 11, marginTop: 4 },

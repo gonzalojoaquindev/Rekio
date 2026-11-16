@@ -170,4 +170,26 @@ export const TOURS_TOKYO_NARA = [
       { id: 'sj_omoide', optional: true, guide: 'Camina hacia el oeste, pasando bajo las vías del tren por el paso peatonal. Junto a la salida oeste de la estación están los callejones de Omoide Yokochō.' },
     ],
   },
+  {
+    id: 'laserena-1680',
+    city: 'laserena',
+    category: 'Historias inmersivas',
+    badge: 'Historia',
+    unit: 'capitulo',
+    description: 'Diciembre de 1680: el corsario Bartholomew Sharp toma La Serena. Una historia real en cinco capítulos, caminando por el centro histórico.',
+    cover: 'ls_plaza',
+    stamp: { shape: 'circle', color: '#8E2C1F', icon: 'ship' },
+    name: 'La Serena: la ciudad que sobrevivió a los piratas',
+    intro:
+      'Bienvenido a La Serena. Esta no es una audioguía común: es una historia real contada en cinco capítulos, y cada uno empieza cuando llegas a su lugar. Los hechos vienen de los archivos y de los diarios de los propios piratas; donde las fuentes no coinciden, te lo diré. Ponte los audífonos y viajemos a 1680.',
+    outro:
+      'Así termina La ciudad que sobrevivió a los piratas. Caminaste por los lugares donde, en diciembre de 1680, una ciudad sin cañones resistió con astucia, perdió casi todo y se volvió a levantar. Gracias por viajar conmigo.',
+    stops: [
+      { id: 'ls_plaza', optional: false, guide: 'Capítulo uno: la Plaza de Armas de La Serena. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'ls_catedral', optional: false, guide: 'Capítulo dos: camina hasta la Catedral, en la esquina de la plaza.' },
+      { id: 'ls_merced', optional: false, guide: 'Capítulo tres: camina unas dos cuadras hacia el noreste, hasta la iglesia de La Merced, en la calle Balmaceda.' },
+      { id: 'ls_sanagustin', optional: false, guide: 'Capítulo cuatro: camina unas tres cuadras hacia el este por la calle Prat, hasta la iglesia de San Agustín.' },
+      { id: 'ls_sanfrancisco', optional: false, guide: 'Capítulo cinco: camina hacia el suroeste hasta la iglesia de San Francisco, en Balmaceda con De la Barra.' },
+    ],
+  },
 ];

@@ -8,7 +8,7 @@ import Icon from '../components/Icon';
 import { Btn, RoundBtn, ScreenTitle, TourCard, pickPhoto, Stars } from '../components/ui';
 import { C, R, shadow } from '../theme';
 import { TOURS } from '../data/tours';
-import { placeById, fmtDist, cityById, distanceM } from '../geo';
+import { placeById, fmtDist, cityById, distanceM, unitOf } from '../geo';
 import { fetchTourRoute } from '../nav';
 import { tourById, useTour, stopAt } from '../tour';
 import { useStore } from '../store';
@@ -135,7 +135,7 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
             </Text>
             <Text style={st.topSub}>
               {tour.simulate ? 'Simulación · ' : ''}
-              {done ? 'Completado' : `Parada ${tour.idx + 1} de ${def.stops.length}`}
+              {done ? 'Completado' : `${unitOf(def).one} ${tour.idx + 1} de ${def.stops.length}`}
             </Text>
           </View>
           <TouchableOpacity style={st.endBtn} onPress={t.endTour}>

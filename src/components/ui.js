@@ -7,7 +7,7 @@ import { Alert } from 'react-native';
 import Icon from './Icon';
 import PointPhoto from './PointPhoto';
 import { C, R, shadow } from '../theme';
-import { placeById, tourStats, cityById, fmtDist } from '../geo';
+import { placeById, tourStats, cityById, fmtDist, unitOf } from '../geo';
 import { tourStatus } from '../hours';
 
 // ── Barra inferior ──
@@ -136,7 +136,7 @@ export const TourCard = React.memo(function TourCard({ tour, onPress, width = 28
         {city.name}, {city.country}
       </Text>
       <Text style={st.cardMeta}>
-        {s.stops} paradas · {s.km.toFixed(1).replace('.', ',')} km · {s.durationLabel}
+        {s.stops} {unitOf(tour).many} · {s.km.toFixed(1).replace('.', ',')} km · {s.durationLabel}
       </Text>
       <View style={{ flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
         {status && <View style={{ marginTop: 6 }}><StatusChip chip={status.chip} small /></View>}

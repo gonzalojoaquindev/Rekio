@@ -196,8 +196,24 @@ def shibuya(T):  # urbana y nocturna: pulso suave, koto y acordes
     T.koto_phrases(YO, 8, gap=(4, 7), notes=(3, 6), bend=0.2, gain=0.35, steps=(beat / 2, beat))
     T.wind(level=0.08, cutoff=900)
 
+def laserena(T):  # 1680: mar, campanas lejanas y tensión
+    t = np.arange(T.N) / SR
+    b, a = butter(2, 700 / (SR / 2))
+    surf = lfilter(b, a, T.rng.normal(0, 1, T.N))
+    swell = (0.35 + 0.65 * np.clip(np.sin(2 * np.pi * t / 7.5), 0, None) ** 2)  # olas que rompen cada ~7 s
+    T.out[:, 0] += surf * swell * 0.45; T.out[:, 1] += np.roll(surf, 9000) * np.roll(swell, 9000) * 0.45
+    T.drone([-34, -27, -22], level=0.07)
+    for s in [5, 37, 70]:  # campana de iglesia colonial, lejana
+        for k in range(3): T.add(T.bell(-26, 7), s + k * 2.2, pan=0.4, gain=0.22)
+    tt = 20.0
+    while tt < T.dur - 6:  # tambor militar lejano
+        for k in range(4): T.add(T.taiko(0.5, f0=95), tt + k * 0.32, pan=-0.3, gain=0.18 if k else 0.26)
+        tt += T.rng.uniform(9, 14)
+    for s, semi, d in [(14, -17, 6), (48, -16, 6), (80, -12, 7)]:
+        T.add(T.flute(semi, d, breath=0.5), s, pan=-0.2, gain=0.12)
+
 PRESETS = {'gion': (gion, 7), 'palacio': (palacio, 11), 'kiyomizu': (kiyomizu, 3), 'arashiyama': (arashiyama, 5),
-           'kinkaku': (kinkaku, 9), 'asakusa': (asakusa, 13), 'edo': (edo, 17), 'shibuya': (shibuya, 21)}
+           'kinkaku': (kinkaku, 9), 'asakusa': (asakusa, 13), 'edo': (edo, 17), 'shibuya': (shibuya, 21), 'laserena': (laserena, 31)}
 
 if __name__ == '__main__':
     name, path = sys.argv[1], sys.argv[2]
