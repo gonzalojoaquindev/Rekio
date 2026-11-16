@@ -20,6 +20,12 @@ export default function Icon({ name, size = 24, color = '#222', stroke = 2 }) {
           <Rect x="16.5" y="14" width="4.5" height="7" rx="1.8" {...p} />
         </>
       )}
+      {name === 'suitcase' && (
+        <>
+          <Rect x="3" y="7" width="18" height="13" rx="2.5" {...p} />
+          <Path d="M9 7 V5 a1.5 1.5 0 0 1 1.5 -1.5 h3 a1.5 1.5 0 0 1 1.5 1.5 V7 M3 12.5 H21 M8 7 V20 M16 7 V20" {...p} />
+        </>
+      )}
       {name === 'passport' && (
         <>
           <Rect x="5" y="2.5" width="14" height="19" rx="2" {...p} />

@@ -15,6 +15,7 @@ import { useStore } from '../store';
 import MyDay from '../components/MyDay';
 import { TermChips } from '../components/Glossary';
 import { nextTourInDay } from '../day';
+import { tripPlanForToday } from '../trips';
 
 const routeCache = {};
 
@@ -71,7 +72,7 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
         contentContainerStyle={{ padding: 20, paddingTop: insets.top + 16, paddingBottom: 30 }}
       >
         <ScreenTitle>Recorrido</ScreenTitle>
-        <MyDay openTour={openTour} />
+        <MyDay openTour={openTour} openPlace={openPlace} itin={tripPlanForToday(store.trips) || undefined} />
         <View style={st.emptyBox}>
           <Icon name="headphones" size={40} color={C.brand} />
           <Text style={st.emptyTitle}>No tienes un recorrido activo</Text>

@@ -13,6 +13,7 @@ const INITIAL = {
   photos: [], // { id, uri, tourId, placeId, date }
   reviews: {}, // { [tourId]: { stars: 0-5, text, date } } — por ahora solo en este teléfono
   progress: {}, // { [tourId]: { pos, order, date } } — dónde quedó un recorrido sin terminar
+  trips: [], // Mis viajes: { id, name, cities, start, end, saved: [{kind,id}], days: { 'YYYY-MM-DD': [{kind,id}] } }
   settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true },
 };
 
@@ -108,14 +109,25 @@ export function StoreProvider({ children }) {
       }),
     []
   );
+  // ── Mis viajes ──
+  const createTrip = useCallback((trip) => {
+    const id = `trip-${Date.now()}`;
+    setState((s) => ({ ...s, trips: [...(s.trips || []), { saved: [], days: {}, ...trip, id }] }));
+    return id;
+  }, []);
+  const updateTrip = useCallback(
+    (id, fn) => setState((s) => ({ ...s, trips: (s.trips || []).map((t) => (t.id === id ? { ...t, ...(typeof fn === 'function' ? fn(t) : fn) } : t)) })),
+    []
+  );
+  const deleteTrip = useCallback((id) => setState((s) => ({ ...s, trips: (s.trips || []).filter((t) => t.id !== id) })), []);
   const updateSettings = useCallback(
     (patch) => setState((s) => ({ ...s, settings: { ...s.settings, ...patch } })),
     []
   );
 
   const value = useMemo(
-    () => ({ ...state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress }),
-    [state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress]
+    () => ({ ...state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip }),
+    [state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip]
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

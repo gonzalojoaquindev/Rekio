@@ -8,7 +8,7 @@ import { TOURS, CITIES } from '../data/tours';
 import { cityById } from '../geo';
 import { useStore, earnedStamps } from '../store';
 
-export default function PassportScreen({ openTour }) {
+export default function PassportScreen({ openTour, onBack }) {
   const insets = useSafeAreaInsets();
   const store = useStore();
   const earned = earnedStamps(store.completed);
@@ -21,6 +21,11 @@ export default function PassportScreen({ openTour }) {
       style={{ flex: 1, backgroundColor: C.bg }}
       contentContainerStyle={{ padding: 20, paddingTop: insets.top + 16, paddingBottom: 30 }}
     >
+      {!!onBack && (
+        <TouchableOpacity onPress={onBack} hitSlop={10} style={{ marginBottom: 8 }}>
+          <Text style={{ fontSize: 15, fontWeight: '700', color: C.brand }}>‹ Perfil</Text>
+        </TouchableOpacity>
+      )}
       <ScreenTitle>Pasaporte</ScreenTitle>
       <Text style={st.sub}>
         {count} de {TOURS.length} estampillas · completa recorridos para ganar más

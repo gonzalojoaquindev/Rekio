@@ -9,11 +9,11 @@ import { useTour, tourById } from '../tour';
 import { useStore } from '../store';
 import { currentItinerary, dayProgress, dayLabel, planWarning } from '../day';
 
-export default function MyDay({ openTour, onStarted }) {
+export default function MyDay({ openTour, openPlace, onStarted, itin: itinProp, compact }) {
   const t = useTour();
   const store = useStore();
   const now = useNow();
-  const itin = currentItinerary(now);
+  const itin = itinProp || currentItinerary(now);
   const prog = itin ? dayProgress(itin, now, { activeTourId: t.tour && t.tour.id, completed: store.completed }) : null;
 
   // Puntos del mapa: inicio de cada recorrido y los bloques libres con ubicación
@@ -46,9 +46,9 @@ export default function MyDay({ openTour, onStarted }) {
   };
 
   return (
-    <View style={st.box}>
-      <Text style={st.kicker}>MI DÍA · {dayLabel(itin).toUpperCase()}</Text>
-      <Text style={st.title}>{itin.name}</Text>
+    <View style={[st.box, compact && st.boxCompact]}>
+      {!compact && <Text style={st.kicker}>MI DÍA · {dayLabel(itin).toUpperCase()}</Text>}
+      {!compact && <Text style={st.title}>{itin.name}</Text>}
       <View style={{ flexDirection: 'row', marginTop: 8 }}>
         <StatusChip chip={{ tone: prog.tone, text: prog.text }} />
       </View>
@@ -73,8 +73,8 @@ export default function MyDay({ openTour, onStarted }) {
                 </View>
               )}
               <TouchableOpacity
-                activeOpacity={it.kind === 'tour' ? 0.8 : 1}
-                onPress={() => it.kind === 'tour' && openTour(it.tourId)}
+                activeOpacity={it.kind === 'free' ? 1 : 0.8}
+                onPress={() => (it.kind === 'tour' ? openTour(it.tourId) : it.kind === 'place' && openPlace ? openPlace(it.placeId) : null)}
                 style={[st.item, isCur && st.itemCur]}
               >
                 <View style={st.timeCol}>
@@ -91,6 +91,7 @@ export default function MyDay({ openTour, onStarted }) {
                   {it.kind === 'tour' && (
                     <Text style={st.itemLink}>{it.done ? 'Completado · ver recorrido' : 'Ver recorrido y comenzar'}</Text>
                   )}
+                  {it.kind === 'place' && <Text style={st.itemLink}>Ver lugar y escuchar su historia</Text>}
                   {!!warn && <Text style={[st.warn, warn.blocking && { color: '#B3261E' }]}>⚠️ {warn.message}</Text>}
                 </View>
               </TouchableOpacity>
@@ -99,7 +100,7 @@ export default function MyDay({ openTour, onStarted }) {
         })}
       </View>
 
-      <Btn title="Simular el día completo" kind="ghost" onPress={simulateDay} style={{ marginTop: 14 }} />
+      {!!firstTour && <Btn title="Simular el día completo" kind="ghost" onPress={simulateDay} style={{ marginTop: 14 }} />}
       <Text style={st.small}>
         La simulación recorre cada recorrido seguido del siguiente. Las indicaciones de transporte son aproximadas.
       </Text>
@@ -109,6 +110,7 @@ export default function MyDay({ openTour, onStarted }) {
 
 const st = StyleSheet.create({
   box: { backgroundColor: '#fff', borderRadius: R.lg, padding: 16, marginBottom: 24, ...shadow },
+  boxCompact: { padding: 0, marginBottom: 8, shadowOpacity: 0, elevation: 0 },
   kicker: { fontSize: 12, fontWeight: '800', color: C.brand, letterSpacing: 0.6 },
   title: { fontSize: 22, fontWeight: '800', color: C.text, marginTop: 4 },
   transit: { flexDirection: 'row', gap: 8, paddingVertical: 8, paddingLeft: 18, borderLeftWidth: 2, borderLeftColor: '#D9D9D9', borderStyle: 'dashed', marginLeft: 22 },

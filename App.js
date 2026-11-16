@@ -12,6 +12,7 @@ import ExploreScreen from './src/screens/ExploreScreen';
 import MapScreen from './src/screens/MapScreen';
 import TourScreen from './src/screens/TourScreen';
 import PassportScreen from './src/screens/PassportScreen';
+import TripsScreen from './src/screens/TripsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import TourDetailScreen from './src/screens/TourDetailScreen';
 import { C } from './src/theme';
@@ -22,24 +23,28 @@ function Main() {
   const [tab, setTab] = useState('explore');
   const [detailId, setDetailId] = useState(null);
   const [placeId, setPlaceId] = useState(null);
+  const [passport, setPassport] = useState(false); // el pasaporte ahora se abre desde Perfil
+  const [tripId, setTripId] = useState(null); // viaje abierto en Mis viajes
 
   // Botón "atrás" de Android
   useEffect(() => {
     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
       if (placeId) return setPlaceId(null), true;
       if (detailId) return setDetailId(null), true;
+      if (passport) return setPassport(false), true;
+      if (tab === 'trips' && tripId) return setTripId(null), true;
       if (tab !== 'explore') return setTab('explore'), true;
       return false;
     });
     return () => sub.remove();
-  }, [placeId, detailId, tab]);
+  }, [placeId, detailId, tab, passport, tripId]);
 
   const nav = {
     openTour: (id) => setDetailId(id),
     openPlace: (id) => setPlaceId(id),
     goPassport: () => {
       setDetailId(null);
-      setTab('passport');
+      setPassport(true);
     },
   };
 
@@ -56,10 +61,11 @@ function Main() {
         }}
       />
     );
-  } else if (tab === 'explore') screen = <ExploreScreen {...nav} />;
+  } else if (passport) screen = <PassportScreen {...nav} onBack={() => setPassport(false)} />;
+  else if (tab === 'explore') screen = <ExploreScreen {...nav} />;
   else if (tab === 'map') screen = <MapScreen {...nav} />;
   else if (tab === 'tour') screen = <TourScreen {...nav} />;
-  else if (tab === 'passport') screen = <PassportScreen {...nav} />;
+  else if (tab === 'trips') screen = <TripsScreen {...nav} tripId={tripId} setTripId={setTripId} />;
   else screen = <ProfileScreen {...nav} />;
 
   return (
@@ -71,6 +77,7 @@ function Main() {
           tab={tab}
           activeTour={!!t.tour}
           onChange={(id) => {
+            setPassport(false);
             setTab(id);
           }}
         />

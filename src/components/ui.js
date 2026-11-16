@@ -15,7 +15,7 @@ export const TABS = [
   { id: 'explore', label: 'Explora', icon: 'search' },
   { id: 'map', label: 'Mapa', icon: 'map' },
   { id: 'tour', label: 'Recorrido', icon: 'headphones' },
-  { id: 'passport', label: 'Pasaporte', icon: 'passport' },
+  { id: 'trips', label: 'Viajes', icon: 'suitcase' },
   { id: 'profile', label: 'Perfil', icon: 'user' },
 ];
 
