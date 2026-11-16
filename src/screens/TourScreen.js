@@ -12,6 +12,8 @@ import { placeById, fmtDist, cityById, distanceM } from '../geo';
 import { fetchTourRoute } from '../nav';
 import { tourById, useTour, stopAt } from '../tour';
 import { useStore } from '../store';
+import MyDay from '../components/MyDay';
+import { nextTourInDay } from '../day';
 
 const routeCache = {};
 
@@ -68,6 +70,7 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
         contentContainerStyle={{ padding: 20, paddingTop: insets.top + 16, paddingBottom: 30 }}
       >
         <ScreenTitle>Recorrido</ScreenTitle>
+        <MyDay openTour={openTour} />
         <View style={st.emptyBox}>
           <Icon name="headphones" size={40} color={C.brand} />
           <Text style={st.emptyTitle}>No tienes un recorrido activo</Text>
@@ -166,7 +169,22 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
             <TouchableOpacity onPress={() => openTour(def.id)}>
               <Text style={st.tipLink}>Escribir un tip para otros viajeros</Text>
             </TouchableOpacity>
-            <View style={{ flexDirection: 'row', gap: 10, marginTop: 14 }}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginTop: 14 }}>
+              {(() => {
+                const nx = nextTourInDay(def.id, tour.dayId);
+                if (!nx) return null;
+                return (
+                  <Btn
+                    title={`Siguiente: ${nx.tour.name.split(':')[0]} (${nx.item.start})`}
+                    small
+                    onPress={() =>
+                      tour.simulate
+                        ? t.startTour(nx.tour.id, true, 'original', { dayId: nx.itin.id })
+                        : (t.endTour(), openTour(nx.tour.id))
+                    }
+                  />
+                );
+              })()}
               <Btn title="Ver pasaporte" onPress={goPassport} small />
               <Btn title="Cerrar recorrido" kind="ghost" onPress={t.endTour} small />
             </View>

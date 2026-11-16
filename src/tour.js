@@ -239,13 +239,13 @@ export function TourProvider({ children }) {
     }
   };
 
-  const startTour = (id, simulate = false, mode = 'original') => {
+  const startTour = (id, simulate = false, mode = 'original', opts = {}) => {
     stopSimWalk();
     stopSpeaking();
     if (!simulate) setSim(null);
     const d = tourById(id);
     const order = buildOrder(d, mode, simulate ? null : hereRef.current);
-    tourRef.current = { id, idx: 0, phase: 'guiding', simulate, order };
+    tourRef.current = { id, idx: 0, phase: 'guiding', simulate, order, dayId: opts.dayId || null };
     giveDirections(0, d.intro + ' ');
   };
 
