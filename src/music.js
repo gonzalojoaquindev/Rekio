@@ -30,7 +30,11 @@ let target = VOL_IDLE;
 let fadeTimer = null;
 let modeSet = false;
 
-export const hasMusic = (tourId) => !!TRACKS[tourId];
+// Recorridos que comparten pista con otro de ambiente parecido
+const SAME_AS = { ueno: 'edo', koishikawa: 'kinkaku', shinjuku: 'shibuya' };
+const trackFor = (id) => TRACKS[id] || TRACKS[SAME_AS[id]];
+
+export const hasMusic = (tourId) => !!trackFor(tourId);
 
 function fadeTo(v, ms = 600) {
   target = v;
@@ -51,7 +55,7 @@ function fadeTo(v, ms = 600) {
 export async function playMusic(tourId, speaking = false) {
   if (currentId === tourId && player) return;
   stopMusic();
-  const src = TRACKS[tourId];
+  const src = trackFor(tourId);
   if (!src) return;
   try {
     if (!modeSet) {

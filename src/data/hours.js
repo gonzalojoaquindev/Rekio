@@ -69,6 +69,12 @@ const MEIJI = {
   }),
 };
 
+const KORAKUEN = {
+  area: 'el jardín Koishikawa Kōrakuen',
+  seasons: ALL_YEAR('09:00', '17:00', '16:30'),
+  closedRanges: [['12-29', '01-01']],
+};
+
 export const HOURS = {
   // Kioto
   seishomon: KYOTO_GOSHO,
@@ -117,6 +123,20 @@ export const HOURS = {
       { from: '11-01', to: '02-29', open: '09:00', close: '16:00', last: '15:30' },
     ],
   },
+  ue_toshogu: {
+    area: 'el recinto interior de Tōshōgū',
+    soft: true,
+    softChip: 'Recinto interior cerrado',
+    seasons: [
+      { from: '03-01', to: '09-30', open: '09:00', close: '17:30', last: '17:00' },
+      { from: '10-01', to: '02-29', open: '09:00', close: '16:30', last: '16:00' },
+    ],
+  },
+  kk_seimon: KORAKUEN,
+  kk_osensui: KORAKUEN,
+  kk_engetsukyo: KORAKUEN,
+  kk_tsutenkyo: KORAKUEN,
+  sj_neko: { area: 'la pantalla del gato 3D', seasons: ALL_YEAR('07:00', '23:59') },
   tk_nonbei: {
     area: 'los bares de Nonbei Yokochō',
     plural: true,

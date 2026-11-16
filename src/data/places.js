@@ -5,6 +5,7 @@
 
 import { TOKYO } from './places_tokyo';
 import { NARA } from './places_nara';
+import { TOKYO2 } from './places_tokyo2';
 
 export const PLACES = [
   {
@@ -556,7 +557,7 @@ export const PLACES = [
 // Precio adulto en yenes, verificado en noviembre de 2026. cash: llevar efectivo.
 // Los precios cambian: se muestran como referencia.
 // Lugares de otras ciudades (cada ciudad en su propio archivo)
-PLACES.push(...TOKYO, ...NARA);
+PLACES.push(...TOKYO, ...TOKYO2, ...NARA);
 
 export const FEES = {
   kiyo_hondo: { yen: 500, cash: true, note: 'Salón principal y escenario de Kiyomizu-dera.' },
@@ -572,6 +573,8 @@ export const FEES = {
   nara_daibutsuden: { yen: 800, cash: true, note: 'Salón del Gran Buda. Con el museo de Tōdai-ji: ¥1200.' },
   nara_kasuga: { yen: 700, cash: true, note: 'Solo el corredor interior junto al santuario principal. El resto es gratis.' },
   tk_shibuyasky: { yen: 2700, cash: false, note: 'Entrada con hora fija. Por internet: ¥2.700 antes de las 15:00 y ¥3.400 desde las 15:00. En la ventanilla, ¥300 más. Se paga con tarjeta.' },
+  ue_toshogu: { yen: 500, cash: true, note: 'Para pasar la puerta dorada (Karamon) y ver el salón de cerca. El resto del santuario es gratis.' },
+  kk_seimon: { yen: 300, cash: true, note: 'Entrada al jardín. Se entra solo por la puerta oeste.' },
   tk_kiyomasa: { yen: 500, cash: true, note: 'Jardín interior (Gyoen). En invierno abre de 9:00 a 16:00.' },
 };
 PLACES.forEach((p) => {

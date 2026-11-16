@@ -110,4 +110,64 @@ export const TOURS_TOKYO_NARA = [
       { id: 'tk_shibuyasky', optional: true, guide: 'Para terminar, vuelve hacia el sur hasta la estación. La torre más alta, sobre la estación, es Shibuya Scramble Square. La entrada a Shibuya Sky está en el piso 14.' },
     ],
   },
+  {
+    id: 'ueno',
+    city: 'tokyo',
+    category: 'Templos',
+    badge: 'Nuevo',
+    description: 'El último samurái, un Kioto copiado en Tokio y el santuario dorado que sobrevivió a todo.',
+    cover: 'ue_toshogu',
+    stamp: { shape: 'hex', color: '#B8860B', icon: 'pagoda' },
+    name: 'Ueno: el santuario dorado del shōgun',
+    intro:
+      'Bienvenido a Ueno, una colina que fue templo, campo de batalla y finalmente parque. Vamos a conocer al último gran samurái, descubrir un Kioto en miniatura y llegar al santuario dorado del primer shōgun. Te voy guiando.',
+    outro:
+      'Aquí termina el recorrido por Ueno. Esta colina pasó de proteger el castillo del shōgun a ser el campo de su última batalla. Gracias por caminar conmigo, y buen provecho.',
+    stops: [
+      { id: 'ue_saigo', optional: false, guide: 'Primera parada: la estatua de Saigō Takamori, en la entrada sur del parque de Ueno. Desde la estación, sube las escaleras del parque junto a la salida de la línea Keisei. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'ue_kiyomizu', optional: false, guide: 'Camina hacia el norte por el parque, unos ciento cincuenta metros. A la izquierda verás un salón rojo sobre pilares de madera, asomado al estanque.' },
+      { id: 'ue_bentendo', optional: true, guide: 'Baja por las escaleras frente al salón hacia el estanque, y cruza el camino hasta el templo de la isla.' },
+      { id: 'ue_toshogu', optional: false, guide: 'Ahora camina hacia el norte, por la orilla del estanque y luego subiendo, unos cuatrocientos metros. Entra por el camino de faroles de piedra hasta el santuario dorado.' },
+      { id: 'ue_pagoda', optional: true, guide: 'Sal del santuario hacia el este, junto a la reja del zoológico. Por encima de los árboles verás la pagoda roja.' },
+    ],
+  },
+  {
+    id: 'koishikawa',
+    city: 'tokyo',
+    category: 'Naturaleza',
+    badge: 'Nuevo',
+    description: 'El jardín del legendario Mito Kōmon: paisajes de Japón y China en miniatura, puentes de piedra y arces rojos.',
+    cover: 'kk_engetsukyo',
+    stamp: { shape: 'circle', color: '#2E7D32', icon: 'pavilion' },
+    name: 'Koishikawa Kōrakuen: un viaje en miniatura',
+    intro:
+      'Bienvenido a Koishikawa Kōrakuen. Este jardín reproduce en miniatura paisajes famosos de Japón y China, y está lleno de detalles que ya conoces de Kioto. Dentro del jardín, los puntos del mapa son aproximados: guíate también por los carteles. Te voy guiando.',
+    outro:
+      'Aquí termina el recorrido. Paseaste por el lago Biwa, el río de Arashiyama y un puente de Kioto, todo sin salir de Tokio. Gracias por caminar conmigo.',
+    stops: [
+      { id: 'kk_seimon', optional: false, guide: 'Primera parada: la puerta oeste del jardín, la única entrada, a unos cinco minutos de la estación Suidōbashi y junto al Tokyo Dome. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'kk_osensui', optional: false, guide: 'Después de la entrada, sigue el sendero hasta el gran estanque central, con una isla en el medio.' },
+      { id: 'kk_engetsukyo', optional: false, guide: 'Rodea el estanque hacia el norte y sigue los carteles hacia Engetsukyō. Busca un puente de piedra en forma de medio círculo.' },
+      { id: 'kk_tsutenkyo', optional: false, guide: 'Sigue hacia el este, por el sendero del bosque, hasta un pequeño valle con un puente rojo entre los arces.' },
+    ],
+  },
+  {
+    id: 'shinjuku',
+    city: 'tokyo',
+    category: 'Barrios históricos',
+    badge: 'Nuevo',
+    description: 'El gato 3D gigante, la cabeza de Godzilla sobre Kabukichō y un callejón de posguerra lleno de humo de yakitori.',
+    cover: 'sj_neko',
+    stamp: { shape: 'square', color: '#E91E63', icon: 'building' },
+    name: 'Shinjuku: el gato, Godzilla y la posguerra',
+    intro:
+      'Bienvenido a Shinjuku, junto a la estación más concurrida del mundo. Vamos a ver al gato gigante que se volvió famoso en todo el planeta, saludar a Godzilla y terminar en un callejón que parece detenido en 1946. Te voy guiando.',
+    outro:
+      'Aquí termina el recorrido por Shinjuku. Del gato digital al mercado negro de la posguerra, en unas pocas cuadras. Gracias por caminar conmigo.',
+    stops: [
+      { id: 'sj_neko', optional: false, guide: 'Primera parada: la plaza de la salida este de la estación de Shinjuku. Al salir, mira la pantalla curva en la esquina del edificio de enfrente. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'sj_godzilla', optional: true, guide: 'Cruza la avenida hacia el norte y entra a Kabukichō por la calle principal, unos cuatrocientos metros. Al fondo, sobre un edificio alto, verás la cabeza de Godzilla.' },
+      { id: 'sj_omoide', optional: true, guide: 'Camina hacia el oeste, pasando bajo las vías del tren por el paso peatonal. Junto a la salida oeste de la estación están los callejones de Omoide Yokochō.' },
+    ],
+  },
 ];
