@@ -88,4 +88,26 @@ export const TOURS_TOKYO_NARA = [
       { id: 'nara_kasuga', optional: false, guide: 'Baja de la colina hacia el sur por el camino del bosque, aproximadamente un kilómetro y medio. Vas a ver cada vez más faroles de piedra cubiertos de musgo, hasta llegar al santuario rojo.' },
     ],
   },
+  {
+    id: 'shibuya',
+    city: 'tokyo',
+    category: 'Barrios históricos',
+    badge: 'Nuevo',
+    description: 'El perro más leal de Japón, el cruce más famoso del mundo, un mural perdido en México y los bares de posguerra.',
+    cover: 'tk_scramble',
+    stamp: { shape: 'pill', color: '#7B3FE4', icon: 'building' },
+    name: 'Shibuya: lealtad, multitudes y neón',
+    intro:
+      'Bienvenido a Shibuya, el barrio que nunca se detiene. Vamos a conocer la historia de un perro que esperó diez años, cruzar el cruce más famoso del mundo, ver un mural que estuvo perdido en México y meternos en los callejones de la posguerra. Te voy guiando.',
+    outro:
+      'Aquí termina el recorrido por Shibuya. Detrás de las pantallas y las multitudes hay historias de lealtad, de guerra y de gente que se negó a desaparecer. Gracias por caminar conmigo.',
+    stops: [
+      { id: 'tk_hachiko', optional: false, guide: 'Primera parada: la estatua de Hachikō, frente a la salida Hachikō de la estación de Shibuya. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'tk_scramble', optional: false, guide: 'Desde la estatua, camina unos pasos hacia el cruce peatonal gigante. Espera la luz verde y crúzalo.' },
+      { id: 'tk_myth', optional: false, guide: 'Vuelve hacia la estación y sube al segundo piso, al pasillo que lleva a la línea Keiō Inokashira. El mural de treinta metros está a lo largo del pasillo, con ventanales que dan al cruce.' },
+      { id: 'tk_nonbei', optional: false, guide: 'Sal de la estación hacia el noreste y camina junto a las vías del tren, unos trescientos metros. Los dos callejones angostos con faroles son Nonbei Yokochō.' },
+      { id: 'tk_miyashita', optional: true, guide: 'Sigue hacia el norte junto a las vías. El edificio largo con un parque en la azotea es Miyashita Park. Sube por las escaleras o el ascensor.' },
+      { id: 'tk_shibuyasky', optional: true, guide: 'Para terminar, vuelve hacia el sur hasta la estación. La torre más alta, sobre la estación, es Shibuya Scramble Square. La entrada a Shibuya Sky está en el piso 14.' },
+    ],
+  },
 ];

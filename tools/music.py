@@ -184,8 +184,20 @@ def edo(T):  # solemne: el castillo de los shōgun
     for s, semi, d in [(14, -12, 7), (40, -9, 6), (66, -16, 7)]:
         T.add(T.flute(semi, d), s, pan=-0.3, gain=0.22)
 
+def shibuya(T):  # urbana y nocturna: pulso suave, koto y acordes
+    beat = 60 / 84; tt = 4.0; i = 0
+    while tt < T.dur - 4:
+        if i % 4 in (0, 2): T.add(T.taiko(0.6, f0=60), tt, gain=0.4)
+        T.add(T.taiko(0.08, rim=True), tt + beat / 2, pan=0.3, gain=0.08)
+        tt += beat; i += 1
+    for s in range(0, int(T.dur), 12):
+        chord = [[-14, -10, -5, 0], [-17, -12, -7, -2], [-19, -14, -10, -5]][(s // 12) % 3]
+        T.add(T.sho(chord, 13), s, gain=0.18)
+    T.koto_phrases(YO, 8, gap=(4, 7), notes=(3, 6), bend=0.2, gain=0.35, steps=(beat / 2, beat))
+    T.wind(level=0.08, cutoff=900)
+
 PRESETS = {'gion': (gion, 7), 'palacio': (palacio, 11), 'kiyomizu': (kiyomizu, 3), 'arashiyama': (arashiyama, 5),
-           'kinkaku': (kinkaku, 9), 'asakusa': (asakusa, 13), 'edo': (edo, 17)}
+           'kinkaku': (kinkaku, 9), 'asakusa': (asakusa, 13), 'edo': (edo, 17), 'shibuya': (shibuya, 21)}
 
 if __name__ == '__main__':
     name, path = sys.argv[1], sys.argv[2]

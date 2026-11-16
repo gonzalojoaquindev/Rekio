@@ -96,8 +96,11 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
     );
   };
 
-  const feeMust = must.reduce((a, x) => a + ((x.p.fee && x.p.fee.yen) || 0), 0);
-  const feeOpt = optional.reduce((a, x) => a + ((x.p.fee && x.p.fee.yen) || 0), 0);
+  // Solo las entradas que se pagan en efectivo cuentan para "lleva efectivo"
+  const cashOf = (list) => list.reduce((a, x) => a + ((x.p.fee && x.p.fee.cash && x.p.fee.yen) || 0), 0);
+  const feeMust = cashOf(must);
+  const feeOpt = cashOf(optional);
+  const cardFees = stops.filter((x) => x.p.fee && !x.p.fee.cash);
   const yen = (n) => `¥${n.toLocaleString('es-CL')}`;
 
   const StopRow = ({ x }) => (
@@ -145,7 +148,9 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
           <View style={[st.cash, feeMust + feeOpt === 0 && { backgroundColor: '#E8F6EF' }]}>
             <Text style={st.cashTitle}>
               {feeMust + feeOpt === 0
-                ? '🆓 Sin entradas pagadas'
+                ? cardFees.length
+                  ? '💳 Sin entradas en efectivo'
+                  : '🆓 Sin entradas pagadas'
                 : `💴 Lleva efectivo: unos ${yen(feeMust + feeOpt)} por persona`}
             </Text>
             {feeMust + feeOpt > 0 && (
@@ -154,6 +159,12 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
                 solo aceptan efectivo. Precios de referencia (nov. 2026).
               </Text>
             )}
+            {cardFees.map((x) => (
+              <Text key={x.p.id} style={st.cashText}>
+                {x.optional ? 'Opcional: ' : ''}
+                {x.p.name} desde {yen(x.p.fee.yen)}, con tarjeta.
+              </Text>
+            ))}
           </View>
 
           {!!status && (

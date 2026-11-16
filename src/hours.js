@@ -126,7 +126,7 @@ export function tourStatus(tour, date = new Date(), { order, from } = {}) {
   if (mustClosedToday) chip = { tone: 'bad', text: `Hoy cerrado (${mustClosedToday.st.why.split(',')[0]})` };
   else if (mustIssues.some((x) => x.st.state === 'after')) chip = { tone: 'bad', text: 'Ya cerró por hoy' };
   else if (main.st.spec.soft && main.st.state !== 'open' && main.st.state !== 'soon')
-    chip = { tone: 'info', text: 'Salón cerrado · exterior abierto' };
+    chip = { tone: 'info', text: main.st.spec.softChip || 'Salón cerrado · exterior abierto' };
   else if (main.st.state === 'before') chip = { tone: 'info', text: `Abre a las ${fmtMin(main.st.open)}` };
   else if (mustIssues.length) chip = { tone: 'warn', text: `Cierra a las ${fmtMin(mustIssues[0].st.close)}` };
   else if (main.st.state === 'soon') chip = { tone: 'warn', text: `Cierra a las ${fmtMin(main.st.close)}` };

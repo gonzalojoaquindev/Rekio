@@ -117,6 +117,15 @@ export const HOURS = {
       { from: '11-01', to: '02-29', open: '09:00', close: '16:00', last: '15:30' },
     ],
   },
+  tk_nonbei: {
+    area: 'los bares de Nonbei Yokochō',
+    plural: true,
+    soft: true,
+    softChip: 'Bares desde las 18:00',
+    seasons: ALL_YEAR('18:00', '23:59'),
+  },
+  tk_miyashita: { area: 'el parque de la azotea de Miyashita Park', seasons: ALL_YEAR('08:00', '23:00') },
+  tk_shibuyasky: { area: 'Shibuya Sky', seasons: ALL_YEAR('10:00', '22:30', '21:20') },
   tk_hyakunin: EAST_GARDENS,
   tk_tenshudai: EAST_GARDENS,
   // Nara

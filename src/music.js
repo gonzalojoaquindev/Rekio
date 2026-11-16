@@ -12,12 +12,13 @@ const TRACKS = {
   edo: require('../assets/music/edo.m4a'),
   meiji: require('../assets/music/meiji.m4a'),
   nara: require('../assets/music/nara.m4a'),
+  shibuya: require('../assets/music/shibuya.m4a'),
 };
 
 export const CREDITS = [
   { title: 'Shika no Tōne (El llamado lejano del ciervo)', who: 'Araki Kodō III, grabación de c. 1930', license: 'Dominio público', where: 'Nara' },
   { title: 'Shizima2', who: 'PeriTune (peritune.com)', license: 'CC BY 3.0', where: 'Meiji Jingu y Harajuku' },
-  { title: 'Resto de las pistas', who: 'Compuestas para Rekio', license: 'Originales', where: 'Kioto, Asakusa y Edo' },
+  { title: 'Resto de las pistas', who: 'Compuestas para Rekio', license: 'Originales', where: 'Kioto, Asakusa, Edo y Shibuya' },
 ];
 
 const VOL_IDLE = 0.4; // sin narración

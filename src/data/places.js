@@ -571,6 +571,7 @@ export const FEES = {
   kenninji: { yen: 800, cash: true },
   nara_daibutsuden: { yen: 800, cash: true, note: 'Salón del Gran Buda. Con el museo de Tōdai-ji: ¥1200.' },
   nara_kasuga: { yen: 700, cash: true, note: 'Solo el corredor interior junto al santuario principal. El resto es gratis.' },
+  tk_shibuyasky: { yen: 2700, cash: false, note: 'Entrada con hora fija. Por internet: ¥2.700 antes de las 15:00 y ¥3.400 desde las 15:00. En la ventanilla, ¥300 más. Se paga con tarjeta.' },
   tk_kiyomasa: { yen: 500, cash: true, note: 'Jardín interior (Gyoen). En invierno abre de 9:00 a 16:00.' },
 };
 PLACES.forEach((p) => {
