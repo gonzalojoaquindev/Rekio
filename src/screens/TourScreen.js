@@ -13,6 +13,7 @@ import { fetchTourRoute } from '../nav';
 import { tourById, useTour, stopAt } from '../tour';
 import { useStore } from '../store';
 import MyDay from '../components/MyDay';
+import { TermChips } from '../components/Glossary';
 import { nextTourInDay } from '../day';
 
 const routeCache = {};
@@ -205,6 +206,8 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
               </View>
               <Text style={st.more}>Ficha ›</Text>
             </TouchableOpacity>
+
+            <TermChips text={p.story} label={`En ${def.unit === 'capitulo' ? 'este capítulo' : 'esta parada'}`} />
 
             <View style={st.controls}>
               <RoundBtn icon="prev" label="Anterior" onPress={() => t.goToStop(tour.idx - 1)} />

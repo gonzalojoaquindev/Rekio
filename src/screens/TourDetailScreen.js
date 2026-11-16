@@ -7,6 +7,7 @@ import Stamp from '../components/Stamp';
 import Icon from '../components/Icon';
 import { Btn, SectionTitle, pickPhoto, WhenChips, Stars, StatusChip, useNow } from '../components/ui';
 import { tourStatus } from '../hours';
+import { LinkedText } from '../components/Glossary';
 import { C, R, shadow } from '../theme';
 import { placeById, tourStats, cityById, distanceM, fmtDist, unitOf } from '../geo';
 import { fetchTourRoute } from '../nav';
@@ -205,7 +206,7 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
             </View>
           )}
 
-          <Text style={st.desc}>{tour.description}</Text>
+          <LinkedText style={st.desc}>{tour.description}</LinkedText>
 
           <View style={st.stampBox}>
             <Stamp stamp={tour.stamp} title={city.name} cc={city.cc} size={86} locked={!earned} />

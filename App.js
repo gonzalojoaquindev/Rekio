@@ -5,6 +5,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { useKeepAwake } from 'expo-keep-awake';
 import { StoreProvider } from './src/store';
 import { TourProvider, useTour } from './src/tour';
+import { GlossaryProvider } from './src/components/Glossary';
 import { TabBar } from './src/components/ui';
 import PlaceSheet from './src/components/PlaceSheet';
 import ExploreScreen from './src/screens/ExploreScreen';
@@ -84,7 +85,9 @@ export default function App() {
     <SafeAreaProvider>
       <StoreProvider>
         <TourProvider>
-          <Main />
+          <GlossaryProvider>
+            <Main />
+          </GlossaryProvider>
         </TourProvider>
       </StoreProvider>
     </SafeAreaProvider>

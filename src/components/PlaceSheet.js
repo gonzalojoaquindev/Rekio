@@ -10,6 +10,7 @@ import { placeById, distanceM, fmtDist } from '../geo';
 import { useTour, tourById, stopAt } from '../tour';
 import { useStore } from '../store';
 import { placeHoursText } from '../hours';
+import { LinkedText } from './Glossary';
 
 export default function PlaceSheet({ placeId, onClose }) {
   const insets = useSafeAreaInsets();
@@ -109,7 +110,8 @@ export default function PlaceSheet({ placeId, onClose }) {
           )}
 
           <Text style={st.storyTitle}>La historia</Text>
-          <Text style={st.story}>{p.story}</Text>
+          <LinkedText style={st.story}>{p.story}</LinkedText>
+          <Text style={st.glossHint}>Toca las palabras subrayadas para ver su significado.</Text>
         </ScrollView>
         <TouchableOpacity style={[st.close, { top: 14 }]} onPress={onClose}>
           <Icon name="close" size={18} />
@@ -122,6 +124,7 @@ export default function PlaceSheet({ placeId, onClose }) {
 const PhotoThumb = ({ uri }) => <Image source={{ uri }} style={{ width: 84, height: 84, borderRadius: 10 }} />;
 
 const st = StyleSheet.create({
+  glossHint: { fontSize: 12, color: '#717171', marginTop: 8 },
   backdrop: { flex: 1, backgroundColor: 'rgba(0,0,0,0.35)' },
   sheet: {
     position: 'absolute',

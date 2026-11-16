@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import { View, Text, ScrollView, TextInput, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, TextInput, StyleSheet } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Icon from '../components/Icon';
 import { ScreenTitle, SectionTitle, Chip, TourCard, PlaceCard, HScroll, useNow } from '../components/ui';
+import { useGlossary } from '../components/Glossary';
 import { C, R, shadow } from '../theme';
 import { TOURS, CITIES } from '../data/tours';
 import { PLACES } from '../data/places';
@@ -28,6 +29,7 @@ export default function ExploreScreen({ openTour, openPlace }) {
   const [cat, setCat] = useState('Todo');
   const done = earnedStamps(store.completed);
   const now = useNow();
+  const { openList } = useGlossary();
 
   const categories = useMemo(() => ['Todo', ...Array.from(new Set(TOURS.map((t) => t.category)))], []);
 
@@ -68,6 +70,17 @@ export default function ExploreScreen({ openTour, openPlace }) {
           <Chip key={c} label={c} on={cat === c} onPress={() => setCat(c)} />
         ))}
       </ScrollView>
+
+      {!q && (
+        <TouchableOpacity style={st.vocab} onPress={openList} activeOpacity={0.85}>
+          <Text style={st.vocabIcon}>📖</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={st.vocabTitle}>Vocabulario</Text>
+            <Text style={st.vocabSub}>Daimyō, geiko, shōgun, corsario… lo que necesitas para entender las historias</Text>
+          </View>
+          <Text style={st.vocabArrow}>›</Text>
+        </TouchableOpacity>
+      )}
 
       {!q && nearby.length > 0 && (
         <>
@@ -125,6 +138,11 @@ export default function ExploreScreen({ openTour, openPlace }) {
 }
 
 const st = StyleSheet.create({
+  vocab: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 18, padding: 14, borderRadius: 16, backgroundColor: '#F7F6FF' },
+  vocabIcon: { fontSize: 26 },
+  vocabTitle: { fontSize: 16, fontWeight: '800', color: C.text },
+  vocabSub: { fontSize: 13, color: C.muted, marginTop: 2, lineHeight: 18 },
+  vocabArrow: { fontSize: 26, color: C.muted },
   search: {
     flexDirection: 'row',
     alignItems: 'center',

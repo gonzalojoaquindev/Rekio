@@ -49,32 +49,82 @@ export const voiceLabel = (v) => {
   return `${v.language} · ${kind}`;
 };
 
-// Dice un texto. key identifica qué se está narrando (p. ej. el id de un lugar).
-// onDone solo se llama si terminó de hablar sin ser interrumpido.
-export function say(text, { key = 'guide', onDone } = {}) {
-  Speech.stop();
-  const token = `${key}:${Date.now()}:${Math.random()}`;
-  current = { token, key };
-  notify();
-  const finish = (completed) => {
-    if (!current || current.token !== token) return;
+// Divide en frases: así se puede interrumpir la narración y retomarla en la misma frase
+const splitSentences = (text) =>
+  (text.match(/[^.!?…]+[.!?…]+[»"”)]*\s*|[^.!?…]+$/g) || [text]).map((x) => x.trim()).filter(Boolean);
+
+let suspended = null; // narración pausada por un comentario (p. ej. la definición de una palabra)
+
+function speakFrom(state) {
+  if (!current || current.token !== state.token) return;
+  if (state.i >= state.chunks.length) {
     current = null;
     notify();
-    if (completed && onDone) onDone();
-  };
-  Speech.speak(text, {
+    if (state.onDone) state.onDone();
+    return;
+  }
+  Speech.speak(state.chunks[state.i], {
     language: voice ? voice.language : 'es-US',
     voice: voice ? voice.identifier : undefined,
     rate: RATE,
     pitch: 1.0,
-    onDone: () => finish(true),
-    onStopped: () => finish(false),
-    onError: () => finish(false),
+    onDone: () => {
+      if (!current || current.token !== state.token) return;
+      state.i += 1;
+      speakFrom(state);
+    },
+    onStopped: () => {
+      if (!current || current.token !== state.token) return;
+      current = null;
+      notify();
+    },
+    onError: () => {
+      if (!current || current.token !== state.token) return;
+      state.i += 1; // si una frase falla, sigue con la siguiente
+      speakFrom(state);
+    },
   });
+}
+
+// Dice un texto. key identifica qué se está narrando (p. ej. el id de un lugar).
+// onDone solo se llama si terminó de hablar sin ser interrumpido.
+export function say(text, { key = 'guide', onDone } = {}) {
+  suspended = null;
+  Speech.stop();
+  const state = { token: `${key}:${Date.now()}:${Math.random()}`, key, chunks: splitSentences(text), i: 0, onDone };
+  current = state;
+  notify();
+  speakFrom(state);
+}
+
+// Dice un comentario breve interrumpiendo la narración, y luego la retoma desde la frase en que iba
+export function sayAside(text) {
+  const prev = current && current.key !== 'aside' ? current : suspended;
+  Speech.stop();
+  const state = {
+    token: `aside:${Date.now()}`,
+    key: 'aside',
+    chunks: splitSentences(text),
+    i: 0,
+    onDone: () => {
+      const back = suspended;
+      suspended = null;
+      if (!back) return;
+      const resumed = { ...back, token: `${back.key}:${Date.now()}` };
+      current = resumed;
+      notify();
+      speakFrom(resumed);
+    },
+  };
+  suspended = prev;
+  current = state;
+  notify();
+  speakFrom(state);
 }
 
 export function stopSpeaking() {
   current = null;
+  suspended = null;
   notify();
   Speech.stop();
 }
