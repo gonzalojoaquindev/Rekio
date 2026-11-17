@@ -42,6 +42,10 @@ function Main() {
   const nav = {
     openTour: (id) => setDetailId(id),
     openPlace: (id) => setPlaceId(id),
+    goTour: () => {
+      setDetailId(null);
+      setTab('tour');
+    },
     goPassport: () => {
       setDetailId(null);
       setPassport(true);

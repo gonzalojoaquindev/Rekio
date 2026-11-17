@@ -25,7 +25,7 @@ const tourById = (id) => TOURS.find((t) => t.id === id);
 const placeById = (id) => PLACES.find((p) => p.id === id);
 const nameOf = (it) => (it.kind === 'tour' ? tourById(it.id).name : placeById(it.id).name);
 
-export default function TripsScreen({ openTour, openPlace, tripId, setTripId }) {
+export default function TripsScreen({ openTour, openPlace, tripId, setTripId, goTour }) {
   const insets = useSafeAreaInsets();
   const store = useStore();
   const trips = store.trips || [];
@@ -36,7 +36,7 @@ export default function TripsScreen({ openTour, openPlace, tripId, setTripId }) 
   const [creating, setCreating] = useState(false);
   const trip = trips.find((t) => t.id === openId);
 
-  if (trip) return <TripDetail trip={trip} onBack={() => setOpenId(null)} openTour={openTour} openPlace={openPlace} />;
+  if (trip) return <TripDetail trip={trip} onBack={() => setOpenId(null)} openTour={openTour} openPlace={openPlace} goTour={goTour} />;
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: C.bg }} contentContainerStyle={{ padding: 20, paddingTop: insets.top + 16, paddingBottom: 40 }}>
@@ -148,7 +148,7 @@ function NewTrip({ visible, onClose, onCreate }) {
 }
 
 // ── Detalle de un viaje ──
-function TripDetail({ trip, onBack, openTour, openPlace }) {
+function TripDetail({ trip, onBack, openTour, openPlace, goTour }) {
   const insets = useSafeAreaInsets();
   const store = useStore();
   const [seg, setSeg] = useState('discover');
@@ -198,7 +198,7 @@ function TripDetail({ trip, onBack, openTour, openPlace }) {
       <ScrollView contentContainerStyle={{ padding: 20, paddingTop: 12, paddingBottom: 60 }}>
         {seg === 'discover' && <Discover trip={trip} toggle={toggle} openTour={openTour} openPlace={openPlace} />}
         {seg === 'saved' && <Saved trip={trip} toggle={toggle} openTour={openTour} openPlace={openPlace} goDays={() => setSeg('days')} />}
-        {seg === 'days' && <Days trip={trip} update={update} openTour={openTour} openPlace={openPlace} />}
+        {seg === 'days' && <Days trip={trip} update={update} openTour={openTour} openPlace={openPlace} goTour={goTour} />}
       </ScrollView>
     </View>
   );
@@ -286,7 +286,17 @@ function Saved({ trip, toggle, openTour, openPlace, goDays }) {
   );
 }
 
-function Days({ trip, update, openTour, openPlace }) {
+function Days({ trip, update, openTour, openPlace, goTour }) {
+  const store = useStore();
+  const active = store.settings.activeDay;
+  // Convierte este día en "Mi día" (aunque no sea hoy) y arranca lo primero del plan
+  const startDay = (date) => {
+    store.updateSettings({ activeDay: { tripId: trip.id, date } });
+    const plan = dayPlan(trip, date);
+    const first = plan && plan.items.find((x) => x.kind === 'tour' || x.kind === 'place');
+    if (first && first.kind === 'tour') openTour(first.tourId);
+    else if (goTour) goTour();
+  };
   const dates = tripDates(trip);
   const [picker, setPicker] = useState(null); // fecha a la que se agrega
   const [open, setOpen] = useState(null); // día expandido con mapa
@@ -357,6 +367,12 @@ function Days({ trip, update, openTour, openPlace }) {
             <TouchableOpacity onPress={() => setPicker(date)}>
               <Text style={[st.link, { marginTop: 10 }]}>+ Agregar a este día</Text>
             </TouchableOpacity>
+            {!!list.length &&
+              (active && active.tripId === trip.id && active.date === date ? (
+                <Text style={st.activeTxt}>▶ Es tu «Mi día» en la pestaña Recorrido</Text>
+              ) : (
+                <Btn title="▶ Empezar este día" small onPress={() => startDay(date)} style={{ alignSelf: 'flex-start', marginTop: 10 }} />
+              ))}
             {plan && (
               <View style={{ marginTop: 12 }}>
                 <MyDay itin={plan} openTour={openTour} openPlace={openPlace} compact />
@@ -439,5 +455,6 @@ const st = StyleSheet.create({
   dayItemTxt: { flex: 1, fontSize: 15, color: C.text },
   ctrl: { fontSize: 18, fontWeight: '700', color: C.muted, paddingHorizontal: 2 },
   sheet: { backgroundColor: '#fff', borderTopLeftRadius: 22, borderTopRightRadius: 22, padding: 20 },
+  activeTxt: { marginTop: 10, fontSize: 14, fontWeight: '700', color: '#1B7A4B' },
   pickRow: { paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#EEE' },
 });

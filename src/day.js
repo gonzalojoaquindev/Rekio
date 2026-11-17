@@ -1,6 +1,7 @@
 // Lógica de "Mi día": en qué parte del plan vas, atrasos y avisos de horarios en la hora planificada.
 import { ITINERARIES, itineraryById } from './data/itineraries';
 import { japanTime, tourStatus, DAY_NAMES } from './hours';
+import { dayPlan, tripDates } from './trips';
 import { TOURS } from './data/tours';
 
 const tourById = (id) => TOURS.find((x) => x.id === id);
@@ -71,12 +72,39 @@ export function planWarning(itin, item) {
   return st && st.issues.length ? { blocking: st.blocking, message: st.message } : null;
 }
 
-// Siguiente recorrido del plan después de uno dado
-export function nextTourInDay(tourId, dayId, now = new Date()) {
-  const itin = (dayId && itineraryById(dayId)) || ITINERARIES.find((x) => x.date === japanTime(now).key);
+// Busca el plan de un día: itinerarios de ejemplo o días de un viaje creado ('trip:<id>:<fecha>')
+export function resolveDay(dayId, trips = []) {
+  if (dayId && dayId.startsWith('trip:')) {
+    const [, tripId, date] = dayId.split(':');
+    const trip = trips.find((x) => x.id === tripId);
+    return trip ? dayPlan(trip, date) : null;
+  }
+  return dayId ? itineraryById(dayId) : null;
+}
+
+// Lo que sigue en el día después de un recorrido. Con toursOnly (simulación) se saltan los lugares sueltos.
+// Si el día terminó y es un viaje creado, propone el siguiente día con plan.
+export function nextInDay(tourId, dayId, { trips = [], now = new Date(), toursOnly = false } = {}) {
+  const itin = resolveDay(dayId, trips) || ITINERARIES.find((x) => x.date === japanTime(now).key);
   if (!itin) return null;
   const i = itin.items.findIndex((x) => x.tourId === tourId);
   if (i < 0) return null;
-  const nxt = itin.items.slice(i + 1).find((x) => x.kind === 'tour');
-  return nxt ? { itin, item: nxt, tour: tourById(nxt.tourId) } : null;
+  const nxt = itin.items.slice(i + 1).find((x) => x.kind === 'tour' || (!toursOnly && x.kind === 'place'));
+  if (nxt) {
+    return nxt.kind === 'tour'
+      ? { itin, item: nxt, tour: tourById(nxt.tourId), label: nxt.kind === 'tour' ? tourById(nxt.tourId).name.split(':')[0] : '' }
+      : { itin, item: nxt, placeId: nxt.placeId, label: nxt.label };
+  }
+  if (itin.tripId) {
+    const trip = trips.find((x) => x.id === itin.tripId);
+    const date = trip && tripDates(trip).find((d) => d > itin.date && ((trip.days || {})[d] || []).length);
+    if (date) return { itin, nextDay: { tripId: trip.id, date, number: tripDates(trip).indexOf(date) + 1 } };
+  }
+  return null;
+}
+
+// Compatibilidad: solo el siguiente recorrido
+export function nextTourInDay(tourId, dayId, now = new Date(), trips = []) {
+  const r = nextInDay(tourId, dayId, { trips, now, toursOnly: true });
+  return r && r.tour ? r : null;
 }

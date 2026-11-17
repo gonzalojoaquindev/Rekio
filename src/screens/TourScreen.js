@@ -14,7 +14,7 @@ import { tourById, useTour, stopAt } from '../tour';
 import { useStore } from '../store';
 import MyDay from '../components/MyDay';
 import { TermChips } from '../components/Glossary';
-import { nextTourInDay } from '../day';
+import { nextInDay, resolveDay, dayLabel } from '../day';
 import { tripPlanForToday } from '../trips';
 
 const routeCache = {};
@@ -72,7 +72,20 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
         contentContainerStyle={{ padding: 20, paddingTop: insets.top + 16, paddingBottom: 30 }}
       >
         <ScreenTitle>Recorrido</ScreenTitle>
-        <MyDay openTour={openTour} openPlace={openPlace} itin={tripPlanForToday(store.trips) || undefined} />
+        {(() => {
+          const ad = store.settings.activeDay;
+          const active = ad ? resolveDay(`trip:${ad.tripId}:${ad.date}`, store.trips) : null;
+          return (
+            <>
+              <MyDay openTour={openTour} openPlace={openPlace} itin={active || tripPlanForToday(store.trips) || undefined} />
+              {!!active && (
+                <TouchableOpacity onPress={() => store.updateSettings({ activeDay: null })} style={{ marginTop: -12, marginBottom: 20 }}>
+                  <Text style={st.tipLink}>Dejar de seguir este día</Text>
+                </TouchableOpacity>
+              )}
+            </>
+          );
+        })()}
         <View style={st.emptyBox}>
           <Icon name="headphones" size={40} color={C.brand} />
           <Text style={st.emptyTitle}>No tienes un recorrido activo</Text>
@@ -173,14 +186,29 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
             </TouchableOpacity>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10, marginTop: 14 }}>
               {(() => {
-                const nx = nextTourInDay(def.id, tour.dayId);
+                const nx = nextInDay(def.id, tour.dayId, { trips: store.trips, toursOnly: tour.simulate });
                 if (!nx) return null;
+                if (nx.nextDay) {
+                  const dl = dayLabel({ date: nx.nextDay.date });
+                  return (
+                    <Btn
+                      title={`Siguiente día: día ${nx.nextDay.number} (${dl})`}
+                      small
+                      onPress={() => {
+                        store.updateSettings({ activeDay: { tripId: nx.nextDay.tripId, date: nx.nextDay.date } });
+                        t.endTour();
+                      }}
+                    />
+                  );
+                }
                 return (
                   <Btn
-                    title={`Siguiente: ${nx.tour.name.split(':')[0]} (${nx.item.start})`}
+                    title={`Siguiente: ${nx.label} (${nx.item.start})`}
                     small
                     onPress={() =>
-                      tour.simulate
+                      nx.placeId
+                        ? (t.endTour(), openPlace(nx.placeId))
+                        : tour.simulate
                         ? t.startTour(nx.tour.id, true, 'original', { dayId: nx.itin.id })
                         : (t.endTour(), openTour(nx.tour.id))
                     }
