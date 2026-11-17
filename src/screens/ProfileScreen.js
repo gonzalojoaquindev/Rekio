@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,7 @@ import {
   TextInput,
   Alert,
   Dimensions,
+  Share,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Stamp from '../components/Stamp';
@@ -24,10 +25,13 @@ import { useStore, earnedStamps } from '../store';
 import { getVoice, getVoices, setVoice, voiceLabel, say } from '../speech';
 import { hasGoogleMaps } from '../components/MapPanel';
 import { CREDITS } from '../music';
+import { calibrationText } from '../calib';
 
 export default function ProfileScreen({ goPassport, openTour }) {
   const insets = useSafeAreaInsets();
   const store = useStore();
+  const devTaps = useRef(0);
+  const devTimer = useRef(null);
   const [editing, setEditing] = useState(false);
   const [voice, setV] = useState(getVoice());
   const earned = earnedStamps(store.completed);
@@ -169,7 +173,46 @@ export default function ProfileScreen({ goPassport, openTour }) {
         </Text>
       ))}
 
-      <Text style={st.version}>Rekio · versión de prueba · datos guardados en este teléfono</Text>
+      {!!store.settings.devMode && (
+        <View style={st.devBox}>
+          <Text style={st.devTitle}>🛠 Modo calibración activo</Text>
+          <Text style={st.devSub}>
+            {Object.keys(store.calib || {}).length} puntos corregidos. Abre cualquier lugar para moverlo o cambiar su radio; en el mapa verás el círculo
+            donde empieza cada relato.
+          </Text>
+          <Btn title="Enviar correcciones" onPress={() => Share.share({ message: calibrationText(store.calib) })} />
+          <TouchableOpacity
+            onPress={() =>
+              Alert.alert('¿Borrar todas las correcciones?', 'Los puntos vuelven a su ubicación original.', [
+                { text: 'Cancelar', style: 'cancel' },
+                { text: 'Borrar', style: 'destructive', onPress: store.clearCalib },
+              ])
+            }
+          >
+            <Text style={st.devLink}>Borrar correcciones</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => store.updateSettings({ devMode: false })}>
+            <Text style={st.devLink}>Desactivar modo calibración</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
+      <Text
+        style={st.version}
+        onPress={() => {
+          devTaps.current += 1;
+          clearTimeout(devTimer.current);
+          devTimer.current = setTimeout(() => (devTaps.current = 0), 2500);
+          if (devTaps.current >= 7) {
+            devTaps.current = 0;
+            const on = !store.settings.devMode;
+            store.updateSettings({ devMode: on });
+            Alert.alert(on ? 'Modo calibración activado' : 'Modo calibración desactivado', on ? 'Abre un lugar para corregir su punto.' : '');
+          }
+        }}
+      >
+        Rekio · versión de prueba · datos guardados en este teléfono
+      </Text>
 
       <EditProfile visible={editing} onClose={() => setEditing(false)} />
     </ScrollView>
@@ -285,7 +328,11 @@ const st = StyleSheet.create({
   },
   setTitle: { fontSize: 16, fontWeight: '600', color: C.text },
   setSub: { fontSize: 13, color: C.muted, marginTop: 2, lineHeight: 18 },
-  version: { fontSize: 12, color: C.faint, textAlign: 'center', marginTop: 30 },
+  version: { fontSize: 12, color: C.faint, textAlign: 'center', marginTop: 30, paddingVertical: 8 },
+  devBox: { marginTop: 24, padding: 16, borderRadius: R.md, backgroundColor: '#FFF8E6', borderWidth: 1, borderColor: '#F2D48A', gap: 10 },
+  devTitle: { fontSize: 16, fontWeight: '800', color: C.text },
+  devSub: { fontSize: 13, color: C.muted, lineHeight: 18 },
+  devLink: { fontSize: 14, fontWeight: '700', color: C.brand, textAlign: 'center', paddingVertical: 4 },
   label: { fontSize: 14, fontWeight: '700', color: C.text, marginTop: 18, marginBottom: 6 },
   input: {
     borderWidth: 1,

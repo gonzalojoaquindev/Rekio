@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import MapView, { Marker, Polyline, Circle, PROVIDER_GOOGLE } from 'react-native-maps';
 import { C, shadow } from '../theme';
+import { useStore } from '../store';
+import { placeById } from '../geo';
 
 const TYPES = [
   { id: 'standard', label: 'Mapa' },
@@ -38,7 +40,10 @@ export default function GoogleMap({
   flex = false,
   rounded = true,
   controlsTop = 10,
+  circles,
+  onLongPressMap,
 }) {
+  const devMode = !!useStore().settings.devMode;
   const ref = useRef(null);
   const [ready, setReady] = useState(false);
   const [typeIdx, setTypeIdx] = useState(0);
@@ -102,6 +107,7 @@ export default function GoogleMap({
         showsBuildings
         showsMyLocationButton={false}
         showsUserLocation={false}
+        onLongPress={onLongPressMap ? (e) => onLongPressMap(e.nativeEvent.coordinate) : undefined}
       >
         {route && route.length > 1 && (
           <>
@@ -115,6 +121,15 @@ export default function GoogleMap({
             <Polyline coordinates={leg.map(toLL)} strokeColor="#1A73E8" strokeWidth={6} zIndex={4} />
           </>
         )}
+        {(circles || (devMode ? points.map((p) => ({ ...p, radius: (placeById(p.id) || {}).radius })).filter((c) => c.radius) : [])).map((c, i) => (
+          <Circle
+            key={`c${i}:${c.lat}:${c.lng}:${c.radius}`}
+            center={{ latitude: c.lat, longitude: c.lng }}
+            radius={c.radius}
+            strokeColor="rgba(255,90,60,0.6)"
+            fillColor="rgba(255,90,60,0.10)"
+          />
+        ))}
         {points.map((p) => (
           <Marker
             key={`${p.id}:${p.state}:${p.label}`}

@@ -10,6 +10,7 @@ export const COPIAPO = [
   {
     id: 'cp_plaza',
     city: 'copiapo',
+    art: require('../../assets/art/copiapo-1.jpg'),
     photo: ['es:Plaza de Armas de Copiapó', 'file:Plaza Prat - panoramio.jpg'],
     name: 'Capítulo 1 · La ciudad de la plata',
     jp: 'Plaza Prat',
@@ -37,6 +38,7 @@ export const COPIAPO = [
   {
     id: 'cp_noche',
     city: 'copiapo',
+    art: require('../../assets/art/copiapo-2.jpg'),
     photo: ['file:Calle Colipí hacia la Plaza Prat - panoramio.jpg', 'es:Plaza de Armas de Copiapó'],
     name: 'Capítulo 2 · La noche en que Copiapó se rebeló',
     jp: 'Calle Atacama, frente a la plaza',
@@ -63,6 +65,7 @@ export const COPIAPO = [
   {
     id: 'cp_matta',
     city: 'copiapo',
+    art: require('../../assets/art/copiapo-3.jpg'),
     photo: ['es:Museo Regional de Atacama', 'file:Museo regional atacama.JPG'],
     name: 'Capítulo 3 · Una bandera, un himno y una moneda',
     jp: 'Casa Matta · Museo Regional de Atacama',
@@ -89,6 +92,7 @@ export const COPIAPO = [
   {
     id: 'cp_estacion',
     city: 'copiapo',
+    art: require('../../assets/art/copiapo-4.jpg'),
     photo: ['es:Estación Copiapó'],
     name: 'Capítulo 4 · Los Loros, la victoria imposible',
     jp: 'Antigua estación de ferrocarril',
@@ -115,6 +119,7 @@ export const COPIAPO = [
   {
     id: 'cp_godoy',
     city: 'copiapo',
+    art: require('../../assets/art/copiapo-5.jpg'),
     photo: ['file:Monumento a Juan Godoy - panoramio.jpg', 'file:Juan godoy.jpg'],
     name: 'Capítulo 5 · Una derrota y una idea que sobrevivió',
     jp: 'Monumento a Juan Godoy · Alameda',

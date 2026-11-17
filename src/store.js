@@ -3,6 +3,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { File, Directory, Paths } from 'expo-file-system';
+import { applyCalibration } from './calib';
 
 const KEY = 'rekio:v1';
 
@@ -14,7 +15,8 @@ const INITIAL = {
   reviews: {}, // { [tourId]: { stars: 0-5, text, date } } — por ahora solo en este teléfono
   progress: {}, // { [tourId]: { pos, order, date } } — dónde quedó un recorrido sin terminar
   trips: [], // Mis viajes: { id, name, cities, start, end, saved: [{kind,id}], days: { 'YYYY-MM-DD': [{kind,id}] } }
-  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true },
+  calib: {}, // modo calibración: { [placeId]: { lat, lng, acc, how, radius, note, date } }
+  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true, devMode: false },
 };
 
 const Ctx = createContext(null);
@@ -120,14 +122,28 @@ export function StoreProvider({ children }) {
     []
   );
   const deleteTrip = useCallback((id) => setState((s) => ({ ...s, trips: (s.trips || []).filter((t) => t.id !== id) })), []);
+  // Calibración: aplica las correcciones de puntos sobre los datos en cuanto cambian
+  useMemo(() => applyCalibration(state.calib), [state.calib]);
+  const setCalib = useCallback(
+    (id, patch) =>
+      setState((s) => {
+        const all = { ...(s.calib || {}) };
+        if (patch === null) delete all[id];
+        else all[id] = { ...(all[id] || {}), ...patch, date: new Date().toISOString() };
+        return { ...s, calib: all };
+      }),
+    []
+  );
+  const clearCalib = useCallback(() => setState((s) => ({ ...s, calib: {} })), []);
+
   const updateSettings = useCallback(
     (patch) => setState((s) => ({ ...s, settings: { ...s.settings, ...patch } })),
     []
   );
 
   const value = useMemo(
-    () => ({ ...state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip }),
-    [state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip]
+    () => ({ ...state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip, setCalib, clearCalib }),
+    [state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip, setCalib, clearCalib]
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

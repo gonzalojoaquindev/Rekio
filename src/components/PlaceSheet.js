@@ -12,6 +12,7 @@ import { useStore } from '../store';
 import { placeHoursText } from '../hours';
 import { LinkedText } from './Glossary';
 import { categoryById, tagById } from '../data/categories';
+import CalibBox from './CalibBox';
 
 export default function PlaceSheet({ placeId, onClose }) {
   const insets = useSafeAreaInsets();
@@ -126,6 +127,7 @@ export default function PlaceSheet({ placeId, onClose }) {
             </Text>
           )}
           <Text style={st.glossHint}>Toca las palabras subrayadas para ver su significado.</Text>
+          {!!store.settings.devMode && <CalibBox p={p} />}
         </ScrollView>
         <TouchableOpacity style={[st.close, { top: 14 }]} onPress={onClose}>
           <Icon name="close" size={18} />
