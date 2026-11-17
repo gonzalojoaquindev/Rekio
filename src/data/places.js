@@ -7,6 +7,8 @@ import { TOKYO } from './places_tokyo';
 import { NARA } from './places_nara';
 import { TOKYO2 } from './places_tokyo2';
 import { LASERENA } from './places_laserena';
+import { TOKYO3 } from './places_tokyo3';
+import { CLASSIFY, PARTS } from './categories';
 
 export const PLACES = [
   {
@@ -558,7 +560,17 @@ export const PLACES = [
 // Precio adulto en yenes, verificado en noviembre de 2026. cash: llevar efectivo.
 // Los precios cambian: se muestran como referencia.
 // Lugares de otras ciudades (cada ciudad en su propio archivo)
-PLACES.push(...TOKYO, ...TOKYO2, ...NARA, ...LASERENA);
+PLACES.push(...TOKYO, ...TOKYO2, ...NARA, ...LASERENA, ...TOKYO3);
+
+// Categoría y etiquetas de los lugares de los recorridos (los nuevos ya las traen)
+for (const p of PLACES) {
+  const c = CLASSIFY[p.id];
+  if (c && !p.cat) {
+    p.cat = c[0];
+    p.tags = c[1];
+  }
+  if (PARTS.has(p.id)) p.part = true;
+}
 
 export const FEES = {
   kiyo_hondo: { yen: 500, cash: true, note: 'Salón principal y escenario de Kiyomizu-dera.' },

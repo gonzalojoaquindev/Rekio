@@ -1,7 +1,7 @@
 // Planificador de viajes: lo guardado (lugares y recorridos) → días con horarios, transporte y avisos.
 import { TOURS } from './data/tours';
 import { PLACES } from './data/places';
-import { tourStatus, japanTime } from './hours';
+import { tourStatus, japanTime, placeStatus, fmtMin } from './hours';
 import { distanceM, tourStats } from './geo';
 
 const tourById = (id) => TOURS.find((t) => t.id === id);
@@ -62,9 +62,11 @@ export function coveredPlaces(trip) {
 const itemCity = (it) => (it.kind === 'tour' ? (tourById(it.id) || {}).city : (placeById(it.id) || {}).city);
 const itemStart = (it) => (it.kind === 'tour' ? placeById(tourById(it.id).stops[0].id) : placeById(it.id));
 const itemEnd = (it) => (it.kind === 'tour' ? placeById(tourById(it.id).stops[tourById(it.id).stops.length - 1].id) : placeById(it.id));
-const itemMinutes = (it) => (it.kind === 'tour' ? Math.max(45, tourStats(tourById(it.id)).minutes) : 45);
+const itemMinutes = (it) => (it.kind === 'tour' ? Math.max(45, tourStats(tourById(it.id)).minutes) : (placeById(it.id) || {}).mins || 45);
+// Mejor horario de un lugar suelto: el que declara, o la noche para bares y vida nocturna
+const placeSlot = (p) => (!p ? 'manana' : p.slot || (p.cat === 'noche' ? 'noche' : 'manana'));
 const itemSlot = (it) => {
-  if (it.kind !== 'tour') return 'manana';
+  if (it.kind !== 'tour') return placeSlot(placeById(it.id));
   const w = tourById(it.id).when;
   return w && w.slots && w.slots.length ? w.slots[0] : 'manana';
 };
@@ -112,10 +114,22 @@ export function dayWarnings(trip, date) {
   const plan = dayPlan(trip, date);
   if (!plan) return [];
   return plan.items
-    .filter((it) => it.kind === 'tour')
     .map((it) => {
-      const st = tourStatus(tourById(it.tourId), new Date(`${date}T${it.start}:00+09:00`));
-      return st && st.issues.length ? { tourId: it.tourId, blocking: st.blocking, message: st.message } : null;
+      const at = new Date(`${date}T${it.start.padStart(5, '0')}:00+09:00`);
+      if (it.kind === 'tour') {
+        const st = tourStatus(tourById(it.tourId), at);
+        return st && st.issues.length ? { tourId: it.tourId, blocking: st.blocking, message: st.message } : null;
+      }
+      if (it.kind !== 'place') return null;
+      const s = placeStatus(it.placeId, at);
+      if (!s || s.state === 'open' || s.state === 'soon') return null;
+      const name = placeById(it.placeId).name;
+      const soft = s.spec.soft;
+      let message;
+      if (s.state === 'closed') message = `${name}: cerrado ese día (${s.why}).${soft ? ' Igual se puede ver desde fuera.' : ''}`;
+      else if (s.state === 'before') message = `${name}: abre a las ${fmtMin(s.open)} y llegarías a las ${it.start}.`;
+      else message = `${name}: recibe gente hasta las ${fmtMin(s.last)} y llegarías a las ${it.start}.`;
+      return { placeId: it.placeId, blocking: !soft && s.state !== 'before', message };
     })
     .filter(Boolean);
 }
@@ -140,9 +154,13 @@ export function autoPlan(trip) {
         const w = it.kind === 'tour' ? 1 : 0.5;
         if (load + w > 3) continue;
         // ¿estaría cerrado ese día?
+        const probe = new Date(`${date}T${pad(Math.floor(SLOT_START[itemSlot(it)] / 60))}:30:00+09:00`);
         if (it.kind === 'tour') {
-          const st = tourStatus(tourById(it.id), new Date(`${date}T${pad(Math.floor(SLOT_START[itemSlot(it)] / 60))}:30:00+09:00`));
+          const st = tourStatus(tourById(it.id), probe);
           if (st && st.blocking && st.issues.some((x) => x.st.state === 'closed')) continue;
+        } else {
+          const s = placeStatus(it.id, probe);
+          if (s && s.state === 'closed' && !s.spec.soft) continue;
         }
         today.push(it);
         load += w;

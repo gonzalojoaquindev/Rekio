@@ -11,6 +11,7 @@ import { useTour, tourById, stopAt } from '../tour';
 import { useStore } from '../store';
 import { placeHoursText } from '../hours';
 import { LinkedText } from './Glossary';
+import { categoryById, tagById } from '../data/categories';
 
 export default function PlaceSheet({ placeId, onClose }) {
   const insets = useSafeAreaInsets();
@@ -47,6 +48,8 @@ export default function PlaceSheet({ placeId, onClose }) {
             {stop && <Badge label={stop.optional ? 'Opcional' : '⭐ Imperdible'} bg={C.surface} />}
             {p.type === 'recreacion' && <Badge label="Recreación histórica" bg={C.brandSoft} color={C.brand} />}
             {heard && <Badge label="✓ Escuchado" bg="#E8F6EF" color={C.ok} />}
+            {!!p.cat && <Badge label={`${categoryById(p.cat).icon} ${categoryById(p.cat).label}`} bg={C.surface} />}
+            {(p.tags || []).map((tg) => tagById(tg) && <Badge key={tg} label={`${tagById(tg).icon} ${tagById(tg).label}`} bg={C.surface} />)}
           </View>
           <Text style={st.name}>{p.name}</Text>
           <Text style={st.local}>
@@ -54,6 +57,12 @@ export default function PlaceSheet({ placeId, onClose }) {
             {dist != null ? `  ·  a ${fmtDist(dist)}` : ''}
           </Text>
           {!!p.short && <Text style={st.short}>{p.short}</Text>}
+          {!!p.best && (
+            <View style={[st.fee, { backgroundColor: '#F7F6FF' }]}>
+              <Text style={st.feeTitle}>✨ Mejor momento: {p.best}</Text>
+              {!!p.mins && <Text style={st.feeNote}>Calcula unos {p.mins >= 90 ? `${Math.round(p.mins / 30) / 2} horas` : `${p.mins} minutos`} de visita.</Text>}
+            </View>
+          )}
           {(() => {
             const h = placeHoursText(p.id);
             if (!h) return null;

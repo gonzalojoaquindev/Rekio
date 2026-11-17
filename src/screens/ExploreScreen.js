@@ -10,6 +10,8 @@ import { PLACES } from '../data/places';
 import { distanceM } from '../geo';
 import { useTour } from '../tour';
 import { useStore, earnedStamps } from '../store';
+import { cityPlaces } from '../components/CityCatalog';
+import { CATEGORIES } from '../data/categories';
 
 const norm = (s) =>
   (s || '')
@@ -17,7 +19,7 @@ const norm = (s) =>
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '');
 
-export default function ExploreScreen({ openTour, openPlace }) {
+export default function ExploreScreen({ openTour, openPlace, openCity }) {
   const insets = useSafeAreaInsets();
   const { here: rawHere } = useTour();
   // Posición redondeada a ~100 m: la lista no se recalcula con cada pequeño movimiento
@@ -38,7 +40,7 @@ export default function ExploreScreen({ openTour, openPlace }) {
       (cat === 'Todo' || t.category === cat) &&
       (!q || norm(`${t.name} ${t.description} ${t.category}`).includes(norm(q)))
   );
-  const places = PLACES.filter((p) => !q || norm(`${p.name} ${p.jp} ${p.story}`).includes(norm(q)));
+  const places = PLACES.filter((p) => (q ? norm(`${p.name} ${p.jp} ${p.story}`).includes(norm(q)) : !p.cat || !p.id.startsWith('tt_')));
 
   const nearby = here
     ? PLACES.map((p) => ({ p, d: distanceM(here, p) }))
@@ -97,8 +99,20 @@ export default function ExploreScreen({ openTour, openPlace }) {
         const ct = tours.filter((t) => t.city === city.id);
         const cp = places.filter((p) => p.city === city.id);
         if (!ct.length && !cp.length) return null;
+        const all = cityPlaces(city.id);
+        const icons = CATEGORIES.filter((c) => all.some((p) => p.cat === c.id)).map((c) => c.icon).join(' ');
         return (
           <View key={city.id}>
+            {!q && all.length >= 8 && openCity && (
+              <TouchableOpacity style={st.cityAll} activeOpacity={0.85} onPress={() => openCity(city.id)}>
+                <View style={{ flex: 1 }}>
+                  <Text style={st.cityAllTitle}>Todo {city.name}</Text>
+                  <Text style={st.cityAllSub}>{all.length} lugares para elegir, con filtros y mapa</Text>
+                  <Text style={st.cityAllIcons}>{icons}</Text>
+                </View>
+                <Text style={st.vocabArrow}>›</Text>
+              </TouchableOpacity>
+            )}
             {ct.length > 0 && (
               <>
                 <SectionTitle sub={`${city.country} · audioguías a pie con GPS`}>Recorridos en {city.name}</SectionTitle>
@@ -130,7 +144,7 @@ export default function ExploreScreen({ openTour, openPlace }) {
       <View style={st.soon}>
         <Text style={st.soonTitle}>Pronto, más ciudades</Text>
         <Text style={st.soonText}>
-          Rekio está empezando en Kioto. Cada nueva ciudad suma recorridos, lugares y estampillas.
+          Rekio ya recorre Kioto, Tokio, Nara y La Serena. Cada nueva ciudad suma recorridos, lugares y estampillas.
         </Text>
       </View>
     </ScrollView>
@@ -138,6 +152,10 @@ export default function ExploreScreen({ openTour, openPlace }) {
 }
 
 const st = StyleSheet.create({
+  cityAll: { flexDirection: 'row', alignItems: 'center', marginTop: 24, padding: 16, borderRadius: 16, backgroundColor: C.text },
+  cityAllTitle: { fontSize: 20, fontWeight: '900', color: '#fff' },
+  cityAllSub: { fontSize: 14, color: '#E6E6E6', marginTop: 3 },
+  cityAllIcons: { fontSize: 18, marginTop: 8, letterSpacing: 2 },
   vocab: { flexDirection: 'row', alignItems: 'center', gap: 12, marginTop: 18, padding: 14, borderRadius: 16, backgroundColor: '#F7F6FF' },
   vocabIcon: { fontSize: 26 },
   vocabTitle: { fontSize: 16, fontWeight: '800', color: C.text },

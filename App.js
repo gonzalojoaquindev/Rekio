@@ -15,6 +15,7 @@ import PassportScreen from './src/screens/PassportScreen';
 import TripsScreen from './src/screens/TripsScreen';
 import ProfileScreen from './src/screens/ProfileScreen';
 import TourDetailScreen from './src/screens/TourDetailScreen';
+import CityScreen from './src/screens/CityScreen';
 import { C } from './src/theme';
 
 function Main() {
@@ -25,6 +26,7 @@ function Main() {
   const [placeId, setPlaceId] = useState(null);
   const [passport, setPassport] = useState(false); // el pasaporte ahora se abre desde Perfil
   const [tripId, setTripId] = useState(null); // viaje abierto en Mis viajes
+  const [cityView, setCityView] = useState(null); // ciudad completa abierta desde Explora
 
   // Botón "atrás" de Android
   useEffect(() => {
@@ -32,12 +34,13 @@ function Main() {
       if (placeId) return setPlaceId(null), true;
       if (detailId) return setDetailId(null), true;
       if (passport) return setPassport(false), true;
+      if (cityView && tab === 'explore') return setCityView(null), true;
       if (tab === 'trips' && tripId) return setTripId(null), true;
       if (tab !== 'explore') return setTab('explore'), true;
       return false;
     });
     return () => sub.remove();
-  }, [placeId, detailId, tab, passport, tripId]);
+  }, [placeId, detailId, tab, passport, tripId, cityView]);
 
   const nav = {
     openTour: (id) => setDetailId(id),
@@ -45,6 +48,11 @@ function Main() {
     goTour: () => {
       setDetailId(null);
       setTab('tour');
+    },
+    openCity: (id) => setCityView(id),
+    goTrips: () => {
+      setCityView(null);
+      setTab('trips');
     },
     goPassport: () => {
       setDetailId(null);
@@ -66,6 +74,7 @@ function Main() {
       />
     );
   } else if (passport) screen = <PassportScreen {...nav} onBack={() => setPassport(false)} />;
+  else if (tab === 'explore' && cityView) screen = <CityScreen {...nav} city={cityView} onBack={() => setCityView(null)} />;
   else if (tab === 'explore') screen = <ExploreScreen {...nav} />;
   else if (tab === 'map') screen = <MapScreen {...nav} />;
   else if (tab === 'tour') screen = <TourScreen {...nav} />;

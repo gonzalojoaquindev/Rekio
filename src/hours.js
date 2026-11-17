@@ -25,8 +25,11 @@ export const hoursFor = (placeId) => HOURS[placeId] || null;
 
 // ¿Por qué está cerrado ese día? null si abre.
 export function closedReason(spec, jt) {
+  const period = (spec.closedPeriods || []).find(([a, b]) => jt.key >= a && jt.key <= b);
+  if (period) return spec.closedPeriodsReason || 'renovación';
   if ((spec.closedRanges || []).some(([a, b]) => inRange(jt.md, a, b))) return 'fin de año';
-  if ((spec.closedDates || []).includes(jt.md)) return 'ceremonias del templo';
+  if ((spec.closedDates || []).includes(jt.md)) return spec.closedDatesReason || 'ceremonias del templo';
+  if (spec.closedOnHolidays && isHoliday(jt)) return 'feriado';
   const weekly = spec.closedWeekdays || [];
   if (weekly.includes(jt.wd)) {
     const exempt = spec.holidayOpens && isHoliday(jt) && !(spec.exceptHolidays || []).includes(jt.md);
@@ -65,8 +68,10 @@ export function placeHoursText(placeId, date = new Date()) {
   const s = placeStatus(placeId, date);
   if (!s) return null;
   const lastTxt = s.last !== s.close ? ` · última entrada ${fmtMin(s.last)}` : '';
-  if (s.state === 'closed') return { tone: 'bad', text: `Hoy cerrado (${s.why})${s.spec.soft ? ' · se puede ver desde fuera' : ''}` };
-  const hours = `Hoy ${fmtMin(s.open)}–${fmtMin(s.close)}${lastTxt}`;
+  if (s.state === 'closed')
+    return { tone: 'bad', text: `Hoy cerrado (${s.why})${s.spec.soft ? s.spec.softClosed || ' · se puede ver desde fuera' : ''}` };
+  const closeTxt = s.close >= 1439 ? 'tarde' : fmtMin(s.close);
+  const hours = `Hoy ${fmtMin(s.open)}–${closeTxt}${lastTxt}`;
   if (s.state === 'before') return { tone: 'info', text: `${hours} · abre a las ${fmtMin(s.open)}` };
   if (s.state === 'after') return { tone: 'bad', text: `${hours} · ya cerró por hoy` };
   if (s.state === 'soon') return { tone: 'warn', text: `${hours} · cierra pronto` };

@@ -9,6 +9,8 @@
 //   exceptHolidays: feriados en que NO se aplica holidayOpens ('MM-DD')
 //   closedRanges:   [['MM-DD', 'MM-DD']] cierres anuales (pueden cruzar el año)
 //   closedDates:    ['MM-DD'] cierres puntuales cada año
+//   closedPeriods:  [['AAAA-MM-DD', 'AAAA-MM-DD']] cierres con fecha (renovaciones)
+//   closedOnHolidays: cierra los feriados
 //   soft:           solo cierra el interior; el lugar se puede ver desde fuera
 //   plural:         el nombre del recinto va en plural (para la redacción de los avisos)
 
@@ -148,6 +150,113 @@ export const HOURS = {
   tk_shibuyasky: { area: 'Shibuya Sky', seasons: ALL_YEAR('10:00', '22:30', '21:20') },
   tk_hyakunin: EAST_GARDENS,
   tk_tenshudai: EAST_GARDENS,
+  // Tokio · catálogo completo
+  tt_tower: { area: 'el mirador de la Torre de Tokio', seasons: ALL_YEAR('09:00', '23:00', '22:30') },
+  tt_skytree: {
+    area: 'los miradores del Skytree',
+    plural: true,
+    seasons: ALL_YEAR('10:00', '22:00', '21:00'),
+  },
+  tt_tocho: { area: 'el mirador del Gobierno Metropolitano', seasons: ALL_YEAR('09:30', '22:00', '21:30'), closedRanges: [['12-29', '01-03']] },
+  tt_cityview: { area: 'Tokyo City View', seasons: ALL_YEAR('10:00', '22:00', '21:30') },
+  tt_gotokuji: { area: 'el templo Gōtoku-ji', seasons: ALL_YEAR('06:00', '17:00') },
+  tt_nezu: { area: 'el santuario Nezu', seasons: ALL_YEAR('06:00', '17:00') },
+  tt_tnm: {
+    area: 'el Museo Nacional de Tokio',
+    seasons: ALL_YEAR('09:30', '17:00', '16:30'),
+    closedWeekdays: [1],
+    holidayOpens: true,
+    shiftAfter: [1],
+    closedRanges: [['12-26', '12-31']],
+  },
+  tt_ghibli: {
+    area: 'el Museo Ghibli',
+    seasons: ALL_YEAR('10:00', '18:00', '16:00'),
+    closedWeekdays: [2],
+    closedRanges: [['12-30', '01-03']],
+  },
+  tt_edohaku: {
+    area: 'el Museo Edo-Tokio',
+    seasons: ALL_YEAR('09:30', '17:30', '17:00'),
+    closedWeekdays: [1],
+    holidayOpens: true,
+    shiftAfter: [1],
+    closedRanges: [['12-28', '01-01']],
+  },
+  tt_hokusai: {
+    area: 'el Museo Hokusai',
+    seasons: ALL_YEAR('09:30', '17:30', '17:00'),
+    closedWeekdays: [1],
+    holidayOpens: true,
+    shiftAfter: [1],
+    closedRanges: [['12-27', '01-01']],
+  },
+  tt_nezumuseum: {
+    area: 'el Museo Nezu',
+    seasons: ALL_YEAR('10:00', '17:00', '16:30'),
+    closedWeekdays: [1],
+    holidayOpens: true,
+    shiftAfter: [1],
+  },
+  tt_miraikan: {
+    area: 'el Miraikan',
+    seasons: ALL_YEAR('10:00', '17:00', '16:30'),
+    closedWeekdays: [2],
+    holidayOpens: true,
+    shiftAfter: [2],
+    closedRanges: [['12-28', '01-01']],
+    closedPeriods: [['2026-10-01', '2027-04-22']],
+    closedPeriodsReason: 'renovación hasta el 22 de abril de 2027',
+  },
+  tt_gyoen: {
+    area: 'el jardín Shinjuku Gyoen',
+    seasons: [
+      { from: '10-01', to: '03-14', open: '09:00', close: '16:30', last: '16:00' },
+      { from: '03-15', to: '06-30', open: '09:00', close: '18:00', last: '17:30' },
+      { from: '07-01', to: '08-20', open: '09:00', close: '19:00', last: '18:30' },
+      { from: '08-21', to: '09-30', open: '09:00', close: '18:00', last: '17:30' },
+    ],
+    closedWeekdays: [1],
+    holidayOpens: true,
+    shiftAfter: [1],
+    closedRanges: [['12-29', '01-03']],
+  },
+  tt_hamarikyu: { area: 'los jardines Hama-rikyū', plural: true, seasons: ALL_YEAR('09:00', '17:00', '16:30'), closedRanges: [['12-29', '01-01']] },
+  tt_rikugien: { area: 'el jardín Rikugien', seasons: ALL_YEAR('09:00', '17:00', '16:30'), closedRanges: [['12-29', '01-01']] },
+  tt_planets: { area: 'teamLab Planets', seasons: ALL_YEAR('09:00', '22:00', '21:00') },
+  tt_borderless: { area: 'teamLab Borderless', seasons: ALL_YEAR('09:00', '21:00', '20:00') },
+  tt_kabukiza: {
+    area: 'las funciones de kabuki',
+    plural: true,
+    soft: true,
+    softChip: 'Funciones de 11:00 a 21:00',
+    seasons: ALL_YEAR('10:30', '21:00', '19:00'),
+  },
+  tt_ameyoko: { area: 'las tiendas de Ameyoko', plural: true, soft: true, softChip: 'Tiendas de 10:00 a 20:00', seasons: ALL_YEAR('10:00', '20:00') },
+  tt_kappabashi: {
+    area: 'las tiendas de Kappabashi',
+    plural: true,
+    soft: true,
+    softChip: 'Muchas tiendas cierran domingo',
+    seasons: ALL_YEAR('09:30', '17:00'),
+    closedWeekdays: [0],
+  },
+  tt_nakano: { area: 'las tiendas de Nakano Broadway', plural: true, soft: true, softChip: 'Tiendas desde las 12:00', seasons: ALL_YEAR('12:00', '20:00') },
+  tt_charstreet: { area: 'Tokyo Character Street', seasons: ALL_YEAR('10:00', '20:30') },
+  tt_tsukiji: {
+    area: 'el mercado de Tsukiji',
+    soft: true,
+    softChip: 'Mercado cerrado',
+    softClosed: ' · la mayoría de los puestos no abre',
+    seasons: ALL_YEAR('08:00', '14:00'),
+    closedWeekdays: [0],
+    closedOnHolidays: true,
+    closedRanges: [['12-31', '01-04']],
+  },
+  tt_monja: { area: 'los restaurantes de monjayaki', plural: true, soft: true, softChip: 'Mejor para cenar', seasons: ALL_YEAR('11:30', '22:00') },
+  tt_isetan: { area: 'Isetan Shinjuku', seasons: ALL_YEAR('10:00', '20:00') },
+  tt_goldengai: { area: 'los bares de Golden Gai', plural: true, soft: true, softChip: 'Bares desde las 19:00', seasons: ALL_YEAR('19:00', '23:59') },
+  tt_ebisuyokocho: { area: 'los bares de Ebisu Yokochō', plural: true, soft: true, softChip: 'Abre a las 17:00', seasons: ALL_YEAR('17:00', '23:59') },
   // Nara
   nara_daibutsuden: {
     area: 'el Salón del Gran Buda',

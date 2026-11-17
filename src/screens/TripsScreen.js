@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ScreenTitle, Btn, Chip, StatusChip } from '../components/ui';
 import PointPhoto from '../components/PointPhoto';
 import MyDay from '../components/MyDay';
+import CityCatalog from '../components/CityCatalog';
 import { C, R, shadow } from '../theme';
 import { CITIES, TOURS } from '../data/tours';
 import { PLACES } from '../data/places';
@@ -234,7 +235,6 @@ function Discover({ trip, toggle, openTour, openPlace }) {
   const [q, setQ] = useState('');
   const norm = (s) => (s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
   const tours = TOURS.filter((t) => t.city === city && (!q || norm(`${t.name} ${t.description}`).includes(norm(q))));
-  const places = PLACES.filter((p) => p.city === city && (!q || norm(`${p.name} ${p.jp} ${p.short}`).includes(norm(q))));
   return (
     <>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
@@ -242,11 +242,17 @@ function Discover({ trip, toggle, openTour, openPlace }) {
           <Chip key={c} label={cityById(c).name} on={city === c} onPress={() => setCity(c)} />
         ))}
       </ScrollView>
-      <TextInput style={[st.input, { marginTop: 12 }]} value={q} onChangeText={setQ} placeholder={`Buscar en ${cityById(city).name}…`} placeholderTextColor={C.muted} />
+      <TextInput style={[st.input, { marginTop: 12 }]} value={q} onChangeText={setQ} placeholder={`Buscar recorridos en ${cityById(city).name}…`} placeholderTextColor={C.muted} />
       <Text style={st.section}>Recorridos en {cityById(city).name}</Text>
       {tours.map((t) => <Row key={t.id} kind="tour" id={t.id} trip={trip} toggle={toggle} openTour={openTour} openPlace={openPlace} />)}
-      <Text style={st.section}>Lugares en {cityById(city).name}</Text>
-      {places.map((p) => <Row key={p.id} kind="place" id={p.id} trip={trip} toggle={toggle} openTour={openTour} openPlace={openPlace} />)}
+      <Text style={st.section}>Todos los lugares de {cityById(city).name}</Text>
+      <CityCatalog
+        key={city}
+        city={city}
+        openPlace={openPlace}
+        mapHeight={320}
+        renderRight={(p) => <Heart on={isSaved(trip, 'place', p.id)} onPress={() => toggle('place', p.id)} />}
+      />
     </>
   );
 }
@@ -343,11 +349,17 @@ function Days({ trip, update, openTour, openPlace, goTour }) {
               )}
             </View>
             {warns.map((w) => (
-              <View key={w.tourId} style={{ flexDirection: 'row', marginTop: 8 }}>
-                <StatusChip chip={{ tone: w.blocking ? 'bad' : 'warn', text: `${tourById(w.tourId).name.split(':')[0]}: ${w.blocking ? 'cerrado ese día' : 'revisa el horario'}` }} small />
+              <View key={w.tourId || w.placeId} style={{ flexDirection: 'row', marginTop: 8 }}>
+                <StatusChip
+                  chip={{
+                    tone: w.blocking ? 'bad' : 'warn',
+                    text: `${(w.tourId ? tourById(w.tourId).name : placeById(w.placeId).name).split(':')[0]}: ${w.blocking ? 'cerrado ese día' : 'revisa el horario'}`,
+                  }}
+                  small
+                />
               </View>
             ))}
-            {warns.map((w) => <Text key={`m${w.tourId}`} style={st.warnText}>{w.message}</Text>)}
+            {warns.map((w) => <Text key={`m${w.tourId || w.placeId}`} style={st.warnText}>{w.message}</Text>)}
             {list.map((it, k) => (
               <View key={`${it.kind}:${it.id}`} style={st.dayItem}>
                 <Text style={st.dayItemTxt} numberOfLines={2}>
