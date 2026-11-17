@@ -1,0 +1,24 @@
+ja:西郷隆盛像 (上野公園)	404	-	SIN FOTO	
+ja:西郷隆盛像	200	-	SIN FOTO	西郷隆盛像
+ja:清水観音堂	404	-	SIN FOTO	
+ja:不忍池弁天堂	404	-	SIN FOTO	
+ja:上野東照宮	200	35.71536,139.77058	foto	上野東照宮
+ja:寛永寺	200	35.72139,139.77431	foto	寛永寺
+cg:Saigo Takamori statue Ueno	Statue of Saigo Takamori, Ueno Park, Tokyo.jpg	35.71186,139.77417
+cg:Saigo Takamori statue Ueno	Statue of Saigo Takamori.JPG	-
+cg:Saigo Takamori statue Ueno	Statue of Saigō Takamori in Ueno Kōen.jpg	-
+cg:Saigo Takamori statue Ueno	Statue of Saigo Takamori (Ueno, Tokyo) - DSC07993.JPG	-
+cg:Saigo Takamori statue Ueno	Statue of Saigo Takamori (Ueno, Tokyo) - DSC07995.JPG	-
+cg:Saigo Takamori statue Ueno	Statue of Saigō Takamori, Ueno (15706031167).jpg	35.71216,139.77414
+cg:Saigo Takamori statue Ueno	Saigo. Takamori. Statue @ Ueno park - panoramio.jpg	35.71185,139.77418
+cg:Saigo Takamori statue Ueno	Statue of Saigo Takamori in Ueno Park.jpg	-
+cg:Kiyomizu Kannon-do Ueno	Kiyomizu Kannon-dō in Ueno Park (50786353997).jpg	-
+cg:Kiyomizu Kannon-do Ueno	Kiyomizu Kannon-do Temple @ Ueno Park (9254179352).jpg	-
+cg:Kiyomizu Kannon-do Ueno	Kiyomizu Kannon-do Temple @ Ueno Park (9251397911).jpg	-
+cg:Kiyomizu Kannon-do Ueno	Kiyomizu Kannon-do Temple @ Ueno Park (9254181962).jpg	-
+cg:Kiyomizu Kannon-do Ueno	Kiyomizu Kannon-do Temple @ Ueno Park (9254181104).jpg	-
+cg:Kiyomizu Kannon-do Ueno	Kiyomizu Kannon-do Temple @ Ueno Park (9254180196).jpg	-
+cg:Kiyomizu Kannon-do Ueno	Kiyomizu Kannon-do Temple @ Ueno Park (9254182638).jpg	-
+cg:Kiyomizu Kannon-do Ueno	Kiyomizu Kannon-do Temple @ Ueno Park (14061710053).jpg	-
+cg:Moon pine Kiyomizu Kannondo	KiyomizuKannondo 05.JPG	35.71261,139.77356
+cg:Moon pine Kiyomizu Kannondo	Kiyomizu Kannon-d Hall The Moon Pine.jpg	-
