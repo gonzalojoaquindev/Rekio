@@ -7,8 +7,8 @@ export const TOKYO2 = [
     photo: ['file:Statue of Saigō Takamori in Ueno Kōen.jpg'],
     name: 'Estatua de Saigō Takamori',
     jp: '西郷隆盛像',
-    lat: 35.7116,
-    lng: 139.7739,
+    lat: 35.71192, // corregido con fotos geolocalizadas de Commons
+    lng: 139.77415,
     radius: 40,
     type: 'historia',
     short: 'El último samurái de verdad, paseando a su perro, sobre un campo de batalla.',
@@ -21,8 +21,8 @@ export const TOKYO2 = [
     photo: ['file:KiyomizuKannondo 05.JPG', 'file:Ueno Tsuki no Matsu 2012.JPG'],
     name: 'Kiyomizu Kannon-dō y el pino de la luna',
     jp: '清水観音堂',
-    lat: 35.7127,
-    lng: 139.7729,
+    lat: 35.71262, // corregido: el punto anterior quedaba ~60 m al oeste, bajando hacia el estanque
+    lng: 139.77352,
     radius: 40,
     type: 'historia',
     short: 'Un Kiyomizu-dera en miniatura, parte de un Kioto copiado en Tokio.',
