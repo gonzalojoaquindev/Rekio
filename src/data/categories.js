@@ -126,5 +126,5 @@ export const PARTS = new Set([
   'kinkaku_pine', 'anmintaku', 'sekkatei', 'kiyo_niomon', 'kiyo_pagoda', 'kiyo_okunoin', 'kiyo_otowa',
   'hamaguri', 'kenreimon', 'seishomon', 'tk_hozomon', 'tk_gojunoto', 'tk_sakadaru', 'tk_kiyomasa',
   'tk_otemon', 'tk_hyakunin', 'ue_pagoda', 'kk_osensui', 'kk_engetsukyo', 'kk_tsutenkyo', 'tk_meiji_torii',
-  'ls_plaza', 'ls_catedral', 'ls_merced', 'ls_sanagustin', 'ls_sanfrancisco',
+  'cp_noche', 'ls_plaza', 'ls_catedral', 'ls_merced', 'ls_sanagustin', 'ls_sanfrancisco',
 ]);

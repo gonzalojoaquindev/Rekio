@@ -10,6 +10,7 @@ export const CITIES = [
   { id: 'tokyo', name: 'Tokio', country: 'Japón', cc: 'JP', lat: 35.6812, lng: 139.7671 },
   { id: 'nara', name: 'Nara', country: 'Japón', cc: 'JP', lat: 34.6851, lng: 135.8329 },
   { id: 'laserena', name: 'La Serena', country: 'Chile', cc: 'CL', lat: -29.9027, lng: -71.252 },
+  { id: 'copiapo', name: 'Copiapó', country: 'Chile', cc: 'CL', lat: -27.3665, lng: -70.332 },
 ];
 
 export const TOURS = [
@@ -292,6 +293,7 @@ export const BEST_TIME = {
   meiji: { slots: ['temprano'], note: 'El santuario abre al amanecer. Temprano el bosque está en silencio; la calle Takeshita se anima desde las 11:00.' },
   edo: { slots: ['manana'], note: 'Los Jardines del Este abren a las 9:00 y cierran a las 16:00 en invierno. Cerrados los lunes y viernes.' },
   shibuya: { slots: ['tarde', 'noche'], note: 'Ven al atardecer: ves la estatua y el mural con luz, el cruce encendido de noche, y Nonbei Yokochō abre desde las 18:00.' },
+  'copiapo-1859': { slots: ['tarde'], note: 'Por la tarde, cuando baja el calor del desierto. Son unos 2 km: de la Plaza Prat por calle Atacama hasta la Alameda.' },
   'laserena-1680': { slots: ['tarde'], note: 'Al atardecer, con la luz cálida sobre la piedra de las iglesias, es más fácil imaginar la ciudad de 1680. Son unos 1,2 km por el centro histórico.' },
   ueno: { slots: ['manana'], note: 'El santuario abre a las 9:00 y en invierno el recinto interior cierra a las 16:30. Por la mañana el parque está tranquilo.' },
   koishikawa: { slots: ['manana', 'tarde'], note: 'Abre de 9:00 a 17:00 (última entrada 16:30). A fines de noviembre los arces del puente rojo están en su mejor momento.' },

@@ -14,6 +14,7 @@ const TRACKS = {
   nara: require('../assets/music/nara.m4a'),
   shibuya: require('../assets/music/shibuya.m4a'),
   'laserena-1680': require('../assets/music/laserena.m4a'),
+  'copiapo-1859': require('../assets/music/copiapo.m4a'),
 };
 
 export const CREDITS = [

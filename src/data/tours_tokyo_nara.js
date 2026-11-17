@@ -171,6 +171,28 @@ export const TOURS_TOKYO_NARA = [
     ],
   },
   {
+    id: 'copiapo-1859',
+    city: 'copiapo',
+    category: 'Historias inmersivas',
+    badge: 'Historia',
+    unit: 'capitulo',
+    description: 'Enero de 1859: Copiapó se levanta contra el gobierno de Manuel Montt. La Revolución Constituyente en cinco capítulos, de la Plaza Prat a la Alameda.',
+    cover: 'cp_plaza',
+    stamp: { shape: 'circle', color: '#1F3A8A', icon: 'star' },
+    name: 'Copiapó: la rebelión del desierto',
+    intro:
+      'Bienvenido a Copiapó. Esta es una historia real contada en cinco capítulos, y cada uno empieza cuando llegas a su lugar. Los nombres, fechas y cifras vienen de documentos e historiadores; las escenas que te pediré imaginar, los sonidos y el ambiente, son recreaciones. Donde las fuentes no saben algo, te lo diré. Ponte los audífonos y viajemos a 1858.',
+    outro:
+      'Así termina La rebelión del desierto. Caminaste por la ciudad que, con la plata de sus minas, hizo su propio ejército, su bandera y su moneda para desafiar a todo Chile. Cada lugar tiene una historia. El pasado te habla. Gracias por caminar conmigo.',
+    stops: [
+      { id: 'cp_plaza', optional: false, guide: 'Capítulo uno: la Plaza Prat, la plaza principal de Copiapó. Si no estás ahí, toca Cómo llegar.' },
+      { id: 'cp_noche', optional: false, guide: 'Capítulo dos: camina al lado norte de la plaza, sobre la calle Atacama.' },
+      { id: 'cp_matta', optional: false, guide: 'Capítulo tres: camina hacia el oeste por la calle Atacama, unas diez cuadras, hasta la casona de la esquina con la Alameda: el Museo Regional de Atacama.' },
+      { id: 'cp_estacion', optional: false, guide: 'Capítulo cuatro: sigue hacia el norte por la Alameda, unas cuatro cuadras, hasta la antigua estación de ferrocarril de madera.' },
+      { id: 'cp_godoy', optional: false, guide: 'Capítulo cinco: vuelve hacia el sur por la Alameda, unas cinco cuadras, hasta la estatua de Juan Godoy.' },
+    ],
+  },
+  {
     id: 'laserena-1680',
     city: 'laserena',
     category: 'Historias inmersivas',

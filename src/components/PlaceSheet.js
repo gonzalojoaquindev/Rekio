@@ -120,6 +120,11 @@ export default function PlaceSheet({ placeId, onClose }) {
 
           <Text style={st.storyTitle}>La historia</Text>
           <LinkedText style={st.story}>{p.story}</LinkedText>
+          {!!p.sources && (
+            <Text style={[st.feeNote, { marginTop: 12 }]}>
+              📚 Fuentes: {p.sources} Las escenas y sonidos que se piden imaginar son recreaciones.
+            </Text>
+          )}
           <Text style={st.glossHint}>Toca las palabras subrayadas para ver su significado.</Text>
         </ScrollView>
         <TouchableOpacity style={[st.close, { top: 14 }]} onPress={onClose}>

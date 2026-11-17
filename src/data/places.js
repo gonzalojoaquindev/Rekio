@@ -8,6 +8,7 @@ import { NARA } from './places_nara';
 import { TOKYO2 } from './places_tokyo2';
 import { LASERENA } from './places_laserena';
 import { TOKYO3 } from './places_tokyo3';
+import { COPIAPO } from './places_copiapo';
 import { CLASSIFY, PARTS } from './categories';
 
 export const PLACES = [
@@ -560,7 +561,7 @@ export const PLACES = [
 // Precio adulto en yenes, verificado en noviembre de 2026. cash: llevar efectivo.
 // Los precios cambian: se muestran como referencia.
 // Lugares de otras ciudades (cada ciudad en su propio archivo)
-PLACES.push(...TOKYO, ...TOKYO2, ...NARA, ...LASERENA, ...TOKYO3);
+PLACES.push(...TOKYO, ...TOKYO2, ...NARA, ...LASERENA, ...TOKYO3, ...COPIAPO);
 
 // Categoría y etiquetas de los lugares de los recorridos (los nuevos ya las traen)
 for (const p of PLACES) {

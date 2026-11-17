@@ -212,8 +212,22 @@ def laserena(T):  # 1680: mar, campanas lejanas y tensión
     for s, semi, d in [(14, -17, 6), (48, -16, 6), (80, -12, 7)]:
         T.add(T.flute(semi, d, breath=0.5), s, pan=-0.2, gain=0.12)
 
+def copiapo(T):  # 1859: viento del desierto, yunque de maestranza, tambor de marcha y una melodía de esperanza
+    T.wind(level=0.16, cutoff=600)
+    T.drone([-33, -26, -21], level=0.075)
+    for s in [6, 52]:  # campana de la iglesia, lejana
+        for k in range(3): T.add(T.bell(-24, 6), s + k * 2.4, pan=0.35, gain=0.18)
+    for s in [18, 62]:  # martillo sobre yunque en la maestranza
+        for k in range(6): T.add(T.bell(5, 0.6), s + k * 0.9 + T.rng.uniform(0, 0.08), pan=-0.45, gain=0.1)
+    tt = 28.0
+    while tt < T.dur - 8:  # tambor de marcha lejano
+        for k in range(6): T.add(T.taiko(0.45, f0=110), tt + k * 0.42, pan=0.25, gain=0.2 if k % 2 else 0.27)
+        tt += T.rng.uniform(11, 16)
+    for s, semi, d in [(12, -19, 6), (40, -17, 6), (74, -14, 8)]:  # quena/flauta del desierto
+        T.add(T.flute(semi, d, breath=0.55), s, pan=-0.15, gain=0.12)
+
 PRESETS = {'gion': (gion, 7), 'palacio': (palacio, 11), 'kiyomizu': (kiyomizu, 3), 'arashiyama': (arashiyama, 5),
-           'kinkaku': (kinkaku, 9), 'asakusa': (asakusa, 13), 'edo': (edo, 17), 'shibuya': (shibuya, 21), 'laserena': (laserena, 31)}
+           'kinkaku': (kinkaku, 9), 'asakusa': (asakusa, 13), 'edo': (edo, 17), 'shibuya': (shibuya, 21), 'laserena': (laserena, 31), 'copiapo': (copiapo, 37)}
 
 if __name__ == '__main__':
     name, path = sys.argv[1], sys.argv[2]

@@ -331,6 +331,47 @@ export const GLOSSARY = [
     id: 'ordenes', term: 'Órdenes religiosas', aliases: ['franciscanos', 'mercedarios', 'jesuitas', 'agustinos'],
     short: 'Comunidades de religiosos católicos con sus propias reglas, como franciscanos, mercedarios o jesuitas. En las ciudades coloniales cada una tenía su iglesia y convento.',
   },
+  // ── Chile: Copiapó y la Revolución Constituyente ──
+  {
+    id: 'revolucion-constituyente', term: 'Revolución Constituyente', aliases: ['revolucion constituyente', 'guerra civil de 1859', 'revolucion de 1859', 'ejercito constituyente'],
+    short: 'El levantamiento de Copiapó contra el gobierno de Manuel Montt (enero-abril de 1859), encabezado por Pedro León Gallo.',
+    long: 'Pedía una asamblea que cambiara la Constitución de 1833 y menos centralismo. Ganó en Los Loros (14 de marzo) y fue derrotado en Cerro Grande (29 de abril de 1859). Algunos historiadores, como Joaquín Fernández Abara, prefieren llamarla guerra civil.',
+    related: ['constitucion-1833', 'intendente', 'peso-constituyente', 'partido-radical'],
+  },
+  {
+    id: 'constitucion-1833', term: 'Constitución de 1833', aliases: ['constitucion de 1833'],
+    short: 'La Constitución que rigió Chile casi un siglo, hasta 1925. Daba enorme poder al presidente y al gobierno central.',
+    related: ['revolucion-constituyente', 'centralismo'],
+  },
+  {
+    id: 'centralismo', term: 'Centralismo', aliases: ['centralismo', 'centralista'],
+    short: 'Forma de gobierno en que las decisiones se concentran en la capital y las provincias tienen poca autonomía.',
+    related: ['constitucion-1833', 'intendente'],
+  },
+  {
+    id: 'intendente', term: 'Intendente', aliases: ['intendente', 'intendentes'],
+    short: 'La autoridad que gobernaba cada provincia de Chile, nombrada por el presidente desde Santiago.',
+    related: ['centralismo'],
+  },
+  {
+    id: 'chanarcillo', term: 'Chañarcillo', aliases: ['chanarcillo', 'chañarcillo'],
+    short: 'Mineral de plata al sur de Copiapó, descubierto por Juan Godoy en 1832. Fue uno de los más ricos de América y financió el auge de Atacama.',
+    related: ['peso-constituyente'],
+  },
+  {
+    id: 'peso-constituyente', term: 'Peso Constituyente', aliases: ['peso constituyente'],
+    short: 'La moneda de plata que acuñaron los rebeldes de Copiapó en 1859, con plata donada en parte por Pedro León Gallo y su madre.',
+    related: ['revolucion-constituyente', 'chanarcillo'],
+  },
+  {
+    id: 'maestranza', term: 'Maestranza', aliases: ['maestranza', 'maestranzas'],
+    short: 'Taller grande para fabricar y reparar máquinas, sobre todo de ferrocarriles y minería.',
+  },
+  {
+    id: 'partido-radical', term: 'Partido Radical', aliases: ['partido radical'],
+    short: 'Partido político chileno nacido en la década de 1860 de las ideas liberales de 1859; entre sus fundadores estuvieron Pedro León Gallo y los hermanos Matta.',
+    related: ['revolucion-constituyente'],
+  },
 ];
 
 export const termById = (id) => GLOSSARY.find((g) => g.id === id);
