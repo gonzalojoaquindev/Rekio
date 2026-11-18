@@ -34,20 +34,32 @@ jobs:
         run: |
           if [ -n "$GOOGLE_MAPS_API_KEY" ]; then echo "Clave de Google Maps: configurada"; else echo "Clave de Google Maps: NO configurada (se usará el mapa abierto)"; fi
           npx expo prebuild --platform android --no-install
+          # Un APK por procesador: arm64 para teléfonos (mucho más liviano) y x86_64 para el emulador de pruebas
+          python3 - <<'PY'
+          p = 'android/app/build.gradle'
+          s = open(p).read()
+          s = s.replace('android {', "android {\n    splits { abi { enable true; reset(); include 'arm64-v8a', 'x86_64'; universalApk false } }", 1)
+          open(p, 'w').write(s)
+          PY
 
       - name: Compilar APK
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew assembleRelease --no-daemon
+          ./gradlew assembleRelease --no-daemon -PreactNativeArchitectures=arm64-v8a,x86_64
 
       - name: Renombrar APK
-        run: cp android/app/build/outputs/apk/release/app-release.apk rekio.apk
+        run: |
+          ls -la android/app/build/outputs/apk/release/
+          cp android/app/build/outputs/apk/release/app-arm64-v8a-release.apk rekio.apk
+          cp android/app/build/outputs/apk/release/app-x86_64-release.apk rekio-emulador.apk
 
       - name: Publicar en Releases
         uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_number }}
           name: Rekio (build ${{ github.run_number }})
-          body: Descarga el archivo rekio.apk e instálalo en tu Android.
-          files: rekio.apk
+          body: Descarga el archivo rekio.apk e instálalo en tu Android. (rekio-emulador.apk es solo para las pruebas automáticas.)
+          files: |
+            rekio.apk
+            rekio-emulador.apk

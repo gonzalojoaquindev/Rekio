@@ -27,7 +27,7 @@ jobs:
         run: |
           TAG=$(gh release view --json tagName -q .tagName)
           echo "TAG=$TAG" >> $GITHUB_ENV
-          gh release download "$TAG" -p rekio.apk -D /tmp
+          gh release download "$TAG" -p rekio-emulador.apk -D /tmp && mv /tmp/rekio-emulador.apk /tmp/rekio.apk
 
       - name: Habilitar KVM
         run: |
