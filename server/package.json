@@ -1,0 +1,7 @@
+{
+  "name": "rekio-server",
+  "private": true,
+  "type": "module",
+  "description": "Servidor de Rekio en Vercel: preguntas por voz durante los recorridos",
+  "engines": { "node": ">=20" }
+}

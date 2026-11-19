@@ -40,7 +40,11 @@ export function StoreProvider({ children }) {
         }
       })
       .catch(() => {})
-      .finally(() => setLoaded(true));
+      .finally(() => {
+        // Identificador anónimo del teléfono (solo para el límite diario de preguntas)
+        setState((s) => (s.settings.deviceId ? s : { ...s, settings: { ...s.settings, deviceId: `d${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}` } }));
+        setLoaded(true);
+      });
   }, []);
 
   // Guarda con un pequeño retraso para no escribir en cada cambio

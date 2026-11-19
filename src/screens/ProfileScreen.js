@@ -181,6 +181,16 @@ export default function ProfileScreen({ goPassport, openTour }) {
             donde empieza cada relato.
           </Text>
           <Btn title="Enviar correcciones" onPress={() => Share.share({ message: calibrationText(store.calib) })} />
+          <Text style={st.devSub}>Servidor de preguntas (déjalo vacío para usar el del build):</Text>
+          <TextInput
+            style={st.devInput}
+            defaultValue={store.settings.serverUrl || ''}
+            onEndEditing={(e) => store.updateSettings({ serverUrl: e.nativeEvent.text.trim() })}
+            placeholder="https://rekio-xxxx.vercel.app"
+            placeholderTextColor={C.faint}
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
           <TouchableOpacity
             onPress={() =>
               Alert.alert('¿Borrar todas las correcciones?', 'Los puntos vuelven a su ubicación original.', [
@@ -332,6 +342,7 @@ const st = StyleSheet.create({
   devBox: { marginTop: 24, padding: 16, borderRadius: R.md, backgroundColor: '#FFF8E6', borderWidth: 1, borderColor: '#F2D48A', gap: 10 },
   devTitle: { fontSize: 16, fontWeight: '800', color: C.text },
   devSub: { fontSize: 13, color: C.muted, lineHeight: 18 },
+  devInput: { backgroundColor: '#fff', borderRadius: 10, paddingHorizontal: 12, paddingVertical: 9, fontSize: 14, color: C.text },
   devLink: { fontSize: 14, fontWeight: '700', color: C.brand, textAlign: 'center', paddingVertical: 4 },
   label: { fontSize: 14, fontWeight: '700', color: C.text, marginTop: 18, marginBottom: 6 },
   input: {

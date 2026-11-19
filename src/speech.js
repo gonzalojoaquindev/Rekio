@@ -122,6 +122,24 @@ export function sayAside(text) {
   speakFrom(state);
 }
 
+// Pausa la narración para una pregunta (se retoma desde la misma frase con releaseNarration o con la respuesta en sayAside)
+export function holdNarration() {
+  if (current && current.key !== 'aside') suspended = current;
+  current = null;
+  notify();
+  Speech.stop();
+}
+
+export function releaseNarration() {
+  const back = suspended;
+  suspended = null;
+  if (!back || current) return;
+  const resumed = { ...back, token: `${back.key}:${Date.now()}` };
+  current = resumed;
+  notify();
+  speakFrom(resumed);
+}
+
 export function stopSpeaking() {
   current = null;
   suspended = null;

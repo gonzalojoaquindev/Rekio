@@ -15,6 +15,8 @@ jobs:
     # al compilar y, sin ella, la app cree que no hay Google Maps.
     env:
       GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
+      REKIO_SERVER_URL: ${{ secrets.REKIO_SERVER_URL }}
+      REKIO_APP_KEY: ${{ secrets.REKIO_APP_KEY }}
     steps:
       - uses: actions/checkout@v4
 

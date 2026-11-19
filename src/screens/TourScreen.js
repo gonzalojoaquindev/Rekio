@@ -14,6 +14,8 @@ import { tourById, useTour, stopAt } from '../tour';
 import { useStore } from '../store';
 import MyDay from '../components/MyDay';
 import { TermChips } from '../components/Glossary';
+import AskSheet from '../components/AskSheet';
+import { serverUrlFor } from '../ask';
 import { nextInDay, resolveDay, dayLabel } from '../day';
 import { tripPlanForToday } from '../trips';
 
@@ -24,6 +26,7 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
   const t = useTour();
   const store = useStore();
   const [route, setRoute] = useState(null);
+  const [asking, setAsking] = useState(false);
   const tour = t.tour;
   const def = tour ? tourById(tour.id) : null;
 
@@ -238,6 +241,13 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
 
             <TermChips text={p.story} label={`En ${def.unit === 'capitulo' ? 'este capítulo' : 'esta parada'}`} />
 
+            {!!serverUrlFor(store.settings) && (
+              <TouchableOpacity style={st.askBtn} onPress={() => setAsking(true)} accessibilityLabel="Hacer una pregunta">
+                <Text style={st.askTxt}>🎙 Preguntar sobre {def.unit === 'capitulo' ? 'este capítulo' : 'esta parada'}</Text>
+              </TouchableOpacity>
+            )}
+            <AskSheet visible={asking} onClose={() => setAsking(false)} tour={{ name: def.name, city: cityById(def.city).name }} chapter={p} />
+
             <View style={st.controls}>
               <RoundBtn icon="prev" label="Anterior" onPress={() => t.goToStop(tour.idx - 1)} />
               <RoundBtn icon="replay" label="Repetir" onPress={t.repeatStep} />
@@ -285,6 +295,8 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
 }
 
 const st = StyleSheet.create({
+  askBtn: { marginTop: 12, borderRadius: 999, borderWidth: 1.5, borderColor: C.brand, paddingVertical: 11, alignItems: 'center' },
+  askTxt: { color: C.brand, fontWeight: '800', fontSize: 15 },
   emptyBox: { alignItems: 'center', padding: 26, borderRadius: R.lg, backgroundColor: C.surface, marginTop: 14 },
   emptyTitle: { fontSize: 19, fontWeight: '800', color: C.text, marginTop: 12 },
   emptyText: { fontSize: 15, color: C.muted, textAlign: 'center', marginTop: 8, lineHeight: 22 },
