@@ -1,0 +1,1500 @@
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationUnchecked(AppOpsService.java:2417)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationImpl(AppOpsService.java:2400)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.-$$Nest$mcheckOperationImpl(AppOpsService.java:0)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.$r8$lambda$fx57Sum-uA3sXo7NCFwrI3iq4WM(AppOpsService.java:0)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher$$ExternalSyntheticLambda9.apply(R8$$SyntheticClass:0)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.policy.AppOpsPolicy.checkOperation(AppOpsPolicy.java:221)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.checkOperation(AppOpsService.java:6389)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperation(AppOpsService.java:2385)
+11-19 14:29:22.668   527   902 E AppOps  : 	at android.app.AppOpsManager.checkOpNoThrow(AppOpsManager.java:8681)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundNoBindingCheckLocked(ActiveServices.java:7965)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundWithBindingCheckLocked(ActiveServices.java:7795)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.setFgsRestrictionLocked(ActiveServices.java:7474)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.bindServiceLocked(ActiveServices.java:3744)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13404)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13368)
+11-19 14:29:22.668   527   902 E AppOps  : 	at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:2127)
+11-19 14:29:22.668   527   902 E AppOps  : 	at android.app.ContextImpl.bindServiceAsUser(ContextImpl.java:2040)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.bindService(ExplicitHealthCheckController.java:345)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.prepareServiceLocked(ExplicitHealthCheckController.java:450)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.getRequestedPackages(ExplicitHealthCheckController.java:268)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$syncRequests$3(ExplicitHealthCheckController.java:153)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$e0trryK6lMIa0Oyq_R_L8I9fbPU(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda0.accept(R8$$SyntheticClass:0)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$getSupportedPackages$4(ExplicitHealthCheckController.java:251)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$SRa9fw8RTJfzefVJ1-zsa9_9yG0(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.668   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda1.onResult(R8$$SyntheticClass:0)
+11-19 14:29:22.668   527   902 E AppOps  : 	at android.os.RemoteCallback.sendResult(RemoteCallback.java:75)
+11-19 14:29:22.668   527   902 E AppOps  : 	at android.os.RemoteCallback$1.sendResult(RemoteCallback.java:52)
+11-19 14:29:22.668   527   902 E AppOps  : 	at android.os.IRemoteCallback$Stub.onTransact(IRemoteCallback.java:87)
+11-19 14:29:22.668   527   902 E AppOps  : 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+11-19 14:29:22.668   527   902 E AppOps  : 	at android.os.Binder.execTransact(Binder.java:1275)
+11-19 14:29:22.668  1411  5183 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:22.669   527   902 E AppOps  : Bad call made by uid 1000. Package "android" does not belong to uid 10172.
+11-19 14:29:22.669  1411  5183 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:22.670   527   902 E AppOps  : Cannot checkOperation
+11-19 14:29:22.670   527   902 E AppOps  : java.lang.SecurityException: Specified package "android" under uid 10172 but it is not
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3886)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3746)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3738)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationUnchecked(AppOpsService.java:2417)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationImpl(AppOpsService.java:2400)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.-$$Nest$mcheckOperationImpl(AppOpsService.java:0)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.$r8$lambda$fx57Sum-uA3sXo7NCFwrI3iq4WM(AppOpsService.java:0)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher$$ExternalSyntheticLambda9.apply(R8$$SyntheticClass:0)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.policy.AppOpsPolicy.checkOperation(AppOpsPolicy.java:221)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.checkOperation(AppOpsService.java:6389)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperation(AppOpsService.java:2385)
+11-19 14:29:22.670   527   902 E AppOps  : 	at android.app.AppOpsManager.checkOpNoThrow(AppOpsManager.java:8681)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundNoBindingCheckLocked(ActiveServices.java:7974)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundWithBindingCheckLocked(ActiveServices.java:7795)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.setFgsRestrictionLocked(ActiveServices.java:7474)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.bindServiceLocked(ActiveServices.java:3744)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13404)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13368)
+11-19 14:29:22.670   527   902 E AppOps  : 	at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:2127)
+11-19 14:29:22.670   527   902 E AppOps  : 	at android.app.ContextImpl.bindServiceAsUser(ContextImpl.java:2040)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.bindService(ExplicitHealthCheckController.java:345)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.prepareServiceLocked(ExplicitHealthCheckController.java:450)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.getRequestedPackages(ExplicitHealthCheckController.java:268)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$syncRequests$3(ExplicitHealthCheckController.java:153)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$e0trryK6lMIa0Oyq_R_L8I9fbPU(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda0.accept(R8$$SyntheticClass:0)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$getSupportedPackages$4(ExplicitHealthCheckController.java:251)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$SRa9fw8RTJfzefVJ1-zsa9_9yG0(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.670   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda1.onResult(R8$$SyntheticClass:0)
+11-19 14:29:22.670   527   902 E AppOps  : 	at android.os.RemoteCallback.sendResult(RemoteCallback.java:75)
+11-19 14:29:22.670   527   902 E AppOps  : 	at android.os.RemoteCallback$1.sendResult(RemoteCallback.java:52)
+11-19 14:29:22.670   527   902 E AppOps  : 	at android.os.IRemoteCallback$Stub.onTransact(IRemoteCallback.java:87)
+11-19 14:29:22.670   527   902 E AppOps  : 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+11-19 14:29:22.670   527   902 E AppOps  : 	at android.os.Binder.execTransact(Binder.java:1275)
+11-19 14:29:22.671   527   902 E AppOps  : Bad call made by uid 1000. Package "android" does not belong to uid 10172.
+11-19 14:29:22.673   527  2113 D CompatibilityChangeReporter: Compat change id reported: 132649864; UID 10131; state: DISABLED
+11-19 14:29:22.673  1411  5183 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:22.674   527   902 E AppOps  : Cannot checkOperation
+11-19 14:29:22.674   527   902 E AppOps  : java.lang.SecurityException: Specified package "android" under uid 10172 but it is not
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3886)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3746)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3738)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationUnchecked(AppOpsService.java:2417)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationImpl(AppOpsService.java:2400)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.-$$Nest$mcheckOperationImpl(AppOpsService.java:0)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.$r8$lambda$fx57Sum-uA3sXo7NCFwrI3iq4WM(AppOpsService.java:0)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher$$ExternalSyntheticLambda9.apply(R8$$SyntheticClass:0)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.policy.AppOpsPolicy.checkOperation(AppOpsPolicy.java:221)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.checkOperation(AppOpsService.java:6389)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperation(AppOpsService.java:2385)
+11-19 14:29:22.674   527   902 E AppOps  : 	at android.app.AppOpsManager.checkOpNoThrow(AppOpsManager.java:8681)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundNoBindingCheckLocked(ActiveServices.java:7977)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundWithBindingCheckLocked(ActiveServices.java:7795)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.setFgsRestrictionLocked(ActiveServices.java:7474)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.am.ActiveServices.bindServiceLocked(ActiveServices.java:3744)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13404)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13368)
+11-19 14:29:22.674   527   902 E AppOps  : 	at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:2127)
+11-19 14:29:22.674   527   902 E AppOps  : 	at android.app.ContextImpl.bindServiceAsUser(ContextImpl.java:2040)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.bindService(ExplicitHealthCheckController.java:345)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.prepareServiceLocked(ExplicitHealthCheckController.java:450)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.getRequestedPackages(ExplicitHealthCheckController.java:268)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$syncRequests$3(ExplicitHealthCheckController.java:153)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$e0trryK6lMIa0Oyq_R_L8I9fbPU(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda0.accept(R8$$SyntheticClass:0)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$getSupportedPackages$4(ExplicitHealthCheckController.java:251)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$SRa9fw8RTJfzefVJ1-zsa9_9yG0(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.674   527   902 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda1.onResult(R8$$SyntheticClass:0)
+11-19 14:29:22.674   527   902 E AppOps  : 	at android.os.RemoteCallback.sendResult(RemoteCallback.java:75)
+11-19 14:29:22.674   527   902 E AppOps  : 	at android.os.RemoteCallback$1.sendResult(RemoteCallback.java:52)
+11-19 14:29:22.674   527   902 E AppOps  : 	at android.os.IRemoteCallback$Stub.onTransact(IRemoteCallback.java:87)
+11-19 14:29:22.674   527   902 E AppOps  : 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+11-19 14:29:22.674   527   902 E AppOps  : 	at android.os.Binder.execTransact(Binder.java:1275)
+11-19 14:29:22.675  1411  5183 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:22.676  1411  5183 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:22.678   527   527 I ExplicitHealthCheckController: Explicit health check service is connected ComponentInfo{com.google.android.ext.services/android.ext.services.watchdog.ExplicitHealthCheckServiceImpl}
+11-19 14:29:22.679   527   902 I ExplicitHealthCheckController: Explicit health check service is bound
+11-19 14:29:22.679   527   527 I ExplicitHealthCheckController: Service initialized, syncing requests
+11-19 14:29:22.679   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.679   527   527 D ExplicitHealthCheckController: Getting health check supported packages
+11-19 14:29:22.679  1411  5183 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:22.679   527   902 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.679   527   902 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.680   527   902 D ExplicitHealthCheckController: Getting health check requested packages
+11-19 14:29:22.680  1411  5183 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:22.680  1411  5183 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:22.680  1411  5183 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:22.682   527  2748 I ExplicitHealthCheckController: Explicit health check requested packages []
+11-19 14:29:22.682   527  2748 I ExplicitHealthCheckController: No more health check requests, unbinding...
+11-19 14:29:22.683   527  2748 I ExplicitHealthCheckController: Explicit health check service is unbound
+11-19 14:29:22.688  1411  5183 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:22.688  1411  5183 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:22.688  1411  5183 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.688  1411  5183 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:22.688  1411  5183 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:22.689  1411  5183 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:22.690  1411  5183 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:22.690  1411  5183 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:22.690  1411  5183 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:22.690  1411  5183 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:22.690  1411  5183 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:22.690  1411  5183 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:22.690  1411  5183 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:22.692   527   623 I RescueParty: Starting to observe: [android, com.google.android.apps.nexuslauncher, com.android.systemui], updated namespace: latency_tracker
+11-19 14:29:22.692   527   553 I PackageWatchdog: Syncing state, reason: observing new packages
+11-19 14:29:22.692   527   553 D PackageWatchdog: rescue-party-observer added the following packages to monitor [android, com.google.android.apps.nexuslauncher, com.android.systemui]
+11-19 14:29:22.692   527   553 I PackageWatchdog: Syncing state, reason: updated observers
+11-19 14:29:22.692   527   553 I PackageWatchdog: Not pruning observers, elapsed time: 0ms
+11-19 14:29:22.692   527   553 I PackageWatchdog: Saving observer state to file
+11-19 14:29:22.696  1411  3198 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:22.697  1411  3198 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:22.698  1411  3198 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:22.699  1411  3198 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:22.699  1411  3198 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:22.699  1411  3198 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:22.699   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.699   527   527 I ExplicitHealthCheckController: Service not ready to get health check supported packages. Binding...
+11-19 14:29:22.701   527   527 I ExplicitHealthCheckController: Explicit health check service is bound
+11-19 14:29:22.701   527   527 I ExplicitHealthCheckController: Explicit health check service is connected ComponentInfo{com.google.android.ext.services/android.ext.services.watchdog.ExplicitHealthCheckServiceImpl}
+11-19 14:29:22.701   527   527 I ExplicitHealthCheckController: Service initialized, syncing requests
+11-19 14:29:22.701   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.701   527   527 D ExplicitHealthCheckController: Getting health check supported packages
+11-19 14:29:22.702   527   623 I RescueParty: Starting to observe: [android], updated namespace: battery_saver
+11-19 14:29:22.702   527   527 E DeviceConfig: Parsing int failed for location_mode
+11-19 14:29:22.703   527   553 I PackageWatchdog: Syncing state, reason: observing new packages
+11-19 14:29:22.704   527   902 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.704   527   902 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.704   527   902 D ExplicitHealthCheckController: Getting health check requested packages
+11-19 14:29:22.704   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.704   527   527 D ExplicitHealthCheckController: Getting health check supported packages
+11-19 14:29:22.704   527   902 I ExplicitHealthCheckController: Explicit health check requested packages []
+11-19 14:29:22.704   527   902 I ExplicitHealthCheckController: No more health check requests, unbinding...
+11-19 14:29:22.704   527  2748 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.704   527  2748 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.705   527   902 I ExplicitHealthCheckController: Explicit health check service is unbound
+11-19 14:29:22.705   527  2748 I ExplicitHealthCheckController: Service not ready to get health check requested packages. Binding...
+11-19 14:29:22.706   527  2748 E AppOps  : Bad call made by uid 1000. Package "android" does not belong to uid 10172.
+11-19 14:29:22.709   527  2748 E AppOps  : Cannot noteOperation
+11-19 14:29:22.709   527  2748 E AppOps  : java.lang.SecurityException: Specified package "android" under uid 10172 but it is not
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3886)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3746)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.noteOperationUnchecked(AppOpsService.java:2629)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.noteOperationImpl(AppOpsService.java:2617)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.-$$Nest$mnoteOperationImpl(AppOpsService.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.$r8$lambda$-zO2p3wazaltMFolMcvKOcU7eN4(AppOpsService.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher$$ExternalSyntheticLambda3.apply(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.policy.AppOpsPolicy.noteOperation(AppOpsPolicy.java:235)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.noteOperation(AppOpsService.java:6434)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.noteOperation(AppOpsService.java:2598)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.AppOpsManager.noteOpNoThrow(AppOpsManager.java:8420)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.wm.ActivityTaskManagerService.hasSystemAlertWindowPermission(ActivityTaskManagerService.java:1076)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.wm.ActivityTaskManagerService$LocalService.hasSystemAlertWindowPermission(ActivityTaskManagerService.java:7006)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundNoBindingCheckLocked(ActiveServices.java:7910)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundWithBindingCheckLocked(ActiveServices.java:7795)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.setFgsRestrictionLocked(ActiveServices.java:7474)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.bindServiceLocked(ActiveServices.java:3744)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13404)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13368)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:2127)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.ContextImpl.bindServiceAsUser(ContextImpl.java:2040)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.bindService(ExplicitHealthCheckController.java:345)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.prepareServiceLocked(ExplicitHealthCheckController.java:450)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.getRequestedPackages(ExplicitHealthCheckController.java:268)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$syncRequests$3(ExplicitHealthCheckController.java:153)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$e0trryK6lMIa0Oyq_R_L8I9fbPU(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda0.accept(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$getSupportedPackages$4(ExplicitHealthCheckController.java:251)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$SRa9fw8RTJfzefVJ1-zsa9_9yG0(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda1.onResult(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.RemoteCallback.sendResult(RemoteCallback.java:75)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.RemoteCallback$1.sendResult(RemoteCallback.java:52)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.IRemoteCallback$Stub.onTransact(IRemoteCallback.java:87)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.Binder.execTransact(Binder.java:1275)
+11-19 14:29:22.709   527  2748 E AppOps  : Bad call made by uid 1000. Package "android" does not belong to uid 10172.
+11-19 14:29:22.709   527  2748 E AppOps  : Cannot checkOperation
+11-19 14:29:22.709   527  2748 E AppOps  : java.lang.SecurityException: Specified package "android" under uid 10172 but it is not
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3886)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3746)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3738)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationUnchecked(AppOpsService.java:2417)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationImpl(AppOpsService.java:2400)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.-$$Nest$mcheckOperationImpl(AppOpsService.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.$r8$lambda$fx57Sum-uA3sXo7NCFwrI3iq4WM(AppOpsService.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher$$ExternalSyntheticLambda9.apply(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.policy.AppOpsPolicy.checkOperation(AppOpsPolicy.java:221)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.checkOperation(AppOpsService.java:6389)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperation(AppOpsService.java:2385)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.AppOpsManager.checkOpNoThrow(AppOpsManager.java:8681)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundNoBindingCheckLocked(ActiveServices.java:7965)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundWithBindingCheckLocked(ActiveServices.java:7795)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.setFgsRestrictionLocked(ActiveServices.java:7474)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.bindServiceLocked(ActiveServices.java:3744)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13404)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13368)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:2127)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.ContextImpl.bindServiceAsUser(ContextImpl.java:2040)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.bindService(ExplicitHealthCheckController.java:345)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.prepareServiceLocked(ExplicitHealthCheckController.java:450)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.getRequestedPackages(ExplicitHealthCheckController.java:268)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$syncRequests$3(ExplicitHealthCheckController.java:153)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$e0trryK6lMIa0Oyq_R_L8I9fbPU(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda0.accept(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$getSupportedPackages$4(ExplicitHealthCheckController.java:251)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$SRa9fw8RTJfzefVJ1-zsa9_9yG0(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda1.onResult(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.RemoteCallback.sendResult(RemoteCallback.java:75)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.RemoteCallback$1.sendResult(RemoteCallback.java:52)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.IRemoteCallback$Stub.onTransact(IRemoteCallback.java:87)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.Binder.execTransact(Binder.java:1275)
+11-19 14:29:22.709   527  2748 E AppOps  : Bad call made by uid 1000. Package "android" does not belong to uid 10172.
+11-19 14:29:22.709   527  2748 E AppOps  : Cannot checkOperation
+11-19 14:29:22.709   527  2748 E AppOps  : java.lang.SecurityException: Specified package "android" under uid 10172 but it is not
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3886)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3746)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3738)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationUnchecked(AppOpsService.java:2417)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationImpl(AppOpsService.java:2400)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.-$$Nest$mcheckOperationImpl(AppOpsService.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.$r8$lambda$fx57Sum-uA3sXo7NCFwrI3iq4WM(AppOpsService.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher$$ExternalSyntheticLambda9.apply(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.policy.AppOpsPolicy.checkOperation(AppOpsPolicy.java:221)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.checkOperation(AppOpsService.java:6389)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperation(AppOpsService.java:2385)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.AppOpsManager.checkOpNoThrow(AppOpsManager.java:8681)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundNoBindingCheckLocked(ActiveServices.java:7974)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundWithBindingCheckLocked(ActiveServices.java:7795)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.setFgsRestrictionLocked(ActiveServices.java:7474)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.bindServiceLocked(ActiveServices.java:3744)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13404)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13368)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:2127)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.ContextImpl.bindServiceAsUser(ContextImpl.java:2040)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.bindService(ExplicitHealthCheckController.java:345)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.prepareServiceLocked(ExplicitHealthCheckController.java:450)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.getRequestedPackages(ExplicitHealthCheckController.java:268)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$syncRequests$3(ExplicitHealthCheckController.java:153)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$e0trryK6lMIa0Oyq_R_L8I9fbPU(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda0.accept(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$getSupportedPackages$4(ExplicitHealthCheckController.java:251)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$SRa9fw8RTJfzefVJ1-zsa9_9yG0(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda1.onResult(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.RemoteCallback.sendResult(RemoteCallback.java:75)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.RemoteCallback$1.sendResult(RemoteCallback.java:52)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.IRemoteCallback$Stub.onTransact(IRemoteCallback.java:87)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.Binder.execTransact(Binder.java:1275)
+11-19 14:29:22.709   527  2748 E AppOps  : Bad call made by uid 1000. Package "android" does not belong to uid 10172.
+11-19 14:29:22.709   527  2748 E AppOps  : Cannot checkOperation
+11-19 14:29:22.709   527  2748 E AppOps  : java.lang.SecurityException: Specified package "android" under uid 10172 but it is not
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3886)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3746)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.verifyAndGetBypass(AppOpsService.java:3738)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationUnchecked(AppOpsService.java:2417)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperationImpl(AppOpsService.java:2400)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.-$$Nest$mcheckOperationImpl(AppOpsService.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.$r8$lambda$fx57Sum-uA3sXo7NCFwrI3iq4WM(AppOpsService.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher$$ExternalSyntheticLambda9.apply(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.policy.AppOpsPolicy.checkOperation(AppOpsPolicy.java:221)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher.checkOperation(AppOpsService.java:6389)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.appop.AppOpsService.checkOperation(AppOpsService.java:2385)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.AppOpsManager.checkOpNoThrow(AppOpsManager.java:8681)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundNoBindingCheckLocked(ActiveServices.java:7977)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.shouldAllowFgsStartForegroundWithBindingCheckLocked(ActiveServices.java:7795)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.setFgsRestrictionLocked(ActiveServices.java:7474)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActiveServices.bindServiceLocked(ActiveServices.java:3744)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13404)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.am.ActivityManagerService.bindServiceInstance(ActivityManagerService.java:13368)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.ContextImpl.bindServiceCommon(ContextImpl.java:2127)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.app.ContextImpl.bindServiceAsUser(ContextImpl.java:2040)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.bindService(ExplicitHealthCheckController.java:345)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.prepareServiceLocked(ExplicitHealthCheckController.java:450)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.getRequestedPackages(ExplicitHealthCheckController.java:268)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$syncRequests$3(ExplicitHealthCheckController.java:153)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$e0trryK6lMIa0Oyq_R_L8I9fbPU(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda0.accept(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.lambda$getSupportedPackages$4(ExplicitHealthCheckController.java:251)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController.$r8$lambda$SRa9fw8RTJfzefVJ1-zsa9_9yG0(ExplicitHealthCheckController.java:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at com.android.server.ExplicitHealthCheckController$$ExternalSyntheticLambda1.onResult(R8$$SyntheticClass:0)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.RemoteCallback.sendResult(RemoteCallback.java:75)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.RemoteCallback$1.sendResult(RemoteCallback.java:52)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.IRemoteCallback$Stub.onTransact(IRemoteCallback.java:87)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.Binder.execTransactInternal(Binder.java:1344)
+11-19 14:29:22.709   527  2748 E AppOps  : 	at android.os.Binder.execTransact(Binder.java:1275)
+11-19 14:29:22.710   527   527 I ExplicitHealthCheckController: Explicit health check service is connected ComponentInfo{com.google.android.ext.services/android.ext.services.watchdog.ExplicitHealthCheckServiceImpl}
+11-19 14:29:22.710   527  2748 I ExplicitHealthCheckController: Explicit health check service is bound
+11-19 14:29:22.710   527   527 I ExplicitHealthCheckController: Service initialized, syncing requests
+11-19 14:29:22.710   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.710   527   527 D ExplicitHealthCheckController: Getting health check supported packages
+11-19 14:29:22.711   527  2748 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.711   527  2748 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.711   527  2748 D ExplicitHealthCheckController: Getting health check requested packages
+11-19 14:29:22.711   527  2748 I ExplicitHealthCheckController: Explicit health check requested packages []
+11-19 14:29:22.712   527  2748 I ExplicitHealthCheckController: No more health check requests, unbinding...
+11-19 14:29:22.713   527  2748 I ExplicitHealthCheckController: Explicit health check service is unbound
+11-19 14:29:22.713   527   553 D PackageWatchdog: rescue-party-observer added the following packages to monitor [android]
+11-19 14:29:22.713   527   553 I PackageWatchdog: Syncing state, reason: updated observers
+11-19 14:29:22.713   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.713   527   527 I ExplicitHealthCheckController: Service not ready to get health check supported packages. Binding...
+11-19 14:29:22.715   527   527 I ExplicitHealthCheckController: Explicit health check service is bound
+11-19 14:29:22.718  1411  5188 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:22.718  1411  5188 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:22.719  1411  5188 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.720  1411  5188 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:22.721  1411  5188 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:22.721  1411  5188 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.722  1411  5188 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:22.722  1411  5188 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:22.723   527   527 I ExplicitHealthCheckController: Explicit health check service is connected ComponentInfo{com.google.android.ext.services/android.ext.services.watchdog.ExplicitHealthCheckServiceImpl}
+11-19 14:29:22.724   527   527 I ExplicitHealthCheckController: Service initialized, syncing requests
+11-19 14:29:22.724   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.724   527   527 D ExplicitHealthCheckController: Getting health check supported packages
+11-19 14:29:22.725  1411  5188 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:22.725  1411  5188 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:22.726  1411  5188 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:22.726  1411  5188 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:22.726   527  2748 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.726   527  2748 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.726   527  2748 D ExplicitHealthCheckController: Getting health check requested packages
+11-19 14:29:22.727  1411  5188 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:22.727  1411  5188 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:22.728   527  2748 I ExplicitHealthCheckController: Explicit health check requested packages []
+11-19 14:29:22.728   527  2748 I ExplicitHealthCheckController: No more health check requests, unbinding...
+11-19 14:29:22.728   527   553 I PackageWatchdog: Saving observer state to file
+11-19 14:29:22.729   527  2748 I ExplicitHealthCheckController: Explicit health check service is unbound
+11-19 14:29:22.729  1411  5188 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:22.730  1411  5188 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:22.730  1411  5188 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:22.730  1411  5188 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:22.730  1411  5188 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:22.730  1411  5188 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:22.730  1411  5188 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:22.732   527   623 I RescueParty: Starting to observe: [android], updated namespace: constrain_display_apis
+11-19 14:29:22.732   527   553 I PackageWatchdog: Syncing state, reason: observing new packages
+11-19 14:29:22.732   527   553 D PackageWatchdog: rescue-party-observer added the following packages to monitor [android]
+11-19 14:29:22.732   527   553 I PackageWatchdog: Syncing state, reason: updated observers
+11-19 14:29:22.732   527   553 I PackageWatchdog: Not pruning observers, elapsed time: 0ms
+11-19 14:29:22.732   527   553 I PackageWatchdog: Saving observer state to file
+11-19 14:29:22.733   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.734   527   527 I ExplicitHealthCheckController: Service not ready to get health check supported packages. Binding...
+11-19 14:29:22.735   527   527 I ExplicitHealthCheckController: Explicit health check service is bound
+11-19 14:29:22.735   527   527 I ExplicitHealthCheckController: Explicit health check service is connected ComponentInfo{com.google.android.ext.services/android.ext.services.watchdog.ExplicitHealthCheckServiceImpl}
+11-19 14:29:22.736   527   527 I ExplicitHealthCheckController: Service initialized, syncing requests
+11-19 14:29:22.736   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:22.736   527   527 D ExplicitHealthCheckController: Getting health check supported packages
+11-19 14:29:22.736   527  2748 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.736   527  2748 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:22.736   527  2748 D ExplicitHealthCheckController: Getting health check requested packages
+11-19 14:29:22.736   527  2748 I ExplicitHealthCheckController: Explicit health check requested packages []
+11-19 14:29:22.737   527  2748 I ExplicitHealthCheckController: No more health check requests, unbinding...
+11-19 14:29:22.737   527  2748 I ExplicitHealthCheckController: Explicit health check service is unbound
+11-19 14:29:22.760  1049  1049 D CarrierSvcBindHelper: onPackageModified: com.google.android.as
+11-19 14:29:22.763   527   630 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS
+11-19 14:29:22.770  1049  1049 D CarrierSvcBindHelper: No carrier app for: 0
+11-19 14:29:22.770   840   909 D StylusManager: Stylus InputDevice changed: 14 virtio_input_multi_touch_11
+11-19 14:29:22.771   840   909 D StylusManager: Stylus InputDevice changed: 12 virtio_input_multi_touch_9
+11-19 14:29:22.771   842  4502 I PermissionControllerServiceImpl: Updating user sensitive for uid 10125
+11-19 14:29:22.772   840   909 D StylusManager: Stylus InputDevice changed: 11 virtio_input_multi_touch_8
+11-19 14:29:22.772   527   527 V NotificationListeners: enabling notification listener for 0: ComponentInfo{com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener}
+11-19 14:29:22.772   527   527 V NotificationListeners: Not registering ComponentInfo{com.google.android.apps.nexuslauncher/com.android.launcher3.notification.NotificationListener} is already bound
+11-19 14:29:22.773   527   527 V NotificationListeners: enabling notification listener for 0: ComponentInfo{com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService}
+11-19 14:29:22.773   527   527 V NotificationListeners: Not registering ComponentInfo{com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationListenerService} is already bound
+11-19 14:29:22.773   527   527 V NotificationAssistants: enabling notification assistant for 0: ComponentInfo{com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService}
+11-19 14:29:22.773   840   909 D StylusManager: Stylus InputDevice changed: 7 virtio_input_multi_touch_4
+11-19 14:29:22.774   840   909 D StylusManager: Stylus InputDevice changed: 10 virtio_input_multi_touch_7
+11-19 14:29:22.774   527   527 V NotificationAssistants: Not registering ComponentInfo{com.google.android.as/com.google.android.apps.miphone.aiai.common.notification.service.AiAiNotificationAssistantService} is already bound
+11-19 14:29:22.775   840   909 D StylusManager: Stylus InputDevice changed: 13 virtio_input_multi_touch_10
+11-19 14:29:22.775   840   909 D StylusManager: Stylus InputDevice changed: 9 virtio_input_multi_touch_6
+11-19 14:29:22.776   840   909 D StylusManager: Stylus InputDevice changed: 8 virtio_input_multi_touch_5
+11-19 14:29:22.776  1025  1025 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-19 14:29:22.777  1025  1025 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-19 14:29:22.777   840   909 D StylusManager: Stylus InputDevice changed: 6 virtio_input_multi_touch_3
+11-19 14:29:22.779   840   909 D StylusManager: Stylus InputDevice changed: 5 virtio_input_multi_touch_2
+11-19 14:29:22.780   840   909 D StylusManager: Stylus InputDevice changed: 4 virtio_input_multi_touch_1
+11-19 14:29:22.786   840   840 D ControlsListingControllerImpl: ServiceConfig reloaded, count: 0
+11-19 14:29:22.791  1049  1367 D ImsResolver: maybeAddedImsService, packageName: com.google.android.as
+11-19 14:29:22.794   527   553 D AmbientContextManagerService: onServiceRemoved
+11-19 14:29:22.794   527   553 D AmbientContextManagerPerUserService: Trying to cancel the remote request. Reason: Service destroyed.
+11-19 14:29:22.795   527   553 I AmbientContextManagerService: Incorrect number of services provided for testing.
+11-19 14:29:22.795   527   553 D AmbientContextManagerService: newServicesListLocked with service name: com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAmbientContextDetectionService
+11-19 14:29:22.795   527   553 D DefaultAmbientContextManagerPerUserService: Created DefaultAmbientContextManagerPerUserServiceand service type: DEFAULT and service name: com.google.android.as/com.google.android.apps.miphone.aiai.app.AiAiAmbientContextDetectionService
+11-19 14:29:22.805  1694  1694 I AiAiEcho: AppFetcherImpl onPackageChanged com.google.android.as.
+11-19 14:29:22.806  1694  2740 I AiAiEcho: AppIndexer Package:[com.google.android.as] UserProfile:[0] Enabled:[true].
+11-19 14:29:22.806  1694  2740 I AiAiEcho: AppFetcherImplV2 updateApps package:[com.google.android.as], userId:[0], reason:[package is updated.].
+11-19 14:29:22.904  1411  5188 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:22.905  1411  5188 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:22.906  1411  5188 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.906  1411  5188 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:22.907  1411  5188 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:22.907  1411  5188 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.908  1411  5188 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:22.909  1411  5188 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:22.910  1411  5188 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:22.910  1411  5188 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:22.910  1411  5188 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:22.910  1411  5188 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:22.911  1411  5188 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:22.911  1411  5188 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:22.911  1411  5188 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:22.912  1411  5188 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:22.912  1411  5188 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:22.912  1411  5188 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:22.912  1411  5188 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:22.912  1411  5188 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:22.912  1411  5188 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:22.946  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:22.947  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:22.947  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.947  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:22.947  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:22.947  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.948  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:22.948  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:22.948  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:22.948  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:22.949  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:22.950  3109  3292 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.tts
+11-19 14:29:22.951   527   554 D OomAdjuster: Not killing cached processes
+11-19 14:29:22.961  1546  1546 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.wellbeing.device#com.google.android.apps.wellbeing which doesn't use ProcessStable flags.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:22.975  1411  5188 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:22.976  1411  5188 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:22.976  1411  5188 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:22.976  1411  5188 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:22.988  1546  1864 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:22.998  1411  5188 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:22.998  1411  5188 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:22.998  1411  5188 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:22.998  1411  5188 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.001   527   623 I RescueParty: Starting to observe: [android, com.google.android.networkstack], updated namespace: tethering
+11-19 14:29:23.001   527   553 I PackageWatchdog: Syncing state, reason: observing new packages
+11-19 14:29:23.001   527   553 D PackageWatchdog: rescue-party-observer added the following packages to monitor [android, com.google.android.networkstack]
+11-19 14:29:23.002  1411  5139 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package: flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-19 14:29:23.003   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:23.003   527   527 I ExplicitHealthCheckController: Service not ready to get health check supported packages. Binding...
+11-19 14:29:23.004   527   553 I PackageWatchdog: Syncing state, reason: updated observers
+11-19 14:29:23.005  1411  1475 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-19 14:29:23.007   527   527 I ExplicitHealthCheckController: Explicit health check service is bound
+11-19 14:29:23.008   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:23.008   527   527 I ExplicitHealthCheckController: Service not ready to get health check supported packages. Binding...
+11-19 14:29:23.008   527   527 I ExplicitHealthCheckController: Not binding to service, service already connecting
+11-19 14:29:23.008   527   553 I PackageWatchdog: Saving observer state to file
+11-19 14:29:23.009   527   527 I ExplicitHealthCheckController: Explicit health check service is connected ComponentInfo{com.google.android.ext.services/android.ext.services.watchdog.ExplicitHealthCheckServiceImpl}
+11-19 14:29:23.009   527   527 I ExplicitHealthCheckController: Service initialized, syncing requests
+11-19 14:29:23.012  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.012  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.013  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.014  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.019   527   623 I RescueParty: Starting to observe: [com.android.settings], updated namespace: activity_manager
+11-19 14:29:23.020   527   553 I PackageWatchdog: Syncing state, reason: observing new packages
+11-19 14:29:23.020   527   553 D PackageWatchdog: rescue-party-observer added the following packages to monitor [com.android.settings]
+11-19 14:29:23.020   527   553 I PackageWatchdog: Syncing state, reason: updated observers
+11-19 14:29:23.020   527   553 I PackageWatchdog: Not pruning observers, elapsed time: 0ms
+11-19 14:29:23.020   527   553 I PackageWatchdog: Saving observer state to file
+11-19 14:29:23.022  1411  1475 W ChimeraUtils: Module com.google.android.gms.nearby_en missing resource null(0)
+11-19 14:29:23.023   527   527 I PackageWatchdog: Syncing health check requests for packages: {}
+11-19 14:29:23.026  4327  4457 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of bdxy@d0178e0
+11-19 14:29:23.026   527   527 D ExplicitHealthCheckController: Getting health check supported packages
+11-19 14:29:23.028   527  2203 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:23.028   527  2203 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-19 14:29:23.028   527  2203 D ExplicitHealthCheckController: Getting health check requested packages
+11-19 14:29:23.028   527  2203 I ExplicitHealthCheckController: Explicit health check requested packages []
+11-19 14:29:23.028   527  2203 I ExplicitHealthCheckController: No more health check requests, unbinding...
+11-19 14:29:23.029  4327  4445 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.shared.experiments.receiver.BuglePhenotypeBroadcastReceiver@53e8222
+11-19 14:29:23.030  1461  1499 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-19 14:29:23.031  1461  1499 I Icing   : Indexing done com.google.android.gms-apps
+11-19 14:29:23.032   527  2203 I ExplicitHealthCheckController: Explicit health check service is unbound
+11-19 14:29:23.040  1411  5139 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-19 14:29:23.041  1546  1703 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.042  4327  4431 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.performance.primes#com.google.android.apps.messaging
+11-19 14:29:23.044  1546  1864 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.apps.wellbeing
+11-19 14:29:23.048  4327  4445 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.shared.experiments.receiver.BuglePhenotypeBroadcastReceiver@ae69e6e
+11-19 14:29:23.051  4327  4327 I PhenotypeBackgroundRecv: Skipping com.google.lighter.android#com.google.android.apps.messaging which doesn't use ProcessStable flags.
+11-19 14:29:23.054  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.054  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.054  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.061  4327  4445 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.shared.experiments.receiver.BuglePhenotypeBroadcastReceiver@5b472b
+11-19 14:29:23.062  1049  1049 D TelephonyManager: requestModemActivityInfo: Sending result to app: ModemActivityInfo{ mTimestamp=97887 mSleepTimeMs=0 mIdleTimeMs=97872 mActivityStatsTechSpecificInfo=[{mRat=UNKNOWN,mFrequencyRange=UNKNOWN,mTxTimeMs[]=[0, 0, 0, 0, 0],mRxTimeMs=0}]}
+11-19 14:29:23.066  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.067  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.068  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.072  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.072  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.072  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.076  4327  4456 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.notifications.platform#com.google.android.apps.messaging
+11-19 14:29:23.079  4327  4456 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.079  1546  1703 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.079  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.080  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.080  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.080  4327  4456 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.081  1800  2787 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.085  1546  1864 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.performance.primes#com.google.android.apps.wellbeing
+11-19 14:29:23.085  4327  4457 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.shared.experiments.receiver.BuglePhenotypeBroadcastReceiver@a0af25d
+11-19 14:29:23.091  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.091  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.092  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.092  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.092  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.092  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.092  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.092  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.092  1411  4516 I PackageUpdateTaskChimer: Scheduling Phenotype config package catchup updates to be 86400 seconds from now (1795098563092) [CONTEXT service_id=51 ]
+11-19 14:29:23.093  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.096  1800  1800 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+11-19 14:29:23.098  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.109  1800  2849 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.110  4327  4431 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.apps.messaging
+11-19 14:29:23.115  1411  4516 I HeterodyneSyncScheduler: Scheduling adaptive one off task with window [14400, 604800] in seconds [CONTEXT service_id=51 ]
+11-19 14:29:23.120  4648  4700 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.googlequicksearchbox
+11-19 14:29:23.121  4648  4648 I PhenotypeBackgroundRecv: Skipping com.google.android.libraries.search.googleapp.user#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+11-19 14:29:23.121  4648  4648 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.search.assistant.mobile.user#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+11-19 14:29:23.122  4327  4457 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.shared.experiments.receiver.BuglePhenotypeBroadcastReceiver@9b945cc
+11-19 14:29:23.123  4648  4648 I PhenotypeBackgroundRecv: Skipping com.google.android.libraries.search.assistant.invocation.device#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+11-19 14:29:23.124  4327  4327 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.messaging.auto#com.google.android.apps.messaging which doesn't use ProcessStable flags.
+11-19 14:29:23.124  4648  4648 I PhenotypeBackgroundRecv: Skipping com.google.android.libraries.search.googleapp.device#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+11-19 14:29:23.130  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.130  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.130  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.130  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.130  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.131  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.131  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.131  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.131  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.131  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.131  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.142  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.142  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.143  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.143  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.143  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.144  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.144  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.144  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.144  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.145  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.145  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.145  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.145  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.146  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.146  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.146  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.146  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.146  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.147  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.147  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.147  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.153   527  1759 W JobScheduler: Job didn't exist in JobStore: 5a06d94 #u0a132/-43 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.tasks.BackgroundTasksJobService
+11-19 14:29:23.158  1800  1800 I A       : Refusing EXCLUSIVE task 21, it is already pending. Try again in 359 seconds.
+11-19 14:29:23.163  1411  4992 W BpBinder: Large outgoing transaction of 324044 bytes, interface descriptor , code 4
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+11-19 14:29:23.166  1800  2406 W A       : Can't format flag bindle_flags__velour_jar to integer.
+11-19 14:29:23.168  1411  3352 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator finished executing. cause:5 result: 1 elapsed_millis: 3035 uptime_millis: 3035 exec_start_elapsed_seconds: 94 [CONTEXT service_id=218 ]
+11-19 14:29:23.172  4327  4431 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.173  4648  4925 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.notifications.platform#com.google.android.googlequicksearchbox
+11-19 14:29:23.179  1800  2504 I A       : Refusing EXCLUSIVE task 24, it is already pending. Try again in 317 seconds.
+11-19 14:29:23.180  1800  2485 I FedAssExpListener: Fed-ass not supported for signed out users.
+11-19 14:29:23.180  1800  2485 I FedAssExpListener: Successfully processed experiments changed.
+11-19 14:29:23.180  1800  2485 I A       : NGA enabled in interactor.
+11-19 14:29:23.181  1800  2504 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-19 14:29:23.182  4648  4648 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.search.assistant.mobile.device#com.google.android.googlequicksearchbox which doesn't use ProcessStable flags.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.186  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.187  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-19 14:29:23.188  1800  2504 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.188  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.195  4327  4457 I BuglePhenotype: onReceive for bugle package [CONTEXT package_name="com.google.android.apps.messaging#com.google.android.apps.messaging" ]
+11-19 14:29:23.196  4327  4457 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.shared.experiments.receiver.BuglePhenotypeBroadcastReceiver@d5c53f6
+11-19 14:29:23.202  4327  4327 I PhenotypeBackgroundRecv: Skipping com.google.android.apps.messaging#com.google.android.apps.messaging which doesn't use ProcessStable flags.
+11-19 14:29:23.205  1461  4251 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+11-19 14:29:23.214  4327  4445 I BuglePhenotype: onReceive for cslib package [CONTEXT package_name="com.google.android.ims.library" ]
+11-19 14:29:23.214  4327  4445 I Bugle   : BroadcastReceiverAsyncWorkTracker: Acknowledging broadcast of com.google.android.apps.messaging.shared.experiments.receiver.BuglePhenotypeBroadcastReceiver@3fdc893
+11-19 14:29:23.219  4327  4327 I PhenotypeBackgroundRecv: Skipping com.google.android.ims.library which doesn't use ProcessStable flags.
+11-19 14:29:23.225  1411  1475 W BpBinder: Large outgoing transaction of 383328 bytes, interface descriptor , code 4
+11-19 14:29:23.231  1461  4254 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+11-19 14:29:23.239  1800  1800 I A       : Refusing EXCLUSIVE task 21, it is already pending. Try again in 358 seconds.
+11-19 14:29:23.241   527   527 I AutofillManagerService: Ignoring change on package_deny_list_for_unimportant_view
+11-19 14:29:23.245   527   545 D AutofillUI: destroySaveUiUiThread(): already destroyed
+11-19 14:29:23.246   527   527 D AutofillManagerServiceImpl: Set component for user 0 as ComponentInfo{com.google.android.gms/com.google.android.gms.autofill.service.AutofillService} and info as ServiceInfo{9b7ef8e com.google.android.gms.autofill.service.AutofillService}
+11-19 14:29:23.247   527   545 D AutofillUI: destroySaveUiUiThread(): already destroyed
+11-19 14:29:23.247   527   527 D AutofillManagerServiceImpl: Set component for user 0 as ComponentInfo{com.google.android.gms/com.google.android.gms.autofill.service.AutofillService} and info as ServiceInfo{252cf45 com.google.android.gms.autofill.service.AutofillService}
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on trigger_fill_request_on_filtered_important_views
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on package_and_activity_allowlist_for_triggering_fill_request
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on multiline_filter_enabled
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on augmented_autofill_mode
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on autofill_dialog_hints
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on include_all_views_in_assist_structure
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on should_enable_autofill_on_all_view_types
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on autofill_save_dialog_landscape_body_height_max_percent
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on non_autofillable_ime_action_ids
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on autofill_save_dialog_portrait_body_height_max_percent
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on include_all_autofill_type_not_none_views_in_assist_structure
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on trigger_fill_request_on_unimportant_view
+11-19 14:29:23.247   527   527 I AutofillManagerService: Ignoring change on autofill_dialog_enabled
+11-19 14:29:23.251  1461  1499 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-19 14:29:23.254   527   527 W ServiceConnector.Impl: mayInterruptIfRunning not supported - ignoring
+11-19 14:29:23.256  2412  2412 I PhenotypeBackgroundRecv: Skipping com.google.android.dialer which doesn't use ProcessStable flags.
+11-19 14:29:23.265  1694  1694 D AugmentedAutofillService: handleOnConnected(): debug=true, verbose=false
+11-19 14:29:23.270  1694  2738 I AiAiAutofill: Connected AiAiAugmentedAutofillService.
+11-19 14:29:23.279  1461  1499 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-19 14:29:23.295  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.296  1800  2849 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+11-19 14:29:23.301  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.301  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.301  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.301  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.302  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.303  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.303  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.303  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.303  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.303  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.309  1800  2787 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.328   527  1447 W JobScheduler: Job didn't exist in JobStore: 596a173 #u0a132/-43 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.tasks.BackgroundTasksJobService
+11-19 14:29:23.331  1800  1800 I A       : Refusing EXCLUSIVE task 21, it is already pending. Try again in 359 seconds.
+11-19 14:29:23.333  2412  2516 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.334  2412  2412 I PhenotypeBackgroundRecv: Skipping com.google.android.dialershared.directboot#com.google.android.dialer which doesn't use ProcessStable flags.
+11-19 14:29:23.334  1800  1800 I A       : Refusing EXCLUSIVE task 21, it is already pending. Try again in 359 seconds.
+11-19 14:29:23.339  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.339  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.361  1411  1478 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.checkin.CheckinService started execution. cause:5 exec_start_elapsed_seconds: 98 [CONTEXT service_id=218 ]
+11-19 14:29:23.362  1461  1461 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action:/... cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+11-19 14:29:23.379  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+11-19 14:29:23.380  1800  2485 W A       : Can't format flag bindle_flags__velour_jar to integer.
+11-19 14:29:23.383  1411  4516 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.checkin.CheckinService finished executing. cause:5 result: 1 elapsed_millis: 41 uptime_millis: 41 exec_start_elapsed_seconds: 98 [CONTEXT service_id=218 ]
+11-19 14:29:23.384  4327  4415 I BuglePhenotype: Notify about updates in current package [CONTEXT current_package_name="com.google.android.ims.library" ]
+11-19 14:29:23.384  1411  1475 W BpBinder: Large outgoing transaction of 324044 bytes, interface descriptor , code 4
+11-19 14:29:23.385  4327  4415 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: onCsLibPhenotypeUpdated
+11-19 14:29:23.388  1800  2406 I A       : Refusing EXCLUSIVE task 24, it is already pending. Try again in 317 seconds.
+11-19 14:29:23.388  4327  4418 I BugleRcsEngine: [43] bptz.run: SystemBindingManager: SystemBinding enabled: true
+11-19 14:29:23.391  1800  2504 I FedAssExpListener: Fed-ass not supported for signed out users.
+11-19 14:29:23.391  1800  2504 I FedAssExpListener: Successfully processed experiments changed.
+11-19 14:29:23.391  1800  2504 I A       : NGA enabled in interactor.
+11-19 14:29:23.394  1800  2406 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-19 14:29:23.397  1800  2406 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.404  1461  4254 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+11-19 14:29:23.405  1461  4251 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+11-19 14:29:23.415  1461  3074 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-19 14:29:23.417  4327  4415 I BugleRcsProvisioning: RcsProvisioningTrigger: onCsLibPhenotypeUpdated, enableProvisioningTaskInBugle = true
+11-19 14:29:23.422  1800  2787 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.418  4327  4415 I BugleRcsProvisioning: RcsProvisioningTrigger: updateRcsAvailability : hint = CSLIB_PHENOTYPE_UPDATE
+11-19 14:29:23.426  4327  4415 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: CSLIB_PHENOTYPE_UPDATE
+11-19 14:29:23.426  4327  4415 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: swapAvailabilityUpdater, provisioningTaskInBugle: true, activeRcsAvailabilityUpdater: awuh
+11-19 14:29:23.426  4327  4415 I BugleRcsProvisioning: RcsAvailabilityUpdaterLocal: updateAvailabilityAsync: scheduling updateRcsAvailability call, hint: CSLIB_PHENOTYPE_UPDATE, enableWelcomePopupWithoutGoogleTos: false, reshowSuccessPopup: false
+11-19 14:29:23.427  4327  4415 I BugleRcsProvisioning: scheduleProvisioning using legacy code path
+11-19 14:29:23.427  4327  4415 W BugleRcsEngine: [41] brcu.d: [SR]: Single Registration is disabled. Skipping Single Registration capability check for subId: 1, OS.isAtLeastS:[true], enableSingleRegistrationProvisioning:[false]
+11-19 14:29:23.428  4327  4415 I BugleRcsProvisioning: RcsProvisioningTrigger: DR is active, initializing DR provisioning. DUAL_REG
+11-19 14:29:23.428  4327  4860 W BugleRcsEngine: [89] brcu.d: [SR]: Single Registration is disabled. Skipping Single Registration capability check for subId: 1, OS.isAtLeastS:[true], enableSingleRegistrationProvisioning:[false]
+11-19 14:29:23.429  4327  4860 I BugleRcsEngine: [89] brnl.e: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897]
+11-19 14:29:23.429  4327  4860 I BugleRcsEngine: [89] zzo.l: Scheduled provisioning task with 0 seconds delay, KEEP policy, trigger is CSLIB_PHENOTYPE_UPDATE, workerId is 144649da-a3bf-49e1-a629-b9d1570c3c60
+11-19 14:29:23.431  1461  3074 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-19 14:29:23.434  4327  4418 I BugleRcsEngine: [43] bpua.b: System Binding updated
+11-19 14:29:23.437  4327  4859 W BugleRcsEngine: [88] bpxc.w: Unable to send diagnostic log
+11-19 14:29:23.437  4327  4431 W BugleRcsEngine: [46] bpxc.w: Unable to send diagnostic log
+11-19 14:29:23.437  4327  4456 I BugleRcsProvisioning: BugleSystemBindingManager: onBuglePhenotypeFlagChanged
+11-19 14:29:23.438  4327  4430 W BugleRcsEngine: [45] brcu.d: [SR]: Single Registration is disabled. Skipping Single Registration capability check for subId: 1, OS.isAtLeastS:[true], enableSingleRegistrationProvisioning:[false]
+11-19 14:29:23.440  4327  4430 I BugleRcsEngine: [45] brnl.e: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897]
+11-19 14:29:23.444  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.445  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.445  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.445  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.445  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.446  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.446  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.446  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.446  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.447  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.447  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.447  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.447  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.451  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.451  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.451  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.452  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.452  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.452  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.452  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.453  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.454  4327  4430 I BugleRcsProvisioning: RcsAvailabilityUpdaterLocal: RcsAvailability configuration availability and enabled status: simId: redacted-pii:sim_id[chars:20,last3:897], SipConnectionType: DUAL_REG, isConfigurationAvailableAndEnabled: false
+11-19 14:29:23.455  4327  4430 I BugleRcsEngine: [45] brox.b: Using config server URL from bqas
+11-19 14:29:23.455  4327  4430 I BugleRcsProvisioning: RcsAvailabilityUpdaterLocal: RcsAvailability subscription{id:1}, simId: redacted-pii:sim_id[chars:20,last3:897], sipConnectionType: DUAL_REG, isRcsAvailable: false
+11-19 14:29:23.455  4327  4430 I BugleRcsProvisioning: RcsAvailabilityUpdaterLocal: updateRcsAvailability, currentAvailability: 10, newAvailability: 10, hint: CSLIB_PHENOTYPE_UPDATE
+11-19 14:29:23.455  4327  4433 I BugleRcsEngine: [47] bptz.run: SystemBindingManager: SystemBinding enabled: true
+11-19 14:29:23.456  4327  4433 I BugleRcsEngine: [47] bpua.b: System Binding updated
+11-19 14:29:23.458  1539  1539 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-19 14:29:23.458  1539  1539 I PhenotypeModule: PhenotypeModule.maybeFetchAndUpdate():166 maybeFetchAndUpdate: start new task to fetch
+11-19 14:29:23.459  1539  2568 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.inputmethod.latin
+11-19 14:29:23.460  1539  1539 I PhenotypeModule: PhenotypeModule.receiveBroadcast():373 onReceive() urgent = false
+11-19 14:29:23.460  1539  1539 I PhenotypeBackgroundRecv: Skipping com.google.android.inputmethod.latin#com.google.android.inputmethod.latin which doesn't use ProcessStable flags.
+11-19 14:29:23.463  4327  4859 W BugleRcsEngine: [88] bpxc.w: Unable to send diagnostic log
+11-19 14:29:23.464  4327  4451 I BugleRcsProvisioning: RcsProvisioningTrigger: onRcsAvailabilityUpdate : availability is updated to Carrier RCS is not set up, lastAvailability is Carrier RCS is not set up, simId hash = 6734849297284224776, simId = redacted-pii:sim_id[chars:20,last3:897], isPev3Enabled = true
+11-19 14:29:23.464  4327  4456 I BugleTransport: onBuglePhenotypeFlagChanged: kicking off updateActiveTransport
+11-19 14:29:23.465  4327  4431 W BugleRcsEngine: [46] bpxc.w: Unable to send diagnostic log
+11-19 14:29:23.467  4327  4860 I BugleTransport: isChatAvailable: RcsAvailability is CARRIER_SETUP_PENDING (Carrier RCS is not set up)
+11-19 14:29:23.471  4327  4451 W BugleAction: Null config in BugleSharedPrefs
+11-19 14:29:23.471  4327  4451 W BugleAction: Failed to get msisdn from Bugle
+11-19 14:29:23.472  4327  4451 W BugleAction: Failed to get msisdn from RcsProfileService
+11-19 14:29:23.472  4327  4451 W BugleAction: cksi: Jibe SDK Service not available. Is the Jibe SDK service running? Did you call connect() and wait for the notification before calling an API function?
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at cksa.b(PG:2)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at com.google.android.rcs.client.profile.RcsProfileService.g(PG:1)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at com.google.android.rcs.client.profile.RcsProfileService.getMsisdn(PG:3)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at awsw.aj(PG:17)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at awsw.z(PG:2)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at aule.k(PG:1)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at aulc.call(Unknown Source:2)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at cnsg.a(PG:1)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at cnpm.a(PG:3)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at ctfv.a(PG:1)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at ctet.run(PG:4)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at ctfx.run(PG:1)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at bxfd.run(PG:1)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at bxef.run(PG:2)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.472  4327  4451 W BugleAction: 	at bxfj.run(PG:5)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: Bugle: SubscriptionMetadataUtils get: unexpected subId = -2, replacing with -1
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: cpwb: FULL
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bdsy.h(PG:6)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bdvp.a(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bgit.<init>(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bgiu.a(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at awsw.ai(PG:3)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at awsw.aj(PG:25)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at awsw.z(PG:2)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at aule.k(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at aulc.call(Unknown Source:2)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at cnsg.a(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at cnpm.a(PG:3)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at ctfv.a(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at ctet.run(PG:4)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at ctfx.run(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bxfd.run(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bxef.run(PG:2)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bxfj.run(PG:5)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: Bugle: SubscriptionMetadataUtils get: unexpected subId = -2, replacing with -1
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: cpwb: FULL
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bdsy.h(PG:6)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bgit.<init>(PG:2)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bgiu.a(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at awsw.ai(PG:3)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at awsw.aj(PG:25)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at awsw.z(PG:2)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at aule.k(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at aulc.call(Unknown Source:2)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at cnsg.a(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at cnpm.a(PG:3)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at ctfv.a(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at ctet.run(PG:4)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at ctfx.run(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bxfd.run(PG:1)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bxef.run(PG:2)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.474  4327  4451 W SubscriptionMetadataUti: 	at bxfj.run(PG:5)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: Bugle: SubscriptionMetadataUtils get: unexpected subId = -2, replacing with -1
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: cpwb: FULL
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at bdsy.h(PG:6)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at awsw.ai(PG:18)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at awsw.aj(PG:25)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at awsw.z(PG:2)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at aule.k(PG:1)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at aulc.call(Unknown Source:2)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at cnsg.a(PG:1)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at cnpm.a(PG:3)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at ctfv.a(PG:1)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at ctet.run(PG:4)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at ctfx.run(PG:1)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at bxfd.run(PG:1)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at bxef.run(PG:2)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.475  4327  4451 W SubscriptionMetadataUti: 	at bxfj.run(PG:5)
+11-19 14:29:23.477  4327  4451 I Bugle   : SubscriptionUtilsAsOfLMR1: getActiveSubscriptionInfo(): empty sub info for subscription{id:-1}
+11-19 14:29:23.478  4327  4451 I Bugle   : SubscriptionUtilsAsOfLMR1: getActiveSubscriptionInfo(): empty sub info for subscription{id:-1}
+11-19 14:29:23.478  4327  4451 W Bugle   : SubscriptionUtilsAsOfLMR1: getSelfRawNumber: subInfo is null for subscription{id:-1}
+11-19 14:29:23.481  4327  4451 W BugleAction: No default number, returning empty msisdn
+11-19 14:29:23.482  4327  4860 I BugleTransport: updateActiveTransport: refreshing chat transport
+11-19 14:29:23.482  4327  4860 I BugleTransport: RCS Configuration is empty. Enabled transport is Dual Reg [CONTEXT ratelimit_period="5 SECONDS" skipped=2 ]
+11-19 14:29:23.482  4327  4860 I BugleTransport: refreshChatTransport: isChatAvailable: false, enabledTransport: 1, configuration: <empty>
+11-19 14:29:23.483  4327  4860 I RcsClientLib: Connecting RcsEngineLifecycleService
+11-19 14:29:23.484  4327  4860 W RcsClientLib: No CS.apk RCS service found. Is RCS running in Bugle?
+11-19 14:29:23.484  4327  4860 I RcsClientLib: shouldUseCarrierServicesJibeService: false, CarrierServices rcs service found: false
+11-19 14:29:23.487   527   902 D ActivityManager: sync unfroze 2661 com.android.chrome for 5
+11-19 14:29:23.489  4327  4451 I RcsClientLib: com.google.android.rcs.client.lifecycle.RcsEngineLifecycleService connected
+11-19 14:29:23.489  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.490  1800  2803 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+11-19 14:29:23.494  4802  5060 I BugleRcsEngine: [79] RcsEngineImpl.triggerStopRcsStack: RcsEngineImpl[DUAL_REG]:[20283e9e-f6ee]: triggerStopRcsStack for msisdn:redacted-pii:phone_number[chars:0,last2:]
+11-19 14:29:23.495  3859  5088 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.projection.gearhead
+11-19 14:29:23.504  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.504  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.507  2412  2516 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.notifications.platform#com.google.android.dialer
+11-19 14:29:23.524  1411  5192 I PTCommittedOperation: Receive new configuration for com.google.android.gms.people
+11-19 14:29:23.526  1461  5129 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.526  1461  5132 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.527  1461  4969 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.527  1461  5129 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-19 14:29:23.528  1461  5132 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-19 14:29:23.528  1461  5129 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-19 14:29:23.529  1461  5132 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+11-19 14:29:23.529  1461  5132 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.people [CONTEXT service_id=340 ]
+11-19 14:29:23.530  1539  1851 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdatesInternal():350 Latency of updating configurations from phenotype (experiment v4): 1
+11-19 14:29:23.530  1539  1851 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdates():277 Latency of updating configurations from phenotype (ExperimentV4): 1
+11-19 14:29:23.530  1539  1851 I PhenotypeModule: PhenotypeModule.lambda$fetchAndUpdate$2():220 fetchAndUpdate() : Success, hasFlags=true, fetchStatus=2026-11-19 14:29:23{reason=2, isFullFetch=false, success=true, isEmpty=false, isDelta=true, fetchedFlagsCount=1, deletedFlagsCount=0, updatedFlagsCount=0, totalTime=72}
+11-19 14:29:23.530  4802  4829 W BugleRcsEngine: [52] bpxc.w: Unable to send diagnostic log
+11-19 14:29:23.530  4802  4829 I BugleRcsEngine: [52] brga.s: ProvisioningEngineManager: onCsLibPhenotypeUpdated, provisioningTaskInBugleEnabled = true, currentProvisioningStrategy = brka
+11-19 14:29:23.530  4802  4829 I BugleRcsEngine: [52] brga.s: ProvisioningEngineManager: onCsLibPhenotypeUpdated, provisioningTaskInBugleEnabled = true, currentProvisioningStrategy = brka
+11-19 14:29:23.530  4802  4829 I BugleRcsEngine: [52] brga.s: ProvisioningEngineManager: onCsLibPhenotypeUpdated, provisioningTaskInBugleEnabled = true, currentProvisioningStrategy = brka
+11-19 14:29:23.531  4327  4445 I RcsClientLib: Disconnecting RcsEngineLifecycleService
+11-19 14:29:23.531  4802  5068 I BugleRcsEngine: [80] brqh.handleMessage: RcsEngineImpl[DUAL_REG]:[20283e9e-f6ee]>Handler: handleMessage processing message:[STOP_RCS_STACK] with [non-null]:RcsEngineImpl reference
+11-19 14:29:23.531  4802  5068 I BugleRcsEngine: [80] brqh.handleMessage: RcsEngineImpl[DUAL_REG]:[20283e9e-f6ee]>Handler: RCS engine STOP RCS stack
+11-19 14:29:23.531  4802  5068 W BugleRcsEngine: [80] RcsEngineImpl.e: RcsEngineImpl[DUAL_REG]:[20283e9e-f6ee]: imsModule is null, shutdown not required
+11-19 14:29:23.532  4802  5068 I BugleRcsEngine: [80] RcsEngineImpl.stopRcsStackInternal: RcsEngineImpl[DUAL_REG]:[20283e9e-f6ee]: skipping imsModule.stop
+11-19 14:29:23.532  4802  5068 I BugleRcsEngine: [80] brqh.handleMessage: RcsEngineImpl[DUAL_REG]:[20283e9e-f6ee]>Handler: handleMessage processing message:[NOTIFY_UPTIME_IGNORE_STATE_CHANGED] with [non-null]:RcsEngineImpl reference
+11-19 14:29:23.534  1461  4969 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.535  1461  4969 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-19 14:29:23.536  1461  5132 W PeoplePU: getComponentEnabledSetting failed.
+11-19 14:29:23.536  1461  5132 W PeoplePU: java.lang.IllegalArgumentException: Unknown component: ComponentInfo{com.google.android.syncadapters.contacts/com.google.android.syncadapters.contacts.ContactsSyncAdapterService}
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3061)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at android.os.Parcel.createException(Parcel.java:3041)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:3024)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2966)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at android.content.pm.IPackageManager$Stub$Proxy.getComponentEnabledSetting(IPackageManager.java:6034)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at android.app.ApplicationPackageManager.getComponentEnabledSetting(ApplicationPackageManager.java:3097)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at bvgq.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):5)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at com.google.android.gms.people.service.SettingsChangedBroadcastIntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.536  1461  5132 W PeoplePU: Caused by: android.os.RemoteException: Remote stack trace:
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at com.android.server.pm.ComputerEngine.getComponentEnabledSettingInternal(ComputerEngine.java:5159)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at com.android.server.pm.ComputerEngine.getComponentEnabledSetting(ComputerEngine.java:5141)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at com.android.server.pm.IPackageManagerBase.getComponentEnabledSetting(IPackageManagerBase.java:388)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at android.content.pm.IPackageManager$Stub.onTransact(IPackageManager.java:3012)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 	at com.android.server.pm.PackageManagerService$IPackageManagerImpl.onTransact(PackageManagerService.java:6334)
+11-19 14:29:23.536  1461  5132 W PeoplePU: 
+11-19 14:29:23.539  1461  5132 I FsaEntryPointSwitcher: setting component enabled=1 for com.google.android.gms.people.sync.focus.ContactsSyncAdapterService
+11-19 14:29:23.539  1461  5132 I FsaEntryPointSwitcher: Setting component enabled succeeds.
+11-19 14:29:23.539  1461  5132 W PeoplePU: getComponentEnabledSetting failed.
+11-19 14:29:23.539  1461  5132 W PeoplePU: java.lang.IllegalArgumentException: Unknown component: ComponentInfo{com.google.android.syncadapters.contacts/com.google.android.syncadapters.contacts.ContactsSyncAdapterService}
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3061)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at android.os.Parcel.createException(Parcel.java:3041)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:3024)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2966)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at android.content.pm.IPackageManager$Stub$Proxy.getComponentEnabledSetting(IPackageManager.java:6034)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at android.app.ApplicationPackageManager.getComponentEnabledSetting(ApplicationPackageManager.java:3097)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at bvgq.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):29)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at com.google.android.gms.people.service.SettingsChangedBroadcastIntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.539  1461  5132 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.540  4802  5068 I BugleRcsEngine: [80] brnl.h: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[chars:20,last3:897]
+11-19 14:29:23.541  1461  5129 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-19 14:29:23.542  1461  5132 W PeoplePU: getComponentEnabledSetting failed.
+11-19 14:29:23.542  1461  5132 W PeoplePU: java.lang.IllegalArgumentException: Unknown component: ComponentInfo{com.google.android.syncadapters.contacts/com.google.android.syncadapters.contacts.ProxyGalProvider}
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at android.os.Parcel.createExceptionOrNull(Parcel.java:3061)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at android.os.Parcel.createException(Parcel.java:3041)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:3024)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at android.os.Parcel.readException(Parcel.java:2966)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at android.content.pm.IPackageManager$Stub$Proxy.getComponentEnabledSetting(IPackageManager.java:6034)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at android.app.ApplicationPackageManager.getComponentEnabledSetting(ApplicationPackageManager.java:3097)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at bvox.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):1)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at buru.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at com.google.android.gms.people.service.SettingsChangedBroadcastIntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):14)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.542  1461  5132 W PeoplePU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.543  1461  5129 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-19 14:29:23.544  1461  5129 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+11-19 14:29:23.562  4802  4828 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.570  1461  5132 I PeopleGalProvider: Gal directories started.
+11-19 14:29:23.571  1461  5132 I PeopleGalProvider: Method 1 completed.
+11-19 14:29:23.571  1461  5132 I PeopleGalProvider: Method 1 finished successfully.
+11-19 14:29:23.572  2412  2627 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.576  1025  1025 D BluetoothPbapService:  onChange on contact uri 
+11-19 14:29:23.579  1461  5132 I GalProviderController: setting component enabled=1 for com.google.android.gms.people.service.galprovider.PeopleGalProvider
+11-19 14:29:23.580  1461  5132 I GalProviderController: Setting component enabled succeeds.
+11-19 14:29:23.588  1461  5132 I PeopleGalProvider: Gal directories started.
+11-19 14:29:23.588  1461  5132 I PeopleGalProvider: Method 1 completed.
+11-19 14:29:23.588  1461  5132 I PeopleGalProvider: Method 1 finished successfully.
+11-19 14:29:23.618  1411  4516 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService started execution. cause:9 exec_start_elapsed_seconds: 98 [CONTEXT service_id=218 ]
+11-19 14:29:23.635  2412  2515 I PhenotypeBackgroundRecv: Successfully updated snapshot for com.google.android.libraries.consentverifier#com.google.android.dialer
+11-19 14:29:23.647  1411  1475 W BpBinder: Large outgoing transaction of 324044 bytes, interface descriptor , code 4
+11-19 14:29:23.650  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+11-19 14:29:23.650  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+11-19 14:29:23.650  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+11-19 14:29:23.650  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+11-19 14:29:23.650  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+11-19 14:29:23.650  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+11-19 14:29:23.650  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+11-19 14:29:23.651  1800  2504 W A       : Can't format flag bindle_flags__velour_jar to integer.
+11-19 14:29:23.651  1411  4516 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService finished executing. cause:9 result: 1 elapsed_millis: 18 uptime_millis: 18 exec_start_elapsed_seconds: 98 [CONTEXT service_id=218 ]
+11-19 14:29:23.662  1800  2473 I A       : Refusing EXCLUSIVE task 24, it is already pending. Try again in 317 seconds.
+11-19 14:29:23.663  1705  2050 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-19 14:29:23.667  1025  5323 D BluetoothPbapUtils: primaryVersionCounter = 0, secondaryVersionCounter=0
+11-19 14:29:23.668  1800  2406 I FedAssExpListener: Fed-ass not supported for signed out users.
+11-19 14:29:23.668  1800  2406 I FedAssExpListener: Successfully processed experiments changed.
+11-19 14:29:23.668  1800  2406 I A       : NGA enabled in interactor.
+11-19 14:29:23.668  1800  2473 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-19 14:29:23.680  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.681  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(PG:7)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.j.a(Unknown Source:2)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.i.r.run(PG:5)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.h.run(PG:2)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.cf.b(PG:1)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.apps.gsa.shared.util.c.a.ci.run(PG:1)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.libraries.i.ae.run(PG:1)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.libraries.i.k.run(PG:2)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at com.google.android.libraries.i.p.run(PG:4)
+11-19 14:29:23.681  1800  2473 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.693  1461  4254 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+11-19 14:29:23.706  1461  4254 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+11-19 14:29:23.709  1461  3074 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-19 14:29:23.730  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.731  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.731  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.731  5322  5322 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+11-19 14:29:23.732  5322  5322 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+11-19 14:29:23.744  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.744  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.745  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms [CONTEXT service_id=204 ]
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.gms
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.746  1411  5189 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.752  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.752  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.752  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.752  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.752  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.752  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.752  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.752  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.753  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.754  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.lighter.android#com.google.android.gms [CONTEXT service_id=204 ]
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.lighter.android#com.google.android.gms
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.754  1411  5189 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.783  1800  2680 W SearchServiceCore: Abort, client detached.
+11-19 14:29:23.789   135   135 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-19 14:29:23.789  5322  5324 I Gralloc4: mapper 4.x is not supported
+11-19 14:29:23.791  1411  3198 I PTCommittedOperation: Receive new configuration for com.google.android.gms
+11-19 14:29:23.791  1411  3198 I PTCommittedOperation: Running Fixer Framework for com.google.android.gms
+11-19 14:29:23.996     0     0 I servicemanager: Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+11-19 14:29:23.804  1461  3074 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-19 14:29:23.805   527   902 W JobScheduler: Job didn't exist in JobStore: ba57484 #u0a132/-43 com.google.android.googlequicksearchbox/com.google.android.apps.gsa.tasks.BackgroundTasksJobService
+11-19 14:29:23.819  1411  5139 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.821  1411  5139 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.821  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.822  1411  5139 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.822  1411  5139 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.822  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.822  1411  5139 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.822  1411  5139 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.823  1411  5139 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.824  1411  5139 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.824  1411  5139 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.824  1411  5139 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.824  1411  5139 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.824  1411  5139 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.824  1411  5139 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.824  1411  5139 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.825  1411  5139 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.825  1411  5139 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.825  1411  5139 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.825  1411  5139 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.825  1411  5139 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.semanticlocation [CONTEXT service_id=204 ]
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.gms.semanticlocation
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.825  1411  5139 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.848  1411  5139 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.848  1411  5139 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.848  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.848  1411  5139 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.851  1411  5139 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.851  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.851  1411  5139 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.852  1461  5132 V Backup  : [CustomDownloadSchedulingIO] Received Action: com.google.android.gms.phenotype.com.google.android.gms.backup.COMMITTED
+11-19 14:29:23.852  1461  5132 V Backup  : [CustomDownloadSchedulingIO] listenToSetupWizardFinishedBroadcast or customBackupDownloadEnableSuwTriggerWithGmsUpdateCheck flag on
+11-19 14:29:23.852  1461  4971 V Backup  : [G1ModuleInitIntentOperation] Flags updated
+11-19 14:29:23.853  1461  4971 V Backup  : [G1ModuleInitIntentOperation] Running restore operation is disabled by flag
+11-19 14:29:23.853  1461  4971 W ChimeraUtils: Module com.google.android.gms.backup_g1 missing resource null(0)
+11-19 14:29:23.853  1461  5129 V Backup  : [ShowPhotosNotifIO] Flag not enabled; returning.
+11-19 14:29:23.854  1461  4971 W ChimeraUtils: Module com.google.android.gms.backup_g1 missing resource null(0)
+11-19 14:29:23.855  1411  5139 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.855  1411  5139 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.855  1461  4971 W ChimeraUtils: Module com.google.android.gms.backup_g1 missing resource null(0)
+11-19 14:29:23.856  1411  5139 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.856  1411  5139 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.856  1411  5139 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.856  1411  5139 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.857  1411  5139 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.857  1411  5139 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.857  1411  5139 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.857  1411  5139 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.857  1411  5139 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.857  1411  5139 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.858  1411  5139 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.858  1411  5139 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.backup [CONTEXT service_id=204 ]
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.gms.backup
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.858  1411  5139 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.860  1411  5189 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.861  1411  5189 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.861  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.862  1411  5189 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.862  1411  5189 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.862  1411  5189 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.862  1411  5189 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.862  1411  5189 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.862  1411  5189 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.862  1411  5189 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.862  1411  5189 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.863  1411  5189 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.863  1411  5189 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.863  1411  5189 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.863  1411  5189 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.863  1411  5189 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.863  1411  5189 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.863  1411  5189 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.864  1411  5189 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.864  1411  5189 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.864  1411  5189 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.libraries.consentverifier#com.google.android.gms [CONTEXT service_id=204 ]
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.libraries.consentverifier#com.google.android.gms
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.865  1411  5189 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.878  1411  5139 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.879  1411  5139 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.879  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.879  1411  5139 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.879  1411  5139 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.879  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.879  1411  5139 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.879  1411  5139 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.881  1411  5139 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.882  1411  5139 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.884  1411  5139 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.884  1411  5139 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.auth_account [CONTEXT service_id=204 ]
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.gms.auth_account
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.885  1411  5139 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.887  1461  5132 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.889  1461  5129 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.890  1461  5129 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.890  1461  5129 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-19 14:29:23.890  1461  5129 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-19 14:29:24.097     0     0 I logd    : logdr: UID=2000 GID=2000 PID=5325 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
+11-19 14:29:23.891  1411  5138 I PTCommittedOperation: Receive new configuration for com.google.android.gms.auth_account
+11-19 14:29:23.893  1461  5129 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-19 14:29:23.894  1461  4971 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+11-19 14:29:23.894  1461  4971 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.gms.auth_account [CONTEXT service_id=340 ]
+11-19 14:29:23.894  1461  4971 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.896  1461  4971 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-19 14:29:23.896  1461  4971 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-19 14:29:23.897  1461  4971 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+11-19 14:29:23.902  1461  5132 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-19 14:29:23.944  1411  5139 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:23.945  1411  5139 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:23.945  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.946  1411  5139 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:23.946  1411  5139 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:23.946  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:23.946  1411  5139 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:23.946  1411  5139 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:23.946  1411  5139 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:23.946  1411  5139 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:23.947  1411  5139 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:23.947  1411  5139 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:23.947  1411  5139 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:23.947  1411  5139 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:23.947  1411  5139 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:23.947  1411  5139 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:23.947  1411  5139 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:23.947  1411  5139 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:23.948  1411  5139 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:23.949  1411  5139 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:23.949  1411  5139 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.location [CONTEXT service_id=204 ]
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.location
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:23.949  1411  5139 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:23.959  1411  4516 E NanoAppLogging: Failed to begin contexthub communication
+11-19 14:29:23.970  1411  3198 I PTCommittedOperation: Receive new configuration for com.google.android.location
+11-19 14:29:23.972  1411  5138 W SyntheticOperationsLogg: SyntheticOperationsLogger unable to log "com.google.android.gms.location__nonwearable"'s use of "change_component_enabled_state" because installOperationsCollector never executed [CONTEXT service_id=238 ]
+11-19 14:29:23.977  1411  5138 W SyntheticOperationsLogg: SyntheticOperationsLogger unable to log "com.google.android.gms.location__nonwearable"'s use of "change_component_enabled_state" because installOperationsCollector never executed [CONTEXT service_id=238 ]
+11-19 14:29:23.979  1461  5132 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.980  1461  5132 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-19 14:29:23.980  1411  5138 W SyntheticOperationsLogg: SyntheticOperationsLogger unable to log "com.google.android.gms.location__nonwearable"'s use of "change_component_enabled_state" because installOperationsCollector never executed [CONTEXT service_id=238 ]
+11-19 14:29:23.981  1461  5132 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-19 14:29:23.982  1411  5138 W SyntheticOperationsLogg: SyntheticOperationsLogger unable to log "com.google.android.gms.location__nonwearable"'s use of "change_component_enabled_state" because installOperationsCollector never executed [CONTEXT service_id=238 ]
+11-19 14:29:23.982  1461  5143 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.983  1461  5147 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.984  1461  5147 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-19 14:29:23.985  1461  5143 I MlBenchmarkInstaller: Intent: com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=340 ]
+11-19 14:29:23.985  1461  5143 I MlBenchmarkInstaller: COMMITTED Extra package name: com.google.android.location [CONTEXT service_id=340 ]
+11-19 14:29:23.985  1461  5143 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-19 14:29:23.987  1461  5147 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-19 14:29:23.987  1461  5143 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-19 14:29:23.993  1461  5143 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-19 14:29:23.994  1461  5143 I GmsSyncPolicyEngine: Periodic sync 3 disabled by policy, cancelled.
+11-19 14:29:24.006  1411  5139 I NamespaceManager: Package com.android.refreshratecontrol name not found! Using module version.
+11-19 14:29:24.007  1411  5139 I NamespaceManager: Package com.google.oslo name not found! Using module version.
+11-19 14:29:24.014  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:24.015  1411  5139 I NamespaceManager: Package com.android.media.swcodec name not found! Using module version.
+11-19 14:29:24.016  1411  5139 I NamespaceManager: Package com.android.neuralnetworks name not found! Using module version.
+11-19 14:29:24.016  1411  5139 I NamespaceManager: Package com.android.media name not found! Using module version.
+11-19 14:29:24.017  1411  5139 I NamespaceManager: Package 1 name not found! Using module version.
+11-19 14:29:24.017  1411  5139 I NamespaceManager: Package rkpd name not found! Using module version.
+11-19 14:29:24.019  1411  5139 I NamespaceManager: Package android.companion name not found! Using module version.
+11-19 14:29:24.020  1411  5139 I NamespaceManager: Package com.google.android.aicore name not found! Using module version.
+11-19 14:29:24.020  1411  5139 I NamespaceManager: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-19 14:29:24.020  1411  5139 I NamespaceManager: Package com.google.android.audioproxy name not found! Using module version.
+11-19 14:29:24.020  1411  5139 I NamespaceManager: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-19 14:29:24.020  1411  5139 I NamespaceManager: Package com.google.android.apps.safetycore name not found! Using module version.
+11-19 14:29:24.020  1411  5139 I NamespaceManager: Package com.google.android.crashrecovery name not found! Using module version.
+11-19 14:29:24.020  1411  5139 I NamespaceManager: Package com.google.android.profiling name not found! Using module version.
+11-19 14:29:24.020  1411  5139 I NamespaceManager: Package com.google.android.bt name not found! Using module version.
+11-19 14:29:24.021  1411  5139 I NamespaceManager: Package com.google.android.nfcservices name not found! Using module version.
+11-19 14:29:24.021  1411  5139 I NamespaceManager: Package com.google.android.webapp name not found! Using module version.
+11-19 14:29:24.021  1411  5139 I NamespaceManager: Package com.google.android.telephonycore name not found! Using module version.
+11-19 14:29:24.021  1411  5139 I NamespaceManager: Package com.google.android.uprobestats name not found! Using module version.
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.nearby [CONTEXT service_id=204 ]
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: bwix: No package exists for config package: com.google.android.gms.nearby
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@231818047@23.18.18 (190800-535401451):6)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):21)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at zhv.onHandleIntent(:com.google.android.gms@231818047@23.18.18 (190800-535401451):4)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at hjm.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):3)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at hjl.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):11)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at dfhf.run(:com.google.android.gms@231818047@23.18.18 (190800-535401451):2)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:644)
+11-19 14:29:24.024  1411  5139 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:1012)
+11-19 14:29:24.027  1411  1475 I NearbyMediums: BluetoothAdapter's name was not set by Nearby Connections, ignoring call to restore default scan mode. [CONTEXT service_id=54 ]
+11-19 14:29:24.029  1461  5132 I NearbyFastPair: TaskSchedulerUtils cancelTask TAG_FOOTPRINTS_PERIODIC_SCHEDULE success. [CONTEXT service_id=265 ]
+11-19 14:29:24.029  1461  5132 I NearbyFastPair: TSS cancel footprints recon sync [CONTEXT service_id=265 ]
+11-19 14:29:24.029  1461  5132 I NearbyFastPair: TaskSchedulerUtils cancelTask TAG_FOOTPRINTS_RECON_SYNC_SCHEDULE success. [CONTEXT service_id=265 ]
