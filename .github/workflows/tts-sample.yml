@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: test -f scripts/voces.txt && echo "VOCES=$(cat scripts/voces.txt)" >> $GITHUB_ENV || true
       - run: node scripts/tts-sample.mjs
         env:
           GOOGLE_TTS_KEY: ${{ secrets.GOOGLE_TTS_KEY }}

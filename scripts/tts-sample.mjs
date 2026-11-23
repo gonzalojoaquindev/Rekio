@@ -17,7 +17,9 @@ const TEXT =
   'Todo empezó en 1832, a unos sesenta kilómetros al sur de aquí. Un hombre humilde, Juan Godoy, encontró en el cerro de Chañarcillo una veta de plata.';
 
 // Voces candidatas en español latino (es-US) y de España (es-ES) para comparar
-const VOICES = [
+const VOICES = process.env.VOCES
+  ? process.env.VOCES.split(',').map((n) => [n.slice(0, 5), n.trim()])
+  : [
   ['es-US', 'es-US-Chirp3-HD-Charon'],
   ['es-US', 'es-US-Chirp3-HD-Orus'],
   ['es-US', 'es-US-Chirp3-HD-Kore'],
@@ -27,7 +29,7 @@ const VOICES = [
 ];
 
 // Lista las voces disponibles en español para el informe
-try {
+if (!process.env.VOCES) try {
   const r = await fetch(`https://texttospeech.googleapis.com/v1/voices?languageCode=es&key=${KEY}`);
   const d = await r.json();
   if (!r.ok) log(`Lista de voces: error ${r.status} ${JSON.stringify(d.error || d).slice(0, 300)}`);
