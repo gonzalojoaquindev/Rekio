@@ -20,6 +20,7 @@ jobs:
           TOURS: ${{ hashFiles('scripts/audio-tours.txt') != '' && '' || 'copiapo-1859,laserena-1680' }}
           VOICES: Fenrir,Iapetus,Leda,Kore
           PREVIEWS: Fenrir,Iapetus,Leda,Kore
+          NAV: '1'
       - name: Subir audios a la release audio-v1
         env:
           GH_TOKEN: ${{ github.token }}

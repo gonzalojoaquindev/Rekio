@@ -4,7 +4,8 @@ import * as Location from 'expo-location';
 import { PLACES } from './data/places';
 import { TOURS } from './data/tours';
 import { distanceM, distToPolylineM, fmtDist, placeById, tourStats, bearingDeg, dirName } from './geo';
-import { STAMP_LINE } from './narrationTexts';
+import { STAMP_LINE, navDistance, NAV_RECALC } from './narrationTexts';
+import { audioFor } from './narration';
 import { say, stopSpeaking, onSpeakingChange, speakingKey, isSpeaking, placeNarration, loadVoices } from './speech';
 import { fetchWalkingRoute } from './nav';
 import { useStore } from './store';
@@ -351,7 +352,7 @@ export function TourProvider({ children }) {
     // Recalcular si te saliste de la ruta (no en simulación)
     if (!t.simulate && distToPolylineM(here, l.line) > 40 && Date.now() - lastRouteAt.current > 20000) {
       requestLeg(t.idx);
-      if (st.settings.turnByTurn && !speakingKey()) say('Recalculando la ruta.', { key: 'nav' });
+      if (st.settings.turnByTurn && !speakingKey()) say(NAV_RECALC, { key: 'nav' });
     }
     // Próxima maniobra pendiente (se salta la salida y las que ya pasaste)
     const steps = l.steps;
@@ -378,10 +379,14 @@ export function TourProvider({ children }) {
     if (busy) return;
     if (d <= 70 && d > 30 && !s.saidFar) {
       s.saidFar = true;
-      say(`En ${Math.round(d / 10) * 10} metros, ${s.text.charAt(0).toLowerCase() + s.text.slice(1)}.`, { key: 'nav' });
+      const m = Math.min(70, Math.max(30, Math.round(d / 10) * 10));
+      // Con voz natural: frases grabadas (sin el nombre de la calle, que se ve en pantalla); si no, la voz del teléfono
+      if (s.voice && audioFor(s.voice) && audioFor(navDistance(m))) say([navDistance(m), s.voice], { key: 'nav' });
+      else say(`En ${m} metros, ${s.text.charAt(0).toLowerCase() + s.text.slice(1)}.`, { key: 'nav' });
     } else if (d <= 25 && !s.saidNear) {
       s.saidNear = s.saidFar = true;
-      say(`${s.text}.`, { key: 'nav' });
+      if (s.voice && audioFor(s.voice)) say(s.voice, { key: 'nav' });
+      else say(`${s.text}.`, { key: 'nav' });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [here && here.lat, here && here.lng, tour && tour.phase, tour && tour.idx, leg]);

@@ -94,6 +94,51 @@ class Track:
         d = sum(np.sin(2 * np.pi * hz(s) * t) * (0.3 if i else 1) for i, s in enumerate(semis)) * level
         self.out[:, 0] += d; self.out[:, 1] += d
 
+    # ── Instrumentos occidentales (Chile colonial y siglo XIX) ──
+    def guitar(self, semi, dur=2.2):  # guitarra criolla: cuerda pulsada con cuerpo de madera
+        y = self.koto(semi, dur)
+        b, a = butter(2, [90 / (SR / 2), 3200 / (SR / 2)], 'band')
+        return lfilter(b, a, y) * 1.4
+
+    def strings(self, semis, dur, attack=1.8):  # sección de cuerdas: sierras desafinadas, filtradas
+        n = int(dur * SR); t = np.arange(n) / SR; y = np.zeros(n)
+        for s in semis:
+            for det in (-0.12, 0.0, 0.11):
+                f = hz(s + det) * (1 + 0.003 * np.sin(2 * np.pi * 5.2 * t + self.rng.uniform(0, 6)))
+                ph = np.cumsum(f) / SR
+                y += 2 * (ph % 1) - 1
+        b, a = butter(2, 1400 / (SR / 2))
+        y = lfilter(b, a, y) / (len(semis) * 3)
+        env = np.clip(t / attack, 0, 1) * np.clip((dur - t) / 1.5, 0, 1)
+        return y * env
+
+    def snare(self, dur=0.35):  # caja militar: ruido con bordonera
+        n = int(dur * SR); t = np.arange(n) / SR
+        b, a = butter(2, [1500 / (SR / 2), 7000 / (SR / 2)], 'band')
+        nz = lfilter(b, a, self.rng.normal(0, 1, n)) * np.exp(-t * 18)
+        body = np.sin(2 * np.pi * 190 * t) * np.exp(-t * 30) * 0.6
+        return (nz + body) * 0.7
+
+    def church_bell(self, semi, dur=7):  # campana de iglesia: zumbido, tercera menor, quinta y nominal
+        n = int(dur * SR); t = np.arange(n) / SR; f = hz(semi); y = np.zeros(n)
+        for ratio, amp, dec in [(0.5, 0.7, 0.3), (1, 1, 0.55), (1.2, 0.6, 0.7), (1.5, 0.35, 0.9), (2.0, 0.45, 1.2), (2.5, 0.15, 1.8), (3.0, 0.1, 2.4)]:
+            y += amp * np.sin(2 * np.pi * f * ratio * t) * np.exp(-t * dec)
+        return y * 0.45 * np.clip(t / 0.004, 0, 1)
+
+    def march_roll(self, start, beats=8, beat=0.45, gain=0.18, pan=-0.3):  # redoble de marcha lejano
+        for k in range(beats):
+            self.add(self.snare(), start + k * beat, pan=pan, gain=gain * (1.25 if k % 4 == 0 else 1))
+            if k % 2: self.add(self.snare(0.2), start + k * beat + beat / 2, pan=pan, gain=gain * 0.55)
+
+    def arpeggios(self, chords, start, bar=4.0, pattern=(0, 1, 2, 1, 3, 1, 2, 1), gain=0.32, pan=0.3):
+        tt = start; step = bar / len(pattern)
+        while tt < self.dur - 4:
+            for ch in chords:
+                for k, i in enumerate(pattern):
+                    if tt + k * step >= self.dur - 3: break
+                    self.add(self.guitar(ch[i % len(ch)]), tt + k * step + self.rng.uniform(0, 0.015), pan=pan, gain=gain)
+                tt += bar
+
     # ── Frases ──
     def koto_phrases(self, scale, start, gap=(5, 9), notes=(2, 5), bend=0.3, gain=0.5, steps=(0.3, 0.45, 0.9), pan=0.35):
         tt = start
@@ -196,35 +241,35 @@ def shibuya(T):  # urbana y nocturna: pulso suave, koto y acordes
     T.koto_phrases(YO, 8, gap=(4, 7), notes=(3, 6), bend=0.2, gain=0.35, steps=(beat / 2, beat))
     T.wind(level=0.08, cutoff=900)
 
-def laserena(T):  # 1680: mar, campanas lejanas y tensión
+DM = [-19, -16, -12, -7]   # re menor (D3 F3 A3 D4)
+BB = [-23, -19, -16, -11]  # si bemol
+FM = [-16, -12, -9, -4]    # fa mayor
+A7 = [-24, -20, -17, -14]  # la mayor (dominante, de sabor hispano)
+
+def laserena(T):  # 1680: mar, campanas de iglesia y el miedo a los piratas
     t = np.arange(T.N) / SR
     b, a = butter(2, 700 / (SR / 2))
     surf = lfilter(b, a, T.rng.normal(0, 1, T.N))
     swell = (0.35 + 0.65 * np.clip(np.sin(2 * np.pi * t / 7.5), 0, None) ** 2)  # olas que rompen cada ~7 s
-    T.out[:, 0] += surf * swell * 0.45; T.out[:, 1] += np.roll(surf, 9000) * np.roll(swell, 9000) * 0.45
-    T.drone([-34, -27, -22], level=0.07)
-    for s in [5, 37, 70]:  # campana de iglesia colonial, lejana
-        for k in range(3): T.add(T.bell(-26, 7), s + k * 2.2, pan=0.4, gain=0.22)
-    tt = 20.0
-    while tt < T.dur - 6:  # tambor militar lejano
-        for k in range(4): T.add(T.taiko(0.5, f0=95), tt + k * 0.32, pan=-0.3, gain=0.18 if k else 0.26)
-        tt += T.rng.uniform(9, 14)
-    for s, semi, d in [(14, -17, 6), (48, -16, 6), (80, -12, 7)]:
-        T.add(T.flute(semi, d, breath=0.5), s, pan=-0.2, gain=0.12)
+    T.out[:, 0] += surf * swell * 0.4; T.out[:, 1] += np.roll(surf, 9000) * np.roll(swell, 9000) * 0.4
+    for i, ch in enumerate([DM, A7, BB, A7] * 3):  # cuerdas graves, tensas
+        T.add(T.strings([c - 12 for c in ch[:3]], 9), i * 8, gain=0.5)
+    for s0 in [4, 40, 74]:
+        for k in range(4): T.add(T.church_bell(-14, 6), s0 + k * 1.9, pan=0.45, gain=0.22)
+    T.arpeggios([DM, A7, BB, A7], 16, bar=4.0, pattern=(0, 2, 1, 3), gain=0.22, pan=-0.25)
+    T.march_roll(30, beats=8, gain=0.14); T.march_roll(66, beats=8, gain=0.16)
 
-def copiapo(T):  # 1859: viento del desierto, yunque de maestranza, tambor de marcha y una melodía de esperanza
-    T.wind(level=0.16, cutoff=600)
-    T.drone([-33, -26, -21], level=0.075)
-    for s in [6, 52]:  # campana de la iglesia, lejana
-        for k in range(3): T.add(T.bell(-24, 6), s + k * 2.4, pan=0.35, gain=0.18)
-    for s in [18, 62]:  # martillo sobre yunque en la maestranza
-        for k in range(6): T.add(T.bell(5, 0.6), s + k * 0.9 + T.rng.uniform(0, 0.08), pan=-0.45, gain=0.1)
-    tt = 28.0
-    while tt < T.dur - 8:  # tambor de marcha lejano
-        for k in range(6): T.add(T.taiko(0.45, f0=110), tt + k * 0.42, pan=0.25, gain=0.2 if k % 2 else 0.27)
-        tt += T.rng.uniform(11, 16)
-    for s, semi, d in [(12, -19, 6), (40, -17, 6), (74, -14, 8)]:  # quena/flauta del desierto
-        T.add(T.flute(semi, d, breath=0.55), s, pan=-0.15, gain=0.12)
+def copiapo(T):  # 1859: viento del desierto, guitarra criolla, cuerdas, redoble de marcha y campana de iglesia
+    T.wind(level=0.13, cutoff=550)
+    for i, ch in enumerate([DM, BB, FM, A7] * 3):  # cuerdas: progresión de re menor
+        T.add(T.strings(ch[:3], 9), i * 8, gain=0.55)
+    T.arpeggios([DM, BB, FM, A7], 8, bar=8.0, gain=0.3)
+    for s0 in [3, 55]:  # campana de la iglesia de Copiapó, lejana
+        for k in range(3): T.add(T.church_bell(-12, 6), s0 + k * 2.1, pan=0.4, gain=0.2)
+    T.march_roll(24, beats=12, gain=0.15); T.march_roll(64, beats=12, gain=0.18)
+    melody = [(40, 5, 1.2), (41.2, 7, 0.6), (41.8, 8, 1.8), (44, 12, 1.2), (45.2, 10, 0.8), (46, 8, 1.0), (47, 7, 1.2), (48.2, 5, 2.6)]
+    for s0, semi, d in melody:  # quena: melodía de esperanza
+        T.add(T.flute(semi, d + 0.3, breath=0.35, vib=0.01), s0, pan=-0.1, gain=0.1)
 
 PRESETS = {'gion': (gion, 7), 'palacio': (palacio, 11), 'kiyomizu': (kiyomizu, 3), 'arashiyama': (arashiyama, 5),
            'kinkaku': (kinkaku, 9), 'asakusa': (asakusa, 13), 'edo': (edo, 17), 'shibuya': (shibuya, 21), 'laserena': (laserena, 31), 'copiapo': (copiapo, 37)}

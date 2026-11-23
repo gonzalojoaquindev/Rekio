@@ -1,6 +1,8 @@
 // Navegación a pie: pide la ruta a un servicio gratuito (OSRM de FOSSGIS sobre OpenStreetMap)
 // y traduce cada maniobra a una indicación en español.
 
+import { navDepart, navRoundabout } from './narrationTexts';
+
 const UA = 'Rekio/1.0 (https://github.com/gonzalojoaquindev/Rekio)';
 const BASE = 'https://routing.openstreetmap.de/routed-foot/route/v1/driving/';
 
@@ -25,26 +27,27 @@ function stepToInstruction(step) {
   const onto = name ? ` hacia ${name}` : '';
   switch (m.type) {
     case 'depart':
-      return { text: `Camina hacia ${DIRS[Math.round((m.bearing_after || 0) / 45) % 8]}${onto}`, arrow: '↑', skip: false };
+      return { text: `Camina hacia ${DIRS[Math.round((m.bearing_after || 0) / 45) % 8]}${onto}`, voice: navDepart(DIRS[Math.round((m.bearing_after || 0) / 45) % 8]), arrow: '↑', skip: false };
     case 'arrive':
       return { text: 'Llegas a la parada', arrow: '◎', skip: true };
     case 'roundabout':
     case 'rotary':
-      return { text: `En la rotonda, toma la salida ${m.exit || 1}${onto}`, arrow: '⟳', skip: false };
+      return { text: `En la rotonda, toma la salida ${m.exit || 1}${onto}`, voice: navRoundabout(Math.min(6, m.exit || 1)), arrow: '⟳', skip: false };
     case 'fork':
       return {
         text: `En la bifurcación, mantente a la ${/left/.test(m.modifier || '') ? 'izquierda' : 'derecha'}${onto}`,
+        voice: `En la bifurcación, mantente a la ${/left/.test(m.modifier || '') ? 'izquierda' : 'derecha'}.`,
         arrow: mod.a,
         skip: false,
       };
     case 'new name':
     case 'continue':
       if (!m.modifier || m.modifier === 'straight') return { text: `Sigue derecho${onto}`, arrow: '↑', skip: true };
-      return { text: `${cap(mod.t)}${onto}`, arrow: mod.a, skip: false };
+      return { text: `${cap(mod.t)}${onto}`, voice: `${cap(mod.t)}.`, arrow: mod.a, skip: false };
     default:
       // turn, end of road, merge, etc.
       if (m.modifier === 'straight') return { text: `Sigue derecho${onto}`, arrow: '↑', skip: true };
-      return { text: `${cap(mod.t)}${onto}`, arrow: mod.a, skip: false };
+      return { text: `${cap(mod.t)}${onto}`, voice: `${cap(mod.t)}.`, arrow: mod.a, skip: false };
   }
 }
 
