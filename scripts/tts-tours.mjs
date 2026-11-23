@@ -48,14 +48,24 @@ function chunks(text, max = 3500) {
   return out;
 }
 
-async function synth(text, voice) {
+// Historias inmersivas: Algenib, más lenta y con tratamiento épico (más grave, cuerpo y sala)
+const EPIC = { voice: 'Algenib', rate: 0.9 };
+const FX = 'asetrate=24000*0.944,aresample=24000,atempo=1.059,bass=g=4:f=110:w=0.7,aecho=0.8:0.5:55|95:0.12|0.07,loudnorm=I=-18:TP=-1.5';
+import { execFileSync } from 'node:child_process';
+function epicFx(buf) {
+  writeFileSync('/tmp/fx-in.mp3', buf);
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', '/tmp/fx-in.mp3', '-af', FX, '-ac', '1', '-c:a', 'libmp3lame', '-b:a', '64k', '/tmp/fx-out.mp3']);
+  return readFileSync('/tmp/fx-out.mp3');
+}
+
+async function synth(text, voice, rate) {
   const parts = [];
   for (const c of chunks(text)) {
     for (let attempt = 1; ; attempt++) {
       const r = await fetch(`https://texttospeech.googleapis.com/v1/text:synthesize?key=${KEY}`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ input: { text: c }, voice: { languageCode: 'es-US', name: `es-US-Chirp3-HD-${voice}` }, audioConfig: { audioEncoding: 'MP3' } }),
+        body: JSON.stringify({ input: { text: c }, voice: { languageCode: 'es-US', name: `es-US-Chirp3-HD-${voice}` }, audioConfig: { audioEncoding: 'MP3', ...(rate ? { speakingRate: rate } : {}) } }),
       });
       const d = await r.json();
       if (r.ok) {
@@ -79,14 +89,15 @@ for (const id of TOURS) {
   }
   const texts = tourTexts(tour, placeById);
   manifest.tours[id] = manifest.tours[id] || {};
-  for (const voice of VOICES) {
+  const epic = tour.unit === 'capitulo';
+  for (const voice of epic ? [EPIC.voice] : VOICES) {
     const files = [];
     let bytes = 0;
     manifest.voices[voice] = manifest.voices[voice] || {};
     for (const t of texts) {
       const k = textKey(t);
       const name = `${voice}-${k}.mp3`;
-      const buf = await synth(t, voice);
+      const buf = epic ? epicFx(await synth(t, voice, EPIC.rate)) : await synth(t, voice);
       writeFileSync(join(OUT, name), buf);
       manifest.voices[voice][k] = name;
       files.push(name);
