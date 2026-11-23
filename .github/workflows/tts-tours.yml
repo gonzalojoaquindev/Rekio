@@ -1,0 +1,30 @@
+name: Grabar narraciones
+on:
+  push:
+    branches: [audio]
+permissions:
+  contents: write
+jobs:
+  grabar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/tts-tours.mjs
+        env:
+          GOOGLE_TTS_KEY: ${{ secrets.GOOGLE_TTS_KEY }}
+          TOURS: copiapo-1859,laserena-1680
+          VOICES: Fenrir,Iapetus,Leda,Kore
+      - name: Subir audios a la release audio-v1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view audio-v1 >/dev/null 2>&1 || gh release create audio-v1 --prerelease --title "Narraciones (audio)" --notes "Audios de las narraciones. No es un APK."
+          ls /tmp/audio/*.mp3 | xargs -n 40 gh release upload audio-v1 --clobber
+      - run: |
+          git config user.name rekio-bot; git config user.email actions@users.noreply.github.com
+          cp /tmp/audio/audio-manifest.json /tmp/m.json
+          git checkout --orphan audio-tmp; git rm -rf . >/dev/null; cp /tmp/m.json audio-manifest.json
+          git add -A; git commit -m "Manifiesto de audios"; git push -f origin HEAD:audio-resultado
