@@ -105,8 +105,44 @@ def mood_calma(dur):
     while t < dur:
         b.add(strings(chords[k % 2][:3], 11, 3.5), t, 0.4); t += 9; k += 1
     return b.out
+# ── Música real (tools/moods/<ánimo>.mp3): si existe, reemplaza al ánimo sintetizado ──
+MOOD_DIR = os.path.join(HERE, 'moods')
+_tracks = {}
+_pos = {}
+TRACK_FILE = {'esperanza': 'victoria'}  # ánimos que comparten tema
+def _file(name): return TRACK_FILE.get(name, name)
+def _load_track(name):
+    name = _file(name)
+    if name not in _tracks:
+        import subprocess
+        wav = f'/tmp/mood-{name}.wav'
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', os.path.join(MOOD_DIR, name + '.mp3'), '-ac', '2', '-ar', str(SR), wav], check=True)
+        _, x = wavfile.read(wav); x = x.astype(float) / 32767
+        # deja espacio a la voz: baja un poco la zona de 1–3,5 kHz
+        x = x - 0.4 * np.stack([bp(x[:, c], 1000, 3500) for c in range(2)], 1)
+        # compresión suave: empareja las partes fuertes y las suaves del tema
+        env = np.sqrt(np.clip(lp((x ** 2).mean(1), 1.5), 1e-9, None))
+        target = np.median(env)
+        x = x * np.clip((target / env) ** 0.5, 0.5, 2.0)[:, None]
+        _tracks[name] = x / (np.sqrt((x ** 2).mean()) + 1e-9) * 0.1
+    return _tracks[name]
+def track_mood(name):
+    def f(dur):
+        x = _load_track(name); n = int(dur * SR); out = np.zeros((n, 2)); i = 0
+        pos = _pos.get(name)
+        if pos is None:  # cada capítulo empieza el tema en un punto distinto (pero siempre igual para el mismo texto)
+            pos = int(rng.uniform(0, 0.5) * len(x))
+        while i < n:
+            take = min(n - i, len(x) - pos); out[i:i + take] = x[pos:pos + take]; i += take; pos += take
+            if pos >= len(x): pos = 0
+        _pos[name] = pos  # la próxima vez sigue donde quedó
+        return out
+    return f
+
 MOODS = {'misterio': mood_misterio, 'tension': mood_tension, 'melancolia': mood_melancolia, 'esperanza': mood_esperanza,
          'victoria': mood_victoria, 'epico': mood_epico, 'calma': mood_calma, 'silencio': lambda d: np.zeros((int(d * SR), 2))}
+for _m in list(MOODS):
+    if os.path.exists(os.path.join(MOOD_DIR, _file(_m) + '.mp3')): MOODS[_m] = track_mood(_m)
 
 # ── Ambientes continuos ──
 def amb_viento(dur):
@@ -230,6 +266,9 @@ def build_voice(job):
     job['segments'] = segs
 
 def render(job):
+    global rng
+    import zlib
+    rng = np.random.default_rng(job.get('seed', zlib.crc32(job.get('out', '').encode())))
     if 'sentences' in job:
         build_voice(job)
         json.dump([[round(a, 2), round(b, 2)] for a, b in job['segments']], open(job['out'] + '.frases.json', 'w'))

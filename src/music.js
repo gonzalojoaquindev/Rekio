@@ -20,7 +20,13 @@ const TRACKS = {
 export const CREDITS = [
   { title: 'Shika no Tōne (El llamado lejano del ciervo)', who: 'Araki Kodō III, grabación de c. 1930', license: 'Dominio público', where: 'Nara' },
   { title: 'Shizima2', who: 'PeriTune (peritune.com)', license: 'CC BY 3.0', where: 'Meiji Jingu y Harajuku' },
-  { title: 'Resto de las pistas', who: 'Compuestas para Rekio', license: 'Originales', where: 'Kioto, Tokio y La Serena' },
+  { title: 'Hiraeth', who: 'Scott Buckley (www.scottbuckley.com.au)', license: 'CC BY 4.0', where: 'Historias inmersivas (editado y mezclado bajo la narración)' },
+  { title: 'Ephemera', who: 'Scott Buckley (www.scottbuckley.com.au)', license: 'CC BY 4.0', where: 'Historias inmersivas (editado y mezclado bajo la narración)' },
+  { title: 'Legionnaire', who: 'Scott Buckley (www.scottbuckley.com.au)', license: 'CC BY 4.0', where: 'Historias inmersivas (editado y mezclado bajo la narración)' },
+  { title: 'The Travelling Symphony', who: 'Savfk', license: 'CC BY 4.0', where: 'Historias inmersivas (editado y mezclado bajo la narración)' },
+  { title: 'Devoted', who: 'Hayden Folker', license: 'CC BY 3.0', where: 'Historias inmersivas (editado y mezclado bajo la narración)' },
+  { title: 'Good Day To Die', who: 'Miguel Johnson', license: 'CC BY 3.0', where: 'Historias inmersivas (editado y mezclado bajo la narración)' },
+  { title: 'Resto de las pistas', who: 'Compuestas para Rekio', license: 'Originales', where: 'Música de fondo de Kioto, Tokio, La Serena y Copiapó' },
 ];
 
 const VOL_IDLE = 0.4; // sin narración
