@@ -1,0 +1,22 @@
+name: Muestras de voz
+on:
+  workflow_dispatch:
+  push:
+    branches: [voz]
+permissions:
+  contents: write
+jobs:
+  voz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/tts-sample.mjs
+        env:
+          GOOGLE_TTS_KEY: ${{ secrets.GOOGLE_TTS_KEY }}
+      - run: |
+          git config user.name rekio-bot; git config user.email actions@users.noreply.github.com
+          git checkout --orphan voz-tmp; git rm -rf . >/dev/null; mkdir -p voz; cp /tmp/voz/* voz/
+          git add -A; git commit -m "Muestras de voz"; git push -f origin HEAD:voz-resultado
