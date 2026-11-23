@@ -22,6 +22,7 @@ jobs:
           VOICES: Fenrir,Iapetus,Leda,Kore
           PREVIEWS: Fenrir,Iapetus,Leda,Kore
           NAV: '1'
+      - run: python3 tools/bank.py /tmp/audio
       - name: Subir audios a la release audio-v1
         env:
           GH_TOKEN: ${{ github.token }}

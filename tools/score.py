@@ -230,7 +230,9 @@ def build_voice(job):
     job['segments'] = segs
 
 def render(job):
-    if 'sentences' in job: build_voice(job)
+    if 'sentences' in job:
+        build_voice(job)
+        json.dump([[round(a, 2), round(b, 2)] for a, b in job['segments']], open(job['out'] + '.frases.json', 'w'))
     sr, v = wavfile.read(job['voice']); v = v.astype(float) / 32767
     if v.ndim == 2: v = v.mean(1)
     if sr != SR: v = resample_poly(v, SR, sr);

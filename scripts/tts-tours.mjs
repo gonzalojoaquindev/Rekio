@@ -90,7 +90,7 @@ async function scored(text, score) {
   execFileSync('python3', ['tools/score.py', `${dir}/job.json`], { stdio: 'inherit' });
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', `${dir}/mezcla.wav`, '-af', 'loudnorm=I=-16:TP=-1.5', '-c:a', 'libmp3lame', '-b:a', '96k', `${dir}/mezcla.mp3`]);
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', `${dir}/voz.wav`, '-af', 'loudnorm=I=-18:TP=-1.5', '-ac', '1', '-c:a', 'libmp3lame', '-b:a', '64k', `${dir}/voz.mp3`]);
-  return { mixed: readFileSync(`${dir}/mezcla.mp3`), voiceOnly: readFileSync(`${dir}/voz.mp3`) };
+  return { mixed: readFileSync(`${dir}/mezcla.mp3`), voiceOnly: readFileSync(`${dir}/voz.mp3`), timing: JSON.parse(readFileSync(`${dir}/mezcla.wav.frases.json`, 'utf8')) };
 }
 
 async function synth(text, voice, rate) {
@@ -146,6 +146,9 @@ for (const id of TOURS) {
         // con banda sonora (voz «Algenib») y solo voz («Algenib-voz», para quien desactive los efectos)
         const r = await scored(t, scores.get(t));
         buf = r.mixed;
+        // tiempos de cada frase (para el editor de sonido de la app)
+        manifest.timings = manifest.timings || {};
+        manifest.timings[k] = r.timing;
         const vname = `${voice}-voz-${k}.mp3`;
         writeFileSync(join(OUT, vname), r.voiceOnly);
         manifest.voices[`${voice}-voz`] = manifest.voices[`${voice}-voz`] || {};
