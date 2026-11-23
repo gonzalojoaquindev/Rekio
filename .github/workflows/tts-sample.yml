@@ -14,7 +14,8 @@ jobs:
         with:
           node-version: 22
       - run: test -f scripts/voces.txt && echo "VOCES=$(cat scripts/voces.txt)" >> $GITHUB_ENV || true
-      - run: node scripts/tts-sample.mjs
+      - run: which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
+      - run: node scripts/tts-epic.mjs
         env:
           GOOGLE_TTS_KEY: ${{ secrets.GOOGLE_TTS_KEY }}
       - run: |
