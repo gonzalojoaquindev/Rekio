@@ -15,7 +15,9 @@ export const NARRATORS = [
 export const DEFAULT_NARRATOR = 'Fenrir';
 
 let narrator = DEFAULT_NARRATOR;
+let effects = true; // música y efectos en las historias inmersivas (si no, solo voz)
 export const setNarrator = (id) => (narrator = id || DEFAULT_NARRATOR);
+export const setEffects = (on) => (effects = on !== false);
 export const getNarrator = () => narrator;
 
 let dir = null;
@@ -37,7 +39,17 @@ const fileFor = (name) => {
 };
 
 // Voces en orden de preferencia: la elegida y luego las demás grabadas (las historias inmersivas solo tienen la épica)
-const voiceOrder = (voice) => [voice, ...Object.keys(MANIFEST.voices || {}).filter((v) => v !== voice)];
+// Las variantes «-voz» son las historias sin música: van primero si se desactivan los efectos, y al final si no
+const voiceOrder = (voice) => {
+  const all = Object.keys(MANIFEST.voices || {});
+  const plain = all.filter((v) => v.endsWith('-voz'));
+  const rest = [voice, ...all.filter((v) => v !== voice && !v.endsWith('-voz'))];
+  return effects ? [...rest, ...plain] : [...plain, ...rest];
+};
+
+// ¿Este recorrido suena con su banda sonora mezclada? (entonces no hace falta la música de fondo)
+export const hasScoredAudio = (tourId) =>
+  effects && narrator !== 'device' && !!(MANIFEST.tours && MANIFEST.tours[tourId] && Object.keys(MANIFEST.tours[tourId]).some((v) => v.endsWith('-voz')));
 
 // Audio para un texto: el archivo descargado si existe, si no la dirección en internet; null si no hay grabación
 export function audioFor(text, voice = narrator) {

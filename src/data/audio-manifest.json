@@ -173,6 +173,22 @@
    "w-f34bc833": "Kore-w-f34bc833.mp3",
    "w-f14e03a4": "Kore-w-f14e03a4.mp3",
    "l-79238225": "Kore-l-79238225.mp3"
+  },
+  "Algenib-voz": {
+   "9s-5a2ff72d": "Algenib-voz-9s-5a2ff72d.mp3",
+   "6x-d539f159": "Algenib-voz-6x-d539f159.mp3",
+   "1it-9b38596c": "Algenib-voz-1it-9b38596c.mp3",
+   "1a1-bf5cacb2": "Algenib-voz-1a1-bf5cacb2.mp3",
+   "1dz-86c3d588": "Algenib-voz-1dz-86c3d588.mp3",
+   "1kk-ff76dc1c": "Algenib-voz-1kk-ff76dc1c.mp3",
+   "1f9-1812410f": "Algenib-voz-1f9-1812410f.mp3",
+   "8j-c8cfd082": "Algenib-voz-8j-c8cfd082.mp3",
+   "64-99869dca": "Algenib-voz-64-99869dca.mp3",
+   "1bo-f0bdcbf4": "Algenib-voz-1bo-f0bdcbf4.mp3",
+   "1hl-62b68a20": "Algenib-voz-1hl-62b68a20.mp3",
+   "1j6-4fed3c20": "Algenib-voz-1j6-4fed3c20.mp3",
+   "1px-0c2604e3": "Algenib-voz-1px-0c2604e3.mp3",
+   "1iu-f7d9143c": "Algenib-voz-1iu-f7d9143c.mp3"
   }
  },
  "tours": {
@@ -198,7 +214,19 @@
      "Algenib-1u-52b40e3f.mp3",
      "Algenib-1f9-1812410f.mp3"
     ],
-    "bytes": 6788376
+    "bytes": 10886712
+   },
+   "Algenib-voz": {
+    "files": [
+     "Algenib-voz-9s-5a2ff72d.mp3",
+     "Algenib-voz-6x-d539f159.mp3",
+     "Algenib-voz-1it-9b38596c.mp3",
+     "Algenib-voz-1a1-bf5cacb2.mp3",
+     "Algenib-voz-1dz-86c3d588.mp3",
+     "Algenib-voz-1kk-ff76dc1c.mp3",
+     "Algenib-voz-1f9-1812410f.mp3"
+    ],
+    "bytes": 6666932
    }
   },
   "laserena-1680": {
@@ -223,7 +251,19 @@
      "Algenib-1q-93b714a8.mp3",
      "Algenib-1iu-f7d9143c.mp3"
     ],
-    "bytes": 6835032
+    "bytes": 11020056
+   },
+   "Algenib-voz": {
+    "files": [
+     "Algenib-voz-8j-c8cfd082.mp3",
+     "Algenib-voz-64-99869dca.mp3",
+     "Algenib-voz-1bo-f0bdcbf4.mp3",
+     "Algenib-voz-1hl-62b68a20.mp3",
+     "Algenib-voz-1j6-4fed3c20.mp3",
+     "Algenib-voz-1px-0c2604e3.mp3",
+     "Algenib-voz-1iu-f7d9143c.mp3"
+    ],
+    "bytes": 6804596
    }
   }
  }

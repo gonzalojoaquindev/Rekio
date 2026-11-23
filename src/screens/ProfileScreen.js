@@ -148,9 +148,15 @@ export default function ProfileScreen({ goPassport, openTour }) {
       />
       <Setting
         title="Música de fondo"
-        sub="Música japonesa suave durante los recorridos; baja cuando habla la guía"
+        sub="Música suave durante los recorridos; baja cuando habla la guía"
         value={store.settings.music !== false}
         onChange={(v) => store.updateSettings({ music: v })}
+      />
+      <Setting
+        title="Música y efectos en historias inmersivas"
+        sub="Banda sonora y efectos que siguen el relato, siempre bajo la voz. Desactívalo para escuchar solo al narrador"
+        value={store.settings.effects !== false}
+        onChange={(v) => store.updateSettings({ effects: v })}
       />
       {hasGoogleMaps && (
         <Setting

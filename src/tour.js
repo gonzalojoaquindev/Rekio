@@ -5,7 +5,7 @@ import { PLACES } from './data/places';
 import { TOURS } from './data/tours';
 import { distanceM, distToPolylineM, fmtDist, placeById, tourStats, bearingDeg, dirName } from './geo';
 import { STAMP_LINE, navDistance, NAV_RECALC } from './narrationTexts';
-import { audioFor } from './narration';
+import { audioFor, hasScoredAudio } from './narration';
 import { say, stopSpeaking, onSpeakingChange, speakingKey, isSpeaking, placeNarration, loadVoices } from './speech';
 import { fetchWalkingRoute } from './nav';
 import { useStore } from './store';
@@ -82,11 +82,12 @@ export function TourProvider({ children }) {
   }, [tour && tour.id, tour && tour.idx, tour && tour.phase]);
 
   // Música de fondo: suena durante el recorrido y baja cuando habla la guía
-  const musicOn = !!tour && store.settings.music !== false;
+  // (las historias con banda sonora mezclada ya traen su música)
+  const musicOn = !!tour && store.settings.music !== false && !hasScoredAudio(tour.id);
   useEffect(() => {
     if (musicOn) playMusic(tour.id, isSpeaking());
     else stopMusic();
-  }, [musicOn, tour && tour.id]);
+  }, [musicOn, tour && tour.id, store.settings.effects, store.settings.narrator]);
   useEffect(() => {
     const off = onSpeakingChange((k) => duckMusic(!!k));
     return () => {

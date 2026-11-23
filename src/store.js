@@ -4,7 +4,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { File, Directory, Paths } from 'expo-file-system';
 import { applyCalibration } from './calib';
-import { setNarrator, DEFAULT_NARRATOR } from './narration';
+import { setNarrator, setEffects, DEFAULT_NARRATOR } from './narration';
 
 const KEY = 'rekio:v1';
 
@@ -17,7 +17,7 @@ const INITIAL = {
   progress: {}, // { [tourId]: { pos, order, date } } — dónde quedó un recorrido sin terminar
   trips: [], // Mis viajes: { id, name, cities, start, end, saved: [{kind,id}], days: { 'YYYY-MM-DD': [{kind,id}] } }
   calib: {}, // modo calibración: { [placeId]: { lat, lng, acc, how, radius, note, date } }
-  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true, devMode: false, narrator: DEFAULT_NARRATOR },
+  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true, devMode: false, narrator: DEFAULT_NARRATOR, effects: true },
 };
 
 const Ctx = createContext(null);
@@ -130,6 +130,7 @@ export function StoreProvider({ children }) {
   // Calibración: aplica las correcciones de puntos sobre los datos en cuanto cambian
   useMemo(() => applyCalibration(state.calib), [state.calib]);
   useMemo(() => setNarrator(state.settings.narrator), [state.settings.narrator]);
+  useMemo(() => setEffects(state.settings.effects), [state.settings.effects]);
   const setCalib = useCallback(
     (id, patch) =>
       setState((s) => {
