@@ -28,6 +28,7 @@ import { previewText } from '../narrationTexts';
 import { hasGoogleMaps } from '../components/MapPanel';
 import { CREDITS } from '../music';
 import { calibrationText } from '../calib';
+import { scoreText } from '../components/ScoreEditor';
 
 export default function ProfileScreen({ goPassport, openTour }) {
   const insets = useSafeAreaInsets();
@@ -216,6 +217,12 @@ export default function ProfileScreen({ goPassport, openTour }) {
             donde empieza cada relato.
           </Text>
           <Btn title="Enviar correcciones" onPress={() => Share.share({ message: calibrationText(store.calib) })} />
+          {Object.keys(store.scoreDrafts || {}).length > 0 && (
+            <Btn
+              title={`Enviar partituras (${Object.keys(store.scoreDrafts).length})`}
+              onPress={() => Share.share({ message: `Rekio · partituras\n${scoreText(store.scoreDrafts)}` })}
+            />
+          )}
           <Text style={st.devSub}>Servidor de preguntas (déjalo vacío para usar el del build):</Text>
           <TextInput
             style={st.devInput}

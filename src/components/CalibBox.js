@@ -7,6 +7,7 @@ import { C, R } from '../theme';
 import { distanceM } from '../geo';
 import { useStore } from '../store';
 import { originalOf } from '../calib';
+import ScoreEditor from './ScoreEditor';
 
 export default function CalibBox({ p }) {
   const store = useStore();
@@ -15,6 +16,7 @@ export default function CalibBox({ p }) {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState('');
   const [note, setNote] = useState(c && c.note ? c.note : '');
+  const [editing, setEditing] = useState(false);
 
   const locate = async (accuracy) => {
     const perm = await Location.requestForegroundPermissionsAsync();
@@ -52,6 +54,14 @@ export default function CalibBox({ p }) {
   const d = me ? Math.round(distanceM(me, p)) : null;
   return (
     <View style={st.box}>
+      {!!p.score && (
+        <>
+          <TouchableOpacity style={[st.main, { marginTop: 0, marginBottom: 12, backgroundColor: C.text }]} onPress={() => setEditing(true)}>
+            <Text style={st.mainTxt}>🎚 Editar sonido de este capítulo{store.scoreDrafts && store.scoreDrafts[p.id] ? ' · borrador' : ''}</Text>
+          </TouchableOpacity>
+          <ScoreEditor place={p} visible={editing} onClose={() => setEditing(false)} />
+        </>
+      )}
       <Text style={st.title}>🛠 Calibración {c ? '· corregido' : ''}</Text>
       <Text style={st.sub}>
         {d == null ? 'Buscando tu ubicación…' : `Estás a ${d} m del punto${me.acc ? ` (GPS ±${Math.round(me.acc)} m)` : ''}. `}

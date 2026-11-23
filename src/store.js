@@ -16,6 +16,7 @@ const INITIAL = {
   reviews: {}, // { [tourId]: { stars: 0-5, text, date } } — por ahora solo en este teléfono
   progress: {}, // { [tourId]: { pos, order, date } } — dónde quedó un recorrido sin terminar
   trips: [], // Mis viajes: { id, name, cities, start, end, saved: [{kind,id}], days: { 'YYYY-MM-DD': [{kind,id}] } }
+  scoreDrafts: {}, // editor de sonido: { [placeId]: cues }
   calib: {}, // modo calibración: { [placeId]: { lat, lng, acc, how, radius, note, date } }
   settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true, devMode: false, narrator: DEFAULT_NARRATOR, effects: true },
 };
@@ -142,6 +143,16 @@ export function StoreProvider({ children }) {
     []
   );
   const clearCalib = useCallback(() => setState((s) => ({ ...s, calib: {} })), []);
+  const setScoreDraft = useCallback(
+    (id, cues) =>
+      setState((s) => {
+        const all = { ...(s.scoreDrafts || {}) };
+        if (cues === null) delete all[id];
+        else all[id] = cues;
+        return { ...s, scoreDrafts: all };
+      }),
+    []
+  );
 
   const updateSettings = useCallback(
     (patch) => setState((s) => ({ ...s, settings: { ...s.settings, ...patch } })),
@@ -149,8 +160,8 @@ export function StoreProvider({ children }) {
   );
 
   const value = useMemo(
-    () => ({ ...state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip, setCalib, clearCalib }),
-    [state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip, setCalib, clearCalib]
+    () => ({ ...state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip, setCalib, clearCalib, setScoreDraft }),
+    [state, loaded, markHeard, completeTour, addPhoto, removePhoto, updateProfile, updateSettings, setReview, setProgress, createTrip, updateTrip, deleteTrip, setCalib, clearCalib, setScoreDraft]
   );
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

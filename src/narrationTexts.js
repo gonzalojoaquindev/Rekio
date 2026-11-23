@@ -48,3 +48,7 @@ export function navPhrases() {
     NAV_RECALC,
   ];
 }
+
+// Frases de un texto (mismo corte que usan la voz y la mezcla)
+export const sentencesOf = (text) =>
+  (String(text).match(/[^.!?…]+[.!?…]+[»"”)]*\s*|[^.!?…]+$/g) || [text]).map((x) => x.trim()).filter(Boolean);
