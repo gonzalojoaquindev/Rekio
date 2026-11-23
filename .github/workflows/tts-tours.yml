@@ -13,11 +13,13 @@ jobs:
         with:
           node-version: 22
       - run: which ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg)
-      - run: node scripts/tts-tours.mjs
+      - run: test -f scripts/audio-tours.txt && echo "TOURS_FILE=$(cat scripts/audio-tours.txt)" >> $GITHUB_ENV || true
+      - run: TOURS="${TOURS_FILE:-$TOURS}" node scripts/tts-tours.mjs
         env:
           GOOGLE_TTS_KEY: ${{ secrets.GOOGLE_TTS_KEY }}
-          TOURS: copiapo-1859,laserena-1680
+          TOURS: ${{ hashFiles('scripts/audio-tours.txt') != '' && '' || 'copiapo-1859,laserena-1680' }}
           VOICES: Fenrir,Iapetus,Leda,Kore
+          PREVIEWS: Fenrir,Iapetus,Leda,Kore
       - name: Subir audios a la release audio-v1
         env:
           GH_TOKEN: ${{ github.token }}

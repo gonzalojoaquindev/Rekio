@@ -23,6 +23,8 @@ import { PLACES } from '../data/places';
 import { cityById } from '../geo';
 import { useStore, earnedStamps } from '../store';
 import { getVoice, getVoices, setVoice, voiceLabel, say } from '../speech';
+import { NARRATORS, setNarrator } from '../narration';
+import { previewText } from '../narrationTexts';
 import { hasGoogleMaps } from '../components/MapPanel';
 import { CREDITS } from '../music';
 import { calibrationText } from '../calib';
@@ -158,9 +160,36 @@ export default function ProfileScreen({ goPassport, openTour }) {
           onChange={(v) => store.updateSettings({ mapProvider: v ? 'google' : 'osm' })}
         />
       )}
+      <View style={st.setting}>
+        <View style={{ flex: 1 }}>
+          <Text style={st.setTitle}>Voz del narrador</Text>
+          <Text style={st.setSub}>
+            Voces naturales grabadas. Las historias inmersivas usan siempre la voz épica de Algenib. Toca una voz para escucharla.
+          </Text>
+          <View style={st.narrators}>
+            {NARRATORS.map((n) => {
+              const on = (store.settings.narrator || 'Fenrir') === n.id;
+              return (
+                <TouchableOpacity
+                  key={n.id}
+                  style={[st.narr, on && st.narrOn]}
+                  onPress={() => {
+                    store.updateSettings({ narrator: n.id });
+                    setNarrator(n.id);
+                    say(n.id === 'device' ? 'Hola, esta es la voz de tu teléfono.' : previewText(n.label), { key: 'test' });
+                  }}
+                >
+                  <Text style={[st.narrName, on && { color: '#fff' }]}>{n.label}</Text>
+                  <Text style={[st.narrDesc, on && { color: '#F2F2F2' }]}>{n.desc}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </View>
+      </View>
       <TouchableOpacity style={st.setting} onPress={nextVoice}>
         <View style={{ flex: 1 }}>
-          <Text style={st.setTitle}>Voz de la guía</Text>
+          <Text style={st.setTitle}>Voz del teléfono (respaldo)</Text>
           <Text style={st.setSub}>{voiceLabel(voice)} · toca para probar otra</Text>
         </View>
         <Text style={st.link}>Cambiar</Text>
@@ -343,6 +372,11 @@ const st = StyleSheet.create({
   devTitle: { fontSize: 16, fontWeight: '800', color: C.text },
   devSub: { fontSize: 13, color: C.muted, lineHeight: 18 },
   devInput: { backgroundColor: '#fff', borderRadius: 10, paddingHorizontal: 12, paddingVertical: 9, fontSize: 14, color: C.text },
+  narrators: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 10 },
+  narr: { paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, borderWidth: 1, borderColor: C.line, backgroundColor: '#fff' },
+  narrOn: { backgroundColor: C.brand, borderColor: C.brand },
+  narrName: { fontSize: 14, fontWeight: '800', color: C.text },
+  narrDesc: { fontSize: 11, color: C.muted, marginTop: 1 },
   devLink: { fontSize: 14, fontWeight: '700', color: C.brand, textAlign: 'center', paddingVertical: 4 },
   label: { fontSize: 14, fontWeight: '700', color: C.text, marginTop: 18, marginBottom: 6 },
   input: {

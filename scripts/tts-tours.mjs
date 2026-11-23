@@ -22,7 +22,7 @@ conv('src/narrationTexts.js', join(TMP, 'narrationTexts.mjs'));
 const { TOURS: ALL } = await import(join(TMP, 'tours.mjs'));
 const { PLACES } = await import(join(TMP, 'places.mjs'));
 const { textKey } = await import(join(TMP, 'textkey.mjs'));
-const { tourTexts } = await import(join(TMP, 'narrationTexts.mjs'));
+const { tourTexts, previewText } = await import(join(TMP, 'narrationTexts.mjs'));
 const placeById = (id) => PLACES.find((p) => p.id === id);
 
 // Manifiesto anterior: se conserva lo ya grabado
@@ -108,6 +108,16 @@ for (const id of TOURS) {
     manifest.tours[id][voice] = { files, bytes };
     console.log(`${id} · ${voice}: ${files.length} audios, ${(bytes / 1e6).toFixed(1)} MB`);
   }
+}
+// Frase de muestra de cada voz (para elegirla en Perfil)
+for (const voice of process.env.PREVIEWS ? process.env.PREVIEWS.split(',') : []) {
+  const t = previewText(voice);
+  const k = textKey(t);
+  const name = `${voice}-${k}.mp3`;
+  writeFileSync(join(OUT, name), await synth(t, voice));
+  manifest.voices[voice] = manifest.voices[voice] || {};
+  manifest.voices[voice][k] = name;
+  chars += t.length;
 }
 writeFileSync(join(OUT, 'audio-manifest.json'), JSON.stringify(manifest, null, 1));
 console.log(`Listo: ${made} audios, ${chars} caracteres`);

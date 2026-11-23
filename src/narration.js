@@ -35,10 +35,15 @@ const fileFor = (name) => {
   return d ? new File(d, name) : null;
 };
 
+// Voces en orden de preferencia: la elegida y luego las demás grabadas (las historias inmersivas solo tienen la épica)
+const voiceOrder = (voice) => [voice, ...Object.keys(MANIFEST.voices || {}).filter((v) => v !== voice)];
+
 // Audio para un texto: el archivo descargado si existe, si no la dirección en internet; null si no hay grabación
 export function audioFor(text, voice = narrator) {
   if (!text || voice === 'device') return null;
-  const name = MANIFEST.voices && MANIFEST.voices[voice] && MANIFEST.voices[voice][textKey(text)];
+  const k = textKey(text);
+  const v = voiceOrder(voice).find((x) => MANIFEST.voices[x] && MANIFEST.voices[x][k]);
+  const name = v && MANIFEST.voices[v][k];
   if (!name) return null;
   try {
     const f = fileFor(name);
@@ -49,8 +54,10 @@ export function audioFor(text, voice = narrator) {
 
 // ¿Este recorrido tiene voz natural? ¿Está descargado?
 export function tourAudio(tourId, voice = narrator) {
-  const t = MANIFEST.tours && MANIFEST.tours[tourId] && MANIFEST.tours[tourId][voice];
-  if (!t || voice === 'device') return null;
+  const all = (MANIFEST.tours && MANIFEST.tours[tourId]) || {};
+  const v = voice === 'device' ? null : voiceOrder(voice).find((x) => all[x]);
+  const t = v && all[v];
+  if (!t) return null;
   let have = 0;
   for (const name of t.files) {
     try {
@@ -58,7 +65,7 @@ export function tourAudio(tourId, voice = narrator) {
       if (f && f.exists) have++;
     } catch (e) {}
   }
-  return { files: t.files, bytes: t.bytes, have, complete: have === t.files.length };
+  return { voice: v, files: t.files, bytes: t.bytes, have, complete: have === t.files.length };
 }
 
 export const hasNaturalVoice = (tourId) => !!(MANIFEST.tours && MANIFEST.tours[tourId]);

@@ -1,1 +1,94 @@
-{ "base": "https://github.com/gonzalojoaquindev/Rekio/releases/download/audio-v1", "voices": {}, "tours": {} }
+{
+ "base": "https://github.com/gonzalojoaquindev/Rekio/releases/download/audio-v1",
+ "voices": {
+  "Algenib": {
+   "9s-5a2ff72d": "Algenib-9s-5a2ff72d.mp3",
+   "6x-d539f159": "Algenib-6x-d539f159.mp3",
+   "1c-ac524a0f": "Algenib-1c-ac524a0f.mp3",
+   "2m-6b1f4eac": "Algenib-2m-6b1f4eac.mp3",
+   "1e-e9c6bc9e": "Algenib-1e-e9c6bc9e.mp3",
+   "1it-9b38596c": "Algenib-1it-9b38596c.mp3",
+   "1z-3cf5ce03": "Algenib-1z-3cf5ce03.mp3",
+   "1q-1a336f0e": "Algenib-1q-1a336f0e.mp3",
+   "1a1-bf5cacb2": "Algenib-1a1-bf5cacb2.mp3",
+   "49-bd1a4fd8": "Algenib-49-bd1a4fd8.mp3",
+   "1r-db98b997": "Algenib-1r-db98b997.mp3",
+   "1dz-86c3d588": "Algenib-1dz-86c3d588.mp3",
+   "3i-071a498d": "Algenib-3i-071a498d.mp3",
+   "1p-9f8fd333": "Algenib-1p-9f8fd333.mp3",
+   "1kk-ff76dc1c": "Algenib-1kk-ff76dc1c.mp3",
+   "2v-cc21cb5b": "Algenib-2v-cc21cb5b.mp3",
+   "1u-52b40e3f": "Algenib-1u-52b40e3f.mp3",
+   "1f9-1812410f": "Algenib-1f9-1812410f.mp3",
+   "8j-c8cfd082": "Algenib-8j-c8cfd082.mp3",
+   "64-99869dca": "Algenib-64-99869dca.mp3",
+   "28-fe7b1443": "Algenib-28-fe7b1443.mp3",
+   "1n-8a93ae9b": "Algenib-1n-8a93ae9b.mp3",
+   "1bo-f0bdcbf4": "Algenib-1bo-f0bdcbf4.mp3",
+   "1u-28704489": "Algenib-1u-28704489.mp3",
+   "1m-479ed681": "Algenib-1m-479ed681.mp3",
+   "1hl-62b68a20": "Algenib-1hl-62b68a20.mp3",
+   "32-f19dbc65": "Algenib-32-f19dbc65.mp3",
+   "1k-e7058278": "Algenib-1k-e7058278.mp3",
+   "1j6-4fed3c20": "Algenib-1j6-4fed3c20.mp3",
+   "2z-47fa9c11": "Algenib-2z-47fa9c11.mp3",
+   "1g-34c8b1ae": "Algenib-1g-34c8b1ae.mp3",
+   "1px-0c2604e3": "Algenib-1px-0c2604e3.mp3",
+   "2x-eb08cb2a": "Algenib-2x-eb08cb2a.mp3",
+   "1q-93b714a8": "Algenib-1q-93b714a8.mp3",
+   "1iu-f7d9143c": "Algenib-1iu-f7d9143c.mp3"
+  }
+ },
+ "tours": {
+  "copiapo-1859": {
+   "Algenib": {
+    "files": [
+     "Algenib-9s-5a2ff72d.mp3",
+     "Algenib-6x-d539f159.mp3",
+     "Algenib-1c-ac524a0f.mp3",
+     "Algenib-2m-6b1f4eac.mp3",
+     "Algenib-1e-e9c6bc9e.mp3",
+     "Algenib-1it-9b38596c.mp3",
+     "Algenib-1z-3cf5ce03.mp3",
+     "Algenib-1q-1a336f0e.mp3",
+     "Algenib-1a1-bf5cacb2.mp3",
+     "Algenib-49-bd1a4fd8.mp3",
+     "Algenib-1r-db98b997.mp3",
+     "Algenib-1dz-86c3d588.mp3",
+     "Algenib-3i-071a498d.mp3",
+     "Algenib-1p-9f8fd333.mp3",
+     "Algenib-1kk-ff76dc1c.mp3",
+     "Algenib-2v-cc21cb5b.mp3",
+     "Algenib-1u-52b40e3f.mp3",
+     "Algenib-1f9-1812410f.mp3"
+    ],
+    "bytes": 6788376
+   }
+  },
+  "laserena-1680": {
+   "Algenib": {
+    "files": [
+     "Algenib-8j-c8cfd082.mp3",
+     "Algenib-64-99869dca.mp3",
+     "Algenib-1c-ac524a0f.mp3",
+     "Algenib-28-fe7b1443.mp3",
+     "Algenib-1n-8a93ae9b.mp3",
+     "Algenib-1bo-f0bdcbf4.mp3",
+     "Algenib-1u-28704489.mp3",
+     "Algenib-1m-479ed681.mp3",
+     "Algenib-1hl-62b68a20.mp3",
+     "Algenib-32-f19dbc65.mp3",
+     "Algenib-1k-e7058278.mp3",
+     "Algenib-1j6-4fed3c20.mp3",
+     "Algenib-2z-47fa9c11.mp3",
+     "Algenib-1g-34c8b1ae.mp3",
+     "Algenib-1px-0c2604e3.mp3",
+     "Algenib-2x-eb08cb2a.mp3",
+     "Algenib-1q-93b714a8.mp3",
+     "Algenib-1iu-f7d9143c.mp3"
+    ],
+    "bytes": 6835032
+   }
+  }
+ }
+}

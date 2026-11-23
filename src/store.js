@@ -4,6 +4,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { File, Directory, Paths } from 'expo-file-system';
 import { applyCalibration } from './calib';
+import { setNarrator, DEFAULT_NARRATOR } from './narration';
 
 const KEY = 'rekio:v1';
 
@@ -16,7 +17,7 @@ const INITIAL = {
   progress: {}, // { [tourId]: { pos, order, date } } — dónde quedó un recorrido sin terminar
   trips: [], // Mis viajes: { id, name, cities, start, end, saved: [{kind,id}], days: { 'YYYY-MM-DD': [{kind,id}] } }
   calib: {}, // modo calibración: { [placeId]: { lat, lng, acc, how, radius, note, date } }
-  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true, devMode: false },
+  settings: { auto: true, turnByTurn: true, voiceId: null, mapProvider: 'google', music: true, devMode: false, narrator: DEFAULT_NARRATOR },
 };
 
 const Ctx = createContext(null);
@@ -128,6 +129,7 @@ export function StoreProvider({ children }) {
   const deleteTrip = useCallback((id) => setState((s) => ({ ...s, trips: (s.trips || []).filter((t) => t.id !== id) })), []);
   // Calibración: aplica las correcciones de puntos sobre los datos en cuanto cambian
   useMemo(() => applyCalibration(state.calib), [state.calib]);
+  useMemo(() => setNarrator(state.settings.narrator), [state.settings.narrator]);
   const setCalib = useCallback(
     (id, patch) =>
       setState((s) => {

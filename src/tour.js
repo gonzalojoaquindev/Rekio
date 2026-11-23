@@ -4,6 +4,7 @@ import * as Location from 'expo-location';
 import { PLACES } from './data/places';
 import { TOURS } from './data/tours';
 import { distanceM, distToPolylineM, fmtDist, placeById, tourStats, bearingDeg, dirName } from './geo';
+import { STAMP_LINE } from './narrationTexts';
 import { say, stopSpeaking, onSpeakingChange, speakingKey, isSpeaking, placeNarration, loadVoices } from './speech';
 import { fetchWalkingRoute } from './nav';
 import { useStore } from './store';
@@ -204,7 +205,7 @@ export function TourProvider({ children }) {
       const where = from ? ` Está a unos ${words(distanceM(from, p))} hacia el ${dirName(bearingDeg(from, p))}.` : '';
       guide = `${idx === 0 ? 'Empezamos por' : 'Siguiente parada'}: ${p.name}.${where}${st.optional ? ' Es una parada opcional.' : ''} Sigue la ruta azul del mapa y las indicaciones de voz.`;
     }
-    say(prefix + guide, {
+    say(prefix ? [prefix, guide] : guide, {
       key: 'guide',
       onDone: () => {
         const cur = tourRef.current;
@@ -242,7 +243,7 @@ export function TourProvider({ children }) {
     } else {
       setTourState({ ...t, phase: 'done' });
       storeRef.current.completeTour(t.id, { simulated: t.simulate, km: tourStats(d).km });
-      say(d.outro + ' ¡Ganaste una nueva estampilla para tu pasaporte!', { key: 'guide' });
+      say([d.outro, STAMP_LINE], { key: 'guide' });
     }
   };
 
@@ -259,7 +260,7 @@ export function TourProvider({ children }) {
     }
     const order = buildOrder(d, mode, simulate ? null : hereRef.current);
     tourRef.current = { id, idx: 0, phase: 'guiding', simulate, order, dayId: opts.dayId || null };
-    giveDirections(0, d.intro + ' ');
+    giveDirections(0, d.intro);
   };
 
   const endTour = () => {

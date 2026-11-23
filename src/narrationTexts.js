@@ -17,3 +17,6 @@ export function tourTexts(tour, placeById) {
   }
   return out.filter(Boolean).map((t) => t.trim());
 }
+
+// Frase de muestra de cada voz del narrador (se graba junto con los recorridos)
+export const previewText = (label) => `Hola, soy ${label}. Te voy a acompañar con historias en tus recorridos por el mundo.`;

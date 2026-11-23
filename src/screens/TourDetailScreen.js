@@ -5,6 +5,7 @@ import PointPhoto from '../components/PointPhoto';
 import MapPanel from '../components/MapPanel';
 import Stamp from '../components/Stamp';
 import Icon from '../components/Icon';
+import AudioBox from '../components/AudioBox';
 import { Btn, SectionTitle, pickPhoto, WhenChips, Stars, StatusChip, useNow } from '../components/ui';
 import { tourStatus } from '../hours';
 import { LinkedText } from '../components/Glossary';
@@ -187,6 +188,8 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
               </Text>
             ))}
           </View>
+
+          <AudioBox tourId={tour.id} />
 
           {!!status && (
             <View style={st.statusBox}>
