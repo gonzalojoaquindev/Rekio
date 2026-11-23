@@ -3,6 +3,7 @@
 import { File, Directory, Paths } from 'expo-file-system';
 import MANIFEST from './data/audio-manifest.json';
 import { textKey } from './textkey';
+import { navPhrases } from './narrationTexts';
 
 export const NARRATORS = [
   { id: 'Fenrir', label: 'Fenrir', desc: 'Voz masculina' },
@@ -56,8 +57,11 @@ export function audioFor(text, voice = narrator) {
 export function tourAudio(tourId, voice = narrator) {
   const all = (MANIFEST.tours && MANIFEST.tours[tourId]) || {};
   const v = voice === 'device' ? null : voiceOrder(voice).find((x) => all[x]);
-  const t = v && all[v];
-  if (!t) return null;
+  const t0 = v && all[v];
+  if (!t0) return null;
+  // También las indicaciones de navegación en la voz elegida, para que funcionen sin internet
+  const nav = MANIFEST.voices[voice] ? navPhrases().map((p) => MANIFEST.voices[voice][textKey(p)]).filter(Boolean) : [];
+  const t = { files: [...new Set([...t0.files, ...nav])], bytes: t0.bytes + nav.length * 15000 };
   let have = 0;
   for (const name of t.files) {
     try {
