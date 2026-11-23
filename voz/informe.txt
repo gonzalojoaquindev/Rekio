@@ -1,0 +1,8 @@
+1-Charon-epico: ok (es-US)
+2-Algenib-epico: ok (es-US)
+3-Alnilam-epico: ok (es-US)
+4-Iapetus-epico: ok (es-US)
+5-Fenrir-epico: ok (es-US)
+6-Gemini-Charon-estilo: error 403 {"code":403,"message":"Agent Platform API has not been used in project 1048367297836 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/aiplatform.googleapis.com/overview?project=1048367297836 then retry. If you enabled this API recently, wait a few minute
+7-Gemini-Algenib-estilo: error 403 {"code":403,"message":"Agent Platform API has not been used in project 1048367297836 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/aiplatform.googleapis.com/overview?project=1048367297836 then retry. If you enabled this API recently, wait a few minute
+8-Gemini-Orus-estilo: error 403 {"code":403,"message":"Agent Platform API has not been used in project 1048367297836 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/aiplatform.googleapis.com/overview?project=1048367297836 then retry. If you enabled this API recently, wait a few minute
