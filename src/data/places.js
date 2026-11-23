@@ -10,6 +10,7 @@ import { LASERENA } from './places_laserena';
 import { TOKYO3 } from './places_tokyo3';
 import { COPIAPO } from './places_copiapo';
 import { CLASSIFY, PARTS } from './categories';
+import { SCORES } from './scores';
 
 export const PLACES = [
   {
@@ -571,6 +572,7 @@ for (const p of PLACES) {
     p.tags = c[1];
   }
   if (PARTS.has(p.id)) p.part = true;
+  if (SCORES[p.id]) p.score = SCORES[p.id];
 }
 
 export const FEES = {

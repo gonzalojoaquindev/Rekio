@@ -1,3 +1,4 @@
+import { SCORES } from './scores';
 // Ciudades y recorridos guiados. Para agregar una ciudad nueva: súmala a CITIES,
 // agrega sus lugares en places.js y crea sus recorridos aquí.
 //   stops[].optional: parada opcional (se muestra con otro ícono y se puede saltar)
@@ -281,6 +282,12 @@ export const TOURS = [
 ];
 
 TOURS.push(...TOURS_TOKYO_NARA);
+
+// Partituras de intro y cierre de las historias inmersivas
+for (const t of TOURS) {
+  if (SCORES[`${t.id}:intro`]) t.introScore = SCORES[`${t.id}:intro`];
+  if (SCORES[`${t.id}:outro`]) t.outroScore = SCORES[`${t.id}:outro`];
+}
 
 // Mejor momento para hacer cada recorrido: temprano | manana | tarde | noche
 export const BEST_TIME = {

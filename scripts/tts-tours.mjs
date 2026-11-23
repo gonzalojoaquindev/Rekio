@@ -58,6 +58,41 @@ function epicFx(buf) {
   return readFileSync('/tmp/fx-out.mp3');
 }
 
+async function synthWav(text, voice, rate, path) {
+  for (let attempt = 1; ; attempt++) {
+    const r = await fetch(`https://texttospeech.googleapis.com/v1/text:synthesize?key=${KEY}`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ input: { text }, voice: { languageCode: 'es-US', name: `es-US-Chirp3-HD-${voice}` }, audioConfig: { audioEncoding: 'LINEAR16', sampleRateHertz: 24000, ...(rate ? { speakingRate: rate } : {}) } }),
+    });
+    const d = await r.json();
+    if (r.ok) return writeFileSync(path, Buffer.from(d.audioContent, 'base64'));
+    if (attempt >= 3) throw new Error(`${r.status} ${JSON.stringify(d.error || d).slice(0, 200)}`);
+    await new Promise((res) => setTimeout(res, 3000 * attempt));
+  }
+}
+
+// Historia inmersiva: graba frase por frase, une con pausas y mezcla la banda sonora de su partitura.
+// Devuelve { mixed, voiceOnly } (MP3)
+const splitS = (t) => (t.match(/[^.!?…]+[.!?…]+[»"”)]*\s*|[^.!?…]+$/g) || [t]).map((x) => x.trim()).filter(Boolean);
+async function scored(text, score) {
+  const texts = splitS(text);
+  const dir = `/tmp/frases-${textKey(text)}`;
+  mkdirSync(dir, { recursive: true });
+  const files = [];
+  for (let i = 0; i < texts.length; i++) {
+    const f = `${dir}/${i}.wav`;
+    await synthWav(texts[i], EPIC.voice, EPIC.rate, f);
+    files.push(f);
+  }
+  const job = { sentences: files, texts, voice: `${dir}/voz.wav`, out: `${dir}/mezcla.wav`, cues: score || [] };
+  writeFileSync(`${dir}/job.json`, JSON.stringify(job));
+  execFileSync('python3', ['tools/score.py', `${dir}/job.json`], { stdio: 'inherit' });
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', `${dir}/mezcla.wav`, '-af', 'loudnorm=I=-16:TP=-1.5', '-c:a', 'libmp3lame', '-b:a', '96k', `${dir}/mezcla.mp3`]);
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', `${dir}/voz.wav`, '-af', 'loudnorm=I=-18:TP=-1.5', '-ac', '1', '-c:a', 'libmp3lame', '-b:a', '64k', `${dir}/voz.mp3`]);
+  return { mixed: readFileSync(`${dir}/mezcla.mp3`), voiceOnly: readFileSync(`${dir}/voz.mp3`) };
+}
+
 async function synth(text, voice, rate) {
   const parts = [];
   for (const c of chunks(text)) {
@@ -89,7 +124,16 @@ for (const id of TOURS) {
   }
   const texts = tourTexts(tour, placeById);
   manifest.tours[id] = manifest.tours[id] || {};
+  // Partituras: texto → lista de momentos sonoros (solo historias inmersivas)
+  const scores = new Map();
+  if (tour.introScore) scores.set(tour.intro.trim(), tour.introScore);
+  if (tour.outroScore) scores.set(tour.outro.trim(), tour.outroScore);
+  for (const st of tour.stops) {
+    const p = placeById(st.id);
+    if (p && p.score) scores.set(p.story.trim(), p.score);
+  }
   const epic = tour.unit === 'capitulo';
+  if (epic) delete manifest.tours[id][`${EPIC.voice}-voz`];
   for (const voice of epic ? [EPIC.voice] : VOICES) {
     const files = [];
     let bytes = 0;
@@ -97,7 +141,18 @@ for (const id of TOURS) {
     for (const t of texts) {
       const k = textKey(t);
       const name = `${voice}-${k}.mp3`;
-      const buf = epic ? epicFx(await synth(t, voice, EPIC.rate)) : await synth(t, voice);
+      let buf;
+      if (epic && scores.has(t)) {
+        // con banda sonora (voz «Algenib») y solo voz («Algenib-voz», para quien desactive los efectos)
+        const r = await scored(t, scores.get(t));
+        buf = r.mixed;
+        const vname = `${voice}-voz-${k}.mp3`;
+        writeFileSync(join(OUT, vname), r.voiceOnly);
+        manifest.voices[`${voice}-voz`] = manifest.voices[`${voice}-voz`] || {};
+        manifest.voices[`${voice}-voz`][k] = vname;
+        (manifest.tours[id][`${voice}-voz`] = manifest.tours[id][`${voice}-voz`] || { files: [], bytes: 0 }).files.push(vname);
+        manifest.tours[id][`${voice}-voz`].bytes += r.voiceOnly.length;
+      } else buf = epic ? epicFx(await synth(t, voice, EPIC.rate)) : await synth(t, voice);
       writeFileSync(join(OUT, name), buf);
       manifest.voices[voice][k] = name;
       files.push(name);
