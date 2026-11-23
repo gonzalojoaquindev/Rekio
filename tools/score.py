@@ -1,5 +1,6 @@
 # Rekio · banda sonora de las historias inmersivas.
-# Paleta reutilizable de ánimos musicales, ambientes y efectos (todo sintetizado), y un mezclador
+# Paleta reutilizable de ánimos musicales, ambientes y efectos (sintetizados o grabaciones reales
+# de tools/moods y tools/sfx), y un mezclador
 # que los coloca frase a frase debajo de la voz.
 #
 # Uso: python3 tools/score.py trabajo.json
@@ -236,10 +237,84 @@ def sfx_canon(arg=None):
     x = sfx_golpe() * 0.8; n = len(x); t = np.arange(n) / SR
     return x + lp(rng.normal(0, 1, n), 900) * np.exp(-t * 3) * 0.8
 def sfx_olas(arg=None): return amb_mar(float(arg or 8)) * 1.6
+# ── Grabaciones reales (tools/sfx/<nombre>.mp3, Pixabay: uso comercial libre, sin atribución) ──
+SFX_DIR = os.path.join(HERE, 'sfx')
+_samples = {}
+def sample(name):
+    if name not in _samples:
+        import subprocess
+        wav = f'/tmp/sfx-{name}.wav'
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', os.path.join(SFX_DIR, name + '.mp3'), '-ac', '2', '-ar', str(SR), wav], check=True)
+        _, x = wavfile.read(wav); _samples[name] = x.astype(float) / 32767
+    return _samples[name]
+def _active_rms(x):
+    e = (x ** 2).mean(1); k = int(0.05 * SR); fr = e[: len(e) // k * k].reshape(-1, k).mean(1)
+    loud = fr[fr > fr.max() * 1e-3]; return np.sqrt(loud.mean()) if len(loud) else 1e-9
+def _fit(x, dur, start=0):  # recorta o repite (con fundido cruzado) hasta dur segundos
+    n = int(dur * SR); out = np.zeros((n + len(x), 2)); xf = min(int(0.8 * SR), len(x) // 4)
+    seg = x[start:].copy(); i = 0
+    while i < n:
+        seg = seg.copy()
+        if i > 0: seg[:xf] *= np.linspace(0, 1, xf)[:, None]
+        seg[-xf:] *= np.linspace(1, 0, xf)[:, None]
+        out[i:i + len(seg)] += seg; i += len(seg) - xf; seg = x
+    out = out[:n]; f = min(int(0.4 * SR), n); out[-f:] *= np.linspace(1, 0, f)[:, None]
+    return out
+def shot(name, peak=0.75):  # efecto puntual, normalizado por su pico
+    x = sample(name); return x / (np.abs(x).max() + 1e-9) * peak
+def loop(name, dur, level=0.09, ramp=False):  # efecto continuo, normalizado por su volumen medio
+    x = sample(name); x = x / _active_rms(x) * level
+    y = _fit(x, dur, int(rng.uniform(0, 0.5) * len(x)) if len(x) / SR > dur * 1.5 else 0)
+    if ramp: y *= np.linspace(0.35, 1, len(y))[:, None]  # se acerca
+    return y * min(1.0, 0.9 / (np.abs(y).max() + 1e-9))
+def amb_sample(name):
+    return lambda dur: _fit(sample(name) / _active_rms(sample(name)) * 0.05, dur, int(rng.uniform(0, 0.5) * len(sample(name))))
+for _a in ['fuego', 'mar', 'lluvia']:
+    if os.path.exists(os.path.join(SFX_DIR, _a + '.mp3')): AMBS[_a] = amb_sample(_a)
+
+def sfx_disparos_real(arg=None):  # descarga de varios fusiles
+    b = Buf(5)
+    for _ in range(int(arg or 6)):
+        b.add(shot('disparo', rng.uniform(0.3, 0.75)), rng.uniform(0, 2.5), 1.0, pan=rng.uniform(-0.6, 0.6))
+    return b.out * min(1.0, 0.9 / (np.abs(b.out).max() + 1e-9))
+def sfx_golpe_real(arg=None):  # impacto de cine: uno de los tres, al azar
+    return shot(['hit1', 'hit2', 'hit3'][rng.integers(0, 3)], 1.0)
+def sfx_yunque_real(arg=None):  # herrero forjando: varios martillazos
+    b = Buf(6)
+    for k in range(int(arg or 4)): b.add(shot('yunque', rng.uniform(0.45, 0.6)), k * 1.0 + rng.uniform(0, 0.08), 1.0, pan=-0.3)
+    return b.out
+REAL_SFX = {
+    'golpe': sfx_golpe_real,
+    'yunque': sfx_yunque_real,
+    'piano': lambda a=None: shot('piano', 0.8),
+    'gritos': lambda a=None: loop('gritos', float(a or 8), 0.09),
+    'puerta': lambda a=None: shot('portazo'),
+    'tocar': lambda a=None: shot('tocar', 0.6),
+    'campana': lambda a=None: shot('campana', 0.55),
+    'pasos': lambda a=None: loop('marcha', float(a or 10), 0.09, ramp=True),
+    'arena': lambda a=None: loop('pasos_arena', float(a or 6), 0.08),
+    'nieve': lambda a=None: loop('pasos_nieve', float(a or 8), 0.08),
+    'disparos': sfx_disparos_real,
+    'recarga': lambda a=None: shot('recarga', 0.5),
+    'canon': lambda a=None: shot('explosion', 0.85),
+    'olas': lambda a=None: loop('mar', float(a or 8), 0.1),
+    'galope': lambda a=None: loop('galope', float(a or 8), 0.1, ramp=True),
+    'caballo': lambda a=None: loop('caballo', float(a or 8), 0.08),
+    'relincho': lambda a=None: shot('relincho', 0.5),
+    'batalla': lambda a=None: loop('batalla', float(a or 12), 0.1),
+    'abordaje': lambda a=None: loop('abordaje', float(a or 10), 0.09),
+    'fanfarria': lambda a=None: loop('fanfarria', float(a or 10), 0.08),
+    'cuerno': lambda a=None: loop('cuerno', float(a or 6), 0.09),
+    'llamarada': lambda a=None: loop('llamarada', float(a or 6), 0.1),
+}
+
 SFX = {'golpe': sfx_golpe, 'subida': sfx_subida, 'puerta': sfx_puerta, 'pasos': sfx_pasos, 'campana': sfx_campana,
        'yunque': sfx_yunque, 'redoble': sfx_redoble, 'disparos': sfx_disparos, 'canon': sfx_canon, 'olas': sfx_olas}
 SFX_GAIN = {'golpe': 0.9, 'subida': 0.5, 'puerta': 0.85, 'pasos': 0.8, 'campana': 0.45, 'yunque': 0.5, 'redoble': 0.5,
             'disparos': 0.6, 'canon': 0.8, 'olas': 0.5}
+for _k, _f in REAL_SFX.items():
+    SFX[_k] = _f
+    SFX_GAIN[_k] = 1.0
 
 def reverb(x, amt=0.08):
     n = int(1.8 * SR); t = np.arange(n) / SR
@@ -305,7 +380,7 @@ def render(job):
     def norm(x, target):
         r = np.sqrt((x ** 2).mean()); return x * (target / r) if r > 1e-6 else x
     vrms = np.sqrt((v[np.abs(v) > 0.01] ** 2).mean())
-    bed = reverb(norm(music.out, vrms * 10 ** (-13 / 20)) + norm(amb.out, vrms * 10 ** (-20 / 20)), 0.07)
+    bed = reverb(norm(music.out, vrms * 10 ** (-16 / 20)) + norm(amb.out, vrms * 10 ** (-20 / 20)), 0.07)
     effects = fx.out * (vrms / 0.25)
     # La música baja un poco mientras habla la voz y vuelve en las pausas (sidechain suave)
     vv = np.zeros(music.N); vv[: len(v)] = v

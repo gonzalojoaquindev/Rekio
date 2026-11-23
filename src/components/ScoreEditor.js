@@ -29,6 +29,7 @@ export const AMB_OPTS = [
   ['grillos', '🦗 Noche'],
   ['agua', '💧 Agua'],
   ['fuego', '🔥 Fuego'],
+  ['lluvia', '🌧 Lluvia'],
   ['ninguno', '∅ Ninguno'],
 ];
 export const SFX_OPTS = [
@@ -42,6 +43,20 @@ export const SFX_OPTS = [
   ['disparos', '🔫 Disparos', ''],
   ['canon', '💣 Cañón', ''],
   ['olas', '🌊 Olas', ':8'],
+  ['piano', '🎹 Golpe de piano', ''],
+  ['gritos', '📣 Gritos de multitud', ':8'],
+  ['tocar', '✊ Tocan la puerta', ''],
+  ['arena', '🏜 Pasos en arena', ':6'],
+  ['nieve', '❄ Pasos en nieve', ':8'],
+  ['recarga', '🔧 Recargar arma', ''],
+  ['galope', '🐎 Galope', ':8'],
+  ['caballo', '🐴 Caballo al paso', ':8'],
+  ['relincho', '🐴 Relincho', ''],
+  ['batalla', '⚔ Batalla', ':12'],
+  ['abordaje', '🏴‍☠️ Combate naval', ':10'],
+  ['fanfarria', '🎺 Fanfarria', ':10'],
+  ['cuerno', '📯 Cuerno de guerra', ':6'],
+  ['llamarada', '🔥 Llamarada', ':6'],
 ];
 const label = (opts, id) => (opts.find((o) => o[0] === id) || [id, id])[1];
 const bankUri = (kind, name) => `${MANIFEST.base}/banco-${kind}-${name}.mp3`;

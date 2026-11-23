@@ -1,7 +1,9 @@
 // Partituras de las historias inmersivas: qué ánimo musical, ambiente y efectos acompañan cada frase.
 // `at` es el número de frase del texto (desde 0). Ánimos: misterio, tension, melancolia, esperanza,
-// victoria, epico, calma, silencio. Ambientes: viento, mar, grillos, agua, fuego, ninguno.
-// Efectos: golpe, subida[:seg], puerta, pasos[:seg], campana, yunque, redoble[:seg], disparos, canon, olas[:seg].
+// victoria, epico, calma, silencio. Ambientes: viento, mar, grillos, agua, fuego, lluvia, ninguno.
+// Efectos: golpe, subida[:seg], puerta, tocar, pasos[:seg], arena[:seg], nieve[:seg], campana, yunque, redoble[:seg],
+// disparos, recarga, canon, olas[:seg], galope[:seg], caballo[:seg], relincho, batalla[:seg], abordaje[:seg],
+// fanfarria[:seg], cuerno[:seg], llamarada[:seg], piano, gritos[:seg].
 // La mezcla la hace tools/score.py al grabar; aquí solo se describe.
 
 export const SCORES = {
