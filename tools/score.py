@@ -112,15 +112,21 @@ _tracks = {}
 _pos = {}
 TRACK_FILE = {'esperanza': 'victoria'}  # ánimos que comparten tema
 def _file(name): return TRACK_FILE.get(name, name)
+PALETTE = None  # paleta de la ciudad (tools/moods/<paleta>/<ánimo>.mp3); si falta un ánimo, se usa el general
+def _mood_path(name):
+    if PALETTE and os.path.exists(os.path.join(MOOD_DIR, PALETTE, name + '.mp3')):
+        return os.path.join(MOOD_DIR, PALETTE, name + '.mp3')
+    return os.path.join(MOOD_DIR, name + '.mp3')
 def _load_track(name):
-    name = _file(name)
+    path = _mood_path(_file(name)); name = path
     if name not in _tracks:
         import subprocess
-        wav = f'/tmp/mood-{name}.wav'
-        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', os.path.join(MOOD_DIR, name + '.mp3'), '-ac', '2', '-ar', str(SR), wav], check=True)
+        wav = '/tmp/mood-' + path.replace('/', '_') + '.wav'
+        subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', path, '-ac', '2', '-ar', str(SR), wav], check=True)
         _, x = wavfile.read(wav); x = x.astype(float) / 32767
         # deja espacio a la voz: baja un poco la zona de 1–3,5 kHz
         x = x - 0.4 * np.stack([bp(x[:, c], 1000, 3500) for c in range(2)], 1)
+        x = x - 0.35 * np.stack([bp(x[:, c], 150, 500) for c in range(2)], 1)  # y en los graves de la voz
         # compresión suave: empareja las partes fuertes y las suaves del tema
         env = np.sqrt(np.clip(lp((x ** 2).mean(1), 1.5), 1e-9, None))
         target = np.median(env)
@@ -283,7 +289,19 @@ def sfx_yunque_real(arg=None):  # herrero forjando: varios martillazos
     b = Buf(6)
     for k in range(int(arg or 4)): b.add(shot('yunque', rng.uniform(0.45, 0.6)), k * 1.0 + rng.uniform(0, 0.08), 1.0, pan=-0.3)
     return b.out
+def sfx_shamisen(arg=None):  # frase de shamisen lejano (cuerda pulsada con ataque seco), escala miyako-bushi
+    d = float(arg or 8); b = Buf(d + 3); t = 0.2; scale = [-17, -16, -12, -10, -9, -5, -4, 0]
+    while t < d:
+        semi = scale[rng.integers(0, len(scale))]
+        x = T0.koto(semi, 1.6, bend=rng.random() < 0.25); x = x + 0.4 * np.diff(x, prepend=0) * 8  # más brillo y golpe de plectro
+        b.add(x, t, rng.uniform(0.35, 0.55), pan=0.35)
+        t += rng.choice([0.28, 0.42, 0.42, 0.85, 1.3])
+    return b.out
+def sfx_campana_templo(arg=None):  # campana budista grave
+    return T0.bell(-26, 9) * 0.9
 REAL_SFX = {
+    'shamisen': sfx_shamisen,
+    'templo': sfx_campana_templo,
     'golpe': sfx_golpe_real,
     'yunque': sfx_yunque_real,
     'piano': lambda a=None: shot('piano', 0.8),
@@ -321,7 +339,7 @@ def reverb(x, amt=0.08):
     ir = rng.normal(0, 1, (n, 2)) * np.exp(-t * 2.8)[:, None]; ir[0] = 1
     return x * 0.75 + np.stack([fftconvolve(x[:, c], ir[:, c])[: len(x)] for c in range(2)], 1) * amt
 
-VOICE_FX = 'asetrate=24000*0.944,aresample=24000,atempo=1.059,bass=g=4:f=110:w=0.7,aecho=0.8:0.5:55|95:0.12|0.07'
+VOICE_FX = 'asetrate=24000*0.975,aresample=24000,atempo=1.0256,bass=g=2:f=115:w=0.7,aecho=0.8:0.6:45|80:0.08|0.04'
 
 def build_voice(job):
     # Une las frases grabadas por separado con pausas naturales y aplica el tratamiento épico a la voz
@@ -341,7 +359,8 @@ def build_voice(job):
     job['segments'] = segs
 
 def render(job):
-    global rng
+    global rng, PALETTE
+    PALETTE = job.get("palette")
     import zlib
     rng = np.random.default_rng(job.get('seed', zlib.crc32(job.get('out', '').encode())))
     if 'sentences' in job:
@@ -380,12 +399,12 @@ def render(job):
     def norm(x, target):
         r = np.sqrt((x ** 2).mean()); return x * (target / r) if r > 1e-6 else x
     vrms = np.sqrt((v[np.abs(v) > 0.01] ** 2).mean())
-    bed = reverb(norm(music.out, vrms * 10 ** (-16 / 20)) + norm(amb.out, vrms * 10 ** (-20 / 20)), 0.07)
+    bed = reverb(norm(music.out, vrms * 10 ** (-25 / 20)) + norm(amb.out, vrms * 10 ** (-28 / 20)), 0.07)
     effects = fx.out * (vrms / 0.25)
     # La música baja un poco mientras habla la voz y vuelve en las pausas (sidechain suave)
     vv = np.zeros(music.N); vv[: len(v)] = v
     env = np.sqrt(np.clip(lp(vv ** 2, 4), 0, None)); env /= env.max() + 1e-9
-    duck = 1 - 0.4 * np.clip(env * 4, 0, 1)
+    duck = 1 - 0.5 * np.clip(env * 4, 0, 1)
     mix = bed * duck[:, None] + effects + vv[:, None]
     fade = np.ones(music.N); fade[-int(tail * SR):] = np.linspace(1, 0, int(tail * SR))
     mix *= fade[:, None]

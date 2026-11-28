@@ -32,3 +32,8 @@ narración de Rekio; no se redistribuyen como archivos de sonido sueltos.
 | piano | cinematic-piano-hit (universfield) |
 | yunque | realistic-anvil-hit (joe_bou_khalil) |
 | gritos | crowd-shouting (freesound_community) |
+
+## Música de la paleta de Japón (tools/moods/japon)
+- calma: "A Just Ronin" — Solas Composer, CC BY-SA 3.0 (provisional: SA obliga a compartir las mezclas igual)
+- victoria: "Orchestral" — Makai Symphony, CC BY 3.0
+- melancolia: "Sakura" — ethnicsoundscapes (Pixabay)
