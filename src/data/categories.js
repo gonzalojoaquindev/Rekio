@@ -20,7 +20,21 @@ export const TAGS = [
   { id: 'corto', icon: '⏱️', label: 'Visita corta' },
 ];
 
-export const categoryById = (id) => CATEGORIES.find((c) => c.id === id);
+// Fuera de Japón, los mismos grupos con íconos y nombres que calzan mejor (iglesias, plazas, pasta…)
+const JP_CITIES = new Set(['kyoto', 'tokyo', 'nara']);
+const WEST = {
+  templos: { icon: '⛪', label: 'Iglesias y basílicas' },
+  historia: { icon: '🏛️' },
+  barrios: { icon: '🏘️' },
+  museos: { icon: '🖼️' },
+  miradores: { icon: '🌄', label: 'Miradores' },
+  comida: { icon: '🍝' },
+};
+export const categoryById = (id, city) => {
+  const c = CATEGORIES.find((x) => x.id === id);
+  return !c || !city || JP_CITIES.has(city) ? c : { ...c, ...(WEST[id] || {}) };
+};
+export const categoriesFor = (city) => CATEGORIES.map((c) => categoryById(c.id, city));
 export const tagById = (id) => TAGS.find((t) => t.id === id);
 
 // Clasificación de los lugares que ya venían en los recorridos: [categoría, etiquetas]

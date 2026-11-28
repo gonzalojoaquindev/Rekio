@@ -1,5 +1,6 @@
 // Todos los lugares de una ciudad, por categoría y etiquetas, en lista o en mapa.
 // Se usa en Explora (vista de ciudad) y en Viajes → Descubrir (con ❤️ para guardar).
+import { feeText } from '../money';
 import React, { useMemo, useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, ScrollView, StyleSheet } from 'react-native';
 import PointPhoto from './PointPhoto';
@@ -7,7 +8,7 @@ import MapPanel from './MapPanel';
 import { StatusChip, useNow } from './ui';
 import { C, R } from '../theme';
 import { PLACES } from '../data/places';
-import { CATEGORIES, TAGS, categoryById } from '../data/categories';
+import { CATEGORIES, TAGS, categoryById, categoriesFor } from '../data/categories';
 import { placeStatus } from '../hours';
 import { fmtMin } from '../hours';
 
@@ -30,10 +31,10 @@ export function hoursChip(id, now) {
 }
 
 export const priceText = (p) =>
-  p.fee ? `¥${p.fee.yen.toLocaleString('es-CL')}${p.fee.cash ? ' · efectivo' : ''}` : (p.tags || []).includes('gratis') ? 'Gratis' : null;
+  p.fee ? `${feeText(p.fee)}${p.fee.cash ? ' · efectivo' : ''}` : (p.tags || []).includes('gratis') ? 'Gratis' : null;
 
 export function CatalogRow({ p, now, onPress, right }) {
-  const c = categoryById(p.cat);
+  const c = categoryById(p.cat, p.city);
   const price = priceText(p);
   const chip = hoursChip(p.id, now);
   return (
@@ -71,7 +72,7 @@ export default function CityCatalog({ city, openPlace, renderRight, mapHeight = 
     all.forEach((p) => (m[p.cat] = (m[p.cat] || 0) + 1));
     return m;
   }, [all]);
-  const cats = CATEGORIES.filter((c) => counts[c.id]);
+  const cats = categoriesFor(city).filter((c) => counts[c.id]);
 
   const list = useMemo(() => {
     const qq = norm(q);
@@ -81,7 +82,7 @@ export default function CityCatalog({ city, openPlace, renderRight, mapHeight = 
         (p) =>
           (cat === 'all' || p.cat === cat) &&
           tags.every((t) => (p.tags || []).includes(t)) &&
-          (!qq || norm(`${p.name} ${p.jp} ${p.short} ${categoryById(p.cat).label}`).includes(qq))
+          (!qq || norm(`${p.name} ${p.jp} ${p.short} ${categoryById(p.cat, p.city).label}`).includes(qq))
       )
       .sort((a, b) => rank(a) - rank(b));
   }, [all, cat, tags, q]);
@@ -96,7 +97,7 @@ export default function CityCatalog({ city, openPlace, renderRight, mapHeight = 
   };
 
   const points = useMemo(
-    () => list.map((p) => ({ id: p.id, lat: p.lat, lng: p.lng, label: categoryById(p.cat).icon, kind: 'place', state: 'todo' })),
+    () => list.map((p) => ({ id: p.id, lat: p.lat, lng: p.lng, label: categoryById(p.cat, p.city).icon, kind: 'place', state: 'todo' })),
     [list]
   );
 
@@ -153,7 +154,7 @@ export default function CityCatalog({ city, openPlace, renderRight, mapHeight = 
 
       {view === 'list' &&
         list.slice(0, shown).map((p) => {
-          const head = cat === 'all' && p.cat !== lastCat ? categoryById(p.cat) : null;
+          const head = cat === 'all' && p.cat !== lastCat ? categoryById(p.cat, p.city) : null;
           lastCat = p.cat;
           return (
             <View key={p.id}>

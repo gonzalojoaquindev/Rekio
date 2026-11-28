@@ -1,3 +1,4 @@
+import { feeText, feeAmount, feeCurrency, money } from '../money';
 import React, { useEffect, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Image, Alert, TextInput } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -119,11 +120,12 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
   };
 
   // Solo las entradas que se pagan en efectivo cuentan para "lleva efectivo"
-  const cashOf = (list) => list.reduce((a, x) => a + ((x.p.fee && x.p.fee.cash && x.p.fee.yen) || 0), 0);
+  const cashOf = (list) => list.reduce((a, x) => a + ((x.p.fee && x.p.fee.cash && feeAmount(x.p.fee)) || 0), 0);
   const feeMust = cashOf(must);
   const feeOpt = cashOf(optional);
   const cardFees = stops.filter((x) => x.p.fee && !x.p.fee.cash);
-  const yen = (n) => `¥${n.toLocaleString('es-CL')}`;
+  const cur = feeCurrency((stops.find((x) => x.p.fee) || { p: {} }).p.fee);
+  const yen = (n) => money(n, cur);
 
   const StopRow = ({ x }) => (
     <TouchableOpacity style={st.stopRow} onPress={() => openPlace(x.p.id)} activeOpacity={0.8}>
@@ -135,7 +137,7 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
         {!!x.p.short && <Text style={st.stopShort}>{x.p.short}</Text>}
         {!!x.p.fee && (
           <Text style={st.stopFee}>
-            🎫 {yen(x.p.fee.yen)}
+            🎫 {feeText(x.p.fee)}
             {x.p.fee.cash ? ' · efectivo' : ''}
           </Text>
         )}
@@ -184,7 +186,7 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
             {cardFees.map((x) => (
               <Text key={x.p.id} style={st.cashText}>
                 {x.optional ? 'Opcional: ' : ''}
-                {x.p.name} desde {yen(x.p.fee.yen)}, con tarjeta.
+                {x.p.name} desde {feeText(x.p.fee)}, con tarjeta.
               </Text>
             ))}
           </View>

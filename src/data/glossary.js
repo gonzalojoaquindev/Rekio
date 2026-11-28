@@ -372,6 +372,40 @@ export const GLOSSARY = [
     short: 'Partido político chileno nacido en la década de 1860 de las ideas liberales de 1859; entre sus fundadores estuvieron Pedro León Gallo y los hermanos Matta.',
     related: ['revolucion-constituyente'],
   },
+  // ── Roma antigua ──
+  {
+    id: 'idus', term: 'Idus', jp: 'Idus Martiae', aliases: ['idus', 'idus de marzo'],
+    short: 'En el calendario romano, el día de mitad de mes: el 15 en marzo, mayo, julio y octubre, y el 13 en los demás meses.',
+    long: 'Los idus de marzo, el 15 de marzo, eran un día de fiestas religiosas y de pago de deudas. Desde el asesinato de Julio César en el año 44 a. C., la expresión quedó como sinónimo de un peligro anunciado.',
+    related: ['curia', 'dictador'],
+  },
+  {
+    id: 'curia', term: 'Curia', jp: 'Curia', aliases: ['curia'],
+    short: 'El edificio donde se reunía el Senado romano.',
+    long: 'La Curia del Foro Romano se incendió en el año 52 a. C., y mientras se construía la nueva, el Senado se reunía en otros lugares, como la sala del pórtico de Pompeyo, donde murió César.',
+    related: ['idus'],
+  },
+  {
+    id: 'dictador', term: 'Dictador', jp: 'Dictator', aliases: ['dictador', 'dictador perpetuo'],
+    short: 'En la República romana, un magistrado con poder absoluto, nombrado en emergencias y por un máximo de seis meses.',
+    long: 'Julio César se hizo nombrar dictador varias veces, y a comienzos del año 44 a. C., dictador perpetuo, es decir, de por vida. Para muchos senadores, eso era convertirse en rey, y fue uno de los motivos de su asesinato.',
+    related: ['idus'],
+  },
+  {
+    id: 'triunfo', term: 'Triunfo', jp: 'Triumphus', aliases: ['triunfo', 'triunfos'],
+    short: 'El gran desfile con que Roma celebraba a un general victorioso: atravesaba la ciudad por la Vía Sacra hasta el templo de Júpiter en el Capitolio.',
+    long: 'El general iba en un carro, con la cara pintada de rojo, seguido de su ejército, el botín y los prisioneros encadenados. La tradición dice que un esclavo le susurraba al oído que recordara que era mortal.',
+  },
+  {
+    id: 'vestales', term: 'Vestales', jp: 'Virgines Vestales', aliases: ['vestales', 'vírgenes vestales'],
+    short: 'Las sacerdotisas de Vesta, la diosa del hogar. Cuidaban el fuego sagrado de Roma, que nunca debía apagarse.',
+    long: 'Eran seis, elegidas de niñas entre familias nobles, y servían treinta años. Tenían privilegios únicos para una mujer romana, pero si rompían su voto de castidad las enterraban vivas.',
+  },
+  {
+    id: 'toga', term: 'Toga', jp: 'Toga', aliases: ['toga'],
+    short: 'La prenda de lana blanca, enrollada al cuerpo, que solo podían usar los ciudadanos romanos.',
+    long: 'Los senadores la llevaban con una franja púrpura. Era pesada e incómoda, y se usaba sobre todo en actos públicos, como las sesiones del Senado.',
+  },
 ];
 
 export const termById = (id) => GLOSSARY.find((g) => g.id === id);

@@ -1,3 +1,4 @@
+import { feeText } from '../money';
 import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity, StyleSheet, Linking, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -233,7 +234,7 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
                 </Text>
                 <Text style={st.status}>
                   {status}
-                  {p.fee ? `  ·  🎫 ¥${p.fee.yen.toLocaleString('es-CL')}${p.fee.cash ? ' efectivo' : ''}` : ''}
+                  {p.fee ? `  ·  🎫 ${feeText(p.fee)}${p.fee.cash ? ' efectivo' : ''}` : ''}
                 </Text>
               </View>
               <Text style={st.more}>Ficha ›</Text>

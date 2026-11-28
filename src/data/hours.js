@@ -77,7 +77,74 @@ const KORAKUEN = {
   closedRanges: [['12-29', '01-01']],
 };
 
+
+// ── Roma (hora de Italia) ──
+const COLOSSEO_SEASONS = (open) => [
+  { from: '01-01', to: '02-29', open, close: '16:30', last: '15:30' },
+  { from: '03-01', to: '03-28', open, close: '17:30', last: '16:30' },
+  { from: '03-29', to: '09-30', open, close: '19:15', last: '18:15' },
+  { from: '10-01', to: '10-24', open, close: '18:30', last: '17:30' },
+  { from: '10-25', to: '12-31', open, close: '16:30', last: '15:30' },
+];
+const COLOSSEO = {
+  area: 'el Coliseo', soft: true, softClosed: ' · el exterior se ve a cualquier hora', softChip: 'Interior cerrado · exterior abierto',
+  seasons: COLOSSEO_SEASONS('08:30'), closedDates: ['12-25', '01-01'], closedDatesReason: 'feriado',
+};
+const FORO = {
+  area: 'el Foro Romano y el Palatino', plural: false,
+  seasons: COLOSSEO_SEASONS('09:00'), closedDates: ['12-25', '01-01'], closedDatesReason: 'feriado',
+};
+const ROMA_HOURS = {
+  ro_colosseo: COLOSSEO,
+  ro_foro: FORO,
+  ro_palatino: FORO,
+  ro_pantheon: {
+    area: 'el Panteón', soft: true, softClosed: ' · el pórtico y la plaza se ven desde fuera', softChip: 'Interior cerrado · plaza abierta',
+    seasons: ALL_YEAR('09:00', '19:00', '18:30'), closedDates: ['12-25'], closedDatesReason: 'Navidad',
+  },
+  ro_vaticani: {
+    area: 'los Museos Vaticanos', plural: true,
+    seasons: ALL_YEAR('08:00', '20:00', '18:00'),
+    closedWeekdays: [0],
+    lastSunday: { open: '09:00', close: '14:00', last: '12:30' },
+    closedDates: ['01-01', '01-06', '02-11', '03-19', '06-29', '08-14', '08-15', '11-01', '12-08', '12-25', '12-26'],
+    closedDatesReason: 'feriado del Vaticano',
+    closedPeriods: [['2027-03-28', '2027-03-29'], ['2028-04-16', '2028-04-17']],
+    closedPeriodsReason: 'Pascua',
+  },
+  ro_sanpietro: {
+    area: 'la Basílica de San Pedro',
+    seasons: [
+      { from: '03-29', to: '10-24', open: '07:00', close: '18:00' },
+      { from: '10-25', to: '03-28', open: '07:00', close: '17:00' },
+    ],
+  },
+  ro_santangelo: {
+    area: 'el Castillo de Sant’Angelo', soft: true, softClosed: ' · el exterior y el puente se ven a cualquier hora', softChip: 'Museo cerrado · exterior abierto',
+    seasons: ALL_YEAR('09:00', '19:30', '18:30'), closedWeekdays: [1], closedDates: ['12-25', '01-01'], closedDatesReason: 'feriado',
+  },
+  ro_borghese: {
+    area: 'la Galería Borghese',
+    seasons: ALL_YEAR('09:00', '19:00', '17:45'), closedWeekdays: [1], closedDates: ['12-25', '01-01'], closedDatesReason: 'feriado',
+  },
+  ro_capitolini: {
+    area: 'los Museos Capitolinos', plural: true,
+    seasons: ALL_YEAR('09:30', '19:30', '18:30'), closedDates: ['05-01', '12-25'], closedDatesReason: 'feriado',
+  },
+  ro_caracalla: {
+    area: 'las Termas de Caracalla', plural: true,
+    seasons: [
+      { from: '11-01', to: '02-29', open: '09:00', close: '16:30', last: '15:30' },
+      { from: '03-01', to: '03-31', open: '09:00', close: '17:30', last: '16:30' },
+      { from: '04-01', to: '09-30', open: '09:00', close: '19:15', last: '18:15' },
+      { from: '10-01', to: '10-31', open: '09:00', close: '18:00', last: '17:00' },
+    ],
+    closedWeekdays: [1], closedDates: ['12-25', '01-01'], closedDatesReason: 'feriado',
+  },
+};
+
 export const HOURS = {
+  ...ROMA_HOURS,
   // Kioto
   seishomon: KYOTO_GOSHO,
   shishinden: KYOTO_GOSHO,
@@ -273,6 +340,11 @@ export const HOURS = {
     ],
   },
 };
+
+// Feriados de Italia (con el 29 de junio, San Pedro y San Pablo, patrón de Roma)
+const IT_FIXED = ['01-01', '01-06', '04-25', '05-01', '06-02', '06-29', '08-15', '11-01', '12-08', '12-25', '12-26'];
+const PASQUETTA = ['2026-04-06', '2027-03-29', '2028-04-17'];
+export const IT_HOLIDAYS = new Set([...[2026, 2027, 2028].flatMap((y) => IT_FIXED.map((d) => `${y}-${d}`)), ...PASQUETTA]);
 
 // Feriados nacionales de Japón (incluye feriados de reemplazo)
 export const JP_HOLIDAYS = new Set([

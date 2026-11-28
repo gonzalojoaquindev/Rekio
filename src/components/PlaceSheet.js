@@ -1,4 +1,5 @@
 // Ficha de un lugar: foto, historia, escuchar, cómo llegar, foto propia.
+import { feeText } from '../money';
 import React from 'react';
 import { Modal, View, Text, ScrollView, TouchableOpacity, StyleSheet, Linking, Pressable, Image } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -49,7 +50,7 @@ export default function PlaceSheet({ placeId, onClose }) {
             {stop && <Badge label={stop.optional ? 'Opcional' : '⭐ Imperdible'} bg={C.surface} />}
             {p.type === 'recreacion' && <Badge label="Recreación histórica" bg={C.brandSoft} color={C.brand} />}
             {heard && <Badge label="✓ Escuchado" bg="#E8F6EF" color={C.ok} />}
-            {!!p.cat && <Badge label={`${categoryById(p.cat).icon} ${categoryById(p.cat).label}`} bg={C.surface} />}
+            {!!p.cat && <Badge label={`${categoryById(p.cat, p.city).icon} ${categoryById(p.cat, p.city).label}`} bg={C.surface} />}
             {(p.tags || []).map((tg) => tagById(tg) && <Badge key={tg} label={`${tagById(tg).icon} ${tagById(tg).label}`} bg={C.surface} />)}
           </View>
           <Text style={st.name}>{p.name}</Text>
@@ -71,14 +72,14 @@ export default function PlaceSheet({ placeId, onClose }) {
             return (
               <View style={[st.fee, { backgroundColor: bg }]}>
                 <Text style={st.feeTitle}>🕘 {h.text}</Text>
-                <Text style={st.feeNote}>Horario de referencia (hora de Japón).</Text>
+                <Text style={st.feeNote}>Horario de referencia (hora local).</Text>
               </View>
             );
           })()}
           {p.fee && (
             <View style={st.fee}>
               <Text style={st.feeTitle}>
-                🎫 Entrada: ¥{p.fee.yen.toLocaleString('es-CL')} por persona{p.fee.cash ? ' · lleva efectivo' : ''}
+                🎫 Entrada: {feeText(p.fee)} por persona{p.fee.cash ? ' · lleva efectivo' : ''}
               </Text>
               {!!p.fee.note && <Text style={st.feeNote}>{p.fee.note}</Text>}
               <Text style={st.feeNote}>Precio de referencia (nov. 2026), puede cambiar.</Text>

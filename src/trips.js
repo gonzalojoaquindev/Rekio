@@ -1,7 +1,7 @@
 // Planificador de viajes: lo guardado (lugares y recorridos) → días con horarios, transporte y avisos.
 import { TOURS } from './data/tours';
 import { PLACES } from './data/places';
-import { tourStatus, japanTime, placeStatus, fmtMin } from './hours';
+import { tourStatus, japanTime, cityDate, placeStatus, fmtMin } from './hours';
 import { distanceM, tourStats } from './geo';
 
 const tourById = (id) => TOURS.find((t) => t.id === id);
@@ -115,7 +115,7 @@ export function dayWarnings(trip, date) {
   if (!plan) return [];
   return plan.items
     .map((it) => {
-      const at = new Date(`${date}T${it.start.padStart(5, '0')}:00+09:00`);
+      const at = cityDate(date, it.start, plan.city || 'kyoto');
       if (it.kind === 'tour') {
         const st = tourStatus(tourById(it.tourId), at);
         return st && st.issues.length ? { tourId: it.tourId, blocking: st.blocking, message: st.message } : null;
@@ -154,7 +154,7 @@ export function autoPlan(trip) {
         const w = it.kind === 'tour' ? 1 : 0.5;
         if (load + w > 3) continue;
         // ¿estaría cerrado ese día?
-        const probe = new Date(`${date}T${pad(Math.floor(SLOT_START[itemSlot(it)] / 60))}:30:00+09:00`);
+        const probe = cityDate(date, `${pad(Math.floor(SLOT_START[itemSlot(it)] / 60))}:30`, city);
         if (it.kind === 'tour') {
           const st = tourStatus(tourById(it.id), probe);
           if (st && st.blocking && st.issues.some((x) => x.st.state === 'closed')) continue;

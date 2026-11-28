@@ -1,6 +1,6 @@
 // Lógica de "Mi día": en qué parte del plan vas, atrasos y avisos de horarios en la hora planificada.
 import { ITINERARIES, itineraryById } from './data/itineraries';
-import { japanTime, tourStatus, DAY_NAMES } from './hours';
+import { japanTime, cityTime, cityDate, tourStatus, DAY_NAMES } from './hours';
 import { dayPlan, tripDates } from './trips';
 import { TOURS } from './data/tours';
 
@@ -11,11 +11,11 @@ const toMin = (hhmm) => {
   const [h, m] = hhmm.split(':').map(Number);
   return h * 60 + m;
 };
-// Fecha real de un horario del plan (hora de Japón)
-export const planDate = (itin, hhmm) => new Date(`${itin.date}T${hhmm}:00+09:00`);
+// Fecha real de un horario del plan (hora local de la ciudad del día)
+export const planDate = (itin, hhmm) => cityDate(itin.date, hhmm, itin.city || 'kyoto');
 
 export function dayLabel(itin) {
-  const jt = japanTime(planDate(itin, '12:00'));
+  const jt = cityTime(planDate(itin, '12:00'), itin.city || 'kyoto');
   return `${DAY_NAMES[jt.wd]} ${jt.d} de ${MONTHS[jt.m - 1]}`;
 }
 
@@ -27,11 +27,11 @@ export function currentItinerary(now = new Date()) {
 }
 
 const doneToday = (completed, tourId, itin) =>
-  completed.some((c) => c.tourId === tourId && japanTime(new Date(c.date)).key === itin.date);
+  completed.some((c) => c.tourId === tourId && cityTime(new Date(c.date), itin.city || 'kyoto').key === itin.date);
 
 // Estado del día respecto a la hora real
 export function dayProgress(itin, now, { activeTourId, completed = [] } = {}) {
-  const jt = japanTime(now);
+  const jt = cityTime(now, itin.city || 'kyoto');
   const items = itin.items.map((it, i) => ({
     ...it,
     i,

@@ -11,7 +11,7 @@ import { distanceM } from '../geo';
 import { useTour } from '../tour';
 import { useStore, earnedStamps } from '../store';
 import { cityPlaces } from '../components/CityCatalog';
-import { CATEGORIES } from '../data/categories';
+import { categoriesFor } from '../data/categories';
 
 const norm = (s) =>
   (s || '')
@@ -40,7 +40,11 @@ export default function ExploreScreen({ openTour, openPlace, openCity }) {
       (cat === 'Todo' || t.category === cat) &&
       (!q || norm(`${t.name} ${t.description} ${t.category}`).includes(norm(q)))
   );
-  const places = PLACES.filter((p) => (q ? norm(`${p.name} ${p.jp} ${p.story}`).includes(norm(q)) : !p.cat || !p.id.startsWith('tt_')));
+  // Sin búsqueda: los lugares de los recorridos (los del catálogo completo están en «Todo <ciudad>»)
+  const stopIds = useMemo(() => new Set(TOURS.flatMap((t) => t.stops.map((s) => s.id))), []);
+  const places = PLACES.filter((p) =>
+    q ? norm(`${p.name} ${p.jp} ${p.story}`).includes(norm(q)) : !p.id.startsWith('tt_') && (p.city !== 'roma' || stopIds.has(p.id))
+  );
 
   const nearby = here
     ? PLACES.map((p) => ({ p, d: distanceM(here, p) }))
@@ -100,7 +104,7 @@ export default function ExploreScreen({ openTour, openPlace, openCity }) {
         const cp = places.filter((p) => p.city === city.id);
         if (!ct.length && !cp.length) return null;
         const all = cityPlaces(city.id);
-        const icons = CATEGORIES.filter((c) => all.some((p) => p.cat === c.id)).map((c) => c.icon).join(' ');
+        const icons = categoriesFor(city.id).filter((c) => all.some((p) => p.cat === c.id)).map((c) => c.icon).join(' ');
         return (
           <View key={city.id}>
             {!q && all.length >= 8 && openCity && (
@@ -144,7 +148,7 @@ export default function ExploreScreen({ openTour, openPlace, openCity }) {
       <View style={st.soon}>
         <Text style={st.soonTitle}>Pronto, más ciudades</Text>
         <Text style={st.soonText}>
-          Rekio ya recorre Kioto, Tokio, Nara y La Serena. Cada nueva ciudad suma recorridos, lugares y estampillas.
+          Rekio ya recorre Roma, Kioto, Tokio, Nara, La Serena y Copiapó. Cada nueva ciudad suma recorridos, lugares y estampillas.
         </Text>
       </View>
     </ScrollView>

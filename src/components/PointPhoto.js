@@ -84,7 +84,7 @@ async function findPhoto(point) {
   if (point.noAutoPhoto && !(point.photo || []).length) return null;
   const tries = [...(point.photo || [])];
   const jp = (point.jp || '').split(/[・（(]/)[0].trim();
-  if (jp && !point.noAutoPhoto) tries.push(`search:ja:${jp}`);
+  if (jp && !point.noAutoPhoto) tries.push(`search:${point.nameLang || 'ja'}:${jp}`);
   for (const t of tries) {
     try {
       let res = null;

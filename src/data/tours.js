@@ -5,6 +5,7 @@ import { SCORES } from './scores';
 //   stamp: estampilla que se gana al completar el recorrido
 
 import { TOURS_TOKYO_NARA } from './tours_tokyo_nara';
+import { TOURS_ROMA } from './tours_roma';
 
 export const CITIES = [
   { id: 'kyoto', name: 'Kioto', country: 'Japón', cc: 'JP', lat: 35.0116, lng: 135.7681 },
@@ -12,6 +13,7 @@ export const CITIES = [
   { id: 'nara', name: 'Nara', country: 'Japón', cc: 'JP', lat: 34.6851, lng: 135.8329 },
   { id: 'laserena', name: 'La Serena', country: 'Chile', cc: 'CL', lat: -29.9027, lng: -71.252 },
   { id: 'copiapo', name: 'Copiapó', country: 'Chile', cc: 'CL', lat: -27.3665, lng: -70.332 },
+  { id: 'roma', name: 'Roma', country: 'Italia', cc: 'IT', lat: 41.8986, lng: 12.4769 },
 ];
 
 export const TOURS = [
@@ -281,7 +283,7 @@ export const TOURS = [
   }
 ];
 
-TOURS.push(...TOURS_TOKYO_NARA);
+TOURS.push(...TOURS_TOKYO_NARA, ...TOURS_ROMA);
 
 // Partituras de intro y cierre de las historias inmersivas
 for (const t of TOURS) {
@@ -305,6 +307,10 @@ export const BEST_TIME = {
   ueno: { slots: ['manana'], note: 'El santuario abre a las 9:00 y en invierno el recinto interior cierra a las 16:30. Por la mañana el parque está tranquilo.' },
   koishikawa: { slots: ['manana', 'tarde'], note: 'Abre de 9:00 a 17:00 (última entrada 16:30). A fines de noviembre los arces del puente rojo están en su mejor momento.' },
   shinjuku: { slots: ['tarde', 'noche'], note: 'El gato aparece desde las 7:00 hasta pasada la medianoche, pero de noche la pantalla luce mucho más. Omoide Yokochō se anima al anochecer.' },
+  'roma-antigua': { slots: ['temprano', 'tarde'], note: 'Temprano evitas el calor y las multitudes del Coliseo; al atardecer, la terraza sobre el Foro es espectacular. Son unos 2 km, todo por fuera y sin entradas.' },
+  'roma-centro': { slots: ['temprano', 'noche'], note: 'Antes de las 9:00 la Fontana di Trevi está casi vacía y no se paga para bajar al borde. De noche las plazas se iluminan y se llenan de vida.' },
+  'roma-vaticano': { slots: ['manana'], note: 'Empieza temprano: la basílica abre a las 7:00 y la fila crece rápido. Así llegas al Trastévere a la hora de almorzar. Los miércoles en la mañana hay audiencia del papa y la plaza se cierra.' },
+  'roma-idus': { slots: ['tarde', 'noche'], note: 'Al atardecer, con las ruinas iluminadas, la historia se vive mejor. Son unos 1,2 km, de Campo de Fiori al Capitolio, todo por fuera.' },
   nara: { slots: ['manana'], note: 'El Gran Buda abre a las 8:00 en invierno. Por la mañana los ciervos están más tranquilos y hay menos grupos.' },
 };
 TOURS.forEach((t) => { if (BEST_TIME[t.id]) t.when = BEST_TIME[t.id]; });

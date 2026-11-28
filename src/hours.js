@@ -1,7 +1,9 @@
 // Horarios: ¿está abierto hoy?, ¿cierra pronto?, ¿llegas a tiempo?
-// Todo se calcula en hora de Japón (UTC+9, sin horario de verano), aunque el teléfono esté en otra zona.
-import { HOURS, JP_HOLIDAYS } from './data/hours';
+// Todo se calcula en la hora local de la ciudad del lugar (Japón UTC+9; Italia UTC+1/+2 con horario
+// de verano europeo; Chile UTC-4/-3), aunque el teléfono esté en otra zona.
+import { HOURS, JP_HOLIDAYS, IT_HOLIDAYS } from './data/hours';
 import { placeById, distanceM } from './geo';
+import { CITIES } from './data/tours';
 
 export const DAY_NAMES = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
 const pad = (n) => String(n).padStart(2, '0');
@@ -11,15 +13,47 @@ const toMin = (hhmm) => {
 };
 export const fmtMin = (min) => `${Math.floor(min / 60)}:${pad(min % 60)}`;
 
-// Fecha y hora en Japón
-export function japanTime(date = new Date()) {
-  const t = new Date(date.getTime() + 9 * 3600 * 1000);
-  const y = t.getUTCFullYear(), m = t.getUTCMonth() + 1, d = t.getUTCDate();
-  return { y, m, d, wd: t.getUTCDay(), min: t.getUTCHours() * 60 + t.getUTCMinutes(), md: `${pad(m)}-${pad(d)}`, key: `${y}-${pad(m)}-${pad(d)}`, ms: date.getTime() };
+// Zona horaria por país
+const countryOf = (city) => ((CITIES.find((c) => c.id === city) || {}).cc || 'JP');
+// Domingo número n (1 = primero, -1 = último) de un mes, en UTC (ms)
+function nthSunday(y, m, n, hourUtc) {
+  if (n > 0) {
+    const first = new Date(Date.UTC(y, m - 1, 1, hourUtc));
+    return first.getTime() + ((7 - first.getUTCDay()) % 7) * 86400000 + (n - 1) * 7 * 86400000;
+  }
+  const last = new Date(Date.UTC(y, m, 0, hourUtc));
+  return last.getTime() - last.getUTCDay() * 86400000;
 }
-const shiftDays = (jt, n) => japanTime(new Date(jt.ms + n * 86400000));
+export function utcOffset(city, date = new Date()) {
+  const cc = countryOf(city);
+  const ms = date.getTime(), y = date.getUTCFullYear();
+  if (cc === 'IT' || cc === 'ES' || cc === 'FR' || cc === 'VA') {
+    // Horario de verano europeo: del último domingo de marzo al último de octubre (01:00 UTC)
+    return ms >= nthSunday(y, 3, -1, 1) && ms < nthSunday(y, 10, -1, 1) ? 2 : 1;
+  }
+  if (cc === 'CL') {
+    // Chile continental: verano (UTC-3) del primer domingo de septiembre al primer domingo de abril
+    return ms >= nthSunday(y, 4, 1, 3) && ms < nthSunday(y, 9, 1, 4) ? -4 : -3;
+  }
+  return 9;
+}
+// Fecha y hora locales de una ciudad (por defecto, Japón)
+export function cityTime(date = new Date(), city = 'kyoto') {
+  const t = new Date(date.getTime() + utcOffset(city, date) * 3600 * 1000);
+  const y = t.getUTCFullYear(), m = t.getUTCMonth() + 1, d = t.getUTCDate();
+  return { y, m, d, wd: t.getUTCDay(), min: t.getUTCHours() * 60 + t.getUTCMinutes(), md: `${pad(m)}-${pad(d)}`, key: `${y}-${pad(m)}-${pad(d)}`, ms: date.getTime(), city };
+}
+export const japanTime = (date = new Date()) => cityTime(date, 'kyoto');
+// Instante real de una fecha y hora locales ('AAAA-MM-DD', 'HH:MM') en una ciudad
+export function cityDate(key, hhmm, city = 'kyoto') {
+  const guess = new Date(`${key}T${hhmm.padStart(5, '0')}:00Z`);
+  return new Date(guess.getTime() - utcOffset(city, guess) * 3600 * 1000);
+}
+const shiftDays = (jt, n) => cityTime(new Date(jt.ms + n * 86400000), jt.city);
 const inRange = (md, from, to) => (from <= to ? md >= from && md <= to : md >= from || md <= to);
-const isHoliday = (jt) => JP_HOLIDAYS.has(jt.key);
+const isHoliday = (jt) => (countryOf(jt.city) === 'IT' || countryOf(jt.city) === 'VA' ? IT_HOLIDAYS : JP_HOLIDAYS).has(jt.key);
+// Último domingo del mes (para los Museos Vaticanos, que abren gratis ese día)
+const isLastSunday = (jt) => jt.wd === 0 && jt.d + 7 > new Date(Date.UTC(jt.y, jt.m, 0)).getUTCDate();
 
 export const hoursFor = (placeId) => HOURS[placeId] || null;
 
@@ -32,7 +66,8 @@ export function closedReason(spec, jt) {
   if (spec.closedOnHolidays && isHoliday(jt)) return 'feriado';
   const weekly = spec.closedWeekdays || [];
   if (weekly.includes(jt.wd)) {
-    const exempt = spec.holidayOpens && isHoliday(jt) && !(spec.exceptHolidays || []).includes(jt.md);
+    const exempt =
+      (spec.holidayOpens && isHoliday(jt) && !(spec.exceptHolidays || []).includes(jt.md)) || (spec.lastSunday && isLastSunday(jt));
     if (!exempt) return DAY_NAMES[jt.wd];
   }
   // El cierre de un lunes feriado pasa al martes
@@ -43,6 +78,10 @@ export function closedReason(spec, jt) {
 }
 
 export function seasonFor(spec, jt) {
+  if (spec.lastSunday && isLastSunday(jt)) {
+    const l = spec.lastSunday;
+    return { open: toMin(l.open), close: toMin(l.close), last: toMin(l.last || l.close) };
+  }
   const s = spec.seasons.find((x) => inRange(jt.md, x.from, x.to));
   if (!s) return null;
   const open = toMin(s.open), close = toMin(s.close);
@@ -54,7 +93,7 @@ export function seasonFor(spec, jt) {
 export function placeStatus(placeId, date = new Date()) {
   const spec = hoursFor(placeId);
   if (!spec) return null;
-  const jt = japanTime(date);
+  const jt = cityTime(date, (placeById(placeId) || {}).city);
   const why = closedReason(spec, jt);
   const sea = seasonFor(spec, jt);
   if (why || !sea) return { state: 'closed', why: why || 'cerrado', spec, jt };
@@ -79,10 +118,10 @@ export function placeHoursText(placeId, date = new Date()) {
 }
 
 // Próximos días en que abre (para recomendar otro día)
-export function nextOpenDays(spec, date = new Date(), count = 3) {
+export function nextOpenDays(spec, date = new Date(), count = 3, city) {
   const out = [];
   for (let i = 1; i <= 10 && out.length < count; i++) {
-    const jt = shiftDays(japanTime(date), i);
+    const jt = shiftDays(cityTime(date, city), i);
     if (!closedReason(spec, jt)) out.push(i === 1 ? 'mañana' : `el ${DAY_NAMES[jt.wd]} ${jt.d}`);
   }
   return out;
@@ -109,7 +148,7 @@ const listJoin = (a) => (a.length <= 1 ? a.join('') : `${a.slice(0, -1).join(', 
 export function tourStatus(tour, date = new Date(), { order, from } = {}) {
   const stops = tour.stops.map((s) => ({ ...s, st: placeStatus(s.id, date), p: placeById(s.id) })).filter((s) => s.st);
   if (!stops.length) return null;
-  const jt = japanTime(date);
+  const jt = cityTime(date, tour.city);
   const arr = arrivalMinutes(tour, order, from);
   // Un aviso por recinto; si tiene paradas imperdibles, cuenta como imperdible
   const byArea = new Map();
@@ -147,7 +186,7 @@ export function tourStatus(tour, date = new Date(), { order, from } = {}) {
     const recibe = pl ? 'reciben' : 'recibe';
     const cerro = pl ? 'cerraron' : 'cerró';
     if (x.st.state === 'closed') {
-      const days = nextOpenDays(x.st.spec, date);
+      const days = nextOpenDays(x.st.spec, date, 3, tour.city);
       lines.push(
         `${x.optional ? '• Parada opcional: hoy ' : '• Hoy '}${area} ${esta} (${x.st.why}).` +
           (x.st.spec.soft ? ' Igual puedes recorrer el exterior.' : x.optional ? ' Puedes saltarla.' : days.length ? ` Te recomiendo ir ${listJoin(days)}.` : '')
