@@ -23,7 +23,7 @@ import { PLACES } from '../data/places';
 import { cityById } from '../geo';
 import { useStore, earnedStamps } from '../store';
 import { getVoice, getVoices, setVoice, voiceLabel, say } from '../speech';
-import { NARRATORS, setNarrator } from '../narration';
+import { NARRATORS, setNarrator, DEFAULT_NARRATOR } from '../narration';
 import { previewText } from '../narrationTexts';
 import { hasGoogleMaps } from '../components/MapPanel';
 import { CREDITS } from '../music';
@@ -175,7 +175,7 @@ export default function ProfileScreen({ goPassport, openTour }) {
           </Text>
           <View style={st.narrators}>
             {NARRATORS.map((n) => {
-              const on = (store.settings.narrator || 'Fenrir') === n.id;
+              const on = (store.settings.narrator || DEFAULT_NARRATOR) === n.id;
               return (
                 <TouchableOpacity
                   key={n.id}

@@ -121,7 +121,7 @@ export default function PlaceSheet({ placeId, onClose }) {
           )}
 
           <Text style={st.storyTitle}>La historia</Text>
-          <LinkedText style={st.story}>{p.story}</LinkedText>
+          <LinkedText style={st.story} city={p.city}>{p.story}</LinkedText>
           {!!p.sources && (
             <Text style={[st.feeNote, { marginTop: 12 }]}>
               📚 Fuentes: {p.sources} Las escenas y sonidos que se piden imaginar son recreaciones.

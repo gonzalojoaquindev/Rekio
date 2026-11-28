@@ -5,7 +5,7 @@ import { PLACES } from './data/places';
 import { TOURS } from './data/tours';
 import { distanceM, distToPolylineM, fmtDist, placeById, tourStats, bearingDeg, dirName } from './geo';
 import { STAMP_LINE, navDistance, NAV_RECALC } from './narrationTexts';
-import { audioFor, hasScoredAudio } from './narration';
+import { audioFor, hasScoredAudio, prefetchTour } from './narration';
 import { say, stopSpeaking, onSpeakingChange, speakingKey, isSpeaking, placeNarration, loadVoices } from './speech';
 import { fetchWalkingRoute } from './nav';
 import { useStore } from './store';
@@ -254,6 +254,7 @@ export function TourProvider({ children }) {
     stopSpeaking();
     if (!simulate) setSim(null);
     const d = tourById(id);
+    prefetchTour(id);
     // Continuar donde quedaste: mismo orden y desde la parada/capítulo guardado
     if (opts.resume) {
       tourRef.current = { id, idx: opts.resume.pos, phase: 'guiding', simulate, order: opts.resume.order || null, dayId: opts.dayId || null };

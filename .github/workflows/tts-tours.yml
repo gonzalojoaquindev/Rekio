@@ -19,8 +19,8 @@ jobs:
         env:
           GOOGLE_TTS_KEY: ${{ secrets.GOOGLE_TTS_KEY }}
           TOURS: ${{ hashFiles('scripts/audio-tours.txt') != '' && '' || 'copiapo-1859,laserena-1680' }}
-          VOICES: Fenrir,Iapetus,Leda,Kore
-          PREVIEWS: Fenrir,Iapetus,Leda,Kore
+          VOICES: Algenib,Fenrir,Iapetus,Leda,Kore
+          PREVIEWS: Algenib
           NAV: '1'
       - run: python3 tools/bank.py /tmp/audio
       - name: Subir audios a la release audio-v1

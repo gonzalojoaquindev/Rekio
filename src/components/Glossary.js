@@ -6,7 +6,7 @@ import { linkTerms } from '../glossary';
 import { sayAside, stopSpeaking, speakingKey } from '../speech';
 import { PLACES } from '../data/places';
 import { TOURS } from '../data/tours';
-import { termsIn } from '../glossary';
+import { termsIn, regionOf } from '../glossary';
 import { C, R } from '../theme';
 
 const Ctx = createContext({ openTerm: () => {}, openList: () => {} });
@@ -18,7 +18,7 @@ function whereUsed(id) {
   if (!whereCache) {
     whereCache = {};
     for (const t of TOURS) {
-      const ids = new Set(t.stops.flatMap((s) => termsIn((PLACES.find((p) => p.id === s.id) || {}).story || '', 40)));
+      const ids = new Set(t.stops.flatMap((s) => termsIn((PLACES.find((p) => p.id === s.id) || {}).story || '', 40, regionOf(t.city))));
       ids.forEach((x) => (whereCache[x] = [...(whereCache[x] || []), t.name.split(':')[0]]));
     }
   }
@@ -64,9 +64,10 @@ export function GlossaryProvider({ children }) {
 }
 
 // Texto con las palabras del vocabulario subrayadas (solo su primera aparición)
-export function LinkedText({ children, style }) {
+export function LinkedText({ children, style, city, region }) {
   const { openTerm } = useGlossary();
-  const parts = useMemo(() => linkTerms(String(children || '')), [children]);
+  const rg = region || (city ? regionOf(city) : undefined);
+  const parts = useMemo(() => linkTerms(String(children || ''), { region: rg }), [children, rg]);
   return (
     <Text style={style}>
       {parts.map((p, i) =>
@@ -83,9 +84,9 @@ export function LinkedText({ children, style }) {
 }
 
 // Fila de chips con los términos de un texto (para el reproductor)
-export function TermChips({ text, label = 'Palabras clave' }) {
+export function TermChips({ text, label = 'Palabras clave', city }) {
   const { openTerm } = useGlossary();
-  const ids = useMemo(() => termsIn(text || '', 6), [text]);
+  const ids = useMemo(() => termsIn(text || '', 6, city ? regionOf(city) : undefined), [text, city]);
   if (!ids.length) return null;
   return (
     <View style={st.chipsBox}>
@@ -120,7 +121,7 @@ function TermCard({ id, onClose, onRelated, canGoBack, onBack }) {
             <Text style={st.term}>{g.term}</Text>
             {!!g.jp && <Text style={st.jp}>{g.jp}</Text>}
             <Text style={st.short}>{g.short}</Text>
-            {!!g.long && <LinkedText style={st.long}>{g.long}</LinkedText>}
+            {!!g.long && <LinkedText style={st.long} region={g.region}>{g.long}</LinkedText>}
             {!!(g.related && g.related.length) && (
               <>
                 <Text style={st.section}>Relacionado</Text>

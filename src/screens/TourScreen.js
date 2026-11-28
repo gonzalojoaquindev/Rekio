@@ -240,7 +240,7 @@ export default function TourScreen({ openPlace, openTour, goPassport }) {
               <Text style={st.more}>Ficha ›</Text>
             </TouchableOpacity>
 
-            <TermChips text={p.story} label={`En ${def.unit === 'capitulo' ? 'este capítulo' : 'esta parada'}`} />
+            <TermChips text={p.story} city={p.city} label={`En ${def.unit === 'capitulo' ? 'este capítulo' : 'esta parada'}`} />
 
             {!!serverUrlFor(store.settings) && (
               <TouchableOpacity style={st.askBtn} onPress={() => setAsking(true)} accessibilityLabel="Hacer una pregunta">

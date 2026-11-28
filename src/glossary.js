@@ -1,5 +1,6 @@
 // Detecta palabras del vocabulario en un texto (sin importar tildes, mayúsculas ni plurales).
 import { GLOSSARY } from './data/glossary';
+import { CITIES } from './data/tours';
 
 const normChar = (c) => {
   const n = c.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -10,12 +11,12 @@ const normKeep = (s) => Array.from(s).map(normChar).join('');
 const isWordChar = (c) => !!c && /[a-z0-9ñ]/.test(c);
 
 // Lista de (alias normalizado → id), las formas largas primero para que "período Edo" gane a "Edo"
-const ENTRIES = GLOSSARY.flatMap((g) => [g.term, ...(g.aliases || [])].map((a) => ({ a: normKeep(a), id: g.id })))
-  .filter((x, i, arr) => x.a.length > 1 && arr.findIndex((y) => y.a === x.a) === i)
+const ENTRIES = GLOSSARY.flatMap((g) => [g.term, ...(g.aliases || [])].map((a) => ({ a: normKeep(a), id: g.id, region: g.region })))
+  .filter((x, i, arr) => x.a.length > 1 && arr.findIndex((y) => y.a === x.a && y.region === x.region) === i)
   .sort((x, y) => y.a.length - x.a.length);
 
 // Divide un texto en trozos: { text } normales y { text, id } enlazados (solo la primera aparición de cada término)
-export function linkTerms(text, { seen = new Set(), max = 12 } = {}) {
+export function linkTerms(text, { seen = new Set(), max = 12, region } = {}) {
   if (!text) return [];
   const chars = Array.from(text);
   const n = chars.map(normChar).join('');
@@ -27,7 +28,7 @@ export function linkTerms(text, { seen = new Set(), max = 12 } = {}) {
     let hit = null;
     if (!isWordChar(n[i - 1]) && count < max) {
       for (const e of ENTRIES) {
-        if (seen.has(e.id) || !n.startsWith(e.a, i)) continue;
+        if (seen.has(e.id) || (region && e.region !== region) || !n.startsWith(e.a, i)) continue;
         let end = i + e.a.length;
         // plurales: samurai → samurais, geisha → geishas, corsario → corsarios
         if (n[end] === 's') end += 1;
@@ -53,4 +54,6 @@ export function linkTerms(text, { seen = new Set(), max = 12 } = {}) {
 }
 
 // Términos que aparecen en un texto, en orden de aparición
-export const termsIn = (text, max = 8) => linkTerms(text, { max }).filter((x) => x.id).map((x) => x.id);
+export const termsIn = (text, max = 8, region) => linkTerms(text, { max, region }).filter((x) => x.id).map((x) => x.id);
+// País de una ciudad (para elegir el vocabulario que corresponde)
+export const regionOf = (city) => ((CITIES.find((c) => c.id === city) || {}).cc || undefined);

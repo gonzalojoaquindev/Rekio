@@ -50,7 +50,8 @@ function chunks(text, max = 3500) {
 
 // Historias inmersivas: Algenib, más lenta y con tratamiento épico (más grave, cuerpo y sala)
 const EPIC = { voice: 'Algenib', rate: 0.9 };
-const FX = 'asetrate=24000*0.944,aresample=24000,atempo=1.059,bass=g=4:f=110:w=0.7,aecho=0.8:0.5:55|95:0.12|0.07,loudnorm=I=-18:TP=-1.5';
+// «Grave suave»: el mismo tratamiento que tools/score.py (VOICE_FX)
+const FX = 'asetrate=24000*0.975,aresample=24000,atempo=1.0256,bass=g=2:f=115:w=0.7,aecho=0.8:0.6:45|80:0.08|0.04,loudnorm=I=-18:TP=-1.5';
 import { execFileSync } from 'node:child_process';
 function epicFx(buf) {
   writeFileSync('/tmp/fx-in.mp3', buf);
@@ -155,7 +156,7 @@ for (const id of TOURS) {
         manifest.voices[`${voice}-voz`][k] = vname;
         (manifest.tours[id][`${voice}-voz`] = manifest.tours[id][`${voice}-voz`] || { files: [], bytes: 0 }).files.push(vname);
         manifest.tours[id][`${voice}-voz`].bytes += r.voiceOnly.length;
-      } else buf = epic ? epicFx(await synth(t, voice, EPIC.rate)) : await synth(t, voice);
+      } else buf = epic || voice === EPIC.voice ? epicFx(await synth(t, voice, EPIC.rate)) : await synth(t, voice);
       writeFileSync(join(OUT, name), buf);
       manifest.voices[voice][k] = name;
       files.push(name);
@@ -174,7 +175,7 @@ for (const voice of process.env.PREVIEWS ? process.env.PREVIEWS.split(',') : [])
     const k = textKey(t);
     if (manifest.voices[voice][k]) continue; // ya grabada
     const name = `${voice}-${k}.mp3`;
-    writeFileSync(join(OUT, name), await synth(t, voice));
+    writeFileSync(join(OUT, name), voice === EPIC.voice ? epicFx(await synth(t, voice, EPIC.rate)) : await synth(t, voice));
     manifest.voices[voice][k] = name;
     chars += t.length;
   }

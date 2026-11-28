@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator, Alert } from 'react-native';
 import { C, R } from '../theme';
 import { useStore } from '../store';
-import { tourAudio, downloadTour, deleteTourAudio } from '../narration';
+import { tourAudio, downloadTour, deleteTourAudio, DEFAULT_NARRATOR } from '../narration';
 
 export default function AudioBox({ tourId }) {
   const store = useStore();
-  const voice = store.settings.narrator || 'Fenrir';
+  const voice = store.settings.narrator || DEFAULT_NARRATOR;
   const [, bump] = useState(0);
   const [prog, setProg] = useState(null);
   const a = tourAudio(tourId, voice);

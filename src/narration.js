@@ -6,13 +6,14 @@ import { textKey } from './textkey';
 import { navPhrases } from './narrationTexts';
 
 export const NARRATORS = [
+  { id: 'Algenib', label: 'Algenib', desc: 'Voz grave, la de las historias inmersivas' },
   { id: 'Fenrir', label: 'Fenrir', desc: 'Voz masculina' },
   { id: 'Iapetus', label: 'Iapetus', desc: 'Voz masculina' },
   { id: 'Leda', label: 'Leda', desc: 'Voz femenina' },
   { id: 'Kore', label: 'Kore', desc: 'Voz femenina' },
   { id: 'device', label: 'Voz del teléfono', desc: 'Funciona sin internet en todos los recorridos' },
 ];
-export const DEFAULT_NARRATOR = 'Fenrir';
+export const DEFAULT_NARRATOR = 'Algenib';
 
 let narrator = DEFAULT_NARRATOR;
 let effects = true; // música y efectos en las historias inmersivas (si no, solo voz)
@@ -100,6 +101,19 @@ export async function downloadTour(tourId, voice = narrator, onProgress) {
     if (onProgress) onProgress(done, t.files.length);
   }
   return tourAudio(tourId, voice);
+}
+
+// Descarga en segundo plano al empezar un recorrido, para que cada parada suene sin esperar a internet
+let prefetching = null;
+export function prefetchTour(tourId, voice = narrator) {
+  const t = tourAudio(tourId, voice);
+  if (!t || t.complete || prefetching === tourId) return;
+  prefetching = tourId;
+  downloadTour(tourId, voice)
+    .catch(() => {})
+    .finally(() => {
+      if (prefetching === tourId) prefetching = null;
+    });
 }
 
 export function deleteTourAudio(tourId, voice = narrator) {

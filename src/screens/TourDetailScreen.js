@@ -211,7 +211,7 @@ export default function TourDetailScreen({ tourId, onBack, openPlace, onStart })
             </View>
           )}
 
-          <LinkedText style={st.desc}>{tour.description}</LinkedText>
+          <LinkedText style={st.desc} city={tour.city}>{tour.description}</LinkedText>
 
           <View style={st.stampBox}>
             <Stamp stamp={tour.stamp} title={city.name} cc={city.cc} size={86} locked={!earned} />

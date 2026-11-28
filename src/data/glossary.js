@@ -374,6 +374,12 @@ export const GLOSSARY = [
   },
   // ── Roma antigua ──
   {
+    id: 'emperador-romano', term: 'Emperador', jp: 'Imperator', aliases: ['emperador', 'emperadores'],
+    short: 'El gobernante supremo del Imperio romano, desde Augusto (27 a. C.) en adelante.',
+    long: 'Formalmente Roma seguía siendo una república, con Senado y magistrados, pero el emperador concentraba el mando del ejército y la última palabra en todo. Muchos fueron declarados dioses al morir.',
+    related: ['dictador', 'triunfo'],
+  },
+  {
     id: 'idus', term: 'Idus', jp: 'Idus Martiae', aliases: ['idus', 'idus de marzo'],
     short: 'En el calendario romano, el día de mitad de mes: el 15 en marzo, mayo, julio y octubre, y el 13 en los demás meses.',
     long: 'Los idus de marzo, el 15 de marzo, eran un día de fiestas religiosas y de pago de deudas. Desde el asesinato de Julio César en el año 44 a. C., la expresión quedó como sinónimo de un peligro anunciado.',
@@ -409,3 +415,8 @@ export const GLOSSARY = [
 ];
 
 export const termById = (id) => GLOSSARY.find((g) => g.id === id);
+
+// País de cada término: así «emperador» de Japón no aparece en una historia de Roma
+const CL = ['pirata', 'corsario', 'bucanero', 'filibustero', 'cabildo', 'corregidor', 'acequia', 'diaguitas', 'changos', 'calendario', 'charqui', 'ordenes', 'revolucion-constituyente', 'constitucion-1833', 'centralismo', 'intendente', 'chanarcillo', 'peso-constituyente', 'maestranza', 'partido-radical'];
+const IT = ['emperador-romano', 'idus', 'curia', 'dictador', 'triunfo', 'vestales', 'toga'];
+GLOSSARY.forEach((g) => (g.region = CL.includes(g.id) ? 'CL' : IT.includes(g.id) ? 'IT' : 'JP'));

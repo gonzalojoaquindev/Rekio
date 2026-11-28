@@ -138,7 +138,7 @@ function playAudio(state, item) {
   // Sin conexión o archivo dañado: sigue con la voz del teléfono
   npTimer = setTimeout(() => {
     if (!loaded && current && current.token === token) fallbackToTts(state);
-  }, item.local ? 5000 : 12000);
+  }, item.local ? 5000 : 8000);
 }
 
 function speakFrom(state) {
