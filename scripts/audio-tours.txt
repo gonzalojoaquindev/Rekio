@@ -1,1 +1,1 @@
-roma-antigua,roma-centro,roma-vaticano,roma-idus
+roma-idus
