@@ -703,6 +703,7 @@ export const ROMA = [
   // ── Historia inmersiva: Los idus de marzo (sin categoría: solo dentro de la historia) ──
   R({
     id: 'ro_idus_pompeyo',
+    art: require('../../assets/art/roma-idus-1.jpg'),
     photo: ['it:Teatro di Pompeo', 'en:Theatre of Pompey'],
     name: 'Capítulo 1: El teatro de Pompeyo',
     jp: 'Via di Grotta Pinta',
@@ -720,6 +721,7 @@ export const ROMA = [
   }),
   R({
     id: 'ro_idus_curia',
+    art: require('../../assets/art/roma-idus-2.jpg'),
     photo: ['it:Largo di Torre Argentina'],
     name: 'Capítulo 2: La Curia de Pompeyo',
     jp: 'Area Sacra di Largo Argentina',
@@ -737,6 +739,7 @@ export const ROMA = [
   }),
   R({
     id: 'ro_idus_capitolio',
+    art: require('../../assets/art/roma-idus-3.jpg'),
     photo: ['it:Piazza del Campidoglio'],
     name: 'Capítulo 3: La huida al Capitolio',
     jp: 'Campidoglio',
@@ -753,6 +756,7 @@ export const ROMA = [
   }),
   R({
     id: 'ro_idus_foro',
+    art: require('../../assets/art/roma-idus-4.jpg'),
     photo: ['it:Tempio del Divo Giulio', 'en:Temple of Caesar'],
     name: 'Capítulo 4: El funeral en el Foro',
     jp: 'Foro Romano',
