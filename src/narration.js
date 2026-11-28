@@ -25,8 +25,13 @@ let dir = null;
 const audioDir = () => {
   if (!dir) {
     try {
-      dir = new Directory(Paths.document, 'narraciones');
+      // «narraciones2»: la carpeta anterior podía tener archivos a medio bajar (build-43); se borra
+      dir = new Directory(Paths.document, 'narraciones2');
       if (!dir.exists) dir.create({ intermediates: true });
+      try {
+        const old = new Directory(Paths.document, 'narraciones');
+        if (old.exists) old.delete();
+      } catch (e) {}
     } catch (e) {
       dir = null;
     }
@@ -92,11 +97,18 @@ export async function downloadTour(tourId, voice = narrator, onProgress) {
   if (!t) throw new Error('Este recorrido aún no tiene voz natural.');
   const d = audioDir();
   if (!d) throw new Error('No se pudo usar el almacenamiento del teléfono.');
+  // Se baja primero a una carpeta aparte y solo al terminar se mueve a su lugar: así nunca se
+  // reproduce un archivo a medio bajar (sonaría la voz del teléfono en su lugar)
+  const tmp = new Directory(Paths.cache, 'narraciones-parcial');
+  if (!tmp.exists) tmp.create({ intermediates: true });
   let done = t.have;
   for (const name of t.files) {
     const f = new File(d, name);
     if (f.exists) continue;
-    await File.downloadFileAsync(`${MANIFEST.base}/${name}`, f);
+    const part = new File(tmp, name);
+    if (part.exists) part.delete();
+    await File.downloadFileAsync(`${MANIFEST.base}/${name}`, part);
+    part.move(d);
     done++;
     if (onProgress) onProgress(done, t.files.length);
   }
